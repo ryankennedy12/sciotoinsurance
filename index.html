@@ -16,13 +16,34 @@
     <meta name="twitter:site" content="@SciotoInsurance" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts - preload for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Prevent FOUC -->
+    <style>
+      html { visibility: hidden; }
+      html.fonts-loaded { visibility: visible; }
+    </style>
+    <script>
+      // Show content immediately if fonts are cached, otherwise wait briefly
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          document.documentElement.classList.add('fonts-loaded');
+        });
+        // Fallback: show after 100ms max to prevent blank screen
+        setTimeout(() => {
+          document.documentElement.classList.add('fonts-loaded');
+        }, 100);
+      } else {
+        // Fallback for browsers without font loading API
+        document.documentElement.classList.add('fonts-loaded');
+      }
+    </script>
   </head>
 
-  <body>
+  <body class="bg-[hsl(40,43%,96%)]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
