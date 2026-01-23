@@ -128,6 +128,7 @@ const GetQuote = () => {
     try {
       const { error } = await supabase.from("leads").insert({
         coverage_type: formData.coverageType!,
+        request_type: "quote",
         personal_coverage_interests: formData.coverageType === "personal" ? formData.personalCoverageInterests : null,
         has_current_coverage: formData.coverageType === "personal" ? formData.hasCurrentCoverage : null,
         switch_reason: formData.coverageType === "personal" ? formData.switchReason : null,
