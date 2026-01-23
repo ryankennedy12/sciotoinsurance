@@ -194,13 +194,13 @@ const Header = () => {
         {/* Close Button - 44px tap target */}
         <button
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-4 right-4 w-11 h-11 flex items-center justify-center z-10"
+          className="absolute top-5 right-4 w-12 h-12 flex items-center justify-center z-20 bg-white/10 rounded-full active:bg-white/20 transition-colors"
           aria-label="Close menu"
+          type="button"
         >
-          <div className="w-6 h-6 relative">
-            <span className="absolute top-1/2 left-0 w-full h-0.5 bg-white rotate-45" />
-            <span className="absolute top-1/2 left-0 w-full h-0.5 bg-white -rotate-45" />
-          </div>
+          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
 
         {/* Mobile Navigation Links - Scrollable */}
