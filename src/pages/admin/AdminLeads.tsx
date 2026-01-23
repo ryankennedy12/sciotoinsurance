@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,12 +23,18 @@ import {
   Filter,
   Mail,
   Phone,
-  ChevronDown,
-  ChevronUp
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
+  User,
+  Building2,
+  Briefcase,
+  HelpCircle
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
+import { LeadDetailModal } from "@/components/admin/LeadDetailModal";
 
 interface Lead {
   id: string;
@@ -45,6 +51,13 @@ interface Lead {
   benefits_interests: string[] | null;
   additional_info: string | null;
   notes: string | null;
+  best_time: string | null;
+  has_current_coverage: boolean | null;
+  switch_reason: string | null;
+  business_type: string | null;
+  employee_count: string | null;
+  benefits_employee_count: string | null;
+  benefits_situation: string | null;
 }
 
 const statusColors: Record<string, string> = {
@@ -63,29 +76,51 @@ const statusOptions = [
   { value: "lost", label: "Lost" },
 ];
 
+const typeOptions = [
+  { value: "personal", label: "Personal" },
+  { value: "business", label: "Business" },
+  { value: "benefits", label: "Benefits" },
+  { value: "not_sure", label: "Not Sure" },
+];
+
 const coverageLabels: Record<string, string> = {
-  personal: "Personal Insurance",
-  business: "Business Insurance",
-  benefits: "Employee Benefits",
-  not_sure: "Not Sure / General",
+  personal: "Personal",
+  business: "Business",
+  benefits: "Benefits",
+  not_sure: "Not Sure",
 };
+
+const coverageIcons: Record<string, React.ReactNode> = {
+  personal: <User className="h-3.5 w-3.5" />,
+  business: <Building2 className="h-3.5 w-3.5" />,
+  benefits: <Briefcase className="h-3.5 w-3.5" />,
+  not_sure: <HelpCircle className="h-3.5 w-3.5" />,
+};
+
+const contactMethodLabels: Record<string, string> = {
+  email: "Email",
+  phone: "Phone",
+  text: "Text",
+};
+
+type SortField = "created_at" | "status" | "coverage_type";
+type SortDirection = "asc" | "desc";
 
 export default function AdminLeads() {
   const [leads, setLeads] = useState<Lead[]>([]);
-  const [filteredLeads, setFilteredLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [sortField, setSortField] = useState<SortField>("created_at");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     fetchLeads();
   }, []);
-
-  useEffect(() => {
-    filterLeads();
-  }, [leads, searchQuery, statusFilter]);
 
   const fetchLeads = async () => {
     try {
@@ -108,7 +143,7 @@ export default function AdminLeads() {
     }
   };
 
-  const filterLeads = () => {
+  const filteredAndSortedLeads = useMemo(() => {
     let filtered = [...leads];
 
     // Search filter
@@ -127,45 +162,76 @@ export default function AdminLeads() {
       filtered = filtered.filter((lead) => lead.status === statusFilter);
     }
 
-    setFilteredLeads(filtered);
-  };
+    // Type filter
+    if (typeFilter !== "all") {
+      filtered = filtered.filter((lead) => lead.coverage_type === typeFilter);
+    }
 
-  const updateLeadStatus = async (leadId: string, newStatus: string) => {
-    try {
-      const { error } = await supabase
-        .from("leads")
-        .update({ status: newStatus as "new" | "contacted" | "quoted" | "won" | "lost" })
-        .eq("id", leadId);
+    // Sorting
+    filtered.sort((a, b) => {
+      let comparison = 0;
+      
+      switch (sortField) {
+        case "created_at":
+          comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+          break;
+        case "status":
+          const statusOrder = ["new", "contacted", "quoted", "won", "lost"];
+          comparison = statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
+          break;
+        case "coverage_type":
+          comparison = a.coverage_type.localeCompare(b.coverage_type);
+          break;
+      }
+      
+      return sortDirection === "asc" ? comparison : -comparison;
+    });
 
-      if (error) throw error;
+    return filtered;
+  }, [leads, searchQuery, statusFilter, typeFilter, sortField, sortDirection]);
 
-      setLeads((prev) =>
-        prev.map((lead) =>
-          lead.id === leadId ? { ...lead, status: newStatus } : lead
-        )
-      );
-
-      toast({
-        title: "Status updated",
-        description: `Lead marked as ${newStatus}.`,
-      });
-    } catch (error) {
-      console.error("Error updating status:", error);
-      toast({
-        title: "Error updating status",
-        variant: "destructive",
-      });
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortDirection("desc");
     }
   };
 
-  const getInterests = (lead: Lead): string[] => {
-    return (
-      lead.personal_coverage_interests ||
-      lead.business_coverage_interests ||
-      lead.benefits_interests ||
-      []
-    );
+  const getSortIcon = (field: SortField) => {
+    if (sortField !== field) {
+      return <ArrowUpDown className="h-4 w-4 text-muted-foreground/50" />;
+    }
+    return sortDirection === "asc" 
+      ? <ArrowUp className="h-4 w-4 text-primary" />
+      : <ArrowDown className="h-4 w-4 text-primary" />;
   };
+
+  const handleRowClick = (lead: Lead) => {
+    setSelectedLead(lead);
+    setIsModalOpen(true);
+  };
+
+  const handleLeadUpdated = () => {
+    fetchLeads();
+  };
+
+  const handleLeadDeleted = (leadId: string) => {
+    setLeads((prev) => prev.filter((lead) => lead.id !== leadId));
+  };
+
+  // Stats
+  const stats = useMemo(() => {
+    const total = leads.length;
+    const newCount = leads.filter((l) => l.status === "new").length;
+    const contactedCount = leads.filter((l) => l.status === "contacted").length;
+    const quotedCount = leads.filter((l) => l.status === "quoted").length;
+    const wonCount = leads.filter((l) => l.status === "won").length;
+    const lostCount = leads.filter((l) => l.status === "lost").length;
+    
+    return { total, newCount, contactedCount, quotedCount, wonCount, lostCount };
+  }, [leads]);
 
   if (isLoading) {
     return (
@@ -181,8 +247,48 @@ export default function AdminLeads() {
       <div>
         <h1 className="heading-lg text-foreground">Leads</h1>
         <p className="text-muted-foreground">
-          Manage quote requests and prospect inquiries
+          Track quote requests and manage prospects
         </p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <Card className="border-border/50">
+          <CardContent className="pt-4 pb-3">
+            <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+            <p className="text-xs text-muted-foreground">Total Leads</p>
+          </CardContent>
+        </Card>
+        <Card className="border-blue-200 bg-blue-50/30">
+          <CardContent className="pt-4 pb-3">
+            <p className="text-2xl font-bold text-blue-700">{stats.newCount}</p>
+            <p className="text-xs text-blue-600">New</p>
+          </CardContent>
+        </Card>
+        <Card className="border-yellow-200 bg-yellow-50/30">
+          <CardContent className="pt-4 pb-3">
+            <p className="text-2xl font-bold text-yellow-700">{stats.contactedCount}</p>
+            <p className="text-xs text-yellow-600">Contacted</p>
+          </CardContent>
+        </Card>
+        <Card className="border-purple-200 bg-purple-50/30">
+          <CardContent className="pt-4 pb-3">
+            <p className="text-2xl font-bold text-purple-700">{stats.quotedCount}</p>
+            <p className="text-xs text-purple-600">Quoted</p>
+          </CardContent>
+        </Card>
+        <Card className="border-green-200 bg-green-50/30">
+          <CardContent className="pt-4 pb-3">
+            <p className="text-2xl font-bold text-green-700">{stats.wonCount}</p>
+            <p className="text-xs text-green-600">Won</p>
+          </CardContent>
+        </Card>
+        <Card className="border-gray-200 bg-gray-50/30">
+          <CardContent className="pt-4 pb-3">
+            <p className="text-2xl font-bold text-gray-500">{stats.lostCount}</p>
+            <p className="text-xs text-gray-500">Lost</p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Filters */}
@@ -198,17 +304,30 @@ export default function AdminLeads() {
                 className="pl-10"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-muted-foreground" />
+            <div className="flex items-center gap-2 flex-wrap">
+              <Filter className="h-4 w-4 text-muted-foreground hidden sm:block" />
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-40 bg-background">
-                  <SelectValue placeholder="Filter by status" />
+                <SelectTrigger className="w-36 bg-background">
+                  <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent className="bg-background border-border z-50">
                   <SelectItem value="all">All Statuses</SelectItem>
                   {statusOptions.map((status) => (
                     <SelectItem key={status.value} value={status.value}>
                       {status.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-32 bg-background">
+                  <SelectValue placeholder="Type" />
+                </SelectTrigger>
+                <SelectContent className="bg-background border-border z-50">
+                  <SelectItem value="all">All Types</SelectItem>
+                  {typeOptions.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -222,11 +341,16 @@ export default function AdminLeads() {
       <Card className="border-border/50">
         <CardHeader>
           <CardTitle>
-            {filteredLeads.length} Lead{filteredLeads.length !== 1 ? "s" : ""}
+            {filteredAndSortedLeads.length} Lead{filteredAndSortedLeads.length !== 1 ? "s" : ""}
+            {(statusFilter !== "all" || typeFilter !== "all" || searchQuery) && (
+              <span className="text-muted-foreground font-normal text-sm ml-2">
+                (filtered)
+              </span>
+            )}
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {filteredLeads.length === 0 ? (
+          {filteredAndSortedLeads.length === 0 ? (
             <p className="text-muted-foreground text-center py-8">
               No leads found matching your criteria.
             </p>
@@ -235,36 +359,70 @@ export default function AdminLeads() {
               <Table>
                 <TableHeader>
                   <TableRow>
+                    <TableHead 
+                      className="cursor-pointer hover:bg-muted/50 transition-colors"
+                      onClick={() => handleSort("created_at")}
+                    >
+                      <div className="flex items-center gap-1">
+                        Date
+                        {getSortIcon("created_at")}
+                      </div>
+                    </TableHead>
                     <TableHead>Name</TableHead>
-                    <TableHead>Type</TableHead>
+                    <TableHead 
+                      className="cursor-pointer hover:bg-muted/50 transition-colors"
+                      onClick={() => handleSort("coverage_type")}
+                    >
+                      <div className="flex items-center gap-1">
+                        Type
+                        {getSortIcon("coverage_type")}
+                      </div>
+                    </TableHead>
                     <TableHead>Contact</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead></TableHead>
+                    <TableHead 
+                      className="cursor-pointer hover:bg-muted/50 transition-colors"
+                      onClick={() => handleSort("status")}
+                    >
+                      <div className="flex items-center gap-1">
+                        Status
+                        {getSortIcon("status")}
+                      </div>
+                    </TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredLeads.map((lead) => (
-                    <>
-                      <TableRow 
-                        key={lead.id}
-                        className="cursor-pointer hover:bg-muted/50"
-                        onClick={() => setExpandedId(expandedId === lead.id ? null : lead.id)}
-                      >
-                        <TableCell className="font-medium">
-                          {lead.first_name} {lead.last_name}
-                        </TableCell>
-                        <TableCell>
-                          <span className="text-sm">
+                  {filteredAndSortedLeads.map((lead) => (
+                    <TableRow 
+                      key={lead.id}
+                      className="cursor-pointer hover:bg-muted/50"
+                      onClick={() => handleRowClick(lead)}
+                    >
+                      <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
+                        {format(new Date(lead.created_at), "MMM d, yyyy")}
+                      </TableCell>
+                      <TableCell className="font-medium">
+                        {lead.first_name} {lead.last_name}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-1.5 text-sm">
+                          {coverageIcons[lead.coverage_type]}
+                          <span>
                             {coverageLabels[lead.coverage_type] || lead.coverage_type}
                           </span>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-3">
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs font-normal">
+                            {contactMethodLabels[lead.preferred_contact] || lead.preferred_contact}
+                          </Badge>
+                          <div className="flex items-center gap-1">
                             <a
                               href={`mailto:${lead.email}`}
                               onClick={(e) => e.stopPropagation()}
-                              className="text-muted-foreground hover:text-primary"
+                              className="text-muted-foreground hover:text-primary p-1"
+                              title={lead.email}
                             >
                               <Mail className="h-4 w-4" />
                             </a>
@@ -272,82 +430,30 @@ export default function AdminLeads() {
                               <a
                                 href={`tel:${lead.phone}`}
                                 onClick={(e) => e.stopPropagation()}
-                                className="text-muted-foreground hover:text-primary"
+                                className="text-muted-foreground hover:text-primary p-1"
+                                title={lead.phone}
                               >
                                 <Phone className="h-4 w-4" />
                               </a>
                             )}
                           </div>
-                        </TableCell>
-                        <TableCell className="text-sm text-muted-foreground">
-                          {format(new Date(lead.created_at), "MMM d, yyyy")}
-                        </TableCell>
-                        <TableCell onClick={(e) => e.stopPropagation()}>
-                          <Select
-                            value={lead.status}
-                            onValueChange={(value) => updateLeadStatus(lead.id, value)}
-                          >
-                            <SelectTrigger className={`w-28 h-8 text-xs ${statusColors[lead.status]} border bg-background`}>
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent className="bg-background border-border z-50">
-                              {statusOptions.map((status) => (
-                                <SelectItem key={status.value} value={status.value}>
-                                  {status.label}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </TableCell>
-                        <TableCell>
-                          {expandedId === lead.id ? (
-                            <ChevronUp className="h-4 w-4 text-muted-foreground" />
-                          ) : (
-                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                          )}
-                        </TableCell>
-                      </TableRow>
-                      {expandedId === lead.id && (
-                        <TableRow>
-                          <TableCell colSpan={6} className="bg-muted/30">
-                            <div className="p-4 space-y-4">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                  <p className="text-sm font-medium text-foreground">Contact Info</p>
-                                  <p className="text-sm text-muted-foreground">{lead.email}</p>
-                                  {lead.phone && (
-                                    <p className="text-sm text-muted-foreground">{lead.phone}</p>
-                                  )}
-                                  <p className="text-sm text-muted-foreground">
-                                    Preferred: {lead.preferred_contact}
-                                  </p>
-                                </div>
-                                {getInterests(lead).length > 0 && (
-                                  <div>
-                                    <p className="text-sm font-medium text-foreground">Interests</p>
-                                    <div className="flex flex-wrap gap-1 mt-1">
-                                      {getInterests(lead).map((interest, i) => (
-                                        <Badge key={i} variant="secondary" className="text-xs">
-                                          {interest}
-                                        </Badge>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                              {(lead.additional_info || lead.notes) && (
-                                <div>
-                                  <p className="text-sm font-medium text-foreground">Notes</p>
-                                  <p className="text-sm text-muted-foreground">
-                                    {lead.notes || lead.additional_info}
-                                  </p>
-                                </div>
-                              )}
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge className={`${statusColors[lead.status]} text-xs border`}>
+                          {lead.status.charAt(0).toUpperCase() + lead.status.slice(1)}
+                        </Badge>
+                      </TableCell>
+                      <TableCell onClick={(e) => e.stopPropagation()}>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRowClick(lead)}
+                        >
+                          View
+                        </Button>
+                      </TableCell>
+                    </TableRow>
                   ))}
                 </TableBody>
               </Table>
@@ -355,6 +461,15 @@ export default function AdminLeads() {
           )}
         </CardContent>
       </Card>
+
+      {/* Lead Detail Modal */}
+      <LeadDetailModal
+        lead={selectedLead}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onLeadUpdated={handleLeadUpdated}
+        onLeadDeleted={handleLeadDeleted}
+      />
     </div>
   );
 }
