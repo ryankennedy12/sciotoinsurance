@@ -21,26 +21,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Prevent FOUC -->
+    <!-- Smooth initial load -->
     <style>
-      html { visibility: hidden; }
-      html.fonts-loaded { visibility: visible; }
+      #root { opacity: 0; transition: opacity 0.2s ease-out; }
+      #root.ready { opacity: 1; }
     </style>
-    <script>
-      // Show content immediately if fonts are cached, otherwise wait briefly
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-          document.documentElement.classList.add('fonts-loaded');
-        });
-        // Fallback: show after 100ms max to prevent blank screen
-        setTimeout(() => {
-          document.documentElement.classList.add('fonts-loaded');
-        }, 100);
-      } else {
-        // Fallback for browsers without font loading API
-        document.documentElement.classList.add('fonts-loaded');
-      }
-    </script>
   </head>
 
   <body class="bg-[hsl(40,43%,96%)]">
