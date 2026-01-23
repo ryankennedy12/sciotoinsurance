@@ -117,15 +117,94 @@ const Home = () => {
         </button>
       </section>
 
-      {/* Placeholder content section for scroll testing */}
-      <section className="py-section-xl bg-white">
-        <div className="max-w-7xl mx-auto px-space-md lg:px-space-lg text-center">
-          <h2 className="heading-md text-foreground mb-space-md">
-            Trusted Protection for Every Stage of Life
-          </h2>
-          <p className="body-lg text-muted-foreground max-w-2xl mx-auto">
-            From your first home to your growing business, we're here with coverage that adapts to your journey.
-          </p>
+      {/* Why Scioto Insurance Group Section */}
+      <section className="py-space-3xl bg-cream">
+        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+          {/* Section Header */}
+          <div className="text-center mb-space-xl">
+            {/* Decorative Line */}
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
+            
+            <h2 className="font-display font-semibold text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-space-sm">
+              Why 1,200+ Ohio Families Trust Scioto
+            </h2>
+            <p className="font-body text-lg text-muted-foreground">
+              We're not a call center. We're your neighbors.
+            </p>
+          </div>
+
+          {/* Value Proposition Cards */}
+          <div className="grid md:grid-cols-3 gap-space-md mb-space-xl">
+            {/* Card 1 - Independent */}
+            <div className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              {/* Handshake Icon */}
+              <div className="mb-space-md">
+                <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M8 28l6-6 4 4 8-8 4 4 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M14 34l-6 6M34 34l6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="14" cy="20" r="4" />
+                  <circle cx="34" cy="20" r="4" />
+                  <path d="M18 20h12" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+                Independent, Not Corporate
+              </h3>
+              <p className="font-body text-base text-muted-foreground leading-relaxed">
+                We work for you, not an insurance company. That means we shop 30+ carriers to find coverage that actually fits your situation — and your budget.
+              </p>
+            </div>
+
+            {/* Card 2 - Experience */}
+            <div className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              {/* Shield Icon */}
+              <div className="mb-space-md">
+                <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M24 4L6 12v12c0 11 8 18 18 22 10-4 18-11 18-22V12L24 4z" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M16 24l6 6 10-12" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+                29 Years of Local Expertise
+              </h3>
+              <p className="font-body text-base text-muted-foreground leading-relaxed">
+                We've insured New Albany homes through three market cycles. We know which carriers pay claims fast, which ones fight you, and which coverage gaps hurt Ohio families most.
+              </p>
+            </div>
+
+            {/* Card 3 - Human */}
+            <div className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              {/* Phone/Person Icon */}
+              <div className="mb-space-md">
+                <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="24" cy="14" r="6" />
+                  <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12" strokeLinecap="round" />
+                  <path d="M36 28l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M40 32h-6" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+                A Human Answers the Phone
+              </h3>
+              <p className="font-body text-base text-muted-foreground leading-relaxed">
+                When you call, you get Sarah, Mike, or Tom — not a phone tree. When you have a claim, we're in your corner. That's not a tagline, it's how we've operated since 1995.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center">
+            <p className="font-body text-muted-foreground mb-space-sm">
+              Join the families and businesses who stopped worrying about insurance.
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-1 font-body font-medium text-primary hover:underline transition-all duration-300"
+            >
+              See Our Reviews
+              <span className="text-lg">→</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>
