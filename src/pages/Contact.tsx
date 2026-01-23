@@ -126,10 +126,10 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-cream to-burgundy-50 py-16 md:py-20">
-        <div className="container-wide">
+      <section className="bg-gradient-to-b from-cream to-burgundy-50 pt-24 pb-8 md:pt-32 md:pb-12">
+        <div className="container-wide px-4 md:px-space-lg">
           <AnimatedSection animation="fade-up" className="max-w-3xl mx-auto text-center">
-            <h1 className="heading-xl text-foreground mb-6">
+            <h1 className="heading-xl text-foreground mb-4">
               Let's Start a Conversation
             </h1>
             <p className="body-lg text-muted-foreground">
@@ -373,7 +373,7 @@ const Contact = () => {
       </section>
 
       {/* Schedule a Call Section */}
-      <section className="py-16 md:py-20 bg-cream">
+      <section className="py-12 md:py-16 bg-cream">
         <div className="container-wide">
           <div className="max-w-2xl mx-auto text-center">
             <div className="w-16 h-16 rounded-full bg-burgundy-100 flex items-center justify-center mx-auto mb-6">
