@@ -207,6 +207,173 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Services Overview Section */}
+      <section className="py-space-2xl bg-white overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+          {/* Section Header */}
+          <div className="mb-space-xl">
+            <h2 className="font-display font-semibold text-3xl lg:text-[38px] text-foreground">
+              Coverage for Every Chapter
+            </h2>
+          </div>
+
+          {/* Asymmetric Service Panels */}
+          <div className="relative">
+            {/* Desktop Layout with Stagger */}
+            <div className="hidden lg:grid lg:grid-cols-12 lg:gap-6 lg:items-start">
+              
+              {/* Panel 1 - Personal Insurance (Larger, starts higher) */}
+              <Link
+                to="/personal-insurance"
+                className="col-span-5 group relative z-20"
+              >
+                <div className="relative bg-gradient-to-br from-primary to-burgundy-800 rounded-lg p-space-lg lg:p-space-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 min-h-[380px] flex flex-col justify-between">
+                  {/* Decorative Elements */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gold-500/10 rounded-full translate-y-1/2 -translate-x-1/2" />
+                  
+                  <div className="relative z-10">
+                    <h3 className="font-display font-semibold text-2xl lg:text-3xl text-white mb-space-sm">
+                      Personal Insurance
+                    </h3>
+                    <p className="font-body text-cream/90 text-lg mb-space-md">
+                      Protect your family, your home, and your future.
+                    </p>
+                    <p className="font-body text-sm text-cream/70 tracking-wide">
+                      Auto • Home • Life • Umbrella • Renters
+                    </p>
+                  </div>
+                  
+                  <div className="relative z-10 mt-space-lg">
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-white group-hover:gap-3 transition-all duration-300">
+                      Explore Personal Coverage
+                      <span className="text-lg">→</span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Panel 2 - Business Insurance (Middle, offset down) */}
+              <Link
+                to="/business-insurance"
+                className="col-span-4 group relative z-10 lg:mt-16"
+              >
+                <div className="relative bg-cream rounded-lg p-space-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[340px] flex flex-col justify-between border border-gray-200/50">
+                  {/* Subtle Pattern */}
+                  <div className="absolute inset-0 opacity-[0.03] rounded-lg" style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B2942' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                  }} />
+                  
+                  <div className="relative z-10">
+                    <h3 className="font-display font-semibold text-2xl text-foreground mb-space-sm">
+                      Business Insurance
+                    </h3>
+                    <p className="font-body text-muted-foreground text-lg mb-space-md">
+                      Risk management built around how you actually operate.
+                    </p>
+                    <p className="font-body text-sm text-muted-foreground/70 tracking-wide">
+                      Liability • Property • Workers' Comp • Commercial Auto
+                    </p>
+                  </div>
+                  
+                  <div className="relative z-10 mt-space-lg">
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-primary group-hover:gap-3 transition-all duration-300">
+                      Explore Business Coverage
+                      <span className="text-lg">→</span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Panel 3 - Employee Benefits (Right, offset more) */}
+              <Link
+                to="/employee-benefits"
+                className="col-span-3 group relative z-0 lg:mt-32"
+              >
+                <div className="relative bg-white rounded-lg p-space-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[300px] flex flex-col justify-between border-l-4 border-primary">
+                  <div className="relative z-10">
+                    <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+                      Employee Benefits
+                    </h3>
+                    <p className="font-body text-muted-foreground mb-space-md">
+                      Attract and keep great people with benefits that compete.
+                    </p>
+                    <p className="font-body text-xs text-muted-foreground/70 tracking-wide leading-relaxed">
+                      Group Health • Dental & Vision • Life & Disability • 401(k)
+                    </p>
+                  </div>
+                  
+                  <div className="relative z-10 mt-space-md">
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-sm text-primary group-hover:gap-3 transition-all duration-300">
+                      Explore Benefits
+                      <span>→</span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Mobile Layout - Stacked */}
+            <div className="lg:hidden flex flex-col gap-space-md">
+              {/* Mobile Panel 1 */}
+              <Link to="/personal-insurance" className="group">
+                <div className="relative bg-gradient-to-br from-primary to-burgundy-800 rounded-lg p-space-lg shadow-lg">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+                  <h3 className="font-display font-semibold text-2xl text-white mb-space-xs relative z-10">
+                    Personal Insurance
+                  </h3>
+                  <p className="font-body text-cream/90 mb-space-sm relative z-10">
+                    Protect your family, your home, and your future.
+                  </p>
+                  <p className="font-body text-xs text-cream/70 tracking-wide mb-space-md relative z-10">
+                    Auto • Home • Life • Umbrella • Renters
+                  </p>
+                  <span className="inline-flex items-center gap-2 font-body font-medium text-white relative z-10">
+                    Explore Coverage →
+                  </span>
+                </div>
+              </Link>
+
+              {/* Mobile Panel 2 */}
+              <Link to="/business-insurance" className="group">
+                <div className="relative bg-cream rounded-lg p-space-lg shadow-md border border-gray-200/50">
+                  <h3 className="font-display font-semibold text-2xl text-foreground mb-space-xs">
+                    Business Insurance
+                  </h3>
+                  <p className="font-body text-muted-foreground mb-space-sm">
+                    Risk management built around how you actually operate.
+                  </p>
+                  <p className="font-body text-xs text-muted-foreground/70 tracking-wide mb-space-md">
+                    Liability • Property • Workers' Comp • Commercial Auto
+                  </p>
+                  <span className="inline-flex items-center gap-2 font-body font-medium text-primary">
+                    Explore Coverage →
+                  </span>
+                </div>
+              </Link>
+
+              {/* Mobile Panel 3 */}
+              <Link to="/employee-benefits" className="group">
+                <div className="relative bg-white rounded-lg p-space-lg shadow-md border-l-4 border-primary">
+                  <h3 className="font-display font-semibold text-2xl text-foreground mb-space-xs">
+                    Employee Benefits
+                  </h3>
+                  <p className="font-body text-muted-foreground mb-space-sm">
+                    Attract and keep great people with benefits that compete.
+                  </p>
+                  <p className="font-body text-xs text-muted-foreground/70 tracking-wide mb-space-md">
+                    Group Health • Dental & Vision • Life & Disability • 401(k)
+                  </p>
+                  <span className="inline-flex items-center gap-2 font-body font-medium text-primary">
+                    Explore Benefits →
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
