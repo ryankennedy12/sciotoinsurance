@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import HeroVisual from "@/components/HeroVisual";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -121,7 +122,7 @@ const Home = () => {
       <section className="py-space-3xl bg-cream">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           {/* Section Header */}
-          <div className="text-center mb-space-xl">
+          <AnimatedSection animation="fade-up" className="text-center mb-space-xl">
             {/* Decorative Line */}
             <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
             
@@ -131,12 +132,12 @@ const Home = () => {
             <p className="font-body text-lg text-muted-foreground">
               We're not a call center. We're your neighbors.
             </p>
-          </div>
+          </AnimatedSection>
 
           {/* Value Proposition Cards */}
           <div className="grid md:grid-cols-3 gap-space-md mb-space-xl">
             {/* Card 1 - Independent */}
-            <div className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={0} className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Handshake Icon */}
               <div className="mb-space-md">
                 <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -153,10 +154,10 @@ const Home = () => {
               <p className="font-body text-base text-muted-foreground leading-relaxed">
                 We work for you, not an insurance company. That means we shop 30+ carriers to find coverage that actually fits your situation — and your budget.
               </p>
-            </div>
+            </AnimatedSection>
 
             {/* Card 2 - Experience */}
-            <div className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={100} className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Shield Icon */}
               <div className="mb-space-md">
                 <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -170,10 +171,10 @@ const Home = () => {
               <p className="font-body text-base text-muted-foreground leading-relaxed">
                 We've insured New Albany homes through three market cycles. We know which carriers pay claims fast, which ones fight you, and which coverage gaps hurt Ohio families most.
               </p>
-            </div>
+            </AnimatedSection>
 
             {/* Card 3 - Human */}
-            <div className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={200} className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Phone/Person Icon */}
               <div className="mb-space-md">
                 <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -189,11 +190,11 @@ const Home = () => {
               <p className="font-body text-base text-muted-foreground leading-relaxed">
                 When you call, you get Sarah, Mike, or Tom — not a phone tree. When you have a claim, we're in your corner. That's not a tagline, it's how we've operated since 1995.
               </p>
-            </div>
+            </AnimatedSection>
           </div>
 
           {/* Bottom CTA */}
-          <div className="text-center">
+          <AnimatedSection animation="fade-up" delay={300} className="text-center">
             <p className="font-body text-muted-foreground mb-space-sm">
               Join the families and businesses who stopped worrying about insurance.
             </p>
@@ -204,7 +205,7 @@ const Home = () => {
               See Our Reviews
               <span className="text-lg">→</span>
             </Link>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -381,38 +382,38 @@ const Home = () => {
           
           {/* Stats Bar */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-space-lg lg:gap-space-md mb-space-2xl text-center">
-            <div>
+            <AnimatedSection animation="fade-up" delay={0}>
               <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
                 29
               </p>
               <p className="font-body text-sm text-white/70 uppercase tracking-wider">
                 Years Serving Ohio
               </p>
-            </div>
-            <div>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" delay={100}>
               <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
                 1,200+
               </p>
               <p className="font-body text-sm text-white/70 uppercase tracking-wider">
                 Families Protected
               </p>
-            </div>
-            <div>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" delay={200}>
               <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
                 30+
               </p>
               <p className="font-body text-sm text-white/70 uppercase tracking-wider">
                 Insurance Carriers
               </p>
-            </div>
-            <div>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" delay={300}>
               <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
                 4.9★
               </p>
               <p className="font-body text-sm text-white/70 uppercase tracking-wider">
                 Google Rating
               </p>
-            </div>
+            </AnimatedSection>
           </div>
 
           {/* Featured Testimonial */}
@@ -466,7 +467,7 @@ const Home = () => {
 
       {/* Final CTA Section */}
       <section className="py-space-2xl bg-cream">
-        <div className="max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
+        <AnimatedSection animation="fade-up" className="max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
           <h2 className="font-display font-semibold text-2xl lg:text-4xl text-foreground leading-tight mb-space-md">
             Ready to Stop Overpaying for Insurance That Underdelivers?
           </h2>
@@ -478,7 +479,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md mb-space-md">
             <Link
               to="/get-quote"
-              className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
             >
               Get Your Free Quote
             </Link>
@@ -495,7 +496,7 @@ const Home = () => {
           <p className="font-body text-sm text-muted-foreground/70 italic">
             No spam. No pushy sales calls. Just honest advice from people who actually live here.
           </p>
-        </div>
+        </AnimatedSection>
       </section>
     </>
   );

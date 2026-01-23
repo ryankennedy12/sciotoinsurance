@@ -7,7 +7,8 @@ import {
   Clock, 
   Calendar,
   CheckCircle,
-  Send
+  Send,
+  Loader2
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 const helpTopics = [
   { value: "quote", label: "I need a quote" },
@@ -126,14 +128,14 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-cream to-burgundy-50 py-16 md:py-20">
         <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center">
+          <AnimatedSection animation="fade-up" className="max-w-3xl mx-auto text-center">
             <h1 className="heading-xl text-foreground mb-6">
               Let's Start a Conversation
             </h1>
             <p className="body-lg text-muted-foreground">
               Whether you have questions, need a quote, or just want to talk through your options — we're here.
             </p>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -143,8 +145,8 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             
             {/* Left Column: Contact Form */}
-            <div>
-              <Card className="border-border/50 shadow-lg">
+            <AnimatedSection animation="fade-up" delay={0}>
+              <Card className="border-border/50 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-8">
                   {isSubmitted ? (
                     <div className="text-center py-8">
@@ -253,7 +255,10 @@ const Contact = () => {
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
-                          "Sending..."
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Sending...
+                          </>
                         ) : (
                           <>
                             <Send className="w-4 h-4 mr-2" />
@@ -265,10 +270,10 @@ const Contact = () => {
                   )}
                 </CardContent>
               </Card>
-            </div>
+            </AnimatedSection>
 
             {/* Right Column: Contact Info & Map */}
-            <div className="space-y-8">
+            <AnimatedSection animation="fade-up" delay={150} className="space-y-8">
               {/* Direct Contact */}
               <div>
                 <h2 className="heading-md text-foreground mb-6">Get in Touch</h2>
@@ -362,7 +367,7 @@ const Contact = () => {
                   />
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
