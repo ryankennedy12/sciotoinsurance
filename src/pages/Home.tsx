@@ -463,6 +463,40 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Final CTA Section */}
+      <section className="py-space-2xl bg-cream">
+        <div className="max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
+          <h2 className="font-display font-semibold text-2xl lg:text-4xl text-foreground leading-tight mb-space-md">
+            Ready to Stop Overpaying for Insurance That Underdelivers?
+          </h2>
+          
+          <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[600px] mx-auto">
+            Get a free, no-pressure quote in 10 minutes. We'll show you exactly what you're paying for — and what you might be missing.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md mb-space-md">
+            <Link
+              to="/get-quote"
+              className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              Get Your Free Quote
+            </Link>
+            
+            <a
+              href="tel:6146120050"
+              className="inline-flex items-center gap-2 font-body font-medium text-primary hover:underline transition-all duration-300"
+            >
+              <Phone className="w-4 h-4" />
+              Or call us: (614) 612-0050
+            </a>
+          </div>
+          
+          <p className="font-body text-sm text-muted-foreground/70 italic">
+            No spam. No pushy sales calls. Just honest advice from people who actually live here.
+          </p>
+        </div>
+      </section>
     </>
   );
 };
