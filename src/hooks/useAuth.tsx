@@ -22,28 +22,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let isMounted = true;
 
-    // Helper to check admin role
-    const checkAdminRole = async (userId: string) => {
-      try {
-        const { data } = await supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", userId)
-          .eq("role", "admin")
-          .maybeSingle();
-        
-        if (isMounted) {
-          setIsAdmin(!!data);
-        }
-      } catch (error) {
-        console.error("Error checking admin role:", error);
-        if (isMounted) {
-          setIsAdmin(false);
-        }
-      }
+    // Helper to check admin role - uses setTimeout to avoid Supabase auth deadlock
+    const checkAdminRole = async (userId: string): Promise<boolean> => {
+      return new Promise((resolve) => {
+        setTimeout(async () => {
+          try {
+            const { data, error } = await supabase
+              .from("user_roles")
+              .select("role")
+              .eq("user_id", userId)
+              .eq("role", "admin")
+              .maybeSingle();
+            
+            if (error) {
+              console.error("Error checking admin role:", error);
+              resolve(false);
+            } else {
+              resolve(!!data);
+            }
+          } catch (error) {
+            console.error("Error checking admin role:", error);
+            resolve(false);
+          }
+        }, 0);
+      });
     };
 
-    // Set up auth state listener FIRST
+    // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (!isMounted) return;
@@ -52,40 +57,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await checkAdminRole(session.user.id);
+          const adminStatus = await checkAdminRole(session.user.id);
+          if (isMounted) {
+            setIsAdmin(adminStatus);
+          }
         } else {
           setIsAdmin(false);
         }
         
-        setIsLoading(false);
-      }
-    );
-
-    // THEN check for existing session
-    const initSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!isMounted) return;
-        
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          await checkAdminRole(session.user.id);
-        } else {
-          setIsAdmin(false);
-        }
-      } catch (error) {
-        console.error("Error getting session:", error);
-      } finally {
         if (isMounted) {
           setIsLoading(false);
         }
       }
-    };
+    );
 
-    initSession();
+    // Check for existing session on mount
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!isMounted) return;
+      
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        const adminStatus = await checkAdminRole(session.user.id);
+        if (isMounted) {
+          setIsAdmin(adminStatus);
+        }
+      }
+      
+      if (isMounted) {
+        setIsLoading(false);
+      }
+    }).catch((error) => {
+      console.error("Error getting session:", error);
+      if (isMounted) {
+        setIsLoading(false);
+      }
+    });
 
     return () => {
       isMounted = false;
