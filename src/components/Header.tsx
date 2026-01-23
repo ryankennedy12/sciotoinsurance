@@ -86,7 +86,7 @@ const Header = () => {
               <img 
                 src={logo} 
                 alt="Scioto Insurance Group" 
-                className="h-12 sm:h-14 lg:h-16 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-16 sm:h-20 lg:h-24 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
