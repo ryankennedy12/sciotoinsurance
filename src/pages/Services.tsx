@@ -70,10 +70,10 @@ const Services = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-cream to-burgundy-50 py-16 md:py-24">
-        <div className="container-wide">
+      <section className="bg-gradient-to-b from-cream to-burgundy-50 pt-24 pb-8 md:pt-32 md:pb-12">
+        <div className="container-wide px-4 md:px-space-lg">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="heading-xl text-foreground mb-6">
+            <h1 className="heading-xl text-foreground mb-4">
               Current Client? We've Got You.
             </h1>
             <p className="body-lg text-muted-foreground">
