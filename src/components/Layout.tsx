@@ -1,36 +1,49 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 
 const Layout = () => {
   const location = useLocation();
-  const [displayLocation, setDisplayLocation] = useState(location);
-  const [transitionStage, setTransitionStage] = useState("enter");
+  const [transitionStage, setTransitionStage] = useState<"hidden" | "enter" | "exit">("hidden");
+  const isFirstMount = useRef(true);
+  const previousPath = useRef(location.pathname);
 
+  // Handle initial mount - fade in once
   useEffect(() => {
-    if (location.pathname !== displayLocation.pathname) {
-      // Start exit, then swap content and enter
-      setTransitionStage("exit");
-      const timeout = setTimeout(() => {
-        setDisplayLocation(location);
-        setTransitionStage("enter");
-        window.scrollTo({ top: 0, behavior: "instant" });
-      }, 250);
-      return () => clearTimeout(timeout);
+    // Small delay to ensure DOM is ready, then fade in
+    const timeout = setTimeout(() => {
+      setTransitionStage("enter");
+      isFirstMount.current = false;
+    }, 50);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Handle route changes after initial mount
+  useEffect(() => {
+    // Skip if first mount or same path
+    if (isFirstMount.current || location.pathname === previousPath.current) {
+      return;
     }
-  }, [location, displayLocation]);
+
+    // Fade out, then fade in
+    setTransitionStage("exit");
+    const timeout = setTimeout(() => {
+      previousPath.current = location.pathname;
+      setTransitionStage("enter");
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }, 200);
+
+    return () => clearTimeout(timeout);
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main 
-        className={`flex-1 transition-all duration-250 ease-out motion-reduce:transition-none ${
-          transitionStage === "enter" 
-            ? "opacity-100 translate-y-0" 
-            : "opacity-0 translate-y-2"
+        className={`flex-1 transition-opacity duration-200 ease-out motion-reduce:transition-none ${
+          transitionStage === "enter" ? "opacity-100" : "opacity-0"
         }`}
-        style={{ transitionDuration: '250ms' }}
       >
         <Outlet />
       </main>
