@@ -78,7 +78,21 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Store as a lead with coverage_type based on help topic
+      // Map help topic to request_type
+      const getRequestType = (topic: string) => {
+        switch (topic) {
+          case "claim": return "service_claim";
+          case "change": return "service_change";
+          case "certificate": return "service_cert";
+          case "id-cards": return "service_idcard";
+          case "review": return "service_review";
+          case "payment": return "service_payment";
+          case "quote": return "quote";
+          default: return "contact_general";
+        }
+      };
+      
+      const requestType = getRequestType(formData.helpTopic);
       const coverageType = formData.helpTopic === "quote" ? "not_sure" : "personal";
       
       const { error } = await supabase.from("leads").insert({
@@ -89,6 +103,7 @@ const Contact = () => {
         coverage_type: coverageType,
         additional_info: formData.message.trim() || null,
         notes: `Contact form inquiry: ${helpTopics.find(t => t.value === formData.helpTopic)?.label || "Not specified"}`,
+        request_type: requestType,
       });
 
       if (error) throw error;

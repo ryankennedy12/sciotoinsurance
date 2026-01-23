@@ -20,6 +20,8 @@ import { AdminLayout } from "./components/admin/AdminLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLeads from "./pages/admin/AdminLeads";
+import AdminContacts from "./pages/admin/AdminContacts";
+import AdminServiceRequests from "./pages/admin/AdminServiceRequests";
 import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 
 const queryClient = new QueryClient();
@@ -49,8 +51,8 @@ const App = () => (
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="leads" element={<AdminLeads />} />
-              <Route path="contacts" element={<AdminPlaceholder title="Contacts" description="Manage contact form submissions" />} />
-              <Route path="requests" element={<AdminPlaceholder title="Service Requests" description="Manage claims, changes, and certificates" />} />
+              <Route path="contacts" element={<AdminContacts />} />
+              <Route path="requests" element={<AdminServiceRequests />} />
               <Route path="clients" element={<AdminPlaceholder title="Clients" description="Client relationship management (coming soon)" />} />
               <Route path="settings" element={<AdminPlaceholder title="Settings" description="Admin settings and preferences" />} />
             </Route>

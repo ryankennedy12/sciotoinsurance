@@ -71,11 +71,14 @@ export type Database = {
           first_name: string
           has_current_coverage: boolean | null
           id: string
+          is_read: boolean | null
           last_name: string
           notes: string | null
           personal_coverage_interests: string[] | null
           phone: string | null
           preferred_contact: Database["public"]["Enums"]["contact_method"]
+          reply_status: string | null
+          request_type: Database["public"]["Enums"]["request_type"] | null
           status: Database["public"]["Enums"]["lead_status"]
           switch_reason: string | null
           updated_at: string
@@ -95,11 +98,14 @@ export type Database = {
           first_name: string
           has_current_coverage?: boolean | null
           id?: string
+          is_read?: boolean | null
           last_name: string
           notes?: string | null
           personal_coverage_interests?: string[] | null
           phone?: string | null
           preferred_contact?: Database["public"]["Enums"]["contact_method"]
+          reply_status?: string | null
+          request_type?: Database["public"]["Enums"]["request_type"] | null
           status?: Database["public"]["Enums"]["lead_status"]
           switch_reason?: string | null
           updated_at?: string
@@ -119,11 +125,14 @@ export type Database = {
           first_name?: string
           has_current_coverage?: boolean | null
           id?: string
+          is_read?: boolean | null
           last_name?: string
           notes?: string | null
           personal_coverage_interests?: string[] | null
           phone?: string | null
           preferred_contact?: Database["public"]["Enums"]["contact_method"]
+          reply_status?: string | null
+          request_type?: Database["public"]["Enums"]["request_type"] | null
           status?: Database["public"]["Enums"]["lead_status"]
           switch_reason?: string | null
           updated_at?: string
@@ -170,6 +179,15 @@ export type Database = {
       contact_method: "email" | "phone" | "text"
       coverage_type: "personal" | "business" | "benefits" | "not_sure"
       lead_status: "new" | "contacted" | "quoted" | "won" | "lost"
+      request_type:
+        | "quote"
+        | "service_claim"
+        | "service_change"
+        | "service_cert"
+        | "service_idcard"
+        | "service_review"
+        | "service_payment"
+        | "contact_general"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -301,6 +319,16 @@ export const Constants = {
       contact_method: ["email", "phone", "text"],
       coverage_type: ["personal", "business", "benefits", "not_sure"],
       lead_status: ["new", "contacted", "quoted", "won", "lost"],
+      request_type: [
+        "quote",
+        "service_claim",
+        "service_change",
+        "service_cert",
+        "service_idcard",
+        "service_review",
+        "service_payment",
+        "contact_general",
+      ],
     },
   },
 } as const
