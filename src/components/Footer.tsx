@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Facebook, Linkedin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
@@ -12,24 +13,13 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
           {/* Column 1 - Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-1">
             {/* Logo */}
-            <div className="mb-space-md">
-              <span className="font-display text-2xl font-bold tracking-[0.1em] text-white">
-                SCIOTO
-              </span>
-              <div className="flex items-center gap-2 mt-1">
-                <svg className="w-6 h-3" viewBox="0 0 24 12" fill="none">
-                  <path
-                    d="M0 6C4 2 8 2 12 6C16 10 20 10 24 6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    className="text-gold-500"
-                  />
-                </svg>
-                <span className="font-body text-[10px] font-medium tracking-[0.15em] text-cream/70 uppercase">
-                  Insurance Group
-                </span>
-              </div>
-            </div>
+            <Link to="/" className="block mb-space-md">
+              <img 
+                src={logo} 
+                alt="Scioto Insurance Group" 
+                className="h-16 w-auto brightness-0 invert"
+              />
+            </Link>
             
             <p className="font-body text-sm text-cream/70 mb-space-md leading-relaxed">
               Family-owned. Independent.<br />

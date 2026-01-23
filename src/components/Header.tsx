@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.png";
 
 const personalInsuranceItems = [
   { title: "Auto Insurance", href: "/personal-insurance/auto" },
@@ -81,28 +82,12 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg">
           <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
             {/* Logo */}
-            <Link to="/" className="flex flex-col items-start group">
-              <div className="relative">
-                <span className="font-display font-bold text-xl sm:text-2xl lg:text-3xl tracking-[0.1em] transition-colors duration-300 text-primary">
-                  SCIOTO
-                </span>
-                {/* Decorative wave line */}
-                <svg
-                  className="absolute -bottom-1 left-0 w-full h-1 text-gold-500"
-                  viewBox="0 0 100 4"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 2 Q 25 0, 50 2 T 100 2"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                </svg>
-              </div>
-              <span className="font-body font-medium text-[9px] sm:text-[10px] lg:text-xs tracking-[0.15em] mt-1 text-muted-foreground">
-                INSURANCE GROUP
-              </span>
+            <Link to="/" className="flex items-center group">
+              <img 
+                src={logo} 
+                alt="Scioto Insurance Group" 
+                className="h-12 sm:h-14 lg:h-16 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
 
             {/* Desktop Navigation */}
