@@ -29,18 +29,18 @@ const Home = () => {
         {/* Background subtle texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-cream via-white to-burgundy-100/30" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-space-md lg:px-space-lg pt-24 lg:pt-32 pb-16">
-          <div className="grid lg:grid-cols-[55%_45%] gap-space-xl lg:gap-space-lg items-center min-h-[calc(100vh-10rem)]">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg pt-20 sm:pt-24 lg:pt-32 pb-16">
+          <div className="grid lg:grid-cols-[55%_45%] gap-8 lg:gap-space-lg items-center min-h-[calc(100vh-10rem)]">
             {/* Left Content */}
             <div className="order-2 lg:order-1 z-10">
               {/* Eyebrow */}
-              <p className="font-body font-medium text-xs uppercase tracking-[0.1em] text-muted-foreground mb-space-md animate-fade-in">
+              <p className="font-body font-medium text-[10px] sm:text-xs uppercase tracking-[0.1em] text-muted-foreground mb-4 sm:mb-space-md animate-fade-in">
                 New Albany's Trusted Insurance Partner Since 1995
               </p>
 
               {/* Main Headline */}
               <h1 
-                className="font-display font-semibold text-4xl sm:text-5xl lg:text-[56px] text-primary leading-[1.15] mb-space-md animate-slide-up"
+                className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-primary leading-[1.15] mb-4 sm:mb-space-md animate-slide-up"
                 style={{ animationDelay: "0.1s" }}
               >
                 Insurance That Actually Understands Your Life
@@ -48,30 +48,30 @@ const Home = () => {
 
               {/* Subheadline */}
               <p 
-                className="font-body text-lg lg:text-xl text-muted-foreground leading-[1.6] max-w-[540px] mb-space-lg animate-slide-up"
+                className="font-body text-base sm:text-lg lg:text-xl text-muted-foreground leading-[1.6] max-w-[540px] mb-6 sm:mb-space-lg animate-slide-up"
                 style={{ animationDelay: "0.2s" }}
               >
                 You're not a policy number. You're a family protecting what matters, a business owner managing real risks, a person who deserves an advisor who picks up the phone.
               </p>
 
-              {/* CTA Buttons */}
+              {/* CTA Buttons - Mobile stacked, larger touch targets */}
               <div 
-                className="flex flex-wrap gap-space-sm mb-space-lg animate-slide-up"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-space-sm mb-6 sm:mb-space-lg animate-slide-up"
                 style={{ animationDelay: "0.3s" }}
               >
                 <Link
                   to="/get-quote"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-sm transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base sm:text-sm transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl"
                 >
                   Get Your Free Quote
                 </Link>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded border-2 border-primary text-primary font-body font-medium text-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+                <a
+                  href="tel:6146120050"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 rounded border-2 border-primary text-primary font-body font-medium text-base sm:text-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
                 >
                   <Phone className="w-4 h-4" />
                   Talk to an Advisor
-                </Link>
+                </a>
               </div>
 
               {/* Trust Indicator */}
@@ -98,16 +98,16 @@ const Home = () => {
             </div>
 
             {/* Right Visual */}
-            <div className="order-1 lg:order-2 relative h-[300px] sm:h-[400px] lg:h-[600px]">
+            <div className="order-1 lg:order-2 relative h-[250px] sm:h-[350px] lg:h-[600px]">
               <HeroVisual scrollY={scrollY} />
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - Hidden on mobile */}
         <button
           onClick={scrollToContent}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 animate-fade-in"
+          className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 animate-fade-in"
           style={{ animationDelay: "0.6s" }}
           aria-label="Scroll to content"
         >
@@ -119,28 +119,28 @@ const Home = () => {
       </section>
 
       {/* Why Scioto Insurance Group Section */}
-      <section className="py-space-3xl bg-cream">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+      <section className="py-16 sm:py-space-3xl bg-cream">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           {/* Section Header */}
-          <AnimatedSection animation="fade-up" className="text-center mb-space-xl">
+          <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
             {/* Decorative Line */}
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-4 sm:mb-space-md" />
             
-            <h2 className="font-display font-semibold text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-space-sm">
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
               Why 1,200+ Ohio Families Trust Scioto
             </h2>
-            <p className="font-body text-lg text-muted-foreground">
+            <p className="font-body text-base sm:text-lg text-muted-foreground">
               We're not a call center. We're your neighbors.
             </p>
           </AnimatedSection>
 
           {/* Value Proposition Cards */}
-          <div className="grid md:grid-cols-3 gap-space-md mb-space-xl">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl">
             {/* Card 1 - Independent */}
-            <AnimatedSection animation="fade-up" delay={0} className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Handshake Icon */}
-              <div className="mb-space-md">
-                <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <div className="mb-4 sm:mb-space-md">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M8 28l6-6 4 4 8-8 4 4 6-6" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M14 34l-6 6M34 34l6 6" strokeLinecap="round" strokeLinejoin="round" />
                   <circle cx="14" cy="20" r="4" />
@@ -148,46 +148,46 @@ const Home = () => {
                   <path d="M18 20h12" strokeLinecap="round" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
                 Independent, Not Corporate
               </h3>
-              <p className="font-body text-base text-muted-foreground leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
                 We work for you, not an insurance company. That means we shop 30+ carriers to find coverage that actually fits your situation — and your budget.
               </p>
             </AnimatedSection>
 
             {/* Card 2 - Experience */}
-            <AnimatedSection animation="fade-up" delay={100} className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Shield Icon */}
-              <div className="mb-space-md">
-                <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <div className="mb-4 sm:mb-space-md">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M24 4L6 12v12c0 11 8 18 18 22 10-4 18-11 18-22V12L24 4z" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M16 24l6 6 10-12" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
                 29 Years of Local Expertise
               </h3>
-              <p className="font-body text-base text-muted-foreground leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
                 We've insured New Albany homes through three market cycles. We know which carriers pay claims fast, which ones fight you, and which coverage gaps hurt Ohio families most.
               </p>
             </AnimatedSection>
 
             {/* Card 3 - Human */}
-            <AnimatedSection animation="fade-up" delay={200} className="bg-white rounded-lg p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 sm:col-span-2 md:col-span-1">
               {/* Phone/Person Icon */}
-              <div className="mb-space-md">
-                <svg className="w-12 h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <div className="mb-4 sm:mb-space-md">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <circle cx="24" cy="14" r="6" />
                   <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12" strokeLinecap="round" />
                   <path d="M36 28l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M40 32h-6" strokeLinecap="round" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
                 A Human Answers the Phone
               </h3>
-              <p className="font-body text-base text-muted-foreground leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
                 When you call, you get Sarah, Mike, or Tom — not a phone tree. When you have a claim, we're in your corner. That's not a tagline, it's how we've operated since 1995.
               </p>
             </AnimatedSection>
@@ -377,54 +377,54 @@ const Home = () => {
       </section>
 
       {/* Testimonials & Social Proof Section */}
-      <section className="py-space-2xl bg-primary">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+      <section className="py-12 sm:py-space-2xl bg-primary">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           
           {/* Stats Bar */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-space-lg lg:gap-space-md mb-space-2xl text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-space-lg lg:gap-space-md mb-12 sm:mb-space-2xl text-center">
             <AnimatedSection animation="fade-up" delay={0}>
-              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
                 29
               </p>
-              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
                 Years Serving Ohio
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={100}>
-              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
                 1,200+
               </p>
-              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
                 Families Protected
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={200}>
-              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
                 30+
               </p>
-              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
                 Insurance Carriers
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={300}>
-              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
                 4.9★
               </p>
-              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
                 Google Rating
               </p>
             </AnimatedSection>
           </div>
 
           {/* Featured Testimonial */}
-          <div className="relative max-w-[800px] mx-auto text-center mb-space-2xl">
-            {/* Decorative Quote Mark */}
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 font-display text-[200px] leading-none text-burgundy-600/20 select-none pointer-events-none">
+          <div className="relative max-w-[800px] mx-auto text-center mb-10 sm:mb-space-2xl">
+            {/* Decorative Quote Mark - Hidden on mobile */}
+            <div className="hidden sm:block absolute -top-8 left-1/2 -translate-x-1/2 font-display text-[120px] sm:text-[200px] leading-none text-burgundy-600/20 select-none pointer-events-none">
               "
             </div>
             
             <blockquote className="relative z-10">
-              <p className="font-display italic text-xl lg:text-2xl text-cream leading-relaxed mb-space-md">
+              <p className="font-display italic text-lg sm:text-xl lg:text-2xl text-cream leading-relaxed mb-4 sm:mb-space-md">
                 "After my basement flooded, Scioto had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months. I tell everyone — call Mike at Scioto."
               </p>
               <footer className="font-body font-medium text-sm text-white">
@@ -434,9 +434,9 @@ const Home = () => {
           </div>
 
           {/* Three Testimonial Cards */}
-          <div className="grid md:grid-cols-3 gap-space-md">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-space-md border border-white/10">
-              <p className="font-body text-cream/90 text-sm leading-relaxed mb-space-sm">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10">
+              <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
                 "Saved us $1,800 a year on the exact same coverage. Should have switched years ago."
               </p>
               <p className="font-body text-sm text-white/60">
@@ -444,8 +444,8 @@ const Home = () => {
               </p>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-space-md border border-white/10">
-              <p className="font-body text-cream/90 text-sm leading-relaxed mb-space-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10">
+              <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
                 "They found a gap in our business policy that would have cost us $50K in a lawsuit. Worth every penny."
               </p>
               <p className="font-body text-sm text-white/60">
@@ -453,8 +453,8 @@ const Home = () => {
               </p>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-space-md border border-white/10">
-              <p className="font-body text-cream/90 text-sm leading-relaxed mb-space-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10 sm:col-span-2 md:col-span-1">
+              <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
                 "When I call, Sarah actually knows who I am. When's the last time your insurance company did that?"
               </p>
               <p className="font-body text-sm text-white/60">
@@ -466,27 +466,27 @@ const Home = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-space-2xl bg-cream">
-        <AnimatedSection animation="fade-up" className="max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
-          <h2 className="font-display font-semibold text-2xl lg:text-4xl text-foreground leading-tight mb-space-md">
+      <section className="py-12 sm:py-space-2xl bg-cream">
+        <AnimatedSection animation="fade-up" className="max-w-[800px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
+          <h2 className="font-display font-semibold text-xl sm:text-2xl lg:text-4xl text-foreground leading-tight mb-4 sm:mb-space-md">
             Ready to Stop Overpaying for Insurance That Underdelivers?
           </h2>
           
-          <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[600px] mx-auto">
+          <p className="font-body text-base sm:text-lg text-muted-foreground mb-6 sm:mb-space-lg max-w-[600px] mx-auto">
             Get a free, no-pressure quote in 10 minutes. We'll show you exactly what you're paying for — and what you might be missing.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md mb-space-md">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-4 sm:mb-space-md">
             <Link
               to="/get-quote"
-              className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
             >
               Get Your Free Quote
             </Link>
             
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 font-body font-medium text-primary hover:underline transition-all duration-300"
+              className="inline-flex items-center gap-2 py-3 font-body font-medium text-primary hover:underline transition-all duration-300"
             >
               <Phone className="w-4 h-4" />
               Or call us: (614) 612-0050
