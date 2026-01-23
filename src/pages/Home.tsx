@@ -374,6 +374,95 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials & Social Proof Section */}
+      <section className="py-space-2xl bg-primary">
+        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+          
+          {/* Stats Bar */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-space-lg lg:gap-space-md mb-space-2xl text-center">
+            <div>
+              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+                29
+              </p>
+              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+                Years Serving Ohio
+              </p>
+            </div>
+            <div>
+              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+                1,200+
+              </p>
+              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+                Families Protected
+              </p>
+            </div>
+            <div>
+              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+                30+
+              </p>
+              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+                Insurance Carriers
+              </p>
+            </div>
+            <div>
+              <p className="font-display font-semibold text-5xl lg:text-[64px] text-cream leading-none mb-space-xs">
+                4.9★
+              </p>
+              <p className="font-body text-sm text-white/70 uppercase tracking-wider">
+                Google Rating
+              </p>
+            </div>
+          </div>
+
+          {/* Featured Testimonial */}
+          <div className="relative max-w-[800px] mx-auto text-center mb-space-2xl">
+            {/* Decorative Quote Mark */}
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 font-display text-[200px] leading-none text-burgundy-600/20 select-none pointer-events-none">
+              "
+            </div>
+            
+            <blockquote className="relative z-10">
+              <p className="font-display italic text-xl lg:text-2xl text-cream leading-relaxed mb-space-md">
+                "After my basement flooded, Scioto had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months. I tell everyone — call Mike at Scioto."
+              </p>
+              <footer className="font-body font-medium text-sm text-white">
+                — Jennifer M., Westerville
+              </footer>
+            </blockquote>
+          </div>
+
+          {/* Three Testimonial Cards */}
+          <div className="grid md:grid-cols-3 gap-space-md">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-space-md border border-white/10">
+              <p className="font-body text-cream/90 text-sm leading-relaxed mb-space-sm">
+                "Saved us $1,800 a year on the exact same coverage. Should have switched years ago."
+              </p>
+              <p className="font-body text-sm text-white/60">
+                — David R., New Albany
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-space-md border border-white/10">
+              <p className="font-body text-cream/90 text-sm leading-relaxed mb-space-sm">
+                "They found a gap in our business policy that would have cost us $50K in a lawsuit. Worth every penny."
+              </p>
+              <p className="font-body text-sm text-white/60">
+                — Columbus Business Owner
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-space-md border border-white/10">
+              <p className="font-body text-cream/90 text-sm leading-relaxed mb-space-sm">
+                "When I call, Sarah actually knows who I am. When's the last time your insurance company did that?"
+              </p>
+              <p className="font-body text-sm text-white/60">
+                — Michelle T., Gahanna
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
