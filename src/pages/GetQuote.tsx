@@ -165,28 +165,28 @@ const GetQuote = () => {
         {[1, 2, 3, 4].map((step) => (
           <div key={step} className="flex items-center">
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-body font-medium text-sm transition-colors duration-300 ${
+              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-body font-medium text-xs sm:text-sm transition-colors duration-300 ${
                 step < currentStep
                   ? "bg-primary text-white"
                   : step === currentStep
                   ? "bg-primary text-white"
-                  : "bg-gray-200 text-muted-foreground"
+                  : "bg-muted text-muted-foreground"
               }`}
             >
-              {step < currentStep ? <Check className="w-5 h-5" /> : step}
+              {step < currentStep ? <Check className="w-4 h-4 sm:w-5 sm:h-5" /> : step}
             </div>
             {step < 4 && (
               <div
-                className={`w-16 sm:w-24 lg:w-32 h-1 mx-2 rounded ${
-                  step < currentStep ? "bg-primary" : "bg-gray-200"
+                className={`w-8 sm:w-16 md:w-24 lg:w-32 h-1 mx-1 sm:mx-2 rounded ${
+                  step < currentStep ? "bg-primary" : "bg-muted"
                 }`}
               />
             )}
           </div>
         ))}
       </div>
-      <div className="flex justify-between text-xs font-body text-muted-foreground">
-        <span>Coverage Type</span>
+      <div className="flex justify-between text-[10px] sm:text-xs font-body text-muted-foreground">
+        <span>Coverage</span>
         <span>Details</span>
         <span>Contact</span>
         <span>Done</span>
@@ -203,19 +203,19 @@ const GetQuote = () => {
         Select one to get started. Don't worry — you can always add more later.
       </p>
       
-      <div className="grid sm:grid-cols-2 gap-space-md">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-space-md">
         {coverageOptions.map((option) => {
           const Icon = option.icon;
           return (
             <button
               key={option.id}
               onClick={() => handleCoverageSelect(option.id)}
-              className="group p-space-lg rounded-lg border-2 border-gray-200 bg-white text-left hover:border-primary hover:shadow-md transition-all duration-300"
+              className="group p-4 sm:p-space-lg rounded-lg border-2 border-border bg-card text-left hover:border-primary hover:shadow-md active:scale-[0.98] transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-space-sm group-hover:bg-primary/20 transition-colors duration-300">
-                <Icon className="w-6 h-6 text-primary" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 sm:mb-space-sm group-hover:bg-primary/20 transition-colors duration-300">
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
-              <h3 className="font-display font-semibold text-lg text-foreground mb-1">
+              <h3 className="font-display font-semibold text-base sm:text-lg text-foreground mb-1">
                 {option.label}
               </h3>
               <p className="font-body text-sm text-muted-foreground">
@@ -696,37 +696,37 @@ const GetQuote = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-space-lg bg-gradient-to-br from-cream via-white to-burgundy-100/30">
-        <div className="max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
-          <h1 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
+      <section className="pt-24 sm:pt-32 pb-4 sm:pb-space-lg bg-gradient-to-br from-cream via-white to-burgundy-100/30">
+        <div className="max-w-[800px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
+          <h1 className="font-display font-semibold text-2xl sm:text-3xl lg:text-4xl text-foreground mb-2 sm:mb-space-sm">
             Let's Find You Better Coverage
           </h1>
-          <p className="font-body text-lg text-muted-foreground">
+          <p className="font-body text-base sm:text-lg text-muted-foreground">
             Takes about 3 minutes. No spam, no aggressive follow-up — just honest recommendations.
           </p>
         </div>
       </section>
 
       {/* Form Section */}
-      <section className="py-space-xl bg-white">
-        <div className="max-w-[1100px] mx-auto px-space-md lg:px-space-lg">
-          <div className="grid lg:grid-cols-[1fr_280px] gap-space-xl">
+      <section className="py-6 sm:py-space-xl bg-background">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
+          <div className="grid lg:grid-cols-[1fr_280px] gap-6 lg:gap-space-xl">
             {/* Main Form */}
             <div>
               {currentStep < 4 && renderProgressBar()}
               
-              <div className="bg-white rounded-xl border border-gray-100 p-space-lg lg:p-space-xl shadow-sm">
+              <div className="bg-card rounded-xl border border-border p-4 sm:p-space-lg lg:p-space-xl shadow-sm">
                 {currentStep === 1 && renderStep1()}
                 {currentStep === 2 && renderStep2()}
                 {currentStep === 3 && renderStep3()}
                 {currentStep === 4 && renderStep4()}
 
-                {/* Navigation Buttons */}
+                {/* Navigation Buttons - Mobile optimized */}
                 {currentStep > 1 && currentStep < 4 && (
-                  <div className="flex items-center justify-between mt-space-xl pt-space-lg border-t border-gray-100">
+                  <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-space-xl pt-4 sm:pt-space-lg border-t border-border">
                     <button
                       onClick={() => setCurrentStep(currentStep - 1)}
-                      className="inline-flex items-center gap-2 font-body font-medium text-muted-foreground hover:text-foreground transition-colors duration-300"
+                      className="inline-flex items-center justify-center gap-2 py-3 sm:py-0 font-body font-medium text-muted-foreground hover:text-foreground transition-colors duration-300"
                     >
                       <ChevronLeft className="w-4 h-4" />
                       Back
@@ -735,7 +735,7 @@ const GetQuote = () => {
                     {currentStep === 2 && (
                       <button
                         onClick={() => setCurrentStep(3)}
-                        className="inline-flex items-center justify-center px-8 py-3 rounded bg-primary text-primary-foreground font-body font-medium transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-lg"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 sm:py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98]"
                       >
                         Continue
                       </button>
@@ -745,7 +745,7 @@ const GetQuote = () => {
                       <button
                         onClick={handleSubmit}
                         disabled={isSubmitting}
-                        className="inline-flex items-center justify-center px-8 py-3 rounded bg-primary text-primary-foreground font-body font-medium transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 sm:py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? "Submitting..." : "Get My Free Quote"}
                       </button>

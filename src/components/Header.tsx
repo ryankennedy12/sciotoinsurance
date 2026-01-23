@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const personalInsuranceItems = [
@@ -25,6 +26,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -32,13 +34,14 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setMobileDropdown(null);
   }, [location.pathname]);
 
   // Prevent body scroll when mobile menu is open
@@ -61,6 +64,10 @@ const Header = () => {
     setActiveDropdown(null);
   };
 
+  const toggleMobileDropdown = (dropdown: string) => {
+    setMobileDropdown(mobileDropdown === dropdown ? null : dropdown);
+  };
+
   return (
     <>
       <header
@@ -71,12 +78,12 @@ const Header = () => {
             : "bg-cream/80 backdrop-blur-sm"
         )}
       >
-        <div className="max-w-7xl mx-auto px-space-md lg:px-space-lg">
-          <div className="flex items-center justify-between h-20 lg:h-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg">
+          <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
             {/* Logo */}
             <Link to="/" className="flex flex-col items-start group">
               <div className="relative">
-                <span className="font-display font-bold text-2xl lg:text-3xl tracking-[0.1em] transition-colors duration-300 text-primary">
+                <span className="font-display font-bold text-xl sm:text-2xl lg:text-3xl tracking-[0.1em] transition-colors duration-300 text-primary">
                   SCIOTO
                 </span>
                 {/* Decorative wave line */}
@@ -93,7 +100,7 @@ const Header = () => {
                   />
                 </svg>
               </div>
-              <span className="font-body font-medium text-[10px] lg:text-xs tracking-[0.15em] mt-1 text-muted-foreground">
+              <span className="font-body font-medium text-[9px] sm:text-[10px] lg:text-xs tracking-[0.15em] mt-1 text-muted-foreground">
                 INSURANCE GROUP
               </span>
             </Link>
@@ -143,7 +150,7 @@ const Header = () => {
               </NavLink>
             </nav>
 
-            {/* Get a Quote Button (Desktop) */}
+            {/* Desktop: Get a Quote Button */}
             <Link
               to="/get-quote"
               className={cn(
@@ -154,18 +161,30 @@ const Header = () => {
               Get a Quote
             </Link>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-2 -mr-2"
-              aria-label="Open menu"
-            >
-              <div className="w-6 h-5 flex flex-col justify-between">
-                <span className="block h-0.5 w-full bg-charcoal" />
-                <span className="block h-0.5 w-full bg-charcoal" />
-                <span className="block h-0.5 w-full bg-charcoal" />
-              </div>
-            </button>
+            {/* Mobile: Click-to-call + Menu Button */}
+            <div className="flex items-center gap-2 lg:hidden">
+              {/* Click-to-call button */}
+              <a
+                href="tel:6146120050"
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground hover:bg-burgundy-800 transition-colors"
+                aria-label="Call us"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+              
+              {/* Mobile Menu Button - 44px tap target */}
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="flex items-center justify-center w-11 h-11 -mr-2"
+                aria-label="Open menu"
+              >
+                <div className="w-6 h-5 flex flex-col justify-between">
+                  <span className="block h-0.5 w-full bg-charcoal transition-all" />
+                  <span className="block h-0.5 w-full bg-charcoal transition-all" />
+                  <span className="block h-0.5 w-full bg-charcoal transition-all" />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -187,10 +206,10 @@ const Header = () => {
           )}
         />
 
-        {/* Close Button */}
+        {/* Close Button - 44px tap target */}
         <button
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-6 right-6 p-2 z-10"
+          className="absolute top-4 right-4 w-11 h-11 flex items-center justify-center z-10"
           aria-label="Close menu"
         >
           <div className="w-6 h-6 relative">
@@ -199,45 +218,137 @@ const Header = () => {
           </div>
         </button>
 
-        {/* Mobile Navigation Links */}
+        {/* Mobile Navigation Links - Scrollable */}
         <nav
           className={cn(
-            "relative z-10 h-full flex flex-col items-center justify-center gap-8 transition-all duration-500 delay-200",
+            "relative z-10 h-full flex flex-col pt-20 pb-8 px-6 overflow-y-auto transition-all duration-500 delay-200",
             isMobileMenuOpen
               ? "opacity-100 translate-x-0"
               : "opacity-0 translate-x-8"
           )}
         >
-          <MobileNavLink to="/" onClick={() => setIsMobileMenuOpen(false)}>
-            Home
-          </MobileNavLink>
-          <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>
-            About
-          </MobileNavLink>
-          <MobileNavLink to="/personal-insurance" onClick={() => setIsMobileMenuOpen(false)}>
-            Personal Insurance
-          </MobileNavLink>
-          <MobileNavLink to="/business-insurance" onClick={() => setIsMobileMenuOpen(false)}>
-            Business Insurance
-          </MobileNavLink>
-          <MobileNavLink to="/employee-benefits" onClick={() => setIsMobileMenuOpen(false)}>
-            Employee Benefits
-          </MobileNavLink>
-          <MobileNavLink to="/services" onClick={() => setIsMobileMenuOpen(false)}>
-            Services
-          </MobileNavLink>
-          <MobileNavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-            Contact
-          </MobileNavLink>
+          <div className="flex flex-col gap-2">
+            <MobileNavLink to="/" onClick={() => setIsMobileMenuOpen(false)}>
+              Home
+            </MobileNavLink>
+            <MobileNavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>
+              About
+            </MobileNavLink>
+            
+            {/* Personal Insurance with accordion */}
+            <div>
+              <button
+                onClick={() => toggleMobileDropdown("personal")}
+                className="w-full flex items-center justify-between py-3 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                Personal Insurance
+                <svg
+                  className={cn(
+                    "w-5 h-5 transition-transform duration-300",
+                    mobileDropdown === "personal" && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className={cn(
+                "overflow-hidden transition-all duration-300",
+                mobileDropdown === "personal" ? "max-h-96" : "max-h-0"
+              )}>
+                <Link
+                  to="/personal-insurance"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 pl-4 font-body text-lg text-white/70 hover:text-white transition-colors"
+                >
+                  All Personal Insurance
+                </Link>
+                {personalInsuranceItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-2 pl-4 font-body text-lg text-white/70 hover:text-white transition-colors"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-          {/* Mobile Quote Button */}
-          <Link
-            to="/get-quote"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-4 px-8 py-4 bg-white text-primary font-body font-medium rounded transition-transform hover:scale-105"
-          >
-            Get a Quote
-          </Link>
+            {/* Business Insurance with accordion */}
+            <div>
+              <button
+                onClick={() => toggleMobileDropdown("business")}
+                className="w-full flex items-center justify-between py-3 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                Business Insurance
+                <svg
+                  className={cn(
+                    "w-5 h-5 transition-transform duration-300",
+                    mobileDropdown === "business" && "rotate-180"
+                  )}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className={cn(
+                "overflow-hidden transition-all duration-300",
+                mobileDropdown === "business" ? "max-h-96" : "max-h-0"
+              )}>
+                <Link
+                  to="/business-insurance"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 pl-4 font-body text-lg text-white/70 hover:text-white transition-colors"
+                >
+                  All Business Insurance
+                </Link>
+                {businessInsuranceItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-2 pl-4 font-body text-lg text-white/70 hover:text-white transition-colors"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <MobileNavLink to="/employee-benefits" onClick={() => setIsMobileMenuOpen(false)}>
+              Employee Benefits
+            </MobileNavLink>
+            <MobileNavLink to="/services" onClick={() => setIsMobileMenuOpen(false)}>
+              Services
+            </MobileNavLink>
+            <MobileNavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+              Contact
+            </MobileNavLink>
+          </div>
+
+          {/* Mobile CTA Buttons */}
+          <div className="mt-auto pt-8 space-y-3">
+            <Link
+              to="/get-quote"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full py-4 px-8 bg-white text-primary font-body font-medium rounded text-center text-base transition-transform active:scale-[0.98]"
+            >
+              Get a Quote
+            </Link>
+            <a
+              href="tel:6146120050"
+              className="flex items-center justify-center gap-2 w-full py-4 px-8 border-2 border-white/50 text-white font-body font-medium rounded text-center text-base transition-all hover:bg-white/10"
+            >
+              <Phone className="w-5 h-5" />
+              (614) 612-0050
+            </a>
+          </div>
         </nav>
       </div>
     </>
@@ -317,7 +428,7 @@ const DropdownMenu = ({ items, isOpen }: DropdownMenuProps) => {
   );
 };
 
-// Mobile Nav Link Component
+// Mobile Nav Link Component - 44px min tap target
 interface MobileNavLinkProps {
   to: string;
   children: React.ReactNode;
@@ -333,8 +444,8 @@ const MobileNavLink = ({ to, children, onClick }: MobileNavLinkProps) => {
       to={to}
       onClick={onClick}
       className={cn(
-        "font-display text-3xl font-semibold transition-all duration-300",
-        isActive ? "text-white" : "text-white/70 hover:text-white"
+        "block py-3 font-display text-2xl font-semibold transition-all duration-300",
+        isActive ? "text-white" : "text-white/90 hover:text-white"
       )}
     >
       {children}

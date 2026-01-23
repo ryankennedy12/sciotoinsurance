@@ -1,15 +1,16 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Facebook, Linkedin } from "lucide-react";
 
-const Footer = () => {
+const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <footer className="bg-charcoal text-cream">
+    <footer ref={ref} className="bg-charcoal text-cream">
       {/* Main Footer Content */}
-      <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg py-space-xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg lg:gap-space-md">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg py-space-xl">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-space-md">
           
           {/* Column 1 - Brand */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 md:col-span-1 lg:col-span-1">
             {/* Logo */}
             <div className="mb-space-md">
               <span className="font-display text-2xl font-bold tracking-[0.1em] text-white">
@@ -35,51 +36,51 @@ const Footer = () => {
               Here when it matters.
             </p>
             
-            {/* Social Icons */}
-            <div className="flex gap-space-sm">
+            {/* Social Icons - 44px tap targets */}
+            <div className="flex gap-3">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300"
+                className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300"
                 aria-label="Facebook"
               >
-                <Facebook className="w-4 h-4" />
+                <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300"
+                className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-4 h-4" />
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           {/* Column 2 - Quick Links */}
           <div>
-            <h4 className="font-display font-semibold text-lg text-white mb-space-md">
+            <h4 className="font-display font-semibold text-base sm:text-lg text-white mb-4 sm:mb-space-md">
               Quick Links
             </h4>
-            <nav className="flex flex-col gap-space-xs">
-              <Link to="/" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+            <nav className="flex flex-col gap-2">
+              <Link to="/" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Home
               </Link>
-              <Link to="/about" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              <Link to="/about" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 About Us
               </Link>
-              <Link to="/get-quote" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              <Link to="/get-quote" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Get a Quote
               </Link>
-              <a href="#" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              <Link to="/services" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Report a Claim
-              </a>
-              <a href="#" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              </Link>
+              <Link to="/services" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Pay Your Bill
-              </a>
-              <Link to="/contact" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              </Link>
+              <Link to="/contact" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Contact
               </Link>
             </nav>
@@ -87,31 +88,31 @@ const Footer = () => {
 
           {/* Column 3 - Coverage */}
           <div>
-            <h4 className="font-display font-semibold text-lg text-white mb-space-md">
+            <h4 className="font-display font-semibold text-base sm:text-lg text-white mb-4 sm:mb-space-md">
               Coverage
             </h4>
-            <nav className="flex flex-col gap-space-xs">
-              <Link to="/personal-insurance" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+            <nav className="flex flex-col gap-2">
+              <Link to="/personal-insurance" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Personal Insurance
               </Link>
-              <Link to="/business-insurance" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              <Link to="/business-insurance" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Business Insurance
               </Link>
-              <Link to="/employee-benefits" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              <Link to="/employee-benefits" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 Employee Benefits
               </Link>
-              <Link to="/services" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300">
+              <Link to="/services" className="font-body text-sm text-cream/70 hover:text-white transition-colors duration-300 py-1">
                 All Coverages
               </Link>
             </nav>
           </div>
 
           {/* Column 4 - Contact */}
-          <div>
-            <h4 className="font-display font-semibold text-lg text-white mb-space-md">
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="font-display font-semibold text-base sm:text-lg text-white mb-4 sm:mb-space-md">
               Contact
             </h4>
-            <div className="flex flex-col gap-space-sm">
+            <div className="flex flex-col gap-3 sm:gap-space-sm">
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" />
                 <p className="font-body text-sm text-cream/70">
@@ -144,17 +145,17 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg py-space-md">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-space-sm text-center md:text-left">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg py-4 sm:py-space-md">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-space-sm text-center sm:text-left">
             <p className="font-body text-xs text-cream/50">
               © {new Date().getFullYear()} Scioto Insurance Group. All rights reserved.
             </p>
-            <div className="flex gap-space-md">
-              <a href="#" className="font-body text-xs text-cream/50 hover:text-cream transition-colors duration-300">
+            <div className="flex gap-4 sm:gap-space-md">
+              <a href="#" className="font-body text-xs text-cream/50 hover:text-cream transition-colors duration-300 py-1">
                 Privacy Policy
               </a>
               <span className="text-cream/30">|</span>
-              <a href="#" className="font-body text-xs text-cream/50 hover:text-cream transition-colors duration-300">
+              <a href="#" className="font-body text-xs text-cream/50 hover:text-cream transition-colors duration-300 py-1">
                 Terms of Service
               </a>
             </div>
@@ -163,6 +164,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 export default Footer;
