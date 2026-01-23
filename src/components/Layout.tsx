@@ -16,7 +16,7 @@ const Layout = () => {
         setDisplayLocation(location);
         setTransitionStage("enter");
         window.scrollTo({ top: 0, behavior: "instant" });
-      }, 150);
+      }, 250);
       return () => clearTimeout(timeout);
     }
   }, [location, displayLocation]);
@@ -25,11 +25,12 @@ const Layout = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main 
-        className={`flex-1 transition-all duration-150 ease-out motion-reduce:transition-none ${
+        className={`flex-1 transition-all duration-250 ease-out motion-reduce:transition-none ${
           transitionStage === "enter" 
             ? "opacity-100 translate-y-0" 
-            : "opacity-0 translate-y-1"
+            : "opacity-0 translate-y-2"
         }`}
+        style={{ transitionDuration: '250ms' }}
       >
         <Outlet />
       </main>
