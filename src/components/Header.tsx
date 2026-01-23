@@ -68,7 +68,7 @@ const Header = () => {
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
             ? "bg-white/98 backdrop-blur-sm shadow-sm"
-            : "bg-transparent"
+            : "bg-cream/80 backdrop-blur-sm"
         )}
       >
         <div className="max-w-7xl mx-auto px-space-md lg:px-space-lg">
@@ -76,20 +76,12 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex flex-col items-start group">
               <div className="relative">
-                <span
-                  className={cn(
-                    "font-display font-bold text-2xl lg:text-3xl tracking-[0.1em] transition-colors duration-300",
-                    isScrolled ? "text-primary" : "text-white"
-                  )}
-                >
+                <span className="font-display font-bold text-2xl lg:text-3xl tracking-[0.1em] transition-colors duration-300 text-primary">
                   SCIOTO
                 </span>
                 {/* Decorative wave line */}
                 <svg
-                  className={cn(
-                    "absolute -bottom-1 left-0 w-full h-1 transition-colors duration-300",
-                    isScrolled ? "text-gold-500" : "text-gold-500"
-                  )}
+                  className="absolute -bottom-1 left-0 w-full h-1 text-gold-500"
                   viewBox="0 0 100 4"
                   preserveAspectRatio="none"
                 >
@@ -101,12 +93,7 @@ const Header = () => {
                   />
                 </svg>
               </div>
-              <span
-                className={cn(
-                  "font-body font-medium text-[10px] lg:text-xs tracking-[0.15em] mt-1 transition-colors duration-300",
-                  isScrolled ? "text-muted-foreground" : "text-white/80"
-                )}
-              >
+              <span className="font-body font-medium text-[10px] lg:text-xs tracking-[0.15em] mt-1 text-muted-foreground">
                 INSURANCE GROUP
               </span>
             </Link>
@@ -174,24 +161,9 @@ const Header = () => {
               aria-label="Open menu"
             >
               <div className="w-6 h-5 flex flex-col justify-between">
-                <span
-                  className={cn(
-                    "block h-0.5 w-full transition-colors duration-300",
-                    isScrolled ? "bg-charcoal" : "bg-white"
-                  )}
-                />
-                <span
-                  className={cn(
-                    "block h-0.5 w-full transition-colors duration-300",
-                    isScrolled ? "bg-charcoal" : "bg-white"
-                  )}
-                />
-                <span
-                  className={cn(
-                    "block h-0.5 w-full transition-colors duration-300",
-                    isScrolled ? "bg-charcoal" : "bg-white"
-                  )}
-                />
+                <span className="block h-0.5 w-full bg-charcoal" />
+                <span className="block h-0.5 w-full bg-charcoal" />
+                <span className="block h-0.5 w-full bg-charcoal" />
               </div>
             </button>
           </div>
@@ -280,7 +252,7 @@ interface NavLinkProps {
   hasDropdown?: boolean;
 }
 
-const NavLink = ({ href, children, isScrolled, hasDropdown }: NavLinkProps) => {
+const NavLink = ({ href, children, hasDropdown }: NavLinkProps) => {
   const location = useLocation();
   const isActive = location.pathname.startsWith(href);
 
@@ -289,13 +261,7 @@ const NavLink = ({ href, children, isScrolled, hasDropdown }: NavLinkProps) => {
       to={href}
       className={cn(
         "relative font-body text-sm font-medium transition-colors duration-300 py-2 group flex items-center gap-1",
-        isScrolled
-          ? isActive
-            ? "text-primary"
-            : "text-charcoal hover:text-primary"
-          : isActive
-          ? "text-white"
-          : "text-white/90 hover:text-white"
+        isActive ? "text-primary" : "text-charcoal hover:text-primary"
       )}
     >
       {children}
