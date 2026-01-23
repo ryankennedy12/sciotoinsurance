@@ -16,28 +16,38 @@ export default function AdminLogin() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasAdmins, setHasAdmins] = useState<boolean | null>(null);
-  const { user, isLoading, isAdmin, signIn } = useAuth();
+  const [isCheckingAdmins, setIsCheckingAdmins] = useState(true);
+  const { user, isLoading: authLoading, isAdmin, signIn } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   // Check if any admins exist using security definer function
   useEffect(() => {
     async function checkAdmins() {
-      const { data, error } = await supabase.rpc("admin_exists");
-      if (error) {
-        console.error("Error checking admins:", error);
+      try {
+        const { data, error } = await supabase.rpc("admin_exists");
+        if (error) {
+          console.error("Error checking admins:", error);
+          setHasAdmins(true); // Default to login mode on error
+        } else {
+          setHasAdmins(data ?? false);
+        }
+      } catch (err) {
+        console.error("Error checking admins:", err);
         setHasAdmins(true); // Default to login mode on error
-      } else {
-        setHasAdmins(data ?? false);
+      } finally {
+        setIsCheckingAdmins(false);
       }
     }
     checkAdmins();
   }, []);
 
-  // Already authenticated as admin
-  if (!isLoading && user && isAdmin) {
-    return <Navigate to="/admin" replace />;
-  }
+  // Already authenticated as admin - redirect
+  useEffect(() => {
+    if (!authLoading && user && isAdmin) {
+      navigate("/admin", { replace: true });
+    }
+  }, [authLoading, user, isAdmin, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,7 +158,7 @@ export default function AdminLogin() {
     setIsSubmitting(false);
   };
 
-  if (isLoading || hasAdmins === null) {
+  if (isCheckingAdmins) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/30">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
