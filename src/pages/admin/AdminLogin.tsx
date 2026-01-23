@@ -20,14 +20,16 @@ export default function AdminLogin() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Check if any admins exist
+  // Check if any admins exist using security definer function
   useEffect(() => {
     async function checkAdmins() {
-      const { count } = await supabase
-        .from("user_roles")
-        .select("*", { count: "exact", head: true })
-        .eq("role", "admin");
-      setHasAdmins((count ?? 0) > 0);
+      const { data, error } = await supabase.rpc("admin_exists");
+      if (error) {
+        console.error("Error checking admins:", error);
+        setHasAdmins(true); // Default to login mode on error
+      } else {
+        setHasAdmins(data ?? false);
+      }
     }
     checkAdmins();
   }, []);
