@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, CheckCircle, HardHat, UtensilsCrossed, ShoppingBag, Stethoscope, Truck, Factory, Briefcase, Wrench } from "lucide-react";
+import { Phone, ArrowRight, Star, CheckCircle, ChevronRight, HardHat, UtensilsCrossed, ShoppingBag, Stethoscope, Truck, Factory, Briefcase, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
 import { businessInsuranceProducts, businessInsuranceReasons } from "@/data/products";
 import { useState } from "react";
-import { useParallax, useScrollProgress } from "@/hooks/useParallax";
 
 import columbusSkyline from "@/assets/columbus-skyline.jpg";
 import constructionSite from "@/assets/construction-site.jpg";
@@ -37,83 +36,32 @@ const testimonials = [
 const BusinessInsurance = () => {
   const [selectedIndustry, setSelectedIndustry] = useState(0);
   const current = industries[selectedIndustry];
-  const parallaxOffset = useParallax(0.4);
-  const scrollProgress = useScrollProgress();
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Dramatic Full-Width Hero with Parallax */}
-      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden">
-        {/* Parallax Background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center scale-110"
-          style={{ 
-            backgroundImage: `url(${columbusSkyline})`,
-            transform: `translateY(${parallaxOffset}px) scale(1.1)`,
-          }}
-        >
+      {/* Dramatic Full-Width Hero */}
+      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${columbusSkyline})` }}>
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/95 via-foreground/80 to-foreground/60" />
-          {/* Animated grid overlay */}
-          <div 
-            className="absolute inset-0 opacity-5"
-            style={{ 
-              backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
-              backgroundSize: '80px 80px',
-              transform: `translateY(${parallaxOffset * 0.2}px)`,
-            }}
-          />
         </div>
-        
-        {/* Floating geometric shapes */}
-        <div 
-          className="absolute top-1/4 right-1/4 w-64 h-64 border border-white/10 rotate-45 hidden lg:block"
-          style={{ transform: `translateY(${parallaxOffset * 0.3}px) rotate(45deg)` }}
-        />
-        <div 
-          className="absolute bottom-1/3 right-1/3 w-32 h-32 border border-accent/20 hidden lg:block"
-          style={{ transform: `translateY(${-parallaxOffset * 0.4}px) rotate(12deg)` }}
-        />
-
         <div className="relative z-10 container-wide px-6 py-20">
           <div className="max-w-3xl">
-            {/* Staggered animations */}
-            <div className="flex flex-wrap gap-6 mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.1s_forwards]">
-              {["1,200+ Businesses Protected", "29 Years Experience", "A+ BBB Rating"].map((t) => (
-                <div key={t} className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-accent" /><span className="text-white/80 text-sm font-medium">{t}</span></div>
-              ))}
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 tracking-tight opacity-0 animate-[fade-in_0.6s_ease-out_0.2s_forwards]">
-              Business Insurance<br /><span className="text-accent">Built for Growth</span>
-            </h1>
-            
-            <p className="text-xl text-white/80 mb-8 leading-relaxed max-w-2xl opacity-0 animate-[fade-in_0.6s_ease-out_0.35s_forwards]">
-              Protect what you've built. From startups to established enterprises, we craft coverage that grows with your business.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.5s_forwards]">
-              <Button asChild size="lg" className="text-base bg-accent hover:bg-accent/90 text-foreground"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
-              <Button asChild variant="outline" size="lg" className="text-base border-white/30 text-white hover:bg-white/10 hover:text-white"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
-            </div>
+            <AnimatedSection animation="fade-up">
+              <div className="flex flex-wrap gap-6 mb-8">
+                {["1,200+ Businesses Protected", "29 Years Experience", "A+ BBB Rating"].map((t) => (
+                  <div key={t} className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-accent" /><span className="text-white/80 text-sm font-medium">{t}</span></div>
+                ))}
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 tracking-tight">Business Insurance<br /><span className="text-accent">Built for Growth</span></h1>
+              <p className="text-xl text-white/80 mb-8 leading-relaxed max-w-2xl">Protect what you've built. From startups to established enterprises, we craft coverage that grows with your business.</p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Button asChild size="lg" className="text-base bg-accent hover:bg-accent/90 text-foreground"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild variant="outline" size="lg" className="text-base border-white/30 text-white hover:bg-white/10 hover:text-white"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
-        
-        {/* Diagonal slice with parallax */}
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-32 bg-background"
-          style={{ 
-            clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)',
-            transform: `translateY(${scrollProgress * 20}px)`,
-          }}
-        />
-        
-        {/* Scroll indicator */}
-        <div 
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 transition-opacity duration-300"
-          style={{ opacity: 1 - scrollProgress * 3 }}
-        >
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/50 to-white/20" />
-        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-background" style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)' }} />
       </section>
 
       {/* Industry Selector Tabs */}
@@ -125,20 +73,14 @@ const BusinessInsurance = () => {
           <AnimatedSection animation="fade-up" delay={100}>
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               {industries.map((ind, i) => { const Icon = ind.icon; return (
-                <button key={ind.name} onClick={() => setSelectedIndustry(i)} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-300 ${selectedIndustry === i ? 'bg-primary text-primary-foreground shadow-lg scale-105' : 'bg-secondary text-foreground hover:bg-secondary/80 hover:scale-102'}`}>
+                <button key={ind.name} onClick={() => setSelectedIndustry(i)} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all ${selectedIndustry === i ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-secondary text-foreground hover:bg-secondary/80'}`}>
                   <Icon className="h-4 w-4" />{ind.name}
                 </button>
               ); })}
             </div>
             <div className="bg-secondary rounded-2xl overflow-hidden border border-border">
               <div className="grid lg:grid-cols-2">
-                <div className="relative h-64 lg:h-auto overflow-hidden">
-                  <img 
-                    src={current.image} 
-                    alt={current.name} 
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
-                  />
-                </div>
+                <div className="relative h-64 lg:h-auto"><img src={current.image} alt={current.name} className="absolute inset-0 w-full h-full object-cover" /></div>
                 <div className="p-8 lg:p-12">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center"><current.icon className="h-6 w-6 text-primary" /></div>
@@ -166,10 +108,10 @@ const BusinessInsurance = () => {
               <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-6 flex items-center gap-3"><div className="w-8 h-px bg-primary" />{category.title}</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {category.products.map((product) => { const Icon = product.icon; return (
-                  <Link key={product.name} to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <Link key={product.name} to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-all">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors"><Icon className="h-5 w-5 text-primary" /></div>
+                      <div className="w-10 h-10 rounded bg-secondary flex items-center justify-center flex-shrink-0"><Icon className="h-5 w-5 text-primary" /></div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{product.name}</h4>
                         {product.description && <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>}
@@ -183,16 +125,9 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Risk Assessment CTA with Parallax */}
+      {/* Risk Assessment CTA */}
       <section className="relative py-20 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center scale-110"
-          style={{ 
-            backgroundImage: `url(${businessOffice})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-foreground/90" />
-        </div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${businessOffice})` }}><div className="absolute inset-0 bg-foreground/90" /></div>
         <div className="relative z-10 container-wide px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection animation="slide-right">
@@ -221,7 +156,7 @@ const BusinessInsurance = () => {
           <AnimatedSection animation="fade-up" className="text-center mb-16"><h2 className="heading-lg text-foreground mb-4">Why Businesses Choose Scioto</h2></AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {businessInsuranceReasons.map((reason, i) => { const Icon = reason.icon; return (
-              <AnimatedSection key={i} animation="fade-up" delay={i * 100} className="bg-background p-8 rounded-lg border border-border hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
+              <AnimatedSection key={i} animation="fade-up" delay={i * 100} className="bg-background p-8 rounded-lg border border-border hover:border-primary/30 transition-colors">
                 <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6"><Icon className="h-7 w-7 text-accent" /></div>
                 <h3 className="font-display font-semibold text-xl text-foreground mb-3">{reason.title}</h3>
                 <p className="text-muted-foreground">{reason.description}</p>
