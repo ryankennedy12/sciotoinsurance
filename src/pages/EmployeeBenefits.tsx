@@ -1,40 +1,8 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Heart, Eye, Shield, PiggyBank, Wallet, Gift, Search, BarChart3, FileCheck, Headphones, Users, TrendingDown, DollarSign } from "lucide-react";
+import { Phone, ArrowRight, Search, BarChart3, FileCheck, Headphones, Users, TrendingDown, DollarSign, PiggyBank, Wallet } from "lucide-react";
+import { employeeBenefitsProducts } from "@/data/products";
 
 const EmployeeBenefits = () => {
-  const offerings = [
-    {
-      icon: Heart,
-      name: "Group Health Insurance",
-      description: "Navigate the complexity of group health plans with an advisor who actually returns your calls. We work with all major carriers to find the right fit for your team and budget.",
-    },
-    {
-      icon: Eye,
-      name: "Dental & Vision",
-      description: "The benefits employees actually use and appreciate. We help you design plans that balance coverage with cost.",
-    },
-    {
-      icon: Shield,
-      name: "Life & Disability Insurance",
-      description: "Protect your employees and their families with group life coverage. Disability insurance replaces income when someone can't work.",
-    },
-    {
-      icon: PiggyBank,
-      name: "Retirement Plans (401k)",
-      description: "Help your team build for the future with retirement plan options that fit businesses of any size.",
-    },
-    {
-      icon: Wallet,
-      name: "Health Savings Accounts (HSA/FSA)",
-      description: "Tax-advantaged accounts that give employees flexibility in managing healthcare costs.",
-    },
-    {
-      icon: Gift,
-      name: "Voluntary Benefits",
-      description: "Additional options employees can choose and pay for themselves — accident insurance, critical illness, legal plans, and more.",
-    },
-  ];
-
   const stats = [
     {
       icon: Users,
@@ -80,6 +48,19 @@ const EmployeeBenefits = () => {
     },
   ];
 
+  const additionalOfferings = [
+    {
+      icon: PiggyBank,
+      name: "Retirement Plans (401k)",
+      description: "Help your team build for the future with retirement plan options that fit businesses of any size.",
+    },
+    {
+      icon: Wallet,
+      name: "Health Savings Accounts (HSA/FSA)",
+      description: "Tax-advantaged accounts that give employees flexibility in managing healthcare costs.",
+    },
+  ];
+
   return (
     <>
       {/* Hero Section */}
@@ -105,39 +86,96 @@ const EmployeeBenefits = () => {
         </div>
       </section>
 
-      {/* Core Offerings Section */}
+      {/* Benefits Products Section */}
       <section className="py-space-2xl bg-white">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="mb-space-xl">
             <div className="w-10 h-0.5 bg-primary mb-space-md" />
             <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              What We Offer
+              Employee Benefits Products
             </h2>
             <p className="font-body text-lg text-muted-foreground max-w-[600px]">
               Comprehensive benefits solutions designed to attract, retain, and protect your team.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-md">
-            {offerings.map((offering, index) => {
-              const Icon = offering.icon;
-              return (
-                <div
-                  key={index}
-                  className="group bg-cream rounded-lg p-space-lg hover:bg-white hover:shadow-lg transition-all duration-300 border border-transparent hover:border-gray-200"
-                >
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-space-md group-hover:bg-primary/20 transition-colors duration-300">
-                    <Icon className="w-6 h-6 text-primary" />
+          <div className="mb-space-lg">
+            <h3 className="font-display font-semibold text-xl text-foreground mb-space-md flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-gold-500" />
+              Insurance Benefits
+            </h3>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+              {employeeBenefitsProducts.map((product, index) => {
+                const Icon = product.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group flex items-start gap-space-sm p-space-md rounded-lg bg-cream hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-border"
+                  >
+                    <div className="w-10 h-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-display font-semibold text-base text-foreground mb-1">
+                        {product.name}
+                      </h4>
+                      {product.description && (
+                        <p className="font-body text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                          {product.description}
+                        </p>
+                      )}
+                      <Link
+                        to="/get-quote"
+                        className="inline-flex items-center gap-1 font-body text-sm font-medium text-primary mt-2 group-hover:gap-2 transition-all duration-300"
+                      >
+                        Learn More
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
-                  <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
-                    {offering.name}
-                  </h3>
-                  <p className="font-body text-muted-foreground leading-relaxed">
-                    {offering.description}
-                  </p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Additional Offerings */}
+          <div>
+            <h3 className="font-display font-semibold text-xl text-foreground mb-space-md flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-gold-500" />
+              Financial Benefits
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-space-sm">
+              {additionalOfferings.map((offering, index) => {
+                const Icon = offering.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group flex items-start gap-space-sm p-space-md rounded-lg bg-cream hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-border"
+                  >
+                    <div className="w-10 h-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-display font-semibold text-base text-foreground mb-1">
+                        {offering.name}
+                      </h4>
+                      <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                        {offering.description}
+                      </p>
+                      <Link
+                        to="/get-quote"
+                        className="inline-flex items-center gap-1 font-body text-sm font-medium text-primary mt-2 group-hover:gap-2 transition-all duration-300"
+                      >
+                        Learn More
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

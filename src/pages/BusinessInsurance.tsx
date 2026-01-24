@@ -1,50 +1,8 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Shield, Building2, Briefcase, HardHat, Scale, Truck, Lock, Users, Hammer, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Heart, Home as HomeIcon, Handshake } from "lucide-react";
+import { Phone, ArrowRight, Handshake, Hammer, UtensilsCrossed, ShoppingBag, Briefcase, Stethoscope, Factory, Heart, Home as HomeIcon } from "lucide-react";
+import { businessInsuranceProducts, businessInsuranceReasons } from "@/data/products";
 
 const BusinessInsurance = () => {
-  const coverageTypes = [
-    {
-      icon: Shield,
-      name: "General Liability",
-      description: "Protection when someone gets hurt on your property or claims your work caused damage. The foundation of business coverage.",
-    },
-    {
-      icon: Building2,
-      name: "Commercial Property",
-      description: "Your building, equipment, inventory, and everything you need to operate — covered against fire, theft, and disasters.",
-    },
-    {
-      icon: Briefcase,
-      name: "Business Owner's Policy (BOP)",
-      description: "Bundles property and liability coverage at a lower cost than buying separately. Smart choice for small to mid-sized businesses.",
-    },
-    {
-      icon: HardHat,
-      name: "Workers' Compensation",
-      description: "Required in Ohio if you have employees. We help you stay compliant and find competitive rates.",
-    },
-    {
-      icon: Scale,
-      name: "Professional Liability (E&O)",
-      description: "When a client claims your professional advice or services caused them harm. Essential for consultants, accountants, and service providers.",
-    },
-    {
-      icon: Truck,
-      name: "Commercial Auto",
-      description: "If your business owns vehicles or your employees drive for work, personal auto policies won't cover you. This will.",
-    },
-    {
-      icon: Lock,
-      name: "Cyber Liability",
-      description: "Data breaches happen to businesses of every size. This covers notification costs, legal fees, and business interruption.",
-    },
-    {
-      icon: Users,
-      name: "Directors & Officers (D&O)",
-      description: "Protects your leadership team's personal assets from lawsuits related to business decisions.",
-    },
-  ];
-
   const industries = [
     { icon: Hammer, name: "Contractors & Construction" },
     { icon: UtensilsCrossed, name: "Restaurants & Food Service" },
@@ -81,43 +39,87 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Coverage Grid Section */}
+      {/* Coverage Grid Section - By Category */}
       <section className="py-space-2xl bg-white">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="mb-space-xl">
             <div className="w-10 h-0.5 bg-primary mb-space-md" />
             <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              Business Coverage Options
+              Business Insurance Products
             </h2>
             <p className="font-body text-lg text-muted-foreground max-w-[600px]">
               From startups to established operations, we tailor coverage to your unique risks.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-space-md">
-            {coverageTypes.map((coverage, index) => {
-              const Icon = coverage.icon;
+          {businessInsuranceProducts.map((category, categoryIndex) => (
+            <div key={categoryIndex} className="mb-space-xl last:mb-0">
+              <h3 className="font-display font-semibold text-xl text-foreground mb-space-md flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-gold-500" />
+                {category.title}
+              </h3>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+                {category.products.map((product, index) => {
+                  const Icon = product.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="group flex items-start gap-space-sm p-space-md rounded-lg bg-cream hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-border"
+                    >
+                      <div className="w-10 h-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                        <Icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-display font-semibold text-base text-foreground mb-1">
+                          {product.name}
+                        </h4>
+                        {product.description && (
+                          <p className="font-body text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                            {product.description}
+                          </p>
+                        )}
+                        <Link
+                          to="/get-quote"
+                          className="inline-flex items-center gap-1 font-body text-sm font-medium text-primary mt-2 group-hover:gap-2 transition-all duration-300"
+                        >
+                          Get Quote
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose Scioto Section */}
+      <section className="py-space-2xl bg-cream">
+        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+          <div className="text-center mb-space-xl">
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
+            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground">
+              Why Choose Scioto for Business Insurance
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-space-lg">
+            {businessInsuranceReasons.map((reason, index) => {
+              const Icon = reason.icon;
               return (
-                <div
-                  key={index}
-                  className="group bg-cream rounded-lg p-space-md hover:bg-white hover:shadow-lg transition-all duration-300 border border-transparent hover:border-gray-200"
-                >
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-space-md group-hover:bg-primary/20 transition-colors duration-300">
-                    <Icon className="w-6 h-6 text-primary" />
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-white shadow-sm flex items-center justify-center">
+                    <Icon className="w-7 h-7 text-primary" />
                   </div>
-                  <h3 className="font-display font-semibold text-lg text-foreground mb-space-xs">
-                    {coverage.name}
+                  <h3 className="font-display font-semibold text-lg text-foreground mb-space-sm">
+                    {reason.title}
                   </h3>
-                  <p className="font-body text-sm text-muted-foreground mb-space-md leading-relaxed">
-                    {coverage.description}
+                  <p className="font-body text-muted-foreground text-sm leading-relaxed">
+                    {reason.description}
                   </p>
-                  <Link
-                    to="/get-quote"
-                    className="inline-flex items-center gap-1 font-body text-sm font-medium text-primary group-hover:gap-2 transition-all duration-300"
-                  >
-                    Learn More
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
                 </div>
               );
             })}
@@ -126,7 +128,7 @@ const BusinessInsurance = () => {
       </section>
 
       {/* Industry Expertise Section */}
-      <section className="py-space-2xl bg-cream">
+      <section className="py-space-2xl bg-white">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="text-center mb-space-xl">
             <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
@@ -144,7 +146,7 @@ const BusinessInsurance = () => {
               return (
                 <div
                   key={index}
-                  className="group bg-white rounded-lg p-space-md text-center hover:shadow-md transition-all duration-300 cursor-pointer"
+                  className="group bg-cream rounded-lg p-space-md text-center hover:shadow-md transition-all duration-300 cursor-pointer"
                 >
                   <div className="w-14 h-14 mx-auto mb-space-sm rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
                     <Icon className="w-6 h-6 text-primary" />
