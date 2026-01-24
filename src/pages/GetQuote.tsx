@@ -647,49 +647,96 @@ const GetQuote = () => {
 
   const renderTrustSidebar = () => (
     <div className="hidden lg:block">
-      <div className="sticky top-32 bg-cream rounded-lg p-space-lg">
-        <h3 className="font-display font-semibold text-lg text-foreground mb-space-md">
-          Why Scioto?
-        </h3>
-        <div className="space-y-space-md">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center">
-              <Star className="w-5 h-5 text-gold-500" />
+      <div className="sticky top-32 bg-burgundy-100 border border-primary rounded-xl p-6">
+        {/* Star Rating Badge */}
+        <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-primary/20">
+          <div className="flex items-center gap-1 mb-2">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
+            ))}
+          </div>
+          <p className="font-display font-semibold text-xl text-foreground">5.0 Rating</p>
+          <p className="font-body text-sm text-muted-foreground">Rated by 247 New Albany families</p>
+        </div>
+
+        {/* Trust Signals */}
+        <div className="space-y-5">
+          {/* Security Signal */}
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-gold-500" />
+            </div>
+            <p className="font-body text-sm text-foreground leading-relaxed">
+              Your info is secure—we'll never spam you
+            </p>
+          </div>
+
+          {/* Response Time Promise */}
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
+              <Clock className="w-5 h-5 text-gold-500" />
+            </div>
+            <p className="font-body text-sm text-foreground leading-relaxed">
+              We'll respond within 1 business day
+            </p>
+          </div>
+
+          {/* Phone CTA */}
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
+              <Phone className="w-5 h-5 text-gold-500" />
             </div>
             <div>
-              <p className="font-body font-medium text-foreground text-sm">4.9 Rating</p>
-              <p className="font-body text-xs text-muted-foreground">on Google Reviews</p>
+              <p className="font-body text-sm text-foreground mb-1">Or call us now:</p>
+              <a 
+                href="tel:6146120050" 
+                className="font-display font-semibold text-lg text-primary hover:text-burgundy-800 transition-colors"
+              >
+                (614) 612-0050
+              </a>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <Users className="w-5 h-5 text-primary" />
+
+          {/* Real People Emphasis */}
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
+              <User className="w-5 h-5 text-gold-500" />
             </div>
-            <div>
-              <p className="font-body font-medium text-foreground text-sm">1,200+ Clients</p>
-              <p className="font-body text-xs text-muted-foreground">Families & businesses</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <Clock className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <p className="font-body font-medium text-foreground text-sm">Fast Response</p>
-              <p className="font-body text-xs text-muted-foreground">Within 1 business day</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <p className="font-body font-medium text-foreground text-sm">No Pressure</p>
-              <p className="font-body text-xs text-muted-foreground">Honest advice only</p>
-            </div>
+            <p className="font-body text-sm text-foreground leading-relaxed">
+              Talk to Tom, Sarah, or Mike—real people, not a call center
+            </p>
           </div>
         </div>
       </div>
+    </div>
+  );
+
+  {/* Mobile Trust Signals - shown below form on mobile */}
+  const renderMobileTrustSignals = () => (
+    <div className="lg:hidden mt-6 p-4 bg-burgundy-100 border border-primary rounded-xl">
+      <div className="flex items-center justify-center gap-1 mb-3">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className="w-4 h-4 fill-gold-500 text-gold-500" />
+        ))}
+        <span className="ml-2 font-body text-sm font-medium text-foreground">5.0 Rating</span>
+      </div>
+      <div className="grid grid-cols-2 gap-3 text-center">
+        <div className="flex items-center justify-center gap-2">
+          <ShieldCheck className="w-4 h-4 text-gold-500" />
+          <span className="font-body text-xs text-foreground">Secure & private</span>
+        </div>
+        <div className="flex items-center justify-center gap-2">
+          <Clock className="w-4 h-4 text-gold-500" />
+          <span className="font-body text-xs text-foreground">1-day response</span>
+        </div>
+      </div>
+      <a 
+        href="tel:6146120050"
+        className="mt-4 flex items-center justify-center gap-2 py-3 rounded-lg bg-white border border-primary text-primary font-body font-medium text-sm hover:bg-primary/5 transition-colors"
+      >
+        <Phone className="w-4 h-4" />
+        Call (614) 612-0050
+      </a>
     </div>
   );
 
@@ -709,8 +756,8 @@ const GetQuote = () => {
 
       {/* Form Section */}
       <section className="py-6 sm:py-space-xl bg-background">
-        <div className="max-w-[1100px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <div className="grid lg:grid-cols-[1fr_280px] gap-6 lg:gap-space-xl">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-6 lg:gap-10">
             {/* Main Form */}
             <div>
               {currentStep < 4 && renderProgressBar()}
@@ -753,9 +800,12 @@ const GetQuote = () => {
                   </div>
                 )}
               </div>
+
+              {/* Mobile Trust Signals */}
+              {currentStep < 4 && renderMobileTrustSignals()}
             </div>
 
-            {/* Trust Sidebar */}
+            {/* Trust Sidebar - Desktop only */}
             {currentStep < 4 && renderTrustSidebar()}
           </div>
         </div>
