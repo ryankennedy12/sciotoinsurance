@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Star, Clock, Users, Shield, Award } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import CarrierLogos from "@/components/CarrierLogos";
 import heroFamily from "@/assets/hero-family.jpg";
 
 const Home = () => {
@@ -141,9 +140,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* Carrier Logos Section */}
-      <CarrierLogos />
 
       {/* Why Scioto Insurance Group Section */}
       <section className="py-16 sm:py-space-3xl bg-cream">
