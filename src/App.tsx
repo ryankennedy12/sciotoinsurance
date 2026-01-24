@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -61,6 +61,7 @@ const App = () => (
               <Route path="/personal-insurance/umbrella" element={<UmbrellaInsurance />} />
               <Route path="/personal-insurance/flood" element={<FloodInsurance />} />
               <Route path="/personal-insurance/high-net-worth" element={<HighNetWorthInsurance />} />
+              <Route path="/personal-insurance/*" element={<Navigate to="/get-quote" replace />} />
               <Route path="/business-insurance" element={<BusinessInsurance />} />
               <Route path="/business-insurance/general-liability" element={<GeneralLiability />} />
               <Route path="/business-insurance/workers-comp" element={<WorkersComp />} />
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/business-insurance/professional-liability" element={<ProfessionalLiability />} />
               <Route path="/business-insurance/commercial-property" element={<CommercialProperty />} />
               <Route path="/business-insurance/commercial-auto" element={<CommercialAuto />} />
+              <Route path="/business-insurance/*" element={<Navigate to="/get-quote" replace />} />
               <Route path="/employee-benefits" element={<EmployeeBenefits />} />
               <Route path="/services" element={<Services />} />
               <Route path="/get-quote" element={<GetQuote />} />
