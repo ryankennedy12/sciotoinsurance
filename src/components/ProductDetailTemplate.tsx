@@ -180,7 +180,7 @@ const ProductDetailTemplate = ({
               Why Choose Scioto for {productName}?
             </h2>
             <p className="body-lg text-muted-foreground max-w-2xl mx-auto">
-              We're not just selling policies — we're protecting what matters most to you.
+              Here's why Ohio families and businesses trust us with their coverage.
             </p>
           </AnimatedSection>
 
@@ -248,8 +248,8 @@ const ProductDetailTemplate = ({
               Ready to Protect What Matters?
             </h2>
             <p className="body-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Get a free {productName.toLowerCase()} quote in minutes. We'll show you exactly 
-              what you're paying for—and what you might be missing.
+              Get a free {productName.toLowerCase()} quote in minutes. We'll walk you through 
+              your options and help you find the right coverage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="bg-white text-primary hover:bg-cream">
@@ -268,7 +268,7 @@ const ProductDetailTemplate = ({
               </Button>
             </div>
             <p className="text-white/70 text-sm mt-6">
-              No spam. No pressure. Just honest advice from people who actually live here.
+              We're happy to just talk. See if we're a good fit.
             </p>
           </AnimatedSection>
         </div>
