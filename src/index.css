@@ -271,17 +271,85 @@
     }
   }
   
-  /* Interactive card hover */
+  /* Interactive card - only hover on devices that support it */
   .interactive-card {
     @apply transition-all duration-300;
   }
   
-  .interactive-card:hover {
-    @apply -translate-y-1 shadow-lg;
+  /* Hover effects only on pointer devices (mouse/trackpad) */
+  @media (hover: hover) and (pointer: fine) {
+    .interactive-card:hover {
+      @apply -translate-y-1 shadow-lg;
+    }
   }
   
+  /* Active state for touch devices */
   .interactive-card:active {
-    @apply translate-y-0 shadow-md;
+    @apply -translate-y-0.5 shadow-md;
+  }
+  
+  /* Touch-friendly card - effects only on press, not scroll */
+  .touch-card {
+    @apply transition-all duration-200;
+  }
+  
+  /* Hover only for mouse/trackpad users */
+  @media (hover: hover) and (pointer: fine) {
+    .touch-card:hover {
+      @apply border-primary/30 shadow-lg;
+    }
+    
+    .touch-card:hover .card-accent {
+      @apply opacity-100;
+    }
+    
+    .touch-card:hover .card-icon {
+      @apply from-primary/20 to-primary/10;
+    }
+    
+    .touch-card:hover .card-link {
+      @apply gap-2.5;
+    }
+  }
+  
+  /* Active state for touch - only when finger is down */
+  .touch-card:active {
+    @apply border-primary/30 shadow-lg;
+  }
+  
+  .touch-card:active .card-accent {
+    @apply opacity-100;
+  }
+  
+  .touch-card:active .card-icon {
+    @apply from-primary/20 to-primary/10;
+  }
+  
+  /* Industry card touch handling */
+  .touch-industry-card {
+    @apply transition-all duration-200;
+  }
+  
+  @media (hover: hover) and (pointer: fine) {
+    .touch-industry-card:hover {
+      @apply border-primary/30 shadow-lg;
+    }
+    
+    .touch-industry-card:hover .industry-accent {
+      @apply opacity-100;
+    }
+    
+    .touch-industry-card:hover .industry-icon {
+      @apply from-primary/20 to-primary/10;
+    }
+  }
+  
+  .touch-industry-card:active {
+    @apply border-primary/30 shadow-lg;
+  }
+  
+  .touch-industry-card:active .industry-accent {
+    @apply opacity-100;
   }
   
   /* Focus visible states */
