@@ -133,7 +133,7 @@ const Contact = () => {
               Let's Start a Conversation
             </h1>
             <p className="body-lg text-muted-foreground">
-              Whether you have questions, need a quote, or just want to talk through your options — we're here.
+              Whether you have questions, need a quote, or just want to talk through your options, we're here.
             </p>
           </AnimatedSection>
         </div>
@@ -341,8 +341,8 @@ const Contact = () => {
                   <div>
                     <p className="font-semibold text-foreground mb-2">Business Hours</p>
                     <div className="space-y-1 text-muted-foreground">
-                      <p>Monday – Friday: 9:00 AM – 5:00 PM</p>
-                      <p>Saturday – Sunday: Closed</p>
+                      <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                      <p>Saturday & Sunday: Closed</p>
                     </div>
                   </div>
                 </div>
@@ -395,7 +395,7 @@ const Contact = () => {
               </a>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Free consultation • No obligation • Your schedule
+              It's free, no strings attached.
             </p>
           </div>
         </div>
