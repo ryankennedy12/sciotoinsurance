@@ -1,394 +1,173 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Search, BarChart3, FileCheck, Headphones, Users, TrendingDown, DollarSign, PiggyBank, Wallet, Star, CheckCircle, Clock } from "lucide-react";
-import { employeeBenefitsProducts } from "@/data/products";
+import { Phone, ArrowRight, CheckCircle, TrendingUp, Calculator, FileSearch, Handshake, HeadphonesIcon, ClipboardCheck, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
+import { employeeBenefitsProducts } from "@/data/products";
+import { useState, useEffect } from "react";
+
+import modernOfficeTeam from "@/assets/modern-office-team.jpg";
+import hrMeeting from "@/assets/hr-meeting.jpg";
+import teamMeeting from "@/assets/team-meeting.jpg";
+
+const heroStats = [
+  { value: 78, suffix: "%", label: "of employees consider benefits in job decisions" },
+  { value: 50, suffix: "%", label: "lower turnover with strong benefits" },
+  { value: 3, suffix: "x", label: "ROI on benefit investments" },
+];
+
+const processSteps = [
+  { step: 1, title: "Discovery", description: "We learn about your business, employees, and goals.", icon: FileSearch, image: hrMeeting },
+  { step: 2, title: "Market Analysis", description: "We shop multiple carriers to find the best coverage.", icon: ClipboardCheck, image: teamMeeting },
+  { step: 3, title: "Implementation", description: "We handle the paperwork and train your team.", icon: Handshake, image: modernOfficeTeam },
+  { step: 4, title: "Ongoing Support", description: "Year-round support for questions and annual reviews.", icon: HeadphonesIcon, image: hrMeeting },
+];
+
+const testimonials = [
+  { quote: "Our retention rate improved 40% after implementing the benefits package they recommended.", name: "Amanda R.", location: "Columbus, OH", date: "November 2024", rating: 5, helpedWith: "Group Health Benefits" },
+  { quote: "They made open enrollment so easy. Our employees actually understood their options.", name: "Michael T.", location: "Dublin, OH", date: "October 2024", rating: 5, helpedWith: "Benefits Administration" },
+  { quote: "The 401(k) setup was seamless. They saved us $8,000 annually in fees.", name: "Jennifer L.", location: "Westerville, OH", date: "September 2024", rating: 5, helpedWith: "Retirement Planning" }
+];
+
+const AnimatedCounter = ({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!isVisible) return;
+    let current = 0;
+    const timer = setInterval(() => { current += value / 60; if (current >= value) { setCount(value); clearInterval(timer); } else { setCount(Math.floor(current)); } }, 33);
+    return () => clearInterval(timer);
+  }, [value, isVisible]);
+  return <span>{count}{suffix}</span>;
+};
 
 const EmployeeBenefits = () => {
-  const stats = [
-    {
-      icon: Users,
-      stat: "78%",
-      description: "of employees say benefits influence where they work",
-    },
-    {
-      icon: TrendingDown,
-      stat: "50%",
-      description: "lower turnover at companies with strong benefits",
-    },
-    {
-      icon: DollarSign,
-      stat: "$3",
-      description: "saved in recruitment for every $1 spent on benefits",
-    },
-  ];
-
-  const processSteps = [
-    {
-      icon: Search,
-      step: "01",
-      title: "Discovery",
-      description: "We learn about your business, your people, and your budget.",
-    },
-    {
-      icon: BarChart3,
-      step: "02",
-      title: "Market Analysis",
-      description: "We shop multiple carriers and present your options.",
-    },
-    {
-      icon: FileCheck,
-      step: "03",
-      title: "Implementation",
-      description: "We handle the paperwork and employee enrollment.",
-    },
-    {
-      icon: Headphones,
-      step: "04",
-      title: "Ongoing Support",
-      description: "We're here for questions, changes, and annual renewals.",
-    },
-  ];
-
-  const additionalOfferings = [
-    {
-      icon: PiggyBank,
-      name: "Retirement Plans (401k)",
-      description: "Help your team build for the future with retirement plan options that fit businesses of any size.",
-    },
-    {
-      icon: Wallet,
-      name: "Health Savings Accounts (HSA/FSA)",
-      description: "Tax-advantaged accounts that give employees flexibility in managing healthcare costs.",
-    },
-  ];
-
-  const testimonials = [
-    {
-      quote: "Natalie helped us set up a benefits package that our employees actually use. We've seen a real difference in retention.",
-      name: "Mark Davidson",
-      location: "Columbus, OH",
-      date: "November 2024",
-      rating: 5,
-      helpedWith: "Group Health + 401k Setup"
-    },
-    {
-      quote: "As a small business, we didn't think we could afford real benefits. Jeff showed us options we didn't know existed.",
-      name: "Lisa Chen",
-      location: "Dublin, OH", 
-      date: "September 2024",
-      rating: 5,
-      helpedWith: "Small Business Benefits"
-    },
-  ];
+  const [statsVisible, setStatsVisible] = useState(false);
+  const [calc, setCalc] = useState({ employees: 25, avgSalary: 50000, turnoverRate: 20 });
+  const currentTurnover = Math.round(calc.employees * (calc.turnoverRate / 100));
+  const improvedTurnover = Math.round(currentTurnover * 0.75);
+  const annualSavings = (currentTurnover - improvedTurnover) * (calc.avgSalary * 0.5);
 
   return (
-    <>
-      {/* Hero Section - Enhanced with gradient depth */}
-      <section className="relative pt-32 pb-space-2xl overflow-hidden">
-        {/* Multi-layer gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900 via-primary to-burgundy-800" />
-        
-        {/* Decorative pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <pattern id="benefitsGrid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-cream" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#benefitsGrid)" />
-          </svg>
-        </div>
-        
-        {/* Radial glow effect */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gold-500/10 to-transparent" />
-        
-        <div className="relative max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="max-w-[700px]">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-space-md">
-              <Star className="w-4 h-4 text-gold-500 fill-gold-500" />
-              <span className="font-body text-sm text-cream">Trusted by Ohio Businesses</span>
-            </div>
-            
-            <h1 className="font-display font-semibold text-3xl lg:text-5xl text-cream leading-tight mb-space-md">
-              Employee Benefits That Help You Hire (and Keep) Good People
-            </h1>
-            <p className="font-body text-lg text-cream/80 mb-space-lg max-w-[560px]">
-              Good candidates expect good benefits. We help small and mid-sized businesses put together packages that can compete with larger companies.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-start gap-space-md mb-space-lg">
-              <Link
-                to="/get-quote"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-cream text-primary font-body font-semibold text-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5 hover:shadow-xl"
-              >
-                Get a Benefits Consultation
-              </Link>
-              <a
-                href="tel:6146120050"
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-cream font-body font-medium text-sm transition-all duration-300 hover:bg-white/20"
-              >
-                <Phone className="w-4 h-4" />
-                (614) 612-0050
-              </a>
-            </div>
-            
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-space-md text-cream/70">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-gold-500" />
-                <span className="font-body text-sm">Multiple carrier options</span>
+    <div className="min-h-screen bg-background">
+      {/* Data-Forward Hero */}
+      <section className="relative min-h-[90vh] lg:min-h-screen">
+        <div className="grid lg:grid-cols-2 min-h-[90vh] lg:min-h-screen">
+          <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-12 xl:px-20 bg-card">
+            <AnimatedSection animation="fade-up" className="max-w-xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8"><TrendingUp className="h-4 w-4" />Strategic Benefits Partner</div>
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6 tracking-tight">Employee Benefits<br /><span className="text-primary">That Work</span></h1>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Attract top talent, reduce turnover, and build a healthier workforce with benefits packages designed for real business impact.</p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Button asChild size="lg" className="text-base"><Link to="/get-quote">Get Custom Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild variant="outline" size="lg" className="text-base"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-gold-500" />
-                <span className="font-body text-sm">Response within 24 hours</span>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Free consultation</span></div>
+                <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Multiple carriers</span></div>
               </div>
-            </div>
+            </AnimatedSection>
+          </div>
+          <div className="relative bg-primary flex items-center justify-center px-6 py-16 lg:px-12">
+            <AnimatedSection animation="fade-up" className="relative z-10 w-full max-w-md" onAnimationStart={() => setStatsVisible(true)}>
+              <div className="space-y-6">
+                {heroStats.map((stat, i) => (
+                  <div key={i} className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+                    <div className="text-5xl font-display font-bold text-white mb-2"><AnimatedCounter value={stat.value} suffix={stat.suffix} isVisible={statsVisible} /></div>
+                    <p className="text-white/80">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Benefits Products Section */}
-      <section className="py-space-2xl bg-white">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              Employee Benefits Products
-            </h2>
-            <p className="font-body text-lg text-muted-foreground max-w-[600px]">
-              Here's what we can help you set up for your team.
-            </p>
-          </div>
-
-          <div className="mb-space-xl">
-            <h3 className="font-display font-semibold text-xl text-foreground mb-space-md flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-gold-500" />
-              Insurance Benefits
-            </h3>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-md">
-              {employeeBenefitsProducts.map((product, index) => {
-                const Icon = product.icon;
-                return (
-                  <div
-                    key={index}
-                    className="touch-card relative flex items-start gap-space-md p-space-lg rounded-xl bg-white border border-border"
-                  >
-                    {/* Gold accent - controlled by CSS */}
-                    <div className="card-accent absolute top-0 left-0 w-1 h-full bg-gold-500 rounded-l-xl opacity-0 transition-opacity duration-200" />
-                    
-                    <div className="card-icon w-12 h-12 shrink-0 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center transition-colors duration-200">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-display font-semibold text-base text-foreground mb-1">
-                        {product.name}
-                      </h4>
-                      {product.description && (
-                        <p className="font-body text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-2">
-                          {product.description}
-                        </p>
-                      )}
-                      <Link
-                        to="/get-quote"
-                        className="card-link inline-flex items-center gap-1.5 font-body text-sm font-semibold text-primary transition-all duration-200"
-                      >
-                        Learn More
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
+      {/* Benefits Products */}
+      <section className="section-padding bg-secondary">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-16"><h2 className="heading-lg text-foreground mb-4">Comprehensive Benefits Solutions</h2></AnimatedSection>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {employeeBenefitsProducts.map((product, i) => { const Icon = product.icon; return (
+              <AnimatedSection key={product.name} animation="fade-up" delay={i * 75}>
+                <Link to="/get-quote" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all h-full">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors"><Icon className="h-6 w-6 text-primary" /></div>
+                    <div className="flex-1">
+                      <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{product.name}</h3>
+                      {product.description && <p className="text-sm text-muted-foreground">{product.description}</p>}
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Additional Offerings - Enhanced cards */}
-          <div>
-            <h3 className="font-display font-semibold text-xl text-foreground mb-space-md flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-gold-500" />
-              Financial Benefits
-            </h3>
-            
-            <div className="grid md:grid-cols-2 gap-space-md">
-              {additionalOfferings.map((offering, index) => {
-                const Icon = offering.icon;
-                return (
-                  <div
-                    key={index}
-                    className="touch-card relative flex items-start gap-space-md p-space-lg rounded-xl bg-white border border-border"
-                  >
-                    {/* Gold accent - controlled by CSS */}
-                    <div className="card-accent absolute top-0 left-0 w-1 h-full bg-gold-500 rounded-l-xl opacity-0 transition-opacity duration-200" />
-                    
-                    <div className="card-icon w-12 h-12 shrink-0 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center transition-colors duration-200">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-display font-semibold text-lg text-foreground mb-2">
-                        {offering.name}
-                      </h4>
-                      <p className="font-body text-sm text-muted-foreground leading-relaxed mb-3">
-                        {offering.description}
-                      </p>
-                      <Link
-                        to="/get-quote"
-                        className="card-link inline-flex items-center gap-1.5 font-body text-sm font-semibold text-primary transition-all duration-200"
-                      >
-                        Learn More
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                </Link>
+              </AnimatedSection>
+            ); })}
           </div>
         </div>
       </section>
 
-      {/* Business Case Section - Enhanced visual treatment */}
-      <section className="py-space-2xl bg-gradient-to-br from-primary via-burgundy-800 to-burgundy-900 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-5">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <pattern id="statsDots" width="8" height="8" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-cream" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#statsDots)" />
-          </svg>
-        </div>
-        
-        <div className="relative max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-cream mb-space-sm">
-              Why Benefits Matter More Than You Think
-            </h2>
-            <p className="font-body text-cream/70 max-w-[500px] mx-auto">
-              The numbers speak for themselves—investing in your team pays off.
-            </p>
+      {/* ROI Calculator */}
+      <section className="section-padding bg-card">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection animation="slide-right">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 text-accent-foreground text-sm font-medium mb-6"><Calculator className="h-4 w-4" />ROI Calculator</div>
+              <h2 className="heading-lg text-foreground mb-4">See the Impact of Better Benefits</h2>
+              <div className="space-y-6">
+                <div><label className="block text-sm font-medium text-foreground mb-2">Employees</label><input type="range" min="5" max="200" value={calc.employees} onChange={(e) => setCalc(p => ({ ...p, employees: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>5</span><span className="font-semibold text-foreground">{calc.employees}</span><span>200</span></div></div>
+                <div><label className="block text-sm font-medium text-foreground mb-2">Avg Salary</label><input type="range" min="30000" max="150000" step="5000" value={calc.avgSalary} onChange={(e) => setCalc(p => ({ ...p, avgSalary: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>$30k</span><span className="font-semibold text-foreground">${(calc.avgSalary / 1000).toFixed(0)}k</span><span>$150k</span></div></div>
+                <div><label className="block text-sm font-medium text-foreground mb-2">Turnover Rate</label><input type="range" min="5" max="50" value={calc.turnoverRate} onChange={(e) => setCalc(p => ({ ...p, turnoverRate: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>5%</span><span className="font-semibold text-foreground">{calc.turnoverRate}%</span><span>50%</span></div></div>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection animation="slide-left">
+              <div className="bg-primary rounded-2xl p-8 lg:p-10 text-primary-foreground">
+                <h3 className="font-display font-semibold text-2xl mb-8">Potential Annual Savings</h3>
+                <div className="bg-white/10 rounded-xl p-6 text-center mb-6"><div className="text-sm text-primary-foreground/80 mb-1">Estimated Annual ROI</div><div className="text-5xl font-display font-bold">${annualSavings.toLocaleString()}</div></div>
+                <Button asChild size="lg" variant="secondary" className="w-full"><Link to="/get-quote">Get Your Custom Analysis<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+              </div>
+            </AnimatedSection>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-3 gap-space-lg mb-space-md">
-            {stats.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div key={index} className="text-center group">
-                  <div className="w-16 h-16 mx-auto mb-space-sm rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300">
-                    <Icon className="w-7 h-7 text-gold-500" />
-                  </div>
-                  <p className="font-display font-bold text-5xl lg:text-6xl text-cream mb-space-xs">
-                    {item.stat}
-                  </p>
-                  <p className="font-body text-sm text-cream/80 max-w-[200px] mx-auto">
-                    {item.description}
-                  </p>
+      {/* Process Timeline */}
+      <section className="section-padding bg-secondary">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-16"><h2 className="heading-lg text-foreground mb-4">How We Work With You</h2></AnimatedSection>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {processSteps.map((step, i) => { const Icon = step.icon; return (
+              <AnimatedSection key={step.step} animation="fade-up" delay={i * 100}>
+                <div className="relative bg-card rounded-xl overflow-hidden h-full border border-border">
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-display font-bold text-lg z-10">{step.step}</div>
+                  <div className="h-32 overflow-hidden"><img src={step.image} alt={step.title} className="w-full h-full object-cover" /><div className="absolute inset-0 h-32 bg-gradient-to-t from-card via-card/50 to-transparent" /></div>
+                  <div className="p-6 relative -mt-8"><div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center mb-4"><Icon className="h-6 w-6 text-primary" /></div><h3 className="font-display font-semibold text-lg text-foreground mb-2">{step.title}</h3><p className="text-sm text-muted-foreground">{step.description}</p></div>
                 </div>
-              );
-            })}
-          </div>
-
-          <p className="text-center font-body text-xs text-cream/50 italic">
-            Source: Industry research, 2023
-          </p>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-space-2xl bg-cream">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground">
-              How We Work With You
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-space-md">
-            {processSteps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div key={index} className="relative">
-                  {/* Connector Line (desktop only) */}
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-primary/20" />
-                  )}
-                  
-                  <div className="bg-white rounded-lg p-space-lg text-center relative z-10">
-                    <div className="w-20 h-20 mx-auto mb-space-md rounded-full bg-primary/5 flex items-center justify-center relative">
-                      <Icon className="w-8 h-8 text-primary" />
-                      <span className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-primary text-white font-display font-semibold text-sm flex items-center justify-center">
-                        {step.step}
-                      </span>
-                    </div>
-                    <h3 className="font-display font-semibold text-lg text-foreground mb-space-xs">
-                      {step.title}
-                    </h3>
-                    <p className="font-body text-sm text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+              </AnimatedSection>
+            ); })}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-space-2xl bg-cream">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              What Business Owners Say
-            </h2>
-            <p className="font-body text-lg text-muted-foreground max-w-[500px] mx-auto">
-              Real feedback from Ohio businesses we've helped with employee benefits.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-space-lg max-w-[900px] mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
-            ))}
-          </div>
+      {/* Testimonials */}
+      <section className="section-padding bg-card">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-12"><h2 className="heading-lg text-foreground mb-4">What HR Leaders Say</h2></AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6">{testimonials.map((t, i) => <AnimatedSection key={i} animation="fade-up" delay={i * 100}><TestimonialCard {...t} /></AnimatedSection>)}</div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-space-2xl bg-white">
-        <div className="max-w-[700px] mx-auto px-space-md lg:px-space-lg text-center">
-          <h2 className="font-display font-semibold text-2xl lg:text-3xl text-foreground leading-tight mb-space-md">
-            Want to see what's possible for your team?
-          </h2>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md mb-space-md">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              Schedule a Consultation
-            </Link>
-            
-            <a
-              href="tel:6146120050"
-              className="inline-flex items-center gap-2 font-body font-medium text-primary hover:underline transition-all duration-300"
-            >
-              <Phone className="w-4 h-4" />
-              (614) 612-0050
-            </a>
-          </div>
-          
-          <p className="font-body text-sm text-muted-foreground">
-            We'll walk you through your options and answer any questions. No sales pitch—just honest advice.
-          </p>
+      {/* Final CTA */}
+      <section className="section-padding bg-primary">
+        <div className="container-narrow text-center">
+          <AnimatedSection animation="fade-up">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-primary-foreground text-sm font-medium mb-6"><Users className="h-4 w-4" />Schedule Your Free Consultation</div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-primary-foreground mb-6">Ready to Build a Better Benefits Package?</h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" variant="secondary" className="text-base"><Link to="/contact">Schedule Consultation<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+              <Button asChild size="lg" variant="outline" className="text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

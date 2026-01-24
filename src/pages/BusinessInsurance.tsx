@@ -1,301 +1,189 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Handshake, Hammer, UtensilsCrossed, ShoppingBag, Briefcase, Stethoscope, Factory, Heart, Home as HomeIcon, Star, CheckCircle, Clock, Building2 } from "lucide-react";
-import { businessInsuranceProducts, businessInsuranceReasons } from "@/data/products";
+import { Phone, ArrowRight, Star, CheckCircle, ChevronRight, HardHat, UtensilsCrossed, ShoppingBag, Stethoscope, Truck, Factory, Briefcase, Wrench } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
+import { businessInsuranceProducts, businessInsuranceReasons } from "@/data/products";
+import { useState } from "react";
+
+import columbusSkyline from "@/assets/columbus-skyline.jpg";
+import constructionSite from "@/assets/construction-site.jpg";
+import restaurantInterior from "@/assets/restaurant-interior.jpg";
+import retailStore from "@/assets/retail-store.jpg";
+import healthcareClinic from "@/assets/healthcare-clinic.jpg";
+import businessOffice from "@/assets/business-office.jpg";
+
+const industries = [
+  { name: "Contractors", icon: HardHat, image: constructionSite, description: "General liability, tools coverage, workers' comp.", caseStudy: "We helped Smith Roofing reduce their Workers' Comp by 18%." },
+  { name: "Restaurants", icon: UtensilsCrossed, image: restaurantInterior, description: "Liquor liability, food spoilage, property protection.", caseStudy: "After a kitchen fire, we helped Mario's Pizza get their claim paid in 11 days." },
+  { name: "Retail", icon: ShoppingBag, image: retailStore, description: "Inventory protection, customer liability, theft coverage.", caseStudy: "A local boutique saved $3,200/year after we found gaps in their policy." },
+  { name: "Healthcare", icon: Stethoscope, image: healthcareClinic, description: "Malpractice, HIPAA compliance, specialized coverage.", caseStudy: "We've insured 40+ Ohio medical practices with zero coverage disputes." },
+  { name: "Transportation", icon: Truck, image: businessOffice, description: "Fleet coverage, cargo insurance, driver protection.", caseStudy: "A trucking company reduced their premium 22% by restructuring coverage." },
+  { name: "Manufacturing", icon: Factory, image: businessOffice, description: "Equipment breakdown, product liability, workplace safety.", caseStudy: "We helped a machine shop navigate an OSHA audit with full documentation." },
+  { name: "Professional", icon: Briefcase, image: businessOffice, description: "E&O coverage, cyber liability, professional indemnity.", caseStudy: "An accounting firm avoided a $500K lawsuit thanks to proper E&O coverage." },
+  { name: "Trades", icon: Wrench, image: constructionSite, description: "Tools, vehicles, liability for HVAC, plumbing, electrical.", caseStudy: "A plumbing company saved $4,100/year after we bundled their policies." },
+];
+
+const testimonials = [
+  { quote: "They understood our industry from day one. No explaining what general contractors actually do.", name: "Robert M.", location: "Columbus, OH", date: "November 2024", rating: 5, helpedWith: "Contractor Insurance" },
+  { quote: "When we had a break-in, they were at our store the next morning.", name: "Lisa P.", location: "Worthington, OH", date: "October 2024", rating: 5, helpedWith: "Commercial Property Claim" },
+  { quote: "An agent who doesn't just sell policies but actually helps us understand our risks.", name: "David K.", location: "Dublin, OH", date: "September 2024", rating: 5, helpedWith: "Business Insurance Review" }
+];
 
 const BusinessInsurance = () => {
-  const industries = [
-    { icon: Hammer, name: "Contractors & Construction" },
-    { icon: UtensilsCrossed, name: "Restaurants & Food Service" },
-    { icon: ShoppingBag, name: "Retail & E-commerce" },
-    { icon: Briefcase, name: "Professional Services" },
-    { icon: Stethoscope, name: "Healthcare & Medical" },
-    { icon: Factory, name: "Manufacturing" },
-    { icon: Heart, name: "Nonprofits" },
-    { icon: HomeIcon, name: "Real Estate & Property Management" },
-  ];
-
-  const testimonials = [
-    {
-      quote: "Jeff understood our construction risks immediately. He found coverage gaps our previous agent missed entirely.",
-      name: "Mike Reynolds",
-      location: "Columbus, OH",
-      date: "January 2025",
-      rating: 5,
-      helpedWith: "Contractor Insurance"
-    },
-    {
-      quote: "When we had a liability claim, Natalie handled everything. We didn't miss a day of business.",
-      name: "Jennifer Walsh",
-      location: "Dublin, OH",
-      date: "November 2024",
-      rating: 5,
-      helpedWith: "Restaurant Claim"
-    },
-  ];
+  const [selectedIndustry, setSelectedIndustry] = useState(0);
+  const current = industries[selectedIndustry];
 
   return (
-    <>
-      {/* Hero Section - Enhanced with gradient depth */}
-      <section className="relative pt-32 pb-space-2xl overflow-hidden">
-        {/* Multi-layer gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900 via-primary to-burgundy-800" />
-        
-        {/* Decorative pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <pattern id="businessGrid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-cream" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#businessGrid)" />
-          </svg>
+    <div className="min-h-screen bg-background">
+      {/* Dramatic Full-Width Hero */}
+      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${columbusSkyline})` }}>
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/95 via-foreground/80 to-foreground/60" />
         </div>
-        
-        {/* Radial glow effect */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gold-500/10 to-transparent" />
-        
-        <div className="relative max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="max-w-[700px]">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-space-md">
-              <Building2 className="w-4 h-4 text-gold-500" />
-              <span className="font-body text-sm text-cream">Business Insurance</span>
-            </div>
-            
-            <h1 className="font-display font-semibold text-3xl lg:text-5xl text-cream leading-tight mb-space-md">
-              Business Insurance Across the U.S.
-            </h1>
-            <p className="font-body text-lg text-cream/80 mb-space-lg max-w-[560px]">
-              A contractor doesn't need the same coverage as a restaurant. We'll build a policy around what you actually do. We serve businesses nationwide, not just Ohio.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-start gap-space-md mb-space-lg">
-              <Link
-                to="/get-quote"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-cream text-primary font-body font-semibold text-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5 hover:shadow-xl"
-              >
-                Get a Business Insurance Quote
-              </Link>
-              <a
-                href="tel:6146120050"
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-cream font-body font-medium text-sm transition-all duration-300 hover:bg-white/20"
-              >
-                <Phone className="w-4 h-4" />
-                (614) 612-0050
-              </a>
-            </div>
-            
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-space-md text-cream/70">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-gold-500" />
-                <span className="font-body text-sm">Nationwide coverage</span>
+        <div className="relative z-10 container-wide px-6 py-20">
+          <div className="max-w-3xl">
+            <AnimatedSection animation="fade-up">
+              <div className="flex flex-wrap gap-6 mb-8">
+                {["1,200+ Businesses Protected", "29 Years Experience", "A+ BBB Rating"].map((t) => (
+                  <div key={t} className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-accent" /><span className="text-white/80 text-sm font-medium">{t}</span></div>
+                ))}
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-gold-500" />
-                <span className="font-body text-sm">Free risk assessment</span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 tracking-tight">Business Insurance<br /><span className="text-accent">Built for Growth</span></h1>
+              <p className="text-xl text-white/80 mb-8 leading-relaxed max-w-2xl">Protect what you've built. From startups to established enterprises, we craft coverage that grows with your business.</p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Button asChild size="lg" className="text-base bg-accent hover:bg-accent/90 text-foreground"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild variant="outline" size="lg" className="text-base border-white/30 text-white hover:bg-white/10 hover:text-white"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-background" style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)' }} />
+      </section>
+
+      {/* Industry Selector Tabs */}
+      <section className="section-padding bg-card">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <h2 className="heading-lg text-foreground mb-4">Coverage for Your Industry</h2>
+          </AnimatedSection>
+          <AnimatedSection animation="fade-up" delay={100}>
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {industries.map((ind, i) => { const Icon = ind.icon; return (
+                <button key={ind.name} onClick={() => setSelectedIndustry(i)} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all ${selectedIndustry === i ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-secondary text-foreground hover:bg-secondary/80'}`}>
+                  <Icon className="h-4 w-4" />{ind.name}
+                </button>
+              ); })}
+            </div>
+            <div className="bg-secondary rounded-2xl overflow-hidden border border-border">
+              <div className="grid lg:grid-cols-2">
+                <div className="relative h-64 lg:h-auto"><img src={current.image} alt={current.name} className="absolute inset-0 w-full h-full object-cover" /></div>
+                <div className="p-8 lg:p-12">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center"><current.icon className="h-6 w-6 text-primary" /></div>
+                    <h3 className="heading-sm text-foreground">{current.name}</h3>
+                  </div>
+                  <p className="body-lg text-muted-foreground mb-6">{current.description}</p>
+                  <div className="bg-card rounded-xl p-6 border border-border mb-6">
+                    <div className="flex gap-2 mb-2">{[1,2,3,4,5].map((i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}</div>
+                    <p className="text-foreground italic mb-2">"{current.caseStudy}"</p>
+                  </div>
+                  <Button asChild className="w-full sm:w-auto"><Link to="/get-quote">Get {current.name} Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Coverage Grid Section - Enhanced Cards */}
-      <section className="py-space-2xl bg-white">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              Business Insurance Products
-            </h2>
-            <p className="font-body text-lg text-muted-foreground max-w-[600px]">
-              From startups to established operations, we tailor coverage to your unique risks.
-            </p>
-          </div>
-
-          {businessInsuranceProducts.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="mb-space-xl last:mb-0">
-              <h3 className="font-display font-semibold text-xl text-foreground mb-space-md flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-gold-500" />
-                {category.title}
-              </h3>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-md">
-                {category.products.map((product, index) => {
-                  const Icon = product.icon;
-                  return (
-                    <div
-                      key={index}
-                      className="touch-card relative flex items-start gap-space-md p-space-lg rounded-xl bg-white border border-border"
-                    >
-                      {/* Gold accent - controlled by CSS */}
-                      <div className="card-accent absolute top-0 left-0 w-1 h-full bg-gold-500 rounded-l-xl opacity-0 transition-opacity duration-200" />
-                      
-                      <div className="card-icon w-12 h-12 shrink-0 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center transition-colors duration-200">
-                        <Icon className="w-6 h-6 text-primary" />
-                      </div>
+      {/* Coverage Types */}
+      <section className="section-padding bg-background">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-16"><h2 className="heading-lg text-foreground mb-4">BUSINESS COVERAGE OPTIONS</h2></AnimatedSection>
+          {businessInsuranceProducts.map((category, ci) => (
+            <AnimatedSection key={category.title} animation="fade-up" delay={ci * 100} className="mb-12 last:mb-0">
+              <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-6 flex items-center gap-3"><div className="w-8 h-px bg-primary" />{category.title}</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {category.products.map((product) => { const Icon = product.icon; return (
+                  <Link key={product.name} to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-all">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded bg-secondary flex items-center justify-center flex-shrink-0"><Icon className="h-5 w-5 text-primary" /></div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-display font-semibold text-base text-foreground mb-1">
-                          {product.name}
-                        </h4>
-                        {product.description && (
-                          <p className="font-body text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-2">
-                            {product.description}
-                          </p>
-                        )}
-                        <Link
-                          to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"}
-                          className="card-link inline-flex items-center gap-1.5 font-body text-sm font-semibold text-primary transition-all duration-200"
-                        >
-                          Learn More
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
+                        <h4 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{product.name}</h4>
+                        {product.description && <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>}
                       </div>
                     </div>
-                  );
-                })}
+                  </Link>
+                ); })}
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </section>
 
-      {/* Why Choose Scioto Section - Enhanced */}
-      <section className="py-space-2xl bg-cream">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground">
-              Why Choose Scioto for Business Insurance
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-space-lg">
-            {businessInsuranceReasons.map((reason, index) => {
-              const Icon = reason.icon;
-              return (
-                <div key={index} className="group bg-white rounded-xl p-space-lg text-center border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-                  <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-colors duration-300">
-                    <Icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="font-display font-semibold text-lg text-foreground mb-space-sm">
-                    {reason.title}
-                  </h3>
-                  <p className="font-body text-muted-foreground text-sm leading-relaxed">
-                    {reason.description}
-                  </p>
-                </div>
-              );
-            })}
+      {/* Risk Assessment CTA */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${businessOffice})` }}><div className="absolute inset-0 bg-foreground/90" /></div>
+        <div className="relative z-10 container-wide px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection animation="slide-right">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Free Business Risk Assessment</h2>
+              <p className="text-lg text-white/80 mb-8">We'll analyze your operations and identify coverage gaps—even if you don't buy from us.</p>
+              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                {["Coverage gap analysis", "Industry-specific review", "Claims scenario planning", "Pricing comparison"].map((item) => (
+                  <div key={item} className="flex items-center gap-3"><CheckCircle className="h-5 w-5 text-accent flex-shrink-0" /><span className="text-white">{item}</span></div>
+                ))}
+              </div>
+            </AnimatedSection>
+            <AnimatedSection animation="slide-left">
+              <div className="bg-card rounded-xl p-8 shadow-2xl">
+                <h3 className="font-display font-semibold text-xl text-foreground mb-6">Request Your Assessment</h3>
+                <Button asChild size="lg" className="w-full mb-4"><Link to="/contact">Schedule Free Assessment<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <div className="text-center"><span className="text-muted-foreground text-sm">Or call us directly:</span><a href="tel:6146120050" className="block text-xl font-semibold text-primary hover:text-primary/80 mt-1">(614) 612-0050</a></div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Industry Expertise Section - Enhanced */}
-      <section className="py-space-2xl bg-white">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              Industries We Work With
-            </h2>
-            <p className="font-body text-lg text-muted-foreground max-w-[600px] mx-auto">
-              We work with businesses across the country. Here are some of the industries we know best.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-space-md">
-            {industries.map((industry, index) => {
-              const Icon = industry.icon;
-              return (
-                <Link
-                  to="/get-quote"
-                  key={index}
-                  className="touch-industry-card relative bg-white rounded-xl p-space-lg text-center border border-border"
-                >
-                  {/* Gold accent - controlled by CSS */}
-                  <div className="industry-accent absolute top-0 left-0 w-full h-1 bg-gold-500 rounded-t-xl opacity-0 transition-opacity duration-200" />
-                  
-                  <div className="industry-icon w-14 h-14 mx-auto mb-space-sm rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center transition-colors duration-200">
-                    <Icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="font-body font-semibold text-sm text-foreground">
-                    {industry.name}
-                  </p>
-                </Link>
-              );
-            })}
+      {/* Why Choose */}
+      <section className="section-padding bg-card">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-16"><h2 className="heading-lg text-foreground mb-4">Why Businesses Choose Scioto</h2></AnimatedSection>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {businessInsuranceReasons.map((reason, i) => { const Icon = reason.icon; return (
+              <AnimatedSection key={i} animation="fade-up" delay={i * 100} className="bg-background p-8 rounded-lg border border-border hover:border-primary/30 transition-colors">
+                <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6"><Icon className="h-7 w-7 text-accent" /></div>
+                <h3 className="font-display font-semibold text-xl text-foreground mb-3">{reason.title}</h3>
+                <p className="text-muted-foreground">{reason.description}</p>
+              </AnimatedSection>
+            ); })}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-space-2xl bg-cream">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
-            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              What Business Owners Say
-            </h2>
-            <p className="font-body text-lg text-muted-foreground max-w-[500px] mx-auto">
-              Real feedback from businesses we've helped protect.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-space-lg max-w-[900px] mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
-            ))}
-          </div>
+      {/* Testimonials */}
+      <section className="section-padding bg-secondary">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-12"><h2 className="heading-lg text-foreground mb-4">Trusted by Ohio Businesses</h2></AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6">{testimonials.map((t, i) => <AnimatedSection key={i} animation="fade-up" delay={i * 100}><TestimonialCard {...t} /></AnimatedSection>)}</div>
         </div>
       </section>
 
-      {/* Risk Assessment CTA Section - Enhanced */}
-      <section className="py-space-2xl bg-gradient-to-br from-primary via-burgundy-800 to-burgundy-900 relative overflow-hidden">
-        {/* Decorative pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <pattern id="ctaDots" width="8" height="8" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-cream" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#ctaDots)" />
-          </svg>
-        </div>
-        
-        <div className="relative max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
-          <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
-            <Handshake className="w-8 h-8 text-gold-500" />
-          </div>
-          
-          <h2 className="font-display font-semibold text-2xl lg:text-4xl text-cream leading-tight mb-space-md">
-            Free Business Risk Assessment
-          </h2>
-          <p className="font-body text-lg text-cream/80 mb-space-lg max-w-[600px] mx-auto">
-            Wondering if you're missing something? We'll look at your current policies and tell you where the gaps are. Takes about 20 minutes and costs nothing.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">
-            <Link
-              to="/get-quote"
-              className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-cream text-primary font-body font-semibold text-base transition-all duration-300 hover:bg-white hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              Request Your Free Assessment
-            </Link>
-            
-            <a
-              href="tel:6146120050"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-cream font-body font-medium transition-all duration-300 hover:bg-white/20"
-            >
-              <Phone className="w-4 h-4" />
-              (614) 612-0050
-            </a>
-          </div>
+      {/* Final CTA */}
+      <section className="section-padding bg-primary">
+        <div className="container-narrow text-center">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-primary-foreground mb-6">Protect Your Business Today</h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" variant="secondary" className="text-base"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+              <Button asChild size="lg" variant="outline" className="text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
