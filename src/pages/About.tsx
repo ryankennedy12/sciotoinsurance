@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import TeamPhotoPlaceholder from "@/components/TeamPhotoPlaceholder";
+import ohioNeighborhood from "@/assets/ohio-neighborhood.jpg";
+import officeInterior from "@/assets/office-interior.jpg";
 
 const About = () => {
   const teamMembers = [
@@ -24,8 +27,8 @@ const About = () => {
 
   return (
     <>
-      {/* Hero Section - Enhanced with gradient depth */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+      {/* Hero Section - Split Layout with Photography */}
+      <section className="relative min-h-[70vh] lg:min-h-[80vh] flex items-center overflow-hidden">
         {/* Multi-layer gradient background for depth */}
         <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900 via-primary to-burgundy-800" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent" />
@@ -42,25 +45,58 @@ const About = () => {
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-space-md lg:px-space-lg pt-32 pb-space-xl">
-          <div className="max-w-[700px]">
-            <AnimatedSection animation="fade-up">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
-                <span className="w-2 h-2 rounded-full bg-gold-500" />
-                <span className="font-body text-sm text-white/80">Est. 2023 • New Albany, Ohio</span>
-              </div>
-            </AnimatedSection>
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Text Content - Left Side */}
+            <div className="lg:col-span-7">
+              <AnimatedSection animation="fade-up">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
+                  <span className="w-2 h-2 rounded-full bg-gold-500" />
+                  <span className="font-body text-sm text-white/80">Est. 2023 • New Albany, Ohio</span>
+                </div>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-up" delay={100}>
+                <h1 className="font-display font-semibold text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.1] mb-6">
+                  A Father-Daughter Team That Picks Up the Phone
+                </h1>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-up" delay={200}>
+                <p className="font-body text-lg lg:text-xl text-cream/90 leading-relaxed max-w-[550px]">
+                  29 years of industry experience. A new agency built on doing things the right way.
+                </p>
+              </AnimatedSection>
+            </div>
             
-            <AnimatedSection animation="fade-up" delay={100}>
-              <h1 className="font-display font-semibold text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.1] mb-6">
-                A Father-Daughter Team That Picks Up the Phone
-              </h1>
-            </AnimatedSection>
-            
-            <AnimatedSection animation="fade-up" delay={200}>
-              <p className="font-body text-lg lg:text-xl text-cream/90 leading-relaxed max-w-[550px]">
-                29 years of industry experience. A new agency built on doing things the right way.
-              </p>
-            </AnimatedSection>
+            {/* Image - Right Side (Desktop only) */}
+            <div className="hidden lg:block lg:col-span-5">
+              <AnimatedSection animation="fade-up" delay={300}>
+                <div className="relative">
+                  {/* Main image */}
+                  <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10">
+                    <img 
+                      src={ohioNeighborhood} 
+                      alt="Beautiful Ohio neighborhood in New Albany" 
+                      className="w-full h-[350px] object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl" />
+                  </div>
+                  
+                  {/* Floating accent card */}
+                  <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-display font-semibold text-foreground text-sm">New Albany, OH</p>
+                        <p className="font-body text-xs text-muted-foreground">Serving all of Ohio</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </div>
           </div>
         </div>
 
@@ -233,12 +269,8 @@ const About = () => {
                 key={index}
                 className="bg-cream rounded-lg p-space-lg text-center hover:shadow-lg transition-shadow duration-300"
               >
-                {/* Photo Placeholder */}
-                <div className="w-32 h-32 mx-auto mb-space-md rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                  <span className="font-display font-semibold text-3xl text-primary">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
+                {/* Professional Photo Placeholder */}
+                <TeamPhotoPlaceholder name={member.name} className="mb-space-md" />
                 
                 <h3 className="font-display font-semibold text-xl text-foreground mb-space-xs">
                   {member.name}
