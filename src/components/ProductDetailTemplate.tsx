@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, CheckCircle, ArrowRight } from "lucide-react";
 import ProductFAQ, { FAQItem } from "@/components/ProductFAQ";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import StatsBar, { StatItem } from "@/components/StatsBar";
+import TestimonialCallout, { TestimonialData } from "@/components/TestimonialCallout";
 
 interface CoverageItem {
   title: string;
@@ -32,6 +35,20 @@ export interface ProductDetailProps {
   heroDescription: string;
   heroImage?: string;
   
+  // NEW: Category theming
+  categoryTheme?: "personal" | "business";
+  
+  // NEW: Stats bar
+  stats?: StatItem[];
+  
+  // NEW: Testimonial
+  testimonial?: TestimonialData;
+  
+  // NEW: Interactive element
+  interactiveElement?: ReactNode;
+  interactiveTitle?: string;
+  interactiveSubtitle?: string;
+  
   // Coverage section
   coverageTitle: string;
   coverageItems: CoverageItem[];
@@ -58,6 +75,12 @@ const ProductDetailTemplate = ({
   heroSubtitle,
   heroDescription,
   heroImage,
+  categoryTheme = "personal",
+  stats,
+  testimonial,
+  interactiveElement,
+  interactiveTitle,
+  interactiveSubtitle,
   coverageTitle,
   coverageItems,
   whyChooseItems,
@@ -67,6 +90,15 @@ const ProductDetailTemplate = ({
   category,
   categorySlug,
 }: ProductDetailProps) => {
+  // Category-specific gradients
+  const heroGradient = categoryTheme === "personal"
+    ? "from-burgundy-900/95 via-burgundy-800/80 to-burgundy-700/50"
+    : "from-charcoal/95 via-charcoal/85 to-charcoal/60";
+  
+  const heroBgClass = categoryTheme === "personal"
+    ? "bg-gradient-to-br from-primary via-burgundy-800 to-burgundy-900"
+    : "bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90";
+
   return (
     <>
       {/* SEO Meta Tags */}
@@ -76,17 +108,21 @@ const ProductDetailTemplate = ({
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-burgundy-800 to-burgundy-900" />
+      {/* Hero Section - Enhanced with full-bleed image */}
+      <section className="relative min-h-[65vh] flex items-center overflow-hidden">
+        {/* Background Color */}
+        <div className={`absolute inset-0 ${heroBgClass}`} />
+        
+        {/* Hero Image */}
         {heroImage && (
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-20"
+            className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${heroImage})` }}
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-900/90 via-burgundy-800/70 to-transparent" />
+        
+        {/* Gradient Overlay */}
+        <div className={`absolute inset-0 bg-gradient-to-r ${heroGradient}`} />
 
         <div className="relative z-10 container-wide section-padding">
           {/* Breadcrumb */}
@@ -131,9 +167,45 @@ const ProductDetailTemplate = ({
                 </Button>
               </div>
             </AnimatedSection>
+
+            {/* Stats Bar - NEW */}
+            {stats && stats.length > 0 && (
+              <StatsBar stats={stats} variant="dark" />
+            )}
           </div>
         </div>
       </section>
+
+      {/* Interactive Tool Section - NEW */}
+      {interactiveElement && (
+        <section className="section-padding bg-secondary/50">
+          <div className="container-wide">
+            {interactiveTitle && (
+              <AnimatedSection animation="fade-up" className="text-center mb-8">
+                <h2 className="heading-md text-foreground mb-3">{interactiveTitle}</h2>
+                {interactiveSubtitle && (
+                  <p className="body-lg text-muted-foreground max-w-2xl mx-auto">
+                    {interactiveSubtitle}
+                  </p>
+                )}
+              </AnimatedSection>
+            )}
+
+            <AnimatedSection animation="fade-up" delay={100}>
+              <div className={`
+                max-w-3xl mx-auto rounded-2xl p-6 sm:p-8
+                bg-card border border-border shadow-lg
+                ${categoryTheme === "personal" 
+                  ? "ring-1 ring-primary/10" 
+                  : "ring-1 ring-charcoal/10"
+                }
+              `}>
+                {interactiveElement}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* What Does It Cover Section */}
       <section className="section-padding bg-background">
@@ -154,8 +226,11 @@ const ProductDetailTemplate = ({
                 className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-primary" />
+                  <div className={`
+                    flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center
+                    ${categoryTheme === "personal" ? "bg-secondary" : "bg-charcoal/10"}
+                  `}>
+                    <CheckCircle className={`w-5 h-5 ${categoryTheme === "personal" ? "text-primary" : "text-charcoal"}`} />
                   </div>
                   <div>
                     <h3 className="font-display font-semibold text-lg text-foreground mb-2">
@@ -171,6 +246,11 @@ const ProductDetailTemplate = ({
           </div>
         </div>
       </section>
+
+      {/* Testimonial Callout - NEW */}
+      {testimonial && (
+        <TestimonialCallout testimonial={testimonial} />
+      )}
 
       {/* Why Choose Scioto Section */}
       <section className="section-padding bg-card">
@@ -194,7 +274,10 @@ const ProductDetailTemplate = ({
                   delay={index * 100}
                   className="text-center"
                 >
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary flex items-center justify-center">
+                  <div className={`
+                    w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center
+                    ${categoryTheme === "personal" ? "bg-secondary" : "bg-charcoal/10"}
+                  `}>
                     <Icon className="w-8 h-8 text-accent" />
                   </div>
                   <h3 className="font-display font-semibold text-xl text-foreground mb-3">
@@ -241,7 +324,7 @@ const ProductDetailTemplate = ({
       </section>
 
       {/* Final CTA Section */}
-      <section className="section-padding bg-primary">
+      <section className={`section-padding ${categoryTheme === "personal" ? "bg-primary" : "bg-charcoal"}`}>
         <div className="container-wide text-center">
           <AnimatedSection animation="fade-up">
             <h2 className="heading-md text-white mb-4">
