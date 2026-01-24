@@ -23,6 +23,14 @@ import UmbrellaInsurance from "./pages/personal-insurance/UmbrellaInsurance";
 import FloodInsurance from "./pages/personal-insurance/FloodInsurance";
 import HighNetWorthInsurance from "./pages/personal-insurance/HighNetWorthInsurance";
 
+// Business Insurance Product Pages
+import GeneralLiability from "./pages/business-insurance/GeneralLiability";
+import WorkersComp from "./pages/business-insurance/WorkersComp";
+import CyberLiability from "./pages/business-insurance/CyberLiability";
+import ProfessionalLiability from "./pages/business-insurance/ProfessionalLiability";
+import CommercialProperty from "./pages/business-insurance/CommercialProperty";
+import CommercialAuto from "./pages/business-insurance/CommercialAuto";
+
 // Admin
 import { AdminLayout } from "./components/admin/AdminLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -54,6 +62,12 @@ const App = () => (
               <Route path="/personal-insurance/flood" element={<FloodInsurance />} />
               <Route path="/personal-insurance/high-net-worth" element={<HighNetWorthInsurance />} />
               <Route path="/business-insurance" element={<BusinessInsurance />} />
+              <Route path="/business-insurance/general-liability" element={<GeneralLiability />} />
+              <Route path="/business-insurance/workers-comp" element={<WorkersComp />} />
+              <Route path="/business-insurance/cyber-liability" element={<CyberLiability />} />
+              <Route path="/business-insurance/professional-liability" element={<ProfessionalLiability />} />
+              <Route path="/business-insurance/commercial-property" element={<CommercialProperty />} />
+              <Route path="/business-insurance/commercial-auto" element={<CommercialAuto />} />
               <Route path="/employee-benefits" element={<EmployeeBenefits />} />
               <Route path="/services" element={<Services />} />
               <Route path="/get-quote" element={<GetQuote />} />
