@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroProfessionalLiability from "@/assets/hero-professional-liability.jpg";
+import { IndustryRiskAssessment } from "@/components/calculators";
 
 const ProfessionalLiability = () => {
   return (
@@ -10,6 +12,26 @@ const ProfessionalLiability = () => {
       heroTitle="Professional Liability Insurance"
       heroSubtitle="Errors & Omissions Coverage Nationwide"
       heroDescription="When a client claims your advice or services cost them money, this is what defends you. Essential for consultants, accountants, architects, and any service-based business."
+      heroImage={heroProfessionalLiability}
+      
+      // Stats
+      stats={[
+        { value: "Industry", label: "Specialized Policies" },
+        { value: "Prior Acts", label: "Coverage Available" },
+        { value: "Expert", label: "Contract Review" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Assess Your Industry Risk"
+      interactiveElement={<IndustryRiskAssessment />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "A former client sued us over advice they didn't like. Our E&O policy covered the legal defense and settlement. Worth every penny.",
+        name: "James W.",
+        location: "Columbus, OH",
+        helpedWith: "Professional Liability"
+      }}
       
       coverageTitle="What Does Professional Liability Cover?"
       coverageItems={[

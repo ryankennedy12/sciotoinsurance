@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroUmbrellaInsurance from "@/assets/hero-umbrella-insurance.jpg";
+import { UmbrellaGapCalculator } from "@/components/calculators";
 
 const UmbrellaInsurance = () => {
   return (
@@ -12,6 +14,26 @@ const UmbrellaInsurance = () => {
       heroTitle="Umbrella Insurance"
       heroSubtitle="Extra Protection for Ohio Families"
       heroDescription="When a lawsuit exceeds your auto or home policy limits, umbrella coverage is what keeps you from losing everything. It costs a lot less than you'd think for a lot more protection than you might expect."
+      heroImage={heroUmbrellaInsurance}
+      
+      // Stats
+      stats={[
+        { value: "$1M+", label: "Extra Protection" },
+        { value: "<$1/day", label: "Typical Cost" },
+        { value: "Worldwide", label: "Coverage" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Calculate Your Coverage Gap"
+      interactiveElement={<UmbrellaGapCalculator />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "With teenage drivers, umbrella insurance gives us peace of mind. Tom explained exactly why we needed it.",
+        name: "The Martinez Family",
+        location: "Powell, OH",
+        helpedWith: "Umbrella Coverage"
+      }}
       
       // Coverage
       coverageTitle="What Does Umbrella Insurance Cover?"

@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroHighNetWorth from "@/assets/hero-high-net-worth.jpg";
+import { HighNetWorthChecklist } from "@/components/calculators";
 
 const HighNetWorthInsurance = () => {
   return (
@@ -12,6 +14,26 @@ const HighNetWorthInsurance = () => {
       heroTitle="High Net Worth Insurance"
       heroSubtitle="Specialized Coverage for Ohio's Affluent Families"
       heroDescription="Standard insurance policies have limits that don't make sense for complex estates. High net worth coverage gives you guaranteed replacement cost, higher liability limits, and protection for the things you actually own."
+      heroImage={heroHighNetWorth}
+      
+      // Stats
+      stats={[
+        { value: "Chubb & PURE", label: "Premier Carriers" },
+        { value: "Guaranteed", label: "Replacement Cost" },
+        { value: "$100M+", label: "Liability Available" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Do You Need Specialized Coverage?"
+      interactiveElement={<HighNetWorthChecklist />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "Finally, an agency that understands our situation. They coordinated coverage for our home, vacation property, and collections seamlessly.",
+        name: "The Hendersons",
+        location: "Upper Arlington, OH",
+        helpedWith: "High Net Worth Coverage"
+      }}
       
       // Coverage
       coverageTitle="What Does High Net Worth Insurance Cover?"

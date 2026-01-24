@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroFloodInsurance from "@/assets/hero-flood-insurance.jpg";
+import { FloodRiskChecker } from "@/components/calculators";
 
 const FloodInsurance = () => {
   return (
@@ -12,6 +14,26 @@ const FloodInsurance = () => {
       heroTitle="Flood Insurance"
       heroSubtitle="Ohio Flood Protection"
       heroDescription="Your home insurance won't cover floods. A lot of people don't know that. And about 25% of flood claims come from outside the official flood zones. If you're near a creek, in a low spot, or have a basement, you should probably look into this."
+      heroImage={heroFloodInsurance}
+      
+      // Stats
+      stats={[
+        { value: "25%", label: "Claims Outside Flood Zones" },
+        { value: "NFIP + Private", label: "Options Available" },
+        { value: "30 Days", label: "Typical Waiting Period" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Check Your Flood Risk"
+      interactiveElement={<FloodRiskChecker />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "We didn't think we needed flood insurance since we're not in a flood zone. Then our basement flooded. Lesson learned—now we're covered.",
+        name: "Robert T.",
+        location: "Gahanna, OH",
+        helpedWith: "Flood Insurance"
+      }}
       
       // Coverage
       coverageTitle="What Does Flood Insurance Cover?"

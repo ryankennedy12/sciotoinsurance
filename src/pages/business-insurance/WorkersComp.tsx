@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroWorkersComp from "@/assets/hero-workers-comp.jpg";
+import { WorkersCompEstimator } from "@/components/calculators";
 
 const WorkersComp = () => {
   return (
@@ -10,6 +12,26 @@ const WorkersComp = () => {
       heroTitle="Workers' Compensation Insurance"
       heroSubtitle="Workers' Comp Compliance & Coverage"
       heroDescription="If you have employees, you likely need workers' comp. We help you navigate state requirements and find ways to lower your costs while staying compliant."
+      heroImage={heroWorkersComp}
+      
+      // Stats
+      stats={[
+        { value: "Ohio BWC", label: "Specialists" },
+        { value: "20-50%", label: "Group Rating Savings" },
+        { value: "Claims", label: "Management Support" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Estimate Your Potential Savings"
+      interactiveElement={<WorkersCompEstimator />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "Scioto got us into a group rating program that saved us over $8,000 last year. They handle all the BWC paperwork too.",
+        name: "ABC Contracting",
+        location: "Delaware, OH",
+        helpedWith: "Workers' Comp"
+      }}
       
       coverageTitle="What Does Workers' Compensation Cover?"
       coverageItems={[
