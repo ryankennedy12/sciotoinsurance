@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, Clock, Users, Shield, Award, Scale, PhoneCall, ShieldCheck } from "lucide-react";
+import { Phone, ArrowRight, Star, Clock, Users, Shield, Award } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import heroFamily from "@/assets/hero-family.jpg";
 
@@ -141,105 +141,94 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why 1,200+ Ohio Families Trust Scioto Section */}
+      {/* Why Scioto Insurance Group Section */}
       <section className="py-16 sm:py-space-3xl bg-cream">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           {/* Section Header */}
-          <AnimatedSection animation="fade-up" className="text-center mb-12 sm:mb-space-xl">
+          <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
             {/* Decorative Line */}
             <div className="w-10 h-0.5 bg-primary mx-auto mb-4 sm:mb-space-md" />
             
-            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-3 sm:mb-space-sm">
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
               Why 1,200+ Ohio Families Trust Scioto
             </h2>
-            <p className="font-body text-lg sm:text-xl text-muted-foreground">
+            <p className="font-body text-base sm:text-lg text-muted-foreground">
               We're not a call center. We're your neighbors.
             </p>
           </AnimatedSection>
 
-          {/* Enhanced Value Proposition Cards */}
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-            {/* Card 1 - Save Money */}
-            <AnimatedSection 
-              animation="fade-up" 
-              delay={0} 
-              className="bg-white rounded-xl p-6 sm:p-8 border border-burgundy-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
-            >
-              {/* Scale/Balance Icon */}
-              <div className="mb-5 sm:mb-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-burgundy-100 flex items-center justify-center">
-                  <Scale className="w-7 h-7 sm:w-8 sm:h-8 text-gold-500" />
-                </div>
+          {/* Value Proposition Cards */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl">
+            {/* Card 1 - Independent */}
+            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              {/* Handshake Icon */}
+              <div className="mb-4 sm:mb-space-md">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M8 28l6-6 4 4 8-8 4 4 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M14 34l-6 6M34 34l6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="14" cy="20" r="4" />
+                  <circle cx="34" cy="20" r="4" />
+                  <path d="M18 20h12" strokeLinecap="round" />
+                </svg>
               </div>
-              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground mb-3 sm:mb-4">
-                We Save Clients an Average of $847/Year
+              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
+                Independent, Not Corporate
               </h3>
-              <p className="font-body text-base text-muted-foreground leading-relaxed mb-5 flex-grow">
-                We're not tied to one company, so we can shop 30+ carriers to find you the best combination of coverage and price. Our clients save an average of $847 annually compared to their previous single-carrier policies.
+              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
+                We work for you, not an insurance company. That means we shop 30+ carriers to find coverage that actually fits your situation — and your budget.
               </p>
-              <Link
-                to="/get-quote"
-                className="inline-flex items-center gap-1 font-body font-medium text-primary hover:text-burgundy-800 transition-colors duration-200"
-              >
-                See What You Could Save
-                <ArrowRight className="w-4 h-4" />
-              </Link>
             </AnimatedSection>
 
-            {/* Card 2 - Same Day Response */}
-            <AnimatedSection 
-              animation="fade-up" 
-              delay={100} 
-              className="bg-white rounded-xl p-6 sm:p-8 border border-burgundy-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
-            >
-              {/* Phone with Person Icon */}
-              <div className="mb-5 sm:mb-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-burgundy-100 flex items-center justify-center">
-                  <PhoneCall className="w-7 h-7 sm:w-8 sm:h-8 text-gold-500" />
-                </div>
+            {/* Card 2 - Experience */}
+            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              {/* Shield Icon */}
+              <div className="mb-4 sm:mb-space-md">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M24 4L6 12v12c0 11 8 18 18 22 10-4 18-11 18-22V12L24 4z" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M16 24l6 6 10-12" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground mb-3 sm:mb-4">
-                You Call, We Answer—Same Day
+              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
+                29 Years of Local Expertise
               </h3>
-              <p className="font-body text-base text-muted-foreground leading-relaxed mb-5 flex-grow">
-                No phone trees. No 1-800 numbers. When you call (614) 612-0050, you get Sarah, Mike, or Tom—real people who know your name and your policy. We've answered 98% of calls within 2 rings since 1995.
+              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
+                We've insured New Albany homes through three market cycles. We know which carriers pay claims fast, which ones fight you, and which coverage gaps hurt Ohio families most.
               </p>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-1 font-body font-medium text-primary hover:text-burgundy-800 transition-colors duration-200"
-              >
-                Meet Our Team
-                <ArrowRight className="w-4 h-4" />
-              </Link>
             </AnimatedSection>
 
-            {/* Card 3 - Claims Advocate */}
-            <AnimatedSection 
-              animation="fade-up" 
-              delay={200} 
-              className="bg-white rounded-xl p-6 sm:p-8 border border-burgundy-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
-            >
-              {/* Shield with Checkmark Icon */}
-              <div className="mb-5 sm:mb-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-burgundy-100 flex items-center justify-center">
-                  <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8 text-gold-500" />
-                </div>
+            {/* Card 3 - Human */}
+            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 sm:col-span-2 md:col-span-1">
+              {/* Phone/Person Icon */}
+              <div className="mb-4 sm:mb-space-md">
+                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="24" cy="14" r="6" />
+                  <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12" strokeLinecap="round" />
+                  <path d="M36 28l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M40 32h-6" strokeLinecap="round" />
+                </svg>
               </div>
-              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground mb-3 sm:mb-4">
-                We Fight for You When Claims Happen
+              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
+                A Human Answers the Phone
               </h3>
-              <p className="font-body text-base text-muted-foreground leading-relaxed mb-5 flex-grow">
-                We've helped 1,200+ Ohio families through house fires, storm damage, car accidents, and business losses. We know which carriers pay claims fast and which ones fight. We'll be in your corner when it matters most.
+              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
+                When you call, you get Sarah, Mike, or Tom — not a phone tree. When you have a claim, we're in your corner. That's not a tagline, it's how we've operated since 1995.
               </p>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-1 font-body font-medium text-primary hover:text-burgundy-800 transition-colors duration-200"
-              >
-                Read Client Stories
-                <ArrowRight className="w-4 h-4" />
-              </Link>
             </AnimatedSection>
           </div>
+
+          {/* Bottom CTA */}
+          <AnimatedSection animation="fade-up" delay={300} className="text-center">
+            <p className="font-body text-muted-foreground mb-space-sm">
+              Join the families and businesses who stopped worrying about insurance.
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-1 font-body font-medium text-primary hover:underline transition-all duration-300"
+            >
+              See Our Reviews
+              <span className="text-lg">→</span>
+            </Link>
+          </AnimatedSection>
         </div>
       </section>
 

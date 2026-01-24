@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Check, Phone, Star, Users, Clock, ShieldCheck, ChevronLeft, User, Briefcase, Heart, HelpCircle, Home, Building2, Mail, FileText } from "lucide-react";
+import { Check, Phone, Star, Users, Clock, ShieldCheck, ChevronLeft, User, Briefcase, Heart, HelpCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
 
 type CoverageType = "personal" | "business" | "benefits" | "not_sure";
 type ContactMethod = "email" | "phone" | "text";
@@ -36,7 +35,6 @@ interface FormData {
   phone: string;
   preferredContact: ContactMethod;
   bestTime: string;
-  includeSpouse: boolean;
 }
 
 const initialFormData: FormData = {
@@ -57,7 +55,6 @@ const initialFormData: FormData = {
   phone: "",
   preferredContact: "email",
   bestTime: "",
-  includeSpouse: false,
 };
 
 const GetQuote = () => {
@@ -67,10 +64,10 @@ const GetQuote = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const coverageOptions = [
-    { id: "personal" as CoverageType, icon: Home, label: "Personal Insurance", description: "Auto, Home, Life, Umbrella", popular: true },
-    { id: "business" as CoverageType, icon: Building2, label: "Business Insurance", description: "Liability, Property, Workers' Comp", popular: false },
-    { id: "benefits" as CoverageType, icon: Users, label: "Employee Benefits", description: "Group Health, 401(k), Dental", popular: false },
-    { id: "not_sure" as CoverageType, icon: HelpCircle, label: "I'm Not Sure", description: "We'll help you figure it out", popular: false },
+    { id: "personal" as CoverageType, icon: User, label: "Personal Insurance", description: "Auto, home, life, and more" },
+    { id: "business" as CoverageType, icon: Briefcase, label: "Business Insurance", description: "Liability, property, workers' comp" },
+    { id: "benefits" as CoverageType, icon: Heart, label: "Employee Benefits", description: "Health, dental, retirement" },
+    { id: "not_sure" as CoverageType, icon: HelpCircle, label: "I'm Not Sure", description: "Help me figure it out" },
   ];
 
   const personalCoverageOptions = ["Auto", "Home", "Renters", "Life", "Umbrella", "Other"];
@@ -93,7 +90,7 @@ const GetQuote = () => {
   const employeeCountOptions = ["Just me", "2-5", "6-10", "11-25", "26-50", "51-100", "100+"];
   const switchReasons = ["Better price", "Better coverage", "Better service", "Just exploring"];
   const benefitsSituations = ["Have benefits, shopping for better options", "No benefits yet", "New business"];
-  const bestTimeOptions = ["Morning (9am-12pm)", "Afternoon (12pm-4pm)", "Evening (4pm-7pm)", "Weekends"];
+  const bestTimeOptions = ["Morning (9am-12pm)", "Afternoon (12pm-5pm)", "Evening (5pm-7pm)"];
 
   const handleCoverageSelect = (type: CoverageType) => {
     setFormData({ ...formData, coverageType: type });
@@ -213,19 +210,12 @@ const GetQuote = () => {
             <button
               key={option.id}
               onClick={() => handleCoverageSelect(option.id)}
-              className="group relative p-5 sm:p-6 rounded-xl border-2 border-border bg-card text-left hover:border-primary hover:shadow-lg active:scale-[0.98] transition-all duration-300"
+              className="group p-4 sm:p-space-lg rounded-lg border-2 border-border bg-card text-left hover:border-primary hover:shadow-md active:scale-[0.98] transition-all duration-300"
             >
-              {/* Most Popular Badge */}
-              {option.popular && (
-                <span className="absolute -top-3 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-body font-semibold rounded-full">
-                  MOST POPULAR
-                </span>
-              )}
-              
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gold-500/15 flex items-center justify-center mb-4 group-hover:bg-gold-500/25 transition-colors duration-300">
-                <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-gold-500" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 sm:mb-space-sm group-hover:bg-primary/20 transition-colors duration-300">
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
-              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2">
+              <h3 className="font-display font-semibold text-base sm:text-lg text-foreground mb-1">
                 {option.label}
               </h3>
               <p className="font-body text-sm text-muted-foreground">
@@ -581,7 +571,6 @@ const GetQuote = () => {
             {(["email", "phone", "text"] as ContactMethod[]).map((method) => (
               <button
                 key={method}
-                type="button"
                 onClick={() => setFormData({ ...formData, preferredContact: method })}
                 className={`px-5 py-2 rounded-lg border-2 font-body font-medium capitalize transition-all duration-300 ${
                   formData.preferredContact === method
@@ -597,7 +586,7 @@ const GetQuote = () => {
 
         <div>
           <label className="block font-body font-medium text-foreground mb-2">
-            Best time to call you?
+            Best time to reach you
           </label>
           <select
             value={formData.bestTime}
@@ -610,250 +599,97 @@ const GetQuote = () => {
             ))}
           </select>
         </div>
-
-        {/* Spouse checkbox */}
-        <label className="flex items-center gap-3 p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary/50 transition-colors">
-          <input
-            type="checkbox"
-            checked={formData.includeSpouse}
-            onChange={(e) => setFormData({ ...formData, includeSpouse: e.target.checked })}
-            className="sr-only"
-          />
-          <div
-            className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
-              formData.includeSpouse ? "border-primary bg-primary" : "border-gray-300"
-            }`}
-          >
-            {formData.includeSpouse && <Check className="w-3 h-3 text-white" />}
-          </div>
-          <span className="font-body text-sm text-foreground">
-            I'd like a quote for my spouse/partner too
-          </span>
-        </label>
-
-        {/* Privacy note */}
-        <p className="text-center text-xs text-muted-foreground pt-2">
-          We respect your privacy.{" "}
-          <Link to="/privacy" className="text-primary hover:underline">
-            See our privacy policy
-          </Link>
-          .
-        </p>
       </div>
     </div>
   );
 
   const renderStep4 = () => (
-    <div className="py-space-lg animate-fade-in">
-      {/* Success Header */}
-      <div className="text-center mb-8">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
-          <Check className="w-8 h-8 text-green-600" />
-        </div>
-        <h2 className="font-display font-semibold text-2xl sm:text-3xl text-foreground mb-2">
-          We Got It! Here's What Happens Next
-        </h2>
+    <div className="text-center py-space-xl animate-fade-in">
+      <div className="w-20 h-20 mx-auto mb-space-lg rounded-full bg-green-100 flex items-center justify-center">
+        <Check className="w-10 h-10 text-green-600" />
+      </div>
+      <h2 className="font-display font-semibold text-3xl text-foreground mb-space-sm">
+        You're All Set!
+      </h2>
+      <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-md mx-auto">
+        We'll review your info and reach out within one business day — usually much sooner. No spam, no nonsense.
+      </p>
+      
+      <div className="bg-cream rounded-lg p-space-lg max-w-md mx-auto mb-space-lg">
+        <h3 className="font-display font-semibold text-lg text-foreground mb-space-sm">
+          What happens next?
+        </h3>
+        <ol className="font-body text-sm text-muted-foreground text-left space-y-2">
+          <li className="flex gap-2">
+            <span className="font-semibold text-primary">1.</span>
+            We'll review your information and research your options
+          </li>
+          <li className="flex gap-2">
+            <span className="font-semibold text-primary">2.</span>
+            We'll reach out via your preferred contact method
+          </li>
+          <li className="flex gap-2">
+            <span className="font-semibold text-primary">3.</span>
+            We'll discuss your options — no pressure, just honest advice
+          </li>
+        </ol>
       </div>
 
-      {/* Timeline */}
-      <div className="max-w-lg mx-auto mb-8">
-        <div className="space-y-0">
-          {/* Step 1 */}
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center">
-                <Mail className="w-5 h-5 text-gold-500" />
-              </div>
-              <div className="w-0.5 h-8 bg-border" />
-            </div>
-            <div className="pb-6">
-              <p className="font-body font-semibold text-foreground">Within 1 hour</p>
-              <p className="font-body text-sm text-muted-foreground">We'll send a confirmation email</p>
-            </div>
-          </div>
-
-          {/* Step 2 */}
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center">
-                <FileText className="w-5 h-5 text-gold-500" />
-              </div>
-              <div className="w-0.5 h-8 bg-border" />
-            </div>
-            <div className="pb-6">
-              <p className="font-body font-semibold text-foreground">Within 4 hours</p>
-              <p className="font-body text-sm text-muted-foreground">We'll prepare your custom quote</p>
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center">
-                <Phone className="w-5 h-5 text-gold-500" />
-              </div>
-            </div>
-            <div>
-              <p className="font-body font-semibold text-foreground">Within 24 hours</p>
-              <p className="font-body text-sm text-muted-foreground">Tom, Sarah, or Mike will call you</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Call CTA */}
-      <div className="text-center mb-8">
-        <a
-          href="tel:6146120050"
-          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-body font-semibold text-lg rounded-lg hover:bg-burgundy-800 transition-colors"
-        >
-          <Phone className="w-5 h-5" />
-          Want it faster? Call (614) 612-0050
-        </a>
-      </div>
-
-      {/* Testimonials */}
-      <div className="bg-burgundy-100 rounded-xl p-6 max-w-xl mx-auto">
-        <p className="font-body text-sm text-muted-foreground text-center mb-4">
-          While you wait, see what these clients saved by switching to Scioto
-        </p>
-        <div className="space-y-4">
-          <div className="flex items-start gap-3 bg-white rounded-lg p-4">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3 h-3 fill-gold-500 text-gold-500" />
-              ))}
-            </div>
-            <div>
-              <p className="font-body text-sm text-foreground">
-                "Saved <span className="font-semibold text-primary">$1,200/year</span> on home + auto bundle"
-              </p>
-              <p className="font-body text-xs text-muted-foreground mt-1">— Sarah M., New Albany</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 bg-white rounded-lg p-4">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3 h-3 fill-gold-500 text-gold-500" />
-              ))}
-            </div>
-            <div>
-              <p className="font-body text-sm text-foreground">
-                "Cut my business insurance by <span className="font-semibold text-primary">$847/year</span>"
-              </p>
-              <p className="font-body text-xs text-muted-foreground mt-1">— Mike R., Columbus</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 bg-white rounded-lg p-4">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3 h-3 fill-gold-500 text-gold-500" />
-              ))}
-            </div>
-            <div>
-              <p className="font-body text-sm text-foreground">
-                "Found better coverage AND saved <span className="font-semibold text-primary">$600</span>"
-              </p>
-              <p className="font-body text-xs text-muted-foreground mt-1">— Jennifer T., Westerville</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <a
+        href="tel:6146120050"
+        className="inline-flex items-center gap-2 font-body font-medium text-primary hover:underline"
+      >
+        <Phone className="w-4 h-4" />
+        Need something urgent? Call (614) 612-0050
+      </a>
     </div>
   );
 
   const renderTrustSidebar = () => (
     <div className="hidden lg:block">
-      <div className="sticky top-32 bg-burgundy-100 border border-primary rounded-xl p-6">
-        {/* Star Rating Badge */}
-        <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-primary/20">
-          <div className="flex items-center gap-1 mb-2">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
-            ))}
-          </div>
-          <p className="font-display font-semibold text-xl text-foreground">5.0 Rating</p>
-          <p className="font-body text-sm text-muted-foreground">Rated by 247 New Albany families</p>
-        </div>
-
-        {/* Trust Signals */}
-        <div className="space-y-5">
-          {/* Security Signal */}
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5 text-gold-500" />
-            </div>
-            <p className="font-body text-sm text-foreground leading-relaxed">
-              Your info is secure—we'll never spam you
-            </p>
-          </div>
-
-          {/* Response Time Promise */}
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
-              <Clock className="w-5 h-5 text-gold-500" />
-            </div>
-            <p className="font-body text-sm text-foreground leading-relaxed">
-              We'll respond within 1 business day
-            </p>
-          </div>
-
-          {/* Phone CTA */}
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
-              <Phone className="w-5 h-5 text-gold-500" />
+      <div className="sticky top-32 bg-cream rounded-lg p-space-lg">
+        <h3 className="font-display font-semibold text-lg text-foreground mb-space-md">
+          Why Scioto?
+        </h3>
+        <div className="space-y-space-md">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center">
+              <Star className="w-5 h-5 text-gold-500" />
             </div>
             <div>
-              <p className="font-body text-sm text-foreground mb-1">Or call us now:</p>
-              <a 
-                href="tel:6146120050" 
-                className="font-display font-semibold text-lg text-primary hover:text-burgundy-800 transition-colors"
-              >
-                (614) 612-0050
-              </a>
+              <p className="font-body font-medium text-foreground text-sm">4.9 Rating</p>
+              <p className="font-body text-xs text-muted-foreground">on Google Reviews</p>
             </div>
           </div>
-
-          {/* Real People Emphasis */}
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-500/20 flex-shrink-0 flex items-center justify-center">
-              <User className="w-5 h-5 text-gold-500" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Users className="w-5 h-5 text-primary" />
             </div>
-            <p className="font-body text-sm text-foreground leading-relaxed">
-              Talk to Tom, Sarah, or Mike—real people, not a call center
-            </p>
+            <div>
+              <p className="font-body font-medium text-foreground text-sm">1,200+ Clients</p>
+              <p className="font-body text-xs text-muted-foreground">Families & businesses</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Clock className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <p className="font-body font-medium text-foreground text-sm">Fast Response</p>
+              <p className="font-body text-xs text-muted-foreground">Within 1 business day</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <p className="font-body font-medium text-foreground text-sm">No Pressure</p>
+              <p className="font-body text-xs text-muted-foreground">Honest advice only</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-
-  {/* Mobile Trust Signals - shown below form on mobile */}
-  const renderMobileTrustSignals = () => (
-    <div className="lg:hidden mt-6 p-4 bg-burgundy-100 border border-primary rounded-xl">
-      <div className="flex items-center justify-center gap-1 mb-3">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 fill-gold-500 text-gold-500" />
-        ))}
-        <span className="ml-2 font-body text-sm font-medium text-foreground">5.0 Rating</span>
-      </div>
-      <div className="grid grid-cols-2 gap-3 text-center">
-        <div className="flex items-center justify-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-gold-500" />
-          <span className="font-body text-xs text-foreground">Secure & private</span>
-        </div>
-        <div className="flex items-center justify-center gap-2">
-          <Clock className="w-4 h-4 text-gold-500" />
-          <span className="font-body text-xs text-foreground">1-day response</span>
-        </div>
-      </div>
-      <a 
-        href="tel:6146120050"
-        className="mt-4 flex items-center justify-center gap-2 py-3 rounded-lg bg-white border border-primary text-primary font-body font-medium text-sm hover:bg-primary/5 transition-colors"
-      >
-        <Phone className="w-4 h-4" />
-        Call (614) 612-0050
-      </a>
     </div>
   );
 
@@ -873,8 +709,8 @@ const GetQuote = () => {
 
       {/* Form Section */}
       <section className="py-6 sm:py-space-xl bg-background">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <div className="grid lg:grid-cols-[3fr_2fr] gap-6 lg:gap-10">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
+          <div className="grid lg:grid-cols-[1fr_280px] gap-6 lg:gap-space-xl">
             {/* Main Form */}
             <div>
               {currentStep < 4 && renderProgressBar()}
@@ -917,12 +753,9 @@ const GetQuote = () => {
                   </div>
                 )}
               </div>
-
-              {/* Mobile Trust Signals */}
-              {currentStep < 4 && renderMobileTrustSignals()}
             </div>
 
-            {/* Trust Sidebar - Desktop only */}
+            {/* Trust Sidebar */}
             {currentStep < 4 && renderTrustSidebar()}
           </div>
         </div>
