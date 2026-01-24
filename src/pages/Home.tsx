@@ -1,121 +1,144 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone } from "lucide-react";
-import HeroVisual from "@/components/HeroVisual";
+import { Phone, ArrowRight, Star, Clock, Users, Shield, Award } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import heroFamily from "@/assets/hero-family.jpg";
 
 const Home = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight - 80,
-      behavior: "smooth",
-    });
-  };
+  // Trust row items with icons
+  const trustItems = [
+    { icon: Star, label: "5.0", sublabel: "Rating" },
+    { icon: Clock, label: "29 Years", sublabel: "Experience" },
+    { icon: Users, label: "1,200+", sublabel: "Families Protected" },
+    { icon: Award, label: "A+ BBB", sublabel: "Rating" },
+    { icon: Shield, label: "Independent", sublabel: "Agent" },
+  ];
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-cream overflow-hidden">
-        {/* Background subtle texture */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cream via-white to-burgundy-100/30" />
+      {/* Hero Section - Full Viewport with Real Family Image */}
+      <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroFamily})` }}
+        />
+        
+        {/* Burgundy Overlay - 20% opacity for text contrast */}
+        <div className="absolute inset-0 bg-burgundy-800/20" />
+        
+        {/* Additional gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/40 to-transparent" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg pt-20 sm:pt-24 lg:pt-32 pb-16">
-          <div className="grid lg:grid-cols-[55%_45%] gap-8 lg:gap-space-lg items-center min-h-[calc(100vh-10rem)]">
-            {/* Left Content */}
-            <div className="order-2 lg:order-1 z-10">
-              {/* Eyebrow */}
-              <p className="font-body font-medium text-[10px] sm:text-xs uppercase tracking-[0.1em] text-muted-foreground mb-4 sm:mb-space-md animate-fade-in">
-                New Albany's Trusted Insurance Partner Since 1995
-              </p>
+        {/* Content Container */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-32 lg:pb-24">
+          <div className="max-w-3xl">
+            {/* Main Headline - Cormorant Garamond */}
+            <h1 
+              className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 animate-slide-up"
+            >
+              Columbus Families Trust Us to Protect What Matters Most
+            </h1>
 
-              {/* Main Headline */}
-              <h1 
-                className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-primary leading-[1.15] mb-4 sm:mb-space-md animate-slide-up"
-                style={{ animationDelay: "0.1s" }}
-              >
-                Insurance That Actually Understands Your Life
-              </h1>
+            {/* Subheadline - Body text, larger size */}
+            <p 
+              className="font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 animate-slide-up"
+              style={{ animationDelay: "0.1s" }}
+            >
+              We shop 30+ carriers to find coverage that actually fits your life—and your budget. No call centers. No voicemail. Just Sarah, Mike, or Tom answering your call.
+            </p>
 
-              {/* Subheadline */}
-              <p 
-                className="font-body text-base sm:text-lg lg:text-xl text-muted-foreground leading-[1.6] max-w-[540px] mb-6 sm:mb-space-lg animate-slide-up"
-                style={{ animationDelay: "0.2s" }}
-              >
-                You're not a policy number. You're a family protecting what matters, a business owner managing real risks, a person who deserves an advisor who picks up the phone.
-              </p>
-
-              {/* CTA Buttons - Mobile stacked, larger touch targets */}
-              <div 
-                className="flex flex-col sm:flex-row gap-3 sm:gap-space-sm mb-6 sm:mb-space-lg animate-slide-up"
-                style={{ animationDelay: "0.3s" }}
-              >
-                <Link
-                  to="/get-quote"
-                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base sm:text-sm transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl"
-                >
-                  Get Your Free Quote
-                </Link>
-                <a
-                  href="tel:6146120050"
-                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 rounded border-2 border-primary text-primary font-body font-medium text-base sm:text-sm transition-all duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
-                >
-                  <Phone className="w-4 h-4" />
-                  Talk to an Advisor
-                </a>
-              </div>
-
-              {/* Trust Indicator */}
-              <div 
-                className="flex items-center gap-2 animate-slide-up"
-                style={{ animationDelay: "0.4s" }}
-              >
-                <div className="flex text-gold-500">
-                  {[...Array(5)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
+            {/* Trust Row - Horizontal with icons and dividers */}
+            <div 
+              className="flex flex-wrap items-center gap-4 lg:gap-0 mb-8 animate-slide-up"
+              style={{ animationDelay: "0.2s" }}
+            >
+              {trustItems.map((item, index) => (
+                <div key={index} className="flex items-center">
+                  <div className="flex items-center gap-2">
+                    {item.icon === Star ? (
+                      <div className="flex text-gold-500">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-current" />
+                        ))}
+                      </div>
+                    ) : (
+                      <item.icon className="w-5 h-5 text-gold-500" />
+                    )}
+                    <div className="flex items-baseline gap-1">
+                      <span className="font-body font-semibold text-white text-sm lg:text-base">
+                        {item.label}
+                      </span>
+                      <span className="font-body text-white/70 text-xs hidden sm:inline">
+                        {item.sublabel}
+                      </span>
+                    </div>
+                  </div>
+                  {/* Vertical Divider */}
+                  {index < trustItems.length - 1 && (
+                    <div className="hidden lg:block w-px h-6 bg-white/30 mx-4" />
+                  )}
                 </div>
-                <span className="font-body text-sm text-muted-foreground">
-                  Rated 5.0 by New Albany families and businesses
-                </span>
-              </div>
+              ))}
             </div>
 
-            {/* Right Visual */}
-            <div className="order-1 lg:order-2 relative h-[250px] sm:h-[350px] lg:h-[600px]">
-              <HeroVisual scrollY={scrollY} />
+            {/* Dual CTAs - Large buttons, side by side */}
+            <div 
+              className="flex flex-col sm:flex-row gap-4 mb-6 animate-slide-up"
+              style={{ animationDelay: "0.3s" }}
+            >
+              {/* Primary CTA */}
+              <Link
+                to="/get-quote"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
+              >
+                Get Your Free Quote
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              
+              {/* Secondary CTA */}
+              <a
+                href="tel:6146120050"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white text-primary border-2 border-primary font-body font-semibold text-base transition-all duration-300 hover:bg-primary hover:text-white active:scale-[0.98]"
+              >
+                <Phone className="w-5 h-5" />
+                Talk to a Real Person
+              </a>
+            </div>
+
+            {/* Trust Reassurances - Small text with gold checkmarks */}
+            <div 
+              className="flex flex-wrap items-center gap-4 sm:gap-6 animate-slide-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <span className="flex items-center gap-2 font-body text-sm text-white/80">
+                <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                No spam, ever
+              </span>
+              <span className="flex items-center gap-2 font-body text-sm text-white/80">
+                <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                Quote in under 10 minutes
+              </span>
+              <span className="flex items-center gap-2 font-body text-sm text-white/80">
+                <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                We'll call you back today
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator - Hidden on mobile */}
-        <button
-          onClick={scrollToContent}
-          className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 animate-fade-in"
-          style={{ animationDelay: "0.6s" }}
-          aria-label="Scroll to content"
-        >
+        {/* Scroll Indicator - Desktop only */}
+        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/70 animate-fade-in" style={{ animationDelay: "0.6s" }}>
           <span className="font-body text-xs uppercase tracking-wider">Explore</span>
-          <div className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-current rounded-full animate-bounce" />
+          <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+            <div className="w-1 h-2 bg-white/70 rounded-full animate-bounce" />
           </div>
-        </button>
+        </div>
       </section>
 
       {/* Why Scioto Insurance Group Section */}
