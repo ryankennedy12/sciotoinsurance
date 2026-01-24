@@ -17,10 +17,12 @@ interface QuoteFormExitIntentProps {
 const QuoteFormExitIntent = ({ formData, hasSubmitted }: QuoteFormExitIntentProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [wantsCall, setWantsCall] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const shouldShow = useCallback(() => {
     if (hasSubmitted) return false;
@@ -109,6 +111,7 @@ const QuoteFormExitIntent = ({ formData, hasSubmitted }: QuoteFormExitIntentProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setEmailError("");
+    setPhoneError("");
 
     if (!email.trim()) {
       setEmailError("Email is required");
@@ -117,6 +120,12 @@ const QuoteFormExitIntent = ({ formData, hasSubmitted }: QuoteFormExitIntentProp
 
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email");
+      return;
+    }
+
+    // Validate phone if they want a call
+    if (wantsCall && !phone.trim()) {
+      setPhoneError("Phone number is required for a callback");
       return;
     }
 
@@ -152,11 +161,12 @@ const QuoteFormExitIntent = ({ formData, hasSubmitted }: QuoteFormExitIntentProp
         email: email.trim().toLowerCase(),
         first_name: "Exit Intent",
         last_name: "Lead",
+        phone: wantsCall && phone.trim() ? phone.trim() : null,
         coverage_type: coverageType,
         request_type: "quote" as const,
         preferred_contact: (wantsCall ? "phone" : "email") as "email" | "phone" | "text",
         additional_info: additionalInfo,
-        notes: `Exit intent popup submission. Wants callback: ${wantsCall ? "Yes" : "No"}`,
+        notes: `Exit intent popup submission. Wants callback: ${wantsCall ? "Yes" : "No"}${wantsCall && phone.trim() ? `. Phone: ${phone.trim()}` : ""}`,
       }]);
 
       if (error) throw error;
@@ -264,6 +274,29 @@ const QuoteFormExitIntent = ({ formData, hasSubmitted }: QuoteFormExitIntentProp
                   I'd like a quick call to discuss my options
                 </span>
               </label>
+
+              {/* Phone input - shown when wantsCall is true */}
+              {wantsCall && (
+                <div className="animate-fade-in">
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                      setPhoneError("");
+                    }}
+                    placeholder="(555) 555-5555"
+                    className={`w-full px-4 py-3 rounded-lg border-2 font-body text-base transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 ${
+                      phoneError 
+                        ? "border-destructive focus:border-destructive" 
+                        : "border-border focus:border-primary"
+                    }`}
+                  />
+                  {phoneError && (
+                    <p className="mt-1 text-sm text-destructive font-body">{phoneError}</p>
+                  )}
+                </div>
+              )}
 
               {/* Small text with checkmarks */}
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground font-body">
