@@ -4,12 +4,12 @@ import { ShieldCheck, Users, RefreshCw } from "lucide-react";
 const GeneralLiability = () => {
   return (
     <ProductDetailTemplate
-      metaTitle="General Liability Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
-      metaDescription="Protect your business from lawsuits and claims with general liability insurance. We shop 30+ carriers for Ohio businesses. Call (614) 612-0050."
+      metaTitle="General Liability Insurance for Businesses | Scioto Insurance Group"
+      metaDescription="Protect your business from lawsuits and claims with general liability insurance. We shop 30+ carriers for businesses nationwide. Call (614) 612-0050."
       
       heroTitle="General Liability Insurance"
-      heroSubtitle="Columbus & Central Ohio Business Coverage"
-      heroDescription="This is the basic coverage every Ohio business needs. It protects you when someone gets hurt on your property or claims your work caused damage. It's the foundation of your commercial insurance program."
+      heroSubtitle="Coverage for Businesses Nationwide"
+      heroDescription="This is the basic coverage every business needs. It protects you when someone gets hurt on your property or claims your work caused damage. It's the foundation of your commercial insurance program."
       
       coverageTitle="What Does General Liability Insurance Cover?"
       coverageItems={[

@@ -5,12 +5,12 @@ const AutoInsurance = () => {
   return (
     <ProductDetailTemplate
       // SEO
-      metaTitle="Auto Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
-      metaDescription="Get comprehensive auto insurance from 30+ carriers. We find the best rates for Columbus & New Albany drivers. Call (614) 612-0050 for a free quote."
+      metaTitle="Auto Insurance in Ohio | Scioto Insurance Group"
+      metaDescription="Get comprehensive auto insurance from 30+ carriers. We find the best rates for Ohio drivers. Call (614) 612-0050 for a free quote."
       
       // Hero
       heroTitle="Auto Insurance That Works for You"
-      heroSubtitle="Columbus & Central Ohio Auto Coverage"
+      heroSubtitle="Coverage Throughout Ohio"
       heroDescription="We look at how you actually drive, what you're driving, and what you need covered. Then we compare rates from over 30 companies to find something that fits. Most people save a few hundred bucks when they switch."
       
       // Coverage

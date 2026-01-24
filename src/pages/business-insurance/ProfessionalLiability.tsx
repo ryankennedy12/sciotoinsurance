@@ -4,11 +4,11 @@ import { ShieldCheck, Users, RefreshCw } from "lucide-react";
 const ProfessionalLiability = () => {
   return (
     <ProductDetailTemplate
-      metaTitle="Professional Liability Insurance (E&O) in Columbus & Ohio | Scioto Insurance Group"
-      metaDescription="Errors & Omissions coverage for Ohio professionals. Protection when clients claim your advice caused harm. Call (614) 612-0050."
+      metaTitle="Professional Liability Insurance (E&O) | Scioto Insurance Group"
+      metaDescription="Errors & Omissions coverage for professionals nationwide. Protection when clients claim your advice caused harm. Call (614) 612-0050."
       
       heroTitle="Professional Liability Insurance"
-      heroSubtitle="Errors & Omissions Coverage for Ohio Professionals"
+      heroSubtitle="Errors & Omissions Coverage Nationwide"
       heroDescription="When a client claims your advice or services cost them money, this is what defends you. Essential for consultants, accountants, architects, and any service-based business."
       
       coverageTitle="What Does Professional Liability Cover?"

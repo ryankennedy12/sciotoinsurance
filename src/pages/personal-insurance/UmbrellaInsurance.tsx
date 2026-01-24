@@ -5,12 +5,12 @@ const UmbrellaInsurance = () => {
   return (
     <ProductDetailTemplate
       // SEO
-      metaTitle="Umbrella Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
-      metaDescription="Protect your assets with umbrella liability insurance. $1M+ in additional coverage for Columbus families. Call (614) 612-0050 for a quote."
+      metaTitle="Umbrella Insurance in Ohio | Scioto Insurance Group"
+      metaDescription="Protect your assets with umbrella liability insurance. $1M+ in additional coverage for Ohio families. Call (614) 612-0050 for a quote."
       
       // Hero
       heroTitle="Umbrella Insurance"
-      heroSubtitle="Columbus & Central Ohio Liability Protection"
+      heroSubtitle="Extra Protection for Ohio Families"
       heroDescription="When a lawsuit exceeds your auto or home policy limits, umbrella coverage is what keeps you from losing everything. It costs a lot less than you'd think for a lot more protection than you might expect."
       
       // Coverage

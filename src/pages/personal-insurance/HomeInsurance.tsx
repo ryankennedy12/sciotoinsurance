@@ -5,13 +5,13 @@ const HomeInsurance = () => {
   return (
     <ProductDetailTemplate
       // SEO
-      metaTitle="Home Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
-      metaDescription="Protect your biggest investment with comprehensive home insurance. We shop 30+ carriers for Columbus & New Albany homeowners. Call (614) 612-0050."
+      metaTitle="Home Insurance in Ohio | Scioto Insurance Group"
+      metaDescription="Protect your biggest investment with comprehensive home insurance. We shop 30+ carriers for Ohio homeowners. Call (614) 612-0050."
       
       // Hero
       heroTitle="Home Insurance for Ohio Homeowners"
-      heroSubtitle="Columbus & Central Ohio Home Coverage"
-      heroDescription="Your home is probably your biggest investment. We know the stuff that can go wrong with Ohio homes: clay soil, basement flooding, freeze-thaw cycles. We'll make sure you're actually covered for what matters in this area."
+      heroSubtitle="Coverage Throughout Ohio"
+      heroDescription="Your home is probably your biggest investment. We know the stuff that can go wrong with Ohio homes: clay soil, basement flooding, freeze-thaw cycles. We'll make sure you're actually covered for what matters."
       
       // Coverage
       coverageTitle="What Does Home Insurance Cover?"

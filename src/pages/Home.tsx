@@ -8,8 +8,7 @@ const Home = () => {
   const trustItems = [
     { icon: Star, label: "5.0", sublabel: "Rating" },
     { icon: Clock, label: "29 Years", sublabel: "Experience" },
-    { icon: Users, label: "1,200+", sublabel: "Families Protected" },
-    { icon: Award, label: "A+ BBB", sublabel: "Rating" },
+    { icon: Users, label: "Father-Daughter", sublabel: "Team" },
     { icon: Shield, label: "Independent", sublabel: "Agent" },
   ];
 
@@ -36,7 +35,7 @@ const Home = () => {
             <h1 
               className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 animate-slide-up"
             >
-              Columbus Families Trust Us to Protect What Matters Most
+              Ohio Families Trust Us to Protect What Matters Most
             </h1>
 
             {/* Subheadline - Body text, larger size */}
@@ -44,7 +43,7 @@ const Home = () => {
               className="font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 animate-slide-up"
               style={{ animationDelay: "0.1s" }}
             >
-              We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Sarah, Mike, or Tom. Actual people who know your name.
+              We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
             </p>
 
             {/* Trust Row - Horizontal with icons and dividers */}
@@ -150,10 +149,10 @@ const Home = () => {
             <div className="w-10 h-0.5 bg-primary mx-auto mb-4 sm:mb-space-md" />
             
             <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
-              Why 1,200+ Ohio Families Work With Us
+              Why Ohio Families Work With Us
             </h2>
             <p className="font-body text-base sm:text-lg text-muted-foreground">
-              We live here. We know the risks. And we pick up the phone.
+              29 years of experience. A father-daughter team that picks up the phone.
             </p>
           </AnimatedSection>
 
@@ -189,10 +188,10 @@ const Home = () => {
                 </svg>
               </div>
               <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
-                29 Years of Local Expertise
+                29 Years in the Industry
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                We've insured New Albany homes through three market cycles. We know which carriers pay claims fast, which ones fight you, and which coverage gaps hurt Ohio families most.
+                Jeff spent 29 years at Nationwide before starting this agency. He knows which carriers pay claims quickly, which ones fight you, and where coverage gaps hurt most.
               </p>
             </AnimatedSection>
 
@@ -211,7 +210,7 @@ const Home = () => {
                 A Human Answers the Phone
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Call our office. You'll get Sarah, Mike, or Tom. Not a phone tree. Not a call center. When you have a claim, we handle it. Been doing it that way since 1995.
+                Call our office. You'll get Jeff or Natalie. That's the whole team. No phone tree, no call center. When you have a claim, we handle it personally.
               </p>
             </AnimatedSection>
           </div>
@@ -404,24 +403,16 @@ const Home = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           
           {/* Stats Bar */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-space-lg lg:gap-space-md mb-12 sm:mb-space-2xl text-center">
+          <div className="grid grid-cols-3 gap-6 sm:gap-space-lg lg:gap-space-md mb-12 sm:mb-space-2xl text-center">
             <AnimatedSection animation="fade-up" delay={0}>
               <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
                 29
               </p>
               <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
-                Years Serving Ohio
+                Years of Experience
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={100}>
-              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
-                1,200+
-              </p>
-              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
-                Families Protected
-              </p>
-            </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={200}>
               <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
                 30+
               </p>
@@ -429,12 +420,12 @@ const Home = () => {
                 Insurance Carriers
               </p>
             </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={300}>
+            <AnimatedSection animation="fade-up" delay={200}>
               <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
-                4.9★
+                2
               </p>
               <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
-                Google Rating
+                People Who Answer
               </p>
             </AnimatedSection>
           </div>
@@ -448,7 +439,7 @@ const Home = () => {
             
             <blockquote className="relative z-10">
               <p className="font-display italic text-lg sm:text-xl lg:text-2xl text-cream leading-relaxed mb-4 sm:mb-space-md">
-                "After my basement flooded, Scioto had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months. I tell everyone — call Mike at Scioto."
+                "After my basement flooded, Scioto had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months."
               </p>
               <footer className="font-body font-medium text-sm text-white">
                 — Jennifer M., Westerville
@@ -478,7 +469,7 @@ const Home = () => {
             
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10 sm:col-span-2 md:col-span-1">
               <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
-                "When I call, Sarah actually knows who I am. When's the last time your insurance company did that?"
+                "When I call, they actually know who I am. When's the last time your insurance company did that?"
               </p>
               <p className="font-body text-sm text-white/60">
                 — Michelle T., Gahanna

@@ -4,32 +4,18 @@ import { Phone, Mail } from "lucide-react";
 const About = () => {
   const teamMembers = [
     {
-      name: "Tom Mitchell",
-      title: "Founder & Principal Agent",
-      bio: "Tom founded Scioto Insurance Group in 1995 with a simple mission: treat every client like a neighbor. With nearly three decades of experience, he's helped thousands of Ohio families find the right coverage.",
+      name: "Jeff Pireu",
+      title: "Principal Agent & Founder",
+      bio: "Jeff spent 29 years at Nationwide learning what works (and what doesn't) in insurance. He started Scioto Insurance Group in 2023 because he wanted to do things differently. As an independent agent, he can shop 30+ carriers to find the right fit for each client, not just push whatever one company offers.",
       phone: "(614) 612-0050",
-      email: "tom@sciotoinsurancegroup.com",
+      email: "info@sciotoinsurancegroup.com",
     },
     {
-      name: "Sarah Mitchell",
+      name: "Natalie Kennedy",
       title: "Account Manager",
-      bio: "Sarah joined the family business in 2008 and has become the friendly voice most clients hear when they call. She specializes in personal lines and making sure no question goes unanswered.",
-      phone: "(614) 612-0051",
-      email: "sarah@sciotoinsurancegroup.com",
-    },
-    {
-      name: "Mike Reynolds",
-      title: "Commercial Lines Specialist",
-      bio: "Mike brings 15 years of experience in business insurance. From startups to established companies, he understands the unique risks Ohio businesses face and how to protect against them.",
-      phone: "(614) 612-0052",
-      email: "mike@sciotoinsurancegroup.com",
-    },
-    {
-      name: "Lisa Chen",
-      title: "Benefits Consultant",
-      bio: "Lisa helps businesses of all sizes design employee benefits packages that attract and retain talent. She believes great benefits shouldn't be reserved for Fortune 500 companies.",
-      phone: "(614) 612-0053",
-      email: "lisa@sciotoinsurancegroup.com",
+      bio: "Natalie handles the day-to-day: policy questions, changes, renewals, and making sure nothing falls through the cracks. When you call, you'll probably talk to her. She believes insurance shouldn't be confusing, and she'll explain things in plain English.",
+      phone: "(614) 612-0050",
+      email: "info@sciotoinsurancegroup.com",
     },
   ];
 
@@ -46,10 +32,10 @@ const About = () => {
         
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-space-md lg:px-space-lg pt-32 pb-space-xl text-center">
           <h1 className="font-display font-semibold text-4xl lg:text-5xl text-white leading-tight mb-space-md animate-fade-in">
-            Insurance Is Personal. We Never Forgot That.
+            A Father-Daughter Team That Picks Up the Phone
           </h1>
           <p className="font-body text-lg lg:text-xl text-cream/90 max-w-[600px] mx-auto animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            We're a family-owned agency that believes you deserve more than a 1-800 number.
+            29 years of industry experience. A new agency built on doing things the right way.
           </p>
         </div>
       </section>
@@ -67,49 +53,66 @@ const About = () => {
               
               <div className="space-y-space-md font-body text-muted-foreground leading-relaxed">
                 <p>
-                  Tom Mitchell started Scioto Insurance Group in 1995. Back then, most of his clients were neighbors. Literally. He knew their kids, their dogs, their driveways.
+                  After 29 years working at Nationwide, Jeff Pireu knew insurance inside and out. He also knew what frustrated people about it: the one-size-fits-all policies, the 1-800 numbers, the feeling that you're just a policy number.
                 </p>
                 <p>
-                  Twenty-nine years later, we've grown. But we're still family-owned, still independent, and small enough that when you call, you talk to someone who knows your name.
+                  In 2023, he decided to do something about it. He started Scioto Insurance Group with a simple idea: be independent, so he could actually shop for the best coverage instead of pushing one company's products.
                 </p>
                 <p>
-                  Being independent means we don't work for any one insurance company. We have access to over 30 carriers. So we can shop around and find what actually fits you, instead of pushing whatever policy pays us the most.
+                  His daughter Natalie joined him to handle the day-to-day operations. When you call, you get one of them. Not a call center. Not a phone tree. Just two people who know your name and your policy.
                 </p>
                 <p>
-                  Insurance has changed a lot since 1995. Paper files are gone. There's an app for everything now. But when something goes wrong, people still want to talk to a human who gives a damn. That hasn't changed, and neither have we.
+                  We're new as an agency, but not new to insurance. Jeff's seen just about everything in three decades. And we're building something we're proud of: an agency that works for you, not the insurance companies.
                 </p>
               </div>
             </div>
 
-            {/* Visual Timeline */}
+            {/* What We Bring - Replaces fake timeline */}
             <div className="relative">
               <div className="bg-cream rounded-lg p-space-lg lg:p-space-xl">
-                {/* Timeline */}
-                <div className="relative pl-8 border-l-2 border-primary/20 space-y-space-lg">
-                  <div className="relative">
-                    <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-primary" />
-                    <p className="font-display font-semibold text-2xl text-primary">1995</p>
-                    <p className="font-body text-muted-foreground">Tom Mitchell founds Scioto Insurance Group in New Albany</p>
+                <h3 className="font-display font-semibold text-xl text-foreground mb-space-lg">
+                  What We Bring
+                </h3>
+                
+                <div className="space-y-space-lg">
+                  <div className="flex items-start gap-space-md">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-semibold text-lg text-primary">29</span>
+                    </div>
+                    <div>
+                      <p className="font-display font-semibold text-lg text-foreground">Years of Experience</p>
+                      <p className="font-body text-sm text-muted-foreground">Jeff's background at Nationwide means he's seen it all: claims, carriers, coverage gaps, and what actually protects people.</p>
+                    </div>
                   </div>
-                  <div className="relative">
-                    <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-primary/60" />
-                    <p className="font-display font-semibold text-2xl text-primary">2003</p>
-                    <p className="font-body text-muted-foreground">Expanded to serve 500+ families across Central Ohio</p>
+                  
+                  <div className="flex items-start gap-space-md">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-semibold text-lg text-primary">30+</span>
+                    </div>
+                    <div>
+                      <p className="font-display font-semibold text-lg text-foreground">Insurance Carriers</p>
+                      <p className="font-body text-sm text-muted-foreground">Being independent means we shop dozens of carriers to find what fits you, not just sell one company's products.</p>
+                    </div>
                   </div>
-                  <div className="relative">
-                    <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-primary/60" />
-                    <p className="font-display font-semibold text-2xl text-primary">2008</p>
-                    <p className="font-body text-muted-foreground">Second generation joins the family business</p>
+                  
+                  <div className="flex items-start gap-space-md">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-semibold text-lg text-primary">2</span>
+                    </div>
+                    <div>
+                      <p className="font-display font-semibold text-lg text-foreground">People. That's the Whole Team.</p>
+                      <p className="font-body text-sm text-muted-foreground">When you call, you get Jeff or Natalie. We're small on purpose. It means we actually know who you are.</p>
+                    </div>
                   </div>
-                  <div className="relative">
-                    <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-primary/60" />
-                    <p className="font-display font-semibold text-2xl text-primary">2015</p>
-                    <p className="font-body text-muted-foreground">Launched employee benefits division</p>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-gold-500" />
-                    <p className="font-display font-semibold text-2xl text-primary">Today</p>
-                    <p className="font-body text-muted-foreground">1,200+ families and businesses protected</p>
+                  
+                  <div className="flex items-start gap-space-md">
+                    <div className="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-semibold text-lg text-gold-600">★</span>
+                    </div>
+                    <div>
+                      <p className="font-display font-semibold text-lg text-foreground">Ohio Personal, Nationwide Business</p>
+                      <p className="font-body text-sm text-muted-foreground">Personal insurance throughout Ohio. Business coverage across the country. We go where you need us.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -158,10 +161,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
-                Local Roots, Real Relationships
+                Small on Purpose
               </h3>
               <p className="font-body text-muted-foreground">
-                We coach Little League, attend the same churches, and shop at the same Kroger. Your success is our success.
+                We're a two-person team because that's how we want it. It means we actually know our clients, not just their policy numbers.
               </p>
             </div>
 
@@ -173,10 +176,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
-                Expertise Without the Ego
+                Straight Talk
               </h3>
               <p className="font-body text-muted-foreground">
-                Insurance can be confusing. We get that. Ask us anything and we'll give you a straight answer. No industry jargon, no talking down to you.
+                Insurance can be confusing. We get that. Ask us anything and we'll give you a straight answer. No jargon, no runaround.
               </p>
             </div>
           </div>
@@ -189,48 +192,51 @@ const About = () => {
           <div className="text-center mb-space-xl">
             <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
             <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground">
-              The People Behind Your Policy
+              Meet the Team
             </h2>
+            <p className="font-body text-muted-foreground mt-space-sm">
+              This is everyone. Literally.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+          <div className="grid md:grid-cols-2 gap-space-xl max-w-[800px] mx-auto">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
                 className="bg-cream rounded-lg p-space-lg text-center hover:shadow-lg transition-shadow duration-300"
               >
                 {/* Photo Placeholder */}
-                <div className="w-28 h-28 mx-auto mb-space-md rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                  <span className="font-display font-semibold text-2xl text-primary">
+                <div className="w-32 h-32 mx-auto mb-space-md rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <span className="font-display font-semibold text-3xl text-primary">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
                 
-                <h3 className="font-display font-semibold text-lg text-foreground mb-space-xs">
+                <h3 className="font-display font-semibold text-xl text-foreground mb-space-xs">
                   {member.name}
                 </h3>
-                <p className="font-body text-sm text-primary font-medium mb-space-sm">
+                <p className="font-body text-sm text-primary font-medium mb-space-md">
                   {member.title}
                 </p>
-                <p className="font-body text-sm text-muted-foreground mb-space-md leading-relaxed">
+                <p className="font-body text-muted-foreground mb-space-lg leading-relaxed">
                   {member.bio}
                 </p>
                 
                 {/* Contact */}
-                <div className="flex flex-col gap-space-xs">
+                <div className="flex flex-col gap-space-sm">
                   <a
                     href={`tel:${member.phone.replace(/[^0-9]/g, '')}`}
-                    className="inline-flex items-center justify-center gap-2 font-body text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
+                    className="inline-flex items-center justify-center gap-2 font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    <Phone className="w-3 h-3" />
+                    <Phone className="w-4 h-4" />
                     {member.phone}
                   </a>
                   <a
                     href={`mailto:${member.email}`}
-                    className="inline-flex items-center justify-center gap-2 font-body text-xs text-muted-foreground hover:text-primary transition-colors duration-300 break-all"
+                    className="inline-flex items-center justify-center gap-2 font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    <Mail className="w-3 h-3" />
-                    {member.email.split('@')[0]}@...
+                    <Mail className="w-4 h-4" />
+                    {member.email}
                   </a>
                 </div>
               </div>

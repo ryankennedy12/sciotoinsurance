@@ -22,7 +22,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             </Link>
             
             <p className="font-body text-sm text-cream/70 mb-space-md leading-relaxed">
-              Family-owned. Independent.<br />
+              Father-daughter team. Independent.<br />
               Here when it matters.
             </p>
             

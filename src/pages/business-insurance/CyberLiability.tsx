@@ -4,11 +4,11 @@ import { ShieldCheck, Users, RefreshCw } from "lucide-react";
 const CyberLiability = () => {
   return (
     <ProductDetailTemplate
-      metaTitle="Cyber Liability Insurance in Columbus & Ohio | Scioto Insurance Group"
-      metaDescription="Protect your business from data breaches, ransomware, and cyber attacks. Cyber insurance for Ohio businesses. Call (614) 612-0050."
+      metaTitle="Cyber Liability Insurance | Scioto Insurance Group"
+      metaDescription="Protect your business from data breaches, ransomware, and cyber attacks. Cyber insurance for businesses nationwide. Call (614) 612-0050."
       
       heroTitle="Cyber Liability Insurance"
-      heroSubtitle="Columbus & Central Ohio Cyber Coverage"
+      heroSubtitle="Cyber Coverage for Businesses Nationwide"
       heroDescription="Every business that uses computers, stores customer data, or accepts payments needs this now. Ransomware, data breaches, phishing attacks. They're happening to businesses of all sizes."
       
       coverageTitle="What Does Cyber Liability Insurance Cover?"

@@ -5,12 +5,12 @@ const FloodInsurance = () => {
   return (
     <ProductDetailTemplate
       // SEO
-      metaTitle="Flood Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
-      metaDescription="Flood insurance for Columbus & New Albany homes. Standard home insurance doesn't cover floods. Call (614) 612-0050 to protect your property."
+      metaTitle="Flood Insurance in Ohio | Scioto Insurance Group"
+      metaDescription="Flood insurance for Ohio homes. Standard home insurance doesn't cover floods. Call (614) 612-0050 to protect your property."
       
       // Hero
       heroTitle="Flood Insurance"
-      heroSubtitle="Columbus & Central Ohio Flood Protection"
+      heroSubtitle="Ohio Flood Protection"
       heroDescription="Your home insurance won't cover floods. A lot of people don't know that. And about 25% of flood claims come from outside the official flood zones. If you're near a creek, in a low spot, or have a basement, you should probably look into this."
       
       // Coverage

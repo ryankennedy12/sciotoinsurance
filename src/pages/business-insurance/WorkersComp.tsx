@@ -4,12 +4,12 @@ import { ShieldCheck, Users, RefreshCw } from "lucide-react";
 const WorkersComp = () => {
   return (
     <ProductDetailTemplate
-      metaTitle="Workers' Compensation Insurance in Columbus & Ohio | Scioto Insurance Group"
-      metaDescription="Required workers' comp coverage for Ohio employers. We help you stay compliant and find competitive rates. Call (614) 612-0050."
+      metaTitle="Workers' Compensation Insurance | Scioto Insurance Group"
+      metaDescription="Required workers' comp coverage for employers. We help you stay compliant and find competitive rates. Call (614) 612-0050."
       
       heroTitle="Workers' Compensation Insurance"
-      heroSubtitle="Ohio Workers' Comp Compliance & Coverage"
-      heroDescription="If you have employees in Ohio, you need this. It's required. We help you navigate Ohio's state-fund system and find ways to lower your costs while staying compliant."
+      heroSubtitle="Workers' Comp Compliance & Coverage"
+      heroDescription="If you have employees, you likely need workers' comp. We help you navigate state requirements and find ways to lower your costs while staying compliant."
       
       coverageTitle="What Does Workers' Compensation Cover?"
       coverageItems={[
