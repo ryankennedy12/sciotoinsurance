@@ -12,15 +12,18 @@ import restaurantInterior from "@/assets/restaurant-interior.jpg";
 import retailStore from "@/assets/retail-store.jpg";
 import healthcareClinic from "@/assets/healthcare-clinic.jpg";
 import businessOffice from "@/assets/business-office.jpg";
+import transportationFleet from "@/assets/transportation-fleet.jpg";
+import manufacturingFacility from "@/assets/manufacturing-facility.jpg";
+import professionalServices from "@/assets/professional-services.jpg";
 
 const industries = [
   { name: "Contractors", icon: HardHat, image: constructionSite, description: "General liability, tools coverage, workers' comp.", caseStudy: "We helped Smith Roofing reduce their Workers' Comp by 18%." },
   { name: "Restaurants", icon: UtensilsCrossed, image: restaurantInterior, description: "Liquor liability, food spoilage, property protection.", caseStudy: "After a kitchen fire, we helped Mario's Pizza get their claim paid in 11 days." },
   { name: "Retail", icon: ShoppingBag, image: retailStore, description: "Inventory protection, customer liability, theft coverage.", caseStudy: "A local boutique saved $3,200/year after we found gaps in their policy." },
   { name: "Healthcare", icon: Stethoscope, image: healthcareClinic, description: "Malpractice, HIPAA compliance, specialized coverage.", caseStudy: "We've insured 40+ Ohio medical practices with zero coverage disputes." },
-  { name: "Transportation", icon: Truck, image: businessOffice, description: "Fleet coverage, cargo insurance, driver protection.", caseStudy: "A trucking company reduced their premium 22% by restructuring coverage." },
-  { name: "Manufacturing", icon: Factory, image: businessOffice, description: "Equipment breakdown, product liability, workplace safety.", caseStudy: "We helped a machine shop navigate an OSHA audit with full documentation." },
-  { name: "Professional", icon: Briefcase, image: businessOffice, description: "E&O coverage, cyber liability, professional indemnity.", caseStudy: "An accounting firm avoided a $500K lawsuit thanks to proper E&O coverage." },
+  { name: "Transportation", icon: Truck, image: transportationFleet, description: "Fleet coverage, cargo insurance, driver protection.", caseStudy: "A trucking company reduced their premium 22% by restructuring coverage." },
+  { name: "Manufacturing", icon: Factory, image: manufacturingFacility, description: "Equipment breakdown, product liability, workplace safety.", caseStudy: "We helped a machine shop navigate an OSHA audit with full documentation." },
+  { name: "Professional", icon: Briefcase, image: professionalServices, description: "E&O coverage, cyber liability, professional indemnity.", caseStudy: "An accounting firm avoided a $500K lawsuit thanks to proper E&O coverage." },
   { name: "Trades", icon: Wrench, image: constructionSite, description: "Tools, vehicles, liability for HVAC, plumbing, electrical.", caseStudy: "A plumbing company saved $4,100/year after we bundled their policies." },
 ];
 
