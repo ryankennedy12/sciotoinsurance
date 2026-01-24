@@ -6,23 +6,30 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Burgundy Palette */
-    --burgundy-900: 345 56% 27%;
-    --burgundy-800: 345 55% 31%;
-    --burgundy-700: 345 54% 35%;
-    --burgundy-600: 345 51% 41%;
-    --burgundy-100: 345 40% 96%;
+    /* Brand Colors - Burgundy Palette (EXACT hex values from brand guide) */
+    /* burgundy-700: #8B2942 - Primary CTAs, headers, brand elements */
+    --burgundy-700: 345 55% 34%;
+    /* burgundy-800: #6B1D32 - Hover states, darker accents */
+    --burgundy-800: 345 58% 27%;
+    /* burgundy-100: #F9F1F3 - Light backgrounds, subtle sections */
+    --burgundy-100: 340 33% 96%;
+    /* Additional burgundy shades for flexibility */
+    --burgundy-900: 345 60% 22%;
+    --burgundy-600: 345 50% 40%;
     
-    /* Neutral Palette */
-    --cream: 30 14% 97%;
+    /* Neutral Palette (EXACT hex values from brand guide) */
+    /* cream: #FAF9F8 - Page backgrounds */
+    --cream: 30 20% 98%;
     --white: 0 0% 100%;
+    /* charcoal: #1A1A1A - Body text */
     --charcoal: 0 0% 10%;
     --gray-600: 0 0% 29%;
     --gray-400: 0 0% 55%;
     --gray-200: 0 0% 90%;
     
-    /* Accent */
-    --gold-500: 42 42% 59%;
+    /* Accent (EXACT hex value from brand guide) */
+    /* gold-500: #C9A962 - Icons, trust badges, premium accents */
+    --gold-500: 42 47% 59%;
     
     /* Spacing Scale */
     --space-xs: 0.5rem;

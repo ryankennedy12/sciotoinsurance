@@ -18,19 +18,26 @@ export default {
         body: ['Inter', 'sans-serif'],
       },
       colors: {
-        // Brand Colors - Burgundy Palette
+        // Brand Colors - Burgundy Palette (EXACT hex values)
+        // burgundy-700: #8B2942 - Primary CTAs, headers, brand elements
+        // burgundy-800: #6B1D32 - Hover states, darker accents
+        // burgundy-100: #F9F1F3 - Light backgrounds, subtle sections
         burgundy: {
-          100: "hsl(var(--burgundy-100))",
+          100: "hsl(var(--burgundy-100))", // #F9F1F3
           600: "hsl(var(--burgundy-600))",
-          700: "hsl(var(--burgundy-700))",
-          800: "hsl(var(--burgundy-800))",
+          700: "hsl(var(--burgundy-700))", // #8B2942
+          800: "hsl(var(--burgundy-800))", // #6B1D32
           900: "hsl(var(--burgundy-900))",
         },
-        // Neutral Palette
-        cream: "hsl(var(--cream))",
-        charcoal: "hsl(var(--charcoal))",
+        // Neutral Palette (EXACT hex values)
+        // cream: #FAF9F8 - Page backgrounds
+        // charcoal: #1A1A1A - Body text
+        cream: "hsl(var(--cream))", // #FAF9F8
+        charcoal: "hsl(var(--charcoal))", // #1A1A1A
+        // Accent (EXACT hex value)
+        // gold-500: #C9A962 - Icons, trust badges, premium accents
         gold: {
-          500: "hsl(var(--gold-500))",
+          500: "hsl(var(--gold-500))", // #C9A962
         },
         // Semantic Colors
         border: "hsl(var(--border))",
