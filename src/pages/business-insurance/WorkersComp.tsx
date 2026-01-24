@@ -7,9 +7,9 @@ const WorkersComp = () => {
       metaTitle="Workers' Compensation Insurance in Columbus & Ohio | Scioto Insurance Group"
       metaDescription="Required workers' comp coverage for Ohio employers. We help you stay compliant and find competitive rates. Call (614) 612-0050."
       
-      heroTitle="Workers' Compensation: Required Protection for Ohio Employers"
+      heroTitle="Workers' Compensation Insurance"
       heroSubtitle="Ohio Workers' Comp Compliance & Coverage"
-      heroDescription="Required in Ohio if you have employees. We help you navigate Ohio's state-fund system and find competitive rates while staying compliant. Protect your employees and your business."
+      heroDescription="If you have employees in Ohio, you need this. It's required. We help you navigate Ohio's state-fund system and find ways to lower your costs while staying compliant."
       
       coverageTitle="What Does Workers' Compensation Cover?"
       coverageItems={[
@@ -27,7 +27,7 @@ const WorkersComp = () => {
         },
         {
           title: "Rehabilitation Costs",
-          description: "Pays for physical therapy, vocational training, and rehabilitation needed to return to work."
+          description: "Pays for physical therapy, vocational training, and rehab needed to return to work."
         },
         {
           title: "Death Benefits",
@@ -35,7 +35,7 @@ const WorkersComp = () => {
         },
         {
           title: "Employer Liability",
-          description: "Protects your business from lawsuits by injured employees (beyond workers' comp benefits)."
+          description: "Protects your business from lawsuits by injured employees beyond workers' comp benefits."
         },
         {
           title: "Legal Defense",
@@ -46,18 +46,18 @@ const WorkersComp = () => {
       whyChooseItems={[
         {
           icon: ShieldCheck,
-          title: "Ohio BWC Expertise",
-          description: "We understand Ohio's unique state-fund workers' comp system and help you navigate group rating programs, safety councils, and premium discounts."
+          title: "We Know Ohio BWC",
+          description: "We understand Ohio's unique state-fund system. Group rating programs, safety councils, premium discounts. We know how to work the system."
         },
         {
           icon: Users,
-          title: "Claims Management Support",
-          description: "We help you manage claims effectively to minimize costs and get injured employees back to work safely."
+          title: "We Help Manage Claims",
+          description: "We help you handle claims effectively to keep costs down and get injured employees back to work safely."
         },
         {
           icon: RefreshCw,
-          title: "Rate Reduction Strategies",
-          description: "We identify group rating, safety programs, and other discount opportunities that can reduce your premiums by 20-50%."
+          title: "We Find Ways to Lower Your Rate",
+          description: "Group rating, safety programs, other discount opportunities. Some businesses save 20-50% on premiums."
         }
       ]}
       
@@ -65,27 +65,27 @@ const WorkersComp = () => {
       faqs={[
         {
           question: "Is workers' comp required in Ohio?",
-          answer: "Yes. Ohio law requires nearly all employers to carry workers' compensation coverage. Exceptions are very limited (some agricultural operations, domestic workers). Penalties for non-compliance include fines up to $10,000 per employee."
+          answer: "Yes. Ohio law requires nearly all employers to carry workers' comp. Exceptions are very limited (some agricultural operations, domestic workers). Penalties for non-compliance can be up to $10,000 per employee."
         },
         {
           question: "How does Ohio's workers' comp system work?",
-          answer: "Ohio is a monopolistic state-fund state, meaning most employers must purchase coverage through the Ohio Bureau of Workers' Compensation (BWC). However, we help you access group rating programs and other cost-saving options."
+          answer: "Ohio is a monopolistic state-fund state. Most employers buy coverage through the Ohio Bureau of Workers' Compensation (BWC). But we help you access group rating programs and other ways to save money."
         },
         {
           question: "What is group rating and how does it save money?",
-          answer: "Group rating pools similar businesses together, and if the group has better-than-average claims experience, all members get discounted rates. Savings can be 20-50% or more. We can connect you with appropriate groups."
+          answer: "Group rating pools similar businesses together. If the group has better-than-average claims, all members get discounted rates. Savings can be 20-50% or more. We can connect you with the right groups."
         },
         {
           question: "What should I do if an employee is injured?",
-          answer: "Get them medical attention immediately. Report the injury to BWC within 24 hours. Document everything. Contact us—we'll help you navigate the claims process and manage the case effectively."
+          answer: "Get them medical attention immediately. Report the injury to BWC within 24 hours. Document everything. Call us. We'll help you navigate the claims process and manage the case."
         },
         {
           question: "How can I reduce my workers' comp premiums?",
-          answer: "Key strategies include joining group rating programs, implementing safety programs, returning injured workers to light duty quickly, and maintaining accurate payroll records. We'll help you develop a comprehensive approach."
+          answer: "Join group rating programs, implement safety programs, return injured workers to light duty quickly, and keep accurate payroll records. We'll help you develop a comprehensive approach."
         },
         {
           question: "Does workers' comp cover all employee injuries?",
-          answer: "It covers injuries and illnesses that arise out of and in the course of employment. It typically doesn't cover injuries from horseplay, intoxication, or self-inflicted harm. Coverage disputes can be complex—we help you navigate them."
+          answer: "It covers injuries and illnesses that happen during and because of work. It typically doesn't cover injuries from horseplay, intoxication, or self-inflicted harm. Coverage disputes can get complicated. We help you work through them."
         }
       ]}
       
