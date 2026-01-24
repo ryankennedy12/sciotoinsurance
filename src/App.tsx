@@ -15,6 +15,14 @@ import GetQuote from "./pages/GetQuote";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// Personal Insurance Product Pages
+import AutoInsurance from "./pages/personal-insurance/AutoInsurance";
+import HomeInsurance from "./pages/personal-insurance/HomeInsurance";
+import LifeInsurance from "./pages/personal-insurance/LifeInsurance";
+import UmbrellaInsurance from "./pages/personal-insurance/UmbrellaInsurance";
+import FloodInsurance from "./pages/personal-insurance/FloodInsurance";
+import HighNetWorthInsurance from "./pages/personal-insurance/HighNetWorthInsurance";
+
 // Admin
 import { AdminLayout } from "./components/admin/AdminLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -39,6 +47,12 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/personal-insurance" element={<PersonalInsurance />} />
+              <Route path="/personal-insurance/auto" element={<AutoInsurance />} />
+              <Route path="/personal-insurance/home" element={<HomeInsurance />} />
+              <Route path="/personal-insurance/life" element={<LifeInsurance />} />
+              <Route path="/personal-insurance/umbrella" element={<UmbrellaInsurance />} />
+              <Route path="/personal-insurance/flood" element={<FloodInsurance />} />
+              <Route path="/personal-insurance/high-net-worth" element={<HighNetWorthInsurance />} />
               <Route path="/business-insurance" element={<BusinessInsurance />} />
               <Route path="/employee-benefits" element={<EmployeeBenefits />} />
               <Route path="/services" element={<Services />} />
