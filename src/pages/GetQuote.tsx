@@ -201,7 +201,7 @@ const GetQuote = () => {
         What type of coverage are you looking for?
       </h2>
       <p className="font-body text-muted-foreground mb-space-lg">
-        Select one to get started. Don't worry — you can always add more later.
+        Pick whichever fits best. You can always add more later.
       </p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-space-md">
@@ -610,28 +610,28 @@ const GetQuote = () => {
         <Check className="w-10 h-10 text-green-600" />
       </div>
       <h2 className="font-display font-semibold text-3xl text-foreground mb-space-sm">
-        You're All Set!
+        Got It!
       </h2>
       <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-md mx-auto">
-        We'll review your info and reach out within one business day — usually much sooner. No spam, no nonsense.
+        We'll look at your info and get back to you within a business day. Usually it's a lot faster than that.
       </p>
       
       <div className="bg-cream rounded-lg p-space-lg max-w-md mx-auto mb-space-lg">
         <h3 className="font-display font-semibold text-lg text-foreground mb-space-sm">
-          What happens next?
+          Here's what happens next
         </h3>
         <ol className="font-body text-sm text-muted-foreground text-left space-y-2">
           <li className="flex gap-2">
             <span className="font-semibold text-primary">1.</span>
-            We'll review your information and research your options
+            We'll review what you sent and look at your options
           </li>
           <li className="flex gap-2">
             <span className="font-semibold text-primary">2.</span>
-            We'll reach out via your preferred contact method
+            Someone from our team will reach out the way you prefer
           </li>
           <li className="flex gap-2">
             <span className="font-semibold text-primary">3.</span>
-            We'll discuss your options — no pressure, just honest advice
+            We'll walk through your options together. No pressure.
           </li>
         </ol>
       </div>
@@ -719,7 +719,7 @@ const GetQuote = () => {
             Let's Find You Better Coverage
           </h1>
           <p className="font-body text-base sm:text-lg text-muted-foreground">
-            Takes about 3 minutes. No spam, no aggressive follow-up — just honest recommendations.
+            Takes about 3 minutes. We'll follow up once, and only with useful information.
           </p>
         </div>
       </section>
