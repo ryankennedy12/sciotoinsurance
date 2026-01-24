@@ -451,12 +451,14 @@ const MegaMenu = ({ categories, viewAllHref, viewAllText, isOpen }: MegaMenuProp
   return (
     <div
       className={cn(
-        "absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300",
+        "absolute top-full left-1/2 -translate-x-1/2 transition-all duration-300",
         isOpen
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 -translate-y-2 pointer-events-none"
       )}
     >
+      {/* Invisible bridge to prevent hover gap */}
+      <div className="h-2" />
       <div className="bg-white rounded-lg shadow-xl border border-border overflow-hidden min-w-[520px]">
         {/* Categories Grid */}
         <div className="grid grid-cols-2 gap-0 p-4">
