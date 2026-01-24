@@ -127,12 +127,12 @@ const BusinessInsurance = () => {
                   return (
                     <div
                       key={index}
-                      className="group relative flex items-start gap-space-md p-space-lg rounded-xl bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                      className="touch-card relative flex items-start gap-space-md p-space-lg rounded-xl bg-white border border-border"
                     >
-                      {/* Gold accent on hover */}
-                      <div className="absolute top-0 left-0 w-1 h-full bg-gold-500 rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      {/* Gold accent - controlled by CSS */}
+                      <div className="card-accent absolute top-0 left-0 w-1 h-full bg-gold-500 rounded-l-xl opacity-0 transition-opacity duration-200" />
                       
-                      <div className="w-12 h-12 shrink-0 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-colors duration-300">
+                      <div className="card-icon w-12 h-12 shrink-0 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center transition-colors duration-200">
                         <Icon className="w-6 h-6 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -146,7 +146,7 @@ const BusinessInsurance = () => {
                         )}
                         <Link
                           to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"}
-                          className="inline-flex items-center gap-1.5 font-body text-sm font-semibold text-primary group-hover:gap-2.5 transition-all duration-300"
+                          className="card-link inline-flex items-center gap-1.5 font-body text-sm font-semibold text-primary transition-all duration-200"
                         >
                           Learn More
                           <ArrowRight className="w-4 h-4" />
@@ -212,12 +212,12 @@ const BusinessInsurance = () => {
                 <Link
                   to="/get-quote"
                   key={index}
-                  className="group relative bg-white rounded-xl p-space-lg text-center border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                  className="touch-industry-card relative bg-white rounded-xl p-space-lg text-center border border-border"
                 >
-                  {/* Gold accent on hover */}
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gold-500 rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* Gold accent - controlled by CSS */}
+                  <div className="industry-accent absolute top-0 left-0 w-full h-1 bg-gold-500 rounded-t-xl opacity-0 transition-opacity duration-200" />
                   
-                  <div className="w-14 h-14 mx-auto mb-space-sm rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-colors duration-300">
+                  <div className="industry-icon w-14 h-14 mx-auto mb-space-sm rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center transition-colors duration-200">
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
                   <p className="font-body font-semibold text-sm text-foreground">
