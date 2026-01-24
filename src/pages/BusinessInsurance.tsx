@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Handshake, Hammer, UtensilsCrossed, ShoppingBag, Briefcase, Stethoscope, Factory, Heart, Home as HomeIcon } from "lucide-react";
+import { Phone, ArrowRight, Handshake, Hammer, UtensilsCrossed, ShoppingBag, Briefcase, Stethoscope, Factory, Heart, Home as HomeIcon, Star, CheckCircle, Clock, Building2 } from "lucide-react";
 import { businessInsuranceProducts, businessInsuranceReasons } from "@/data/products";
+import TestimonialCard from "@/components/TestimonialCard";
 
 const BusinessInsurance = () => {
   const industries = [
@@ -14,32 +15,93 @@ const BusinessInsurance = () => {
     { icon: HomeIcon, name: "Real Estate & Property Management" },
   ];
 
+  const testimonials = [
+    {
+      quote: "Jeff understood our construction risks immediately. He found coverage gaps our previous agent missed entirely.",
+      name: "Mike Reynolds",
+      location: "Columbus, OH",
+      date: "January 2025",
+      rating: 5,
+      helpedWith: "Contractor Insurance"
+    },
+    {
+      quote: "When we had a liability claim, Natalie handled everything. We didn't miss a day of business.",
+      name: "Jennifer Walsh",
+      location: "Dublin, OH",
+      date: "November 2024",
+      rating: 5,
+      helpedWith: "Restaurant Claim"
+    },
+  ];
+
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-space-xl bg-gradient-to-br from-cream via-white to-burgundy-100/30">
-        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+      {/* Hero Section - Enhanced with gradient depth */}
+      <section className="relative pt-32 pb-space-2xl overflow-hidden">
+        {/* Multi-layer gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900 via-primary to-burgundy-800" />
+        
+        {/* Decorative pattern overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="businessGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-cream" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#businessGrid)" />
+          </svg>
+        </div>
+        
+        {/* Radial glow effect */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gold-500/10 to-transparent" />
+        
+        <div className="relative max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="max-w-[700px]">
-            <p className="font-body font-medium text-xs uppercase tracking-[0.1em] text-muted-foreground mb-space-sm">
-              Business Insurance
-            </p>
-            <h1 className="font-display font-semibold text-3xl lg:text-5xl text-foreground leading-tight mb-space-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-space-md">
+              <Building2 className="w-4 h-4 text-gold-500" />
+              <span className="font-body text-sm text-cream">Business Insurance</span>
+            </div>
+            
+            <h1 className="font-display font-semibold text-3xl lg:text-5xl text-cream leading-tight mb-space-md">
               Business Insurance Across the U.S.
             </h1>
-            <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[540px]">
+            <p className="font-body text-lg text-cream/80 mb-space-lg max-w-[560px]">
               A contractor doesn't need the same coverage as a restaurant. We'll build a policy around what you actually do. We serve businesses nationwide, not just Ohio.
             </p>
-            <Link
-              to="/get-quote"
-              className="inline-flex items-center justify-center px-8 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-sm transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              Get a Business Insurance Quote
-            </Link>
+            
+            <div className="flex flex-col sm:flex-row items-start gap-space-md mb-space-lg">
+              <Link
+                to="/get-quote"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-cream text-primary font-body font-semibold text-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5 hover:shadow-xl"
+              >
+                Get a Business Insurance Quote
+              </Link>
+              <a
+                href="tel:6146120050"
+                className="inline-flex items-center gap-2 px-6 py-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-cream font-body font-medium text-sm transition-all duration-300 hover:bg-white/20"
+              >
+                <Phone className="w-4 h-4" />
+                (614) 612-0050
+              </a>
+            </div>
+            
+            {/* Trust indicators */}
+            <div className="flex flex-wrap items-center gap-space-md text-cream/70">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-gold-500" />
+                <span className="font-body text-sm">Nationwide coverage</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-gold-500" />
+                <span className="font-body text-sm">Free risk assessment</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Coverage Grid Section - By Category */}
+      {/* Coverage Grid Section - Enhanced Cards */}
       <section className="py-space-2xl bg-white">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="mb-space-xl">
@@ -59,32 +121,35 @@ const BusinessInsurance = () => {
                 {category.title}
               </h3>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-space-md">
                 {category.products.map((product, index) => {
                   const Icon = product.icon;
                   return (
                     <div
                       key={index}
-                      className="group flex items-start gap-space-sm p-space-md rounded-lg bg-cream hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-border"
+                      className="group relative flex items-start gap-space-md p-space-lg rounded-xl bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                     >
-                      <div className="w-10 h-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                        <Icon className="w-5 h-5 text-primary" />
+                      {/* Gold accent on hover */}
+                      <div className="absolute top-0 left-0 w-1 h-full bg-gold-500 rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="w-12 h-12 shrink-0 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-colors duration-300">
+                        <Icon className="w-6 h-6 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-display font-semibold text-base text-foreground mb-1">
                           {product.name}
                         </h4>
                         {product.description && (
-                          <p className="font-body text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                          <p className="font-body text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-2">
                             {product.description}
                           </p>
                         )}
                         <Link
-                          to="/get-quote"
-                          className="inline-flex items-center gap-1 font-body text-sm font-medium text-primary mt-2 group-hover:gap-2 transition-all duration-300"
+                          to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"}
+                          className="inline-flex items-center gap-1.5 font-body text-sm font-semibold text-primary group-hover:gap-2.5 transition-all duration-300"
                         >
-                          Get Quote
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          Learn More
+                          <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
                     </div>
@@ -96,7 +161,7 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Why Choose Scioto Section */}
+      {/* Why Choose Scioto Section - Enhanced */}
       <section className="py-space-2xl bg-cream">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="text-center mb-space-xl">
@@ -110,8 +175,8 @@ const BusinessInsurance = () => {
             {businessInsuranceReasons.map((reason, index) => {
               const Icon = reason.icon;
               return (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-white shadow-sm flex items-center justify-center">
+                <div key={index} className="group bg-white rounded-xl p-space-lg text-center border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                  <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-colors duration-300">
                     <Icon className="w-7 h-7 text-primary" />
                   </div>
                   <h3 className="font-display font-semibold text-lg text-foreground mb-space-sm">
@@ -127,7 +192,7 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Industry Expertise Section */}
+      {/* Industry Expertise Section - Enhanced */}
       <section className="py-space-2xl bg-white">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="text-center mb-space-xl">
@@ -144,48 +209,85 @@ const BusinessInsurance = () => {
             {industries.map((industry, index) => {
               const Icon = industry.icon;
               return (
-                <div
+                <Link
+                  to="/get-quote"
                   key={index}
-                  className="group bg-cream rounded-lg p-space-md text-center hover:shadow-md transition-all duration-300 cursor-pointer"
+                  className="group relative bg-white rounded-xl p-space-lg text-center border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="w-14 h-14 mx-auto mb-space-sm rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
+                  {/* Gold accent on hover */}
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gold-500 rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="w-14 h-14 mx-auto mb-space-sm rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-colors duration-300">
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
-                  <p className="font-body font-medium text-sm text-foreground">
+                  <p className="font-body font-semibold text-sm text-foreground">
                     {industry.name}
                   </p>
-                </div>
+                </Link>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Risk Assessment CTA Section */}
-      <section className="py-space-2xl bg-primary">
-        <div className="max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
-          <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-white/10 flex items-center justify-center">
-            <Handshake className="w-8 h-8 text-cream" />
+      {/* Testimonials Section */}
+      <section className="py-space-2xl bg-cream">
+        <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
+          <div className="text-center mb-space-xl">
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
+            <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
+              What Business Owners Say
+            </h2>
+            <p className="font-body text-lg text-muted-foreground max-w-[500px] mx-auto">
+              Real feedback from businesses we've helped protect.
+            </p>
           </div>
           
-          <h2 className="font-display font-semibold text-2xl lg:text-4xl text-white leading-tight mb-space-md">
+          <div className="grid md:grid-cols-2 gap-space-lg max-w-[900px] mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard key={index} {...testimonial} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Risk Assessment CTA Section - Enhanced */}
+      <section className="py-space-2xl bg-gradient-to-br from-primary via-burgundy-800 to-burgundy-900 relative overflow-hidden">
+        {/* Decorative pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="ctaDots" width="8" height="8" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-cream" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#ctaDots)" />
+          </svg>
+        </div>
+        
+        <div className="relative max-w-[800px] mx-auto px-space-md lg:px-space-lg text-center">
+          <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+            <Handshake className="w-8 h-8 text-gold-500" />
+          </div>
+          
+          <h2 className="font-display font-semibold text-2xl lg:text-4xl text-cream leading-tight mb-space-md">
             Free Business Risk Assessment
           </h2>
-          <p className="font-body text-lg text-cream/90 mb-space-lg max-w-[600px] mx-auto">
+          <p className="font-body text-lg text-cream/80 mb-space-lg max-w-[600px] mx-auto">
             Wondering if you're missing something? We'll look at your current policies and tell you where the gaps are. Takes about 20 minutes and costs nothing.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">
             <Link
               to="/get-quote"
-              className="inline-flex items-center justify-center px-10 py-4 rounded bg-white text-primary font-body font-medium text-base transition-all duration-300 hover:bg-cream hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-lg bg-cream text-primary font-body font-semibold text-base transition-all duration-300 hover:bg-white hover:-translate-y-0.5 hover:shadow-xl"
             >
               Request Your Free Assessment
             </Link>
             
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 font-body font-medium text-cream hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-cream font-body font-medium transition-all duration-300 hover:bg-white/20"
             >
               <Phone className="w-4 h-4" />
               (614) 612-0050
