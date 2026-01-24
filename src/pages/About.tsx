@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 const About = () => {
   const teamMembers = [
@@ -9,6 +10,7 @@ const About = () => {
       bio: "Jeff spent 29 years at Nationwide learning what works (and what doesn't) in insurance. He started Scioto Insurance Group in 2023 because he wanted to do things differently. As an independent agent, he can shop 30+ carriers to find the right fit for each client, not just push whatever one company offers.",
       phone: "(614) 612-0050",
       email: "info@sciotoinsurancegroup.com",
+      specialty: "High-value homes, umbrella policies, complex coverage needs",
     },
     {
       name: "Natalie Kennedy",
@@ -16,36 +18,62 @@ const About = () => {
       bio: "Natalie handles the day-to-day: policy questions, changes, renewals, and making sure nothing falls through the cracks. When you call, you'll probably talk to her. She believes insurance shouldn't be confusing, and she'll explain things in plain English.",
       phone: "(614) 612-0050",
       email: "info@sciotoinsurancegroup.com",
+      specialty: "Policy changes, renewals, certificates of insurance",
     },
   ];
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center bg-primary overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
+      {/* Hero Section - Enhanced with gradient depth */}
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+        {/* Multi-layer gradient background for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-burgundy-900 via-primary to-burgundy-800" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent" />
+        
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
           }} />
         </div>
+
+        {/* Decorative shapes */}
+        <div className="absolute top-20 right-10 w-72 h-72 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl" />
         
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-space-md lg:px-space-lg pt-32 pb-space-xl text-center">
-          <h1 className="font-display font-semibold text-4xl lg:text-5xl text-white leading-tight mb-space-md animate-fade-in">
-            A Father-Daughter Team That Picks Up the Phone
-          </h1>
-          <p className="font-body text-lg lg:text-xl text-cream/90 max-w-[600px] mx-auto animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            29 years of industry experience. A new agency built on doing things the right way.
-          </p>
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-space-md lg:px-space-lg pt-32 pb-space-xl">
+          <div className="max-w-[700px]">
+            <AnimatedSection animation="fade-up">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
+                <span className="w-2 h-2 rounded-full bg-gold-500" />
+                <span className="font-body text-sm text-white/80">Est. 2023 • New Albany, Ohio</span>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fade-up" delay={100}>
+              <h1 className="font-display font-semibold text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.1] mb-6">
+                A Father-Daughter Team That Picks Up the Phone
+              </h1>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fade-up" delay={200}>
+              <p className="font-body text-lg lg:text-xl text-cream/90 leading-relaxed max-w-[550px]">
+                29 years of industry experience. A new agency built on doing things the right way.
+              </p>
+            </AnimatedSection>
+          </div>
         </div>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Story Section */}
-      <section className="py-space-2xl bg-white">
+      <section className="py-space-2xl bg-white -mt-16 relative z-10">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="grid lg:grid-cols-2 gap-space-xl items-center">
+          <div className="grid lg:grid-cols-2 gap-space-xl items-start">
             {/* Text Content */}
-            <div>
+            <AnimatedSection animation="fade-up">
               <div className="w-10 h-0.5 bg-primary mb-space-md" />
               <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-lg">
                 Our Story
@@ -65,58 +93,58 @@ const About = () => {
                   We're new as an agency, but not new to insurance. Jeff's seen just about everything in three decades. And we're building something we're proud of: an agency that works for you, not the insurance companies.
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
 
             {/* What We Bring - Replaces fake timeline */}
-            <div className="relative">
-              <div className="bg-cream rounded-lg p-space-lg lg:p-space-xl">
+            <AnimatedSection animation="fade-up" delay={150}>
+              <div className="bg-cream rounded-2xl p-8 lg:p-10 shadow-sm">
                 <h3 className="font-display font-semibold text-xl text-foreground mb-space-lg">
                   What We Bring
                 </h3>
                 
-                <div className="space-y-space-lg">
-                  <div className="flex items-start gap-space-md">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <span className="font-display font-semibold text-lg text-primary">29</span>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-bold text-xl text-primary">29</span>
                     </div>
                     <div>
                       <p className="font-display font-semibold text-lg text-foreground">Years of Experience</p>
-                      <p className="font-body text-sm text-muted-foreground">Jeff's background at Nationwide means he's seen it all: claims, carriers, coverage gaps, and what actually protects people.</p>
+                      <p className="font-body text-sm text-muted-foreground mt-1">Jeff's background at Nationwide means he's seen it all: claims, carriers, coverage gaps, and what actually protects people.</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-space-md">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <span className="font-display font-semibold text-lg text-primary">30+</span>
+                  <div className="flex items-start gap-4">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-bold text-lg text-primary">30+</span>
                     </div>
                     <div>
                       <p className="font-display font-semibold text-lg text-foreground">Insurance Carriers</p>
-                      <p className="font-body text-sm text-muted-foreground">Being independent means we shop dozens of carriers to find what fits you, not just sell one company's products.</p>
+                      <p className="font-body text-sm text-muted-foreground mt-1">Being independent means we shop dozens of carriers to find what fits you, not just sell one company's products.</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-space-md">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <span className="font-display font-semibold text-lg text-primary">2</span>
+                  <div className="flex items-start gap-4">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-display font-bold text-xl text-primary">2</span>
                     </div>
                     <div>
                       <p className="font-display font-semibold text-lg text-foreground">People. That's the Whole Team.</p>
-                      <p className="font-body text-sm text-muted-foreground">When you call, you get Jeff or Natalie. We're small on purpose. It means we actually know who you are.</p>
+                      <p className="font-body text-sm text-muted-foreground mt-1">When you call, you get Jeff or Natalie. We're small on purpose. It means we actually know who you are.</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-space-md">
-                    <div className="w-12 h-12 rounded-full bg-gold-500/20 flex items-center justify-center flex-shrink-0">
-                      <span className="font-display font-semibold text-lg text-gold-600">★</span>
+                  <div className="flex items-start gap-4">
+                    <div className="w-14 h-14 rounded-xl bg-gold-500/20 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-gold-600" />
                     </div>
                     <div>
                       <p className="font-display font-semibold text-lg text-foreground">Ohio Personal, Nationwide Business</p>
-                      <p className="font-body text-sm text-muted-foreground">Personal insurance throughout Ohio. Business coverage across the country. We go where you need us.</p>
+                      <p className="font-body text-sm text-muted-foreground mt-1">Personal insurance throughout Ohio. Business coverage across the country. We go where you need us.</p>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -124,17 +152,17 @@ const About = () => {
       {/* Values Section */}
       <section className="py-space-2xl bg-cream">
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
-          <div className="text-center mb-space-xl">
+          <AnimatedSection animation="fade-up" className="text-center mb-space-xl">
             <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
             <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground">
               What We Stand For
             </h2>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid md:grid-cols-3 gap-space-lg">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Value 1 */}
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-primary/10 flex items-center justify-center">
+            <AnimatedSection animation="fade-up" delay={0} className="text-center">
+              <div className="w-16 h-16 mx-auto mb-space-md rounded-2xl bg-white shadow-sm flex items-center justify-center">
                 <svg className="w-8 h-8 text-primary" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M16 4L4 8v8c0 7.33 5.33 12 12 14.67C22.67 28 28 23.33 28 16V8L16 4z" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M12 16l4 4 6-8" strokeLinecap="round" strokeLinejoin="round" />
@@ -146,11 +174,11 @@ const About = () => {
               <p className="font-body text-muted-foreground">
                 We represent you, not insurance companies. Our advice is based on what's best for your family or business, period.
               </p>
-            </div>
+            </AnimatedSection>
 
             {/* Value 2 */}
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-primary/10 flex items-center justify-center">
+            <AnimatedSection animation="fade-up" delay={100} className="text-center">
+              <div className="w-16 h-16 mx-auto mb-space-md rounded-2xl bg-white shadow-sm flex items-center justify-center">
                 <svg className="w-8 h-8 text-primary" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <circle cx="16" cy="12" r="4" />
                   <path d="M8 26c0-4.42 3.58-8 8-8s8 3.58 8 8" strokeLinecap="round" />
@@ -166,11 +194,11 @@ const About = () => {
               <p className="font-body text-muted-foreground">
                 We're a two-person team because that's how we want it. It means we actually know our clients, not just their policy numbers.
               </p>
-            </div>
+            </AnimatedSection>
 
             {/* Value 3 */}
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-space-md rounded-full bg-primary/10 flex items-center justify-center">
+            <AnimatedSection animation="fade-up" delay={200} className="text-center">
+              <div className="w-16 h-16 mx-auto mb-space-md rounded-2xl bg-white shadow-sm flex items-center justify-center">
                 <svg className="w-8 h-8 text-primary" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M16 6v20M10 10l6-4 6 4M8 16h16M10 22l6 4 6-4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -181,7 +209,7 @@ const About = () => {
               <p className="font-body text-muted-foreground">
                 Insurance can be confusing. We get that. Ask us anything and we'll give you a straight answer. No jargon, no runaround.
               </p>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

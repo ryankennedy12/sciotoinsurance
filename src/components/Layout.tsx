@@ -2,12 +2,14 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import StickyMobileCTA from "./StickyMobileCTA";
 
 const Layout = () => {
   const location = useLocation();
   const [transitionStage, setTransitionStage] = useState<"hidden" | "enter" | "exit">("hidden");
   const isFirstMount = useRef(true);
   const previousPath = useRef(location.pathname);
+  const footerRef = useRef<HTMLElement>(null);
 
   // Handle initial mount - fade in once
   useEffect(() => {
@@ -47,7 +49,8 @@ const Layout = () => {
       >
         <Outlet />
       </main>
-      <Footer />
+      <Footer ref={footerRef} />
+      <StickyMobileCTA footerRef={footerRef} />
     </div>
   );
 };
