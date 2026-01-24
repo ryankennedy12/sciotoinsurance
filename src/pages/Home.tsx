@@ -141,6 +141,66 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Carrier Logos Section */}
+      <section className="py-16 lg:py-24 bg-cream">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-6" />
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-4xl text-foreground">
+              We Shop These 30+ Carriers So You Don't Have To
+            </h2>
+          </AnimatedSection>
+
+          {/* Carrier Logo Grid */}
+          <AnimatedSection animation="fade-up" delay={100} className="mb-8">
+            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6">
+              {[
+                "State Farm",
+                "Progressive",
+                "Nationwide",
+                "Travelers",
+                "Safeco",
+                "Liberty Mutual",
+                "Grange",
+                "Westfield",
+                "Cincinnati Insurance",
+                "Auto-Owners",
+                "Erie Insurance",
+                "MetLife",
+                "Guardian",
+                "Allstate",
+                "Farmers",
+                "American Family",
+              ].map((carrier, index) => (
+                <div
+                  key={index}
+                  className="group flex items-center justify-center h-16 lg:h-20 bg-white rounded-lg border border-gray-200/50 px-3 transition-all duration-300 hover:scale-105 hover:shadow-md hover:border-primary/20"
+                >
+                  <span className="font-body text-xs lg:text-sm font-medium text-muted-foreground text-center leading-tight grayscale group-hover:grayscale-0 group-hover:text-primary transition-all duration-300">
+                    {carrier}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* "...and more" text */}
+          <AnimatedSection animation="fade-up" delay={200} className="text-center mb-8">
+            <p className="font-body text-muted-foreground text-sm italic">
+              ...and 20+ more carriers
+            </p>
+          </AnimatedSection>
+
+          {/* Explanation text */}
+          <AnimatedSection animation="fade-up" delay={300} className="text-center max-w-2xl mx-auto">
+            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+              As an independent agency, we work for <span className="font-semibold text-foreground">YOU</span>, not one insurance company. We compare coverage and pricing across dozens of carriers to find your best fit.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Why Scioto Insurance Group Section */}
       <section className="py-16 sm:py-space-3xl bg-cream">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
