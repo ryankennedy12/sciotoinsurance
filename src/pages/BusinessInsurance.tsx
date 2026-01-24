@@ -24,10 +24,10 @@ const BusinessInsurance = () => {
               Business Insurance
             </p>
             <h1 className="font-display font-semibold text-3xl lg:text-5xl text-foreground leading-tight mb-space-md">
-              Business Insurance That Understands How You Actually Operate
+              Business Insurance for Ohio Companies
             </h1>
             <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[540px]">
-              Every business has different risks. Cookie-cutter policies leave gaps. We build coverage around your specific operation.
+              A contractor doesn't need the same coverage as a restaurant. We'll build a policy around what you actually do, not some generic template.
             </p>
             <Link
               to="/get-quote"
@@ -133,10 +133,10 @@ const BusinessInsurance = () => {
           <div className="text-center mb-space-xl">
             <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
             <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-sm">
-              Industries We Know Inside and Out
+              Industries We Work With
             </h2>
             <p className="font-body text-lg text-muted-foreground max-w-[600px] mx-auto">
-              We've built specialized programs for these industries, which means better coverage and better rates.
+              We've insured hundreds of Ohio businesses. Here are some of the industries we know best.
             </p>
           </div>
 
@@ -172,7 +172,7 @@ const BusinessInsurance = () => {
             Free Business Risk Assessment
           </h2>
           <p className="font-body text-lg text-cream/90 mb-space-lg max-w-[600px] mx-auto">
-            Not sure if you're properly covered? We'll review your current policies, identify gaps, and give you an honest assessment — no obligation.
+            Wondering if you're missing something? We'll look at your current policies and tell you where the gaps are. Takes about 20 minutes and costs nothing.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">

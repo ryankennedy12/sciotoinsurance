@@ -13,10 +13,10 @@ const PersonalInsurance = () => {
               Personal Insurance
             </p>
             <h1 className="font-display font-semibold text-3xl lg:text-5xl text-foreground leading-tight mb-space-md">
-              Personal Insurance That Protects What Actually Matters
+              Personal Insurance for Ohio Families
             </h1>
             <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[540px]">
-              Your home. Your family. Your future. We help you protect all of it — without overpaying.
+              Your car, your house, your family's future. We help you figure out what you actually need and find the best price for it.
             </p>
             <Link
               to="/get-quote"
@@ -120,10 +120,10 @@ const PersonalInsurance = () => {
       <section className="py-space-2xl bg-white">
         <div className="max-w-[700px] mx-auto px-space-md lg:px-space-lg text-center">
           <h2 className="font-display font-semibold text-2xl lg:text-3xl text-foreground leading-tight mb-space-md">
-            Not sure what coverage you need?
+            Not sure where to start?
           </h2>
           <p className="font-body text-lg text-muted-foreground mb-space-lg">
-            That's literally our job. Let's talk through your situation and build a plan that makes sense.
+            That's fine. Tell us your situation and we'll help you figure out what makes sense.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md mb-space-md">
