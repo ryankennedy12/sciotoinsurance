@@ -36,7 +36,7 @@ const testimonials = [
 const PersonalInsurance = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
 
   useEffect(() => {
     if (!api) return;
@@ -83,11 +83,9 @@ const PersonalInsurance = () => {
           <AnimatedSection animation="fade-up">
             <Carousel
               setApi={setApi}
-              opts={{ loop: true }}
+              opts={{ loop: true, align: "start" }}
               plugins={[plugin.current]}
               className="w-full"
-              onMouseEnter={() => plugin.current.stop()}
-              onMouseLeave={() => plugin.current.play()}
             >
               <CarouselContent>
                 {lifeStages.map((stage, index) => {
