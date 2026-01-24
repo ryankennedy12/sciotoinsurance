@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
 import { personalInsuranceProducts, personalInsuranceReasons } from "@/data/products";
+import { useParallax, useScrollProgress } from "@/hooks/useParallax";
 
 import ohioFamilyPorch from "@/assets/ohio-family-porch.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
@@ -26,35 +27,90 @@ const testimonials = [
 ];
 
 const PersonalInsurance = () => {
+  const parallaxOffset = useParallax(0.3);
+  const scrollProgress = useScrollProgress();
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Split-Screen Hero */}
-      <section className="relative min-h-[90vh] lg:min-h-screen">
+      {/* Split-Screen Hero with Parallax */}
+      <section className="relative min-h-[90vh] lg:min-h-screen overflow-hidden">
         <div className="grid lg:grid-cols-2 min-h-[90vh] lg:min-h-screen">
           <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-12 xl:px-20 bg-secondary order-2 lg:order-1">
-            <AnimatedSection animation="fade-up" className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border mb-8">
+            <div className="max-w-xl">
+              {/* Staggered Hero Content */}
+              <div 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.1s_forwards]"
+              >
                 <div className="flex">{[1,2,3,4,5].map((i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}</div>
                 <span className="text-sm text-muted-foreground">Trusted by 1,200+ Ohio Families</span>
               </div>
-              <h1 className="heading-xl text-foreground mb-6">Protecting Ohio Families Since 1995</h1>
-              <p className="body-lg text-muted-foreground mb-8">Your family deserves coverage that actually fits your life. We'll shop 30+ carriers to find the right protection at the right price.</p>
-              <div className="flex flex-wrap gap-4 mb-8">
+              
+              <h1 
+                className="heading-xl text-foreground mb-6 opacity-0 animate-[fade-in_0.6s_ease-out_0.2s_forwards]"
+              >
+                Protecting Ohio Families Since 1995
+              </h1>
+              
+              <p 
+                className="body-lg text-muted-foreground mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.3s_forwards]"
+              >
+                Your family deserves coverage that actually fits your life. We'll shop 30+ carriers to find the right protection at the right price.
+              </p>
+              
+              <div 
+                className="flex flex-wrap gap-4 mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.4s_forwards]"
+              >
                 <div className="flex items-center gap-2 text-sm text-muted-foreground"><Shield className="h-5 w-5 text-accent" /><span>30+ Carriers</span></div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground"><Clock className="h-5 w-5 text-accent" /><span>Same-Day Quotes</span></div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground"><Users className="h-5 w-5 text-accent" /><span>Real People</span></div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              
+              <div 
+                className="flex flex-col sm:flex-row gap-4 mb-6 opacity-0 animate-[fade-in_0.6s_ease-out_0.5s_forwards]"
+              >
                 <Button asChild size="lg" className="text-base rounded-xl"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base rounded-xl"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
-              <p className="text-sm text-muted-foreground">✓ No spam, ever &nbsp;&nbsp; ✓ Quote in under 10 minutes</p>
-            </AnimatedSection>
+              
+              <p 
+                className="text-sm text-muted-foreground opacity-0 animate-[fade-in_0.6s_ease-out_0.6s_forwards]"
+              >
+                ✓ No spam, ever &nbsp;&nbsp; ✓ Quote in under 10 minutes
+              </p>
+            </div>
           </div>
-          <div className="relative h-64 lg:h-auto order-1 lg:order-2">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${ohioFamilyPorch})` }}>
+          
+          {/* Parallax Image Side */}
+          <div className="relative h-64 lg:h-auto order-1 lg:order-2 overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center scale-110 transition-transform duration-100"
+              style={{ 
+                backgroundImage: `url(${ohioFamilyPorch})`,
+                transform: `translateY(${parallaxOffset}px) scale(1.1)`,
+              }}
+            >
               <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent lg:hidden" />
             </div>
+            {/* Floating decorative elements */}
+            <div 
+              className="absolute top-1/4 right-8 w-20 h-20 rounded-full bg-accent/20 blur-xl hidden lg:block"
+              style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
+            />
+            <div 
+              className="absolute bottom-1/3 right-1/4 w-32 h-32 rounded-full bg-primary/10 blur-2xl hidden lg:block"
+              style={{ transform: `translateY(${-parallaxOffset * 0.3}px)` }}
+            />
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-muted-foreground transition-opacity duration-300"
+          style={{ opacity: 1 - scrollProgress * 3 }}
+        >
+          <span className="text-sm">Scroll to explore</span>
+          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
+            <div className="w-1.5 h-3 rounded-full bg-muted-foreground/50 animate-bounce" />
           </div>
         </div>
       </section>
@@ -73,7 +129,7 @@ const PersonalInsurance = () => {
                 <AnimatedSection key={stage.stage} animation="fade-up" delay={index * 100} className="flex-shrink-0 w-64 lg:w-auto snap-center">
                   <Link to={stage.link} className="group block text-center">
                     <div className="relative mx-auto mb-4">
-                      <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-secondary border-4 border-card group-hover:border-primary/30 transition-all flex items-center justify-center mx-auto shadow-lg">
+                      <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-secondary border-4 border-card group-hover:border-primary/30 transition-all flex items-center justify-center mx-auto shadow-lg group-hover:scale-105 group-hover:shadow-xl duration-300">
                         <Icon className="h-8 w-8 lg:h-10 lg:w-10 text-primary" />
                       </div>
                       <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex items-center justify-center">{index + 1}</div>
@@ -102,8 +158,8 @@ const PersonalInsurance = () => {
                 {category.products.map((product) => {
                   const Icon = product.icon;
                   return (
-                    <Link key={product.name} to={product.slug ? `/personal-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center mb-4"><Icon className="h-6 w-6 text-primary" /></div>
+                    <Link key={product.name} to={product.slug ? `/personal-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"><Icon className="h-6 w-6 text-primary" /></div>
                       <h4 className="font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{product.name}</h4>
                       {product.description && <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>}
                       <span className="inline-flex items-center text-sm font-medium text-primary">{product.slug ? "Learn More" : "Get Quote"}<ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" /></span>
@@ -129,8 +185,8 @@ const PersonalInsurance = () => {
               <p className="body-lg text-muted-foreground mb-8">We're not a big insurance company with 1-800 numbers. We're your neighbors.</p>
               <div className="space-y-6">
                 {personalInsuranceReasons.map((reason, i) => { const Icon = reason.icon; return (
-                  <div key={i} className="flex gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-secondary flex items-center justify-center"><Icon className="h-6 w-6 text-accent" /></div>
+                  <div key={i} className="flex gap-4 group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors"><Icon className="h-6 w-6 text-accent" /></div>
                     <div><h3 className="font-display font-semibold text-foreground mb-1">{reason.title}</h3><p className="text-muted-foreground text-sm">{reason.description}</p></div>
                   </div>
                 ); })}

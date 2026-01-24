@@ -5,6 +5,7 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
 import { employeeBenefitsProducts } from "@/data/products";
 import { useState, useEffect } from "react";
+import { useScrollProgress } from "@/hooks/useParallax";
 
 import modernOfficeTeam from "@/assets/modern-office-team.jpg";
 import hrMeeting from "@/assets/hr-meeting.jpg";
@@ -43,41 +44,88 @@ const AnimatedCounter = ({ value, suffix, isVisible }: { value: number; suffix: 
 const EmployeeBenefits = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const [calc, setCalc] = useState({ employees: 25, avgSalary: 50000, turnoverRate: 20 });
+  const scrollProgress = useScrollProgress();
   const currentTurnover = Math.round(calc.employees * (calc.turnoverRate / 100));
   const improvedTurnover = Math.round(currentTurnover * 0.75);
   const annualSavings = (currentTurnover - improvedTurnover) * (calc.avgSalary * 0.5);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Data-Forward Hero */}
-      <section className="relative min-h-[90vh] lg:min-h-screen">
+      {/* Data-Forward Hero with Animations */}
+      <section className="relative min-h-[90vh] lg:min-h-screen overflow-hidden">
         <div className="grid lg:grid-cols-2 min-h-[90vh] lg:min-h-screen">
           <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-12 xl:px-20 bg-card">
-            <AnimatedSection animation="fade-up" className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8"><TrendingUp className="h-4 w-4" />Strategic Benefits Partner</div>
-              <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6 tracking-tight">Employee Benefits<br /><span className="text-primary">That Work</span></h1>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Attract top talent, reduce turnover, and build a healthier workforce with benefits packages designed for real business impact.</p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <div className="max-w-xl">
+              {/* Staggered hero content */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.1s_forwards]">
+                <TrendingUp className="h-4 w-4" />Strategic Benefits Partner
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6 tracking-tight opacity-0 animate-[fade-in_0.6s_ease-out_0.2s_forwards]">
+                Employee Benefits<br /><span className="text-primary">That Work</span>
+              </h1>
+              
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed opacity-0 animate-[fade-in_0.6s_ease-out_0.35s_forwards]">
+                Attract top talent, reduce turnover, and build a healthier workforce with benefits packages designed for real business impact.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-8 opacity-0 animate-[fade-in_0.6s_ease-out_0.5s_forwards]">
                 <Button asChild size="lg" className="text-base"><Link to="/get-quote">Get Custom Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              
+              <div className="flex items-center gap-4 text-sm text-muted-foreground opacity-0 animate-[fade-in_0.6s_ease-out_0.65s_forwards]">
                 <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Free consultation</span></div>
                 <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Multiple carriers</span></div>
               </div>
-            </AnimatedSection>
+            </div>
           </div>
-          <div className="relative bg-primary flex items-center justify-center px-6 py-16 lg:px-12">
+          
+          {/* Stats Side with floating animations */}
+          <div className="relative bg-primary flex items-center justify-center px-6 py-16 lg:px-12 overflow-hidden">
+            {/* Animated background pattern */}
+            <div 
+              className="absolute inset-0 opacity-5"
+              style={{ 
+                backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 1px)`,
+                backgroundSize: '40px 40px',
+              }}
+            />
+            
+            {/* Floating decorative circles */}
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-white/5 animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-24 h-24 rounded-full bg-white/5 animate-pulse delay-1000" />
+            <div className="absolute top-1/2 right-1/6 w-16 h-16 rounded-full bg-accent/10 animate-pulse delay-500" />
+
             <AnimatedSection animation="fade-up" className="relative z-10 w-full max-w-md" onAnimationStart={() => setStatsVisible(true)}>
               <div className="space-y-6">
                 {heroStats.map((stat, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
-                    <div className="text-5xl font-display font-bold text-white mb-2"><AnimatedCounter value={stat.value} suffix={stat.suffix} isVisible={statsVisible} /></div>
+                  <div 
+                    key={i} 
+                    className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-colors duration-300 hover:scale-[1.02] transform"
+                    style={{ 
+                      animationDelay: `${0.2 + i * 0.15}s`,
+                    }}
+                  >
+                    <div className="text-5xl font-display font-bold text-white mb-2">
+                      <AnimatedCounter value={stat.value} suffix={stat.suffix} isVisible={statsVisible} />
+                    </div>
                     <p className="text-white/80">{stat.label}</p>
                   </div>
                 ))}
               </div>
             </AnimatedSection>
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div 
+          className="absolute bottom-8 left-1/4 hidden lg:flex flex-col items-center gap-2 text-muted-foreground transition-opacity duration-300"
+          style={{ opacity: 1 - scrollProgress * 3 }}
+        >
+          <span className="text-sm">Explore benefits</span>
+          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
+            <div className="w-1.5 h-3 rounded-full bg-muted-foreground/50 animate-bounce" />
           </div>
         </div>
       </section>
@@ -89,9 +137,9 @@ const EmployeeBenefits = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {employeeBenefitsProducts.map((product, i) => { const Icon = product.icon; return (
               <AnimatedSection key={product.name} animation="fade-up" delay={i * 75}>
-                <Link to="/get-quote" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all h-full">
+                <Link to="/get-quote" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors"><Icon className="h-6 w-6 text-primary" /></div>
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300"><Icon className="h-6 w-6 text-primary" /></div>
                     <div className="flex-1">
                       <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{product.name}</h3>
                       {product.description && <p className="text-sm text-muted-foreground">{product.description}</p>}
@@ -112,16 +160,23 @@ const EmployeeBenefits = () => {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 text-accent-foreground text-sm font-medium mb-6"><Calculator className="h-4 w-4" />ROI Calculator</div>
               <h2 className="heading-lg text-foreground mb-4">See the Impact of Better Benefits</h2>
               <div className="space-y-6">
-                <div><label className="block text-sm font-medium text-foreground mb-2">Employees</label><input type="range" min="5" max="200" value={calc.employees} onChange={(e) => setCalc(p => ({ ...p, employees: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>5</span><span className="font-semibold text-foreground">{calc.employees}</span><span>200</span></div></div>
-                <div><label className="block text-sm font-medium text-foreground mb-2">Avg Salary</label><input type="range" min="30000" max="150000" step="5000" value={calc.avgSalary} onChange={(e) => setCalc(p => ({ ...p, avgSalary: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>$30k</span><span className="font-semibold text-foreground">${(calc.avgSalary / 1000).toFixed(0)}k</span><span>$150k</span></div></div>
-                <div><label className="block text-sm font-medium text-foreground mb-2">Turnover Rate</label><input type="range" min="5" max="50" value={calc.turnoverRate} onChange={(e) => setCalc(p => ({ ...p, turnoverRate: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>5%</span><span className="font-semibold text-foreground">{calc.turnoverRate}%</span><span>50%</span></div></div>
+                <div><label className="block text-sm font-medium text-foreground mb-2">Employees</label><input type="range" min="5" max="200" value={calc.employees} onChange={(e) => setCalc(p => ({ ...p, employees: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary cursor-pointer" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>5</span><span className="font-semibold text-foreground">{calc.employees}</span><span>200</span></div></div>
+                <div><label className="block text-sm font-medium text-foreground mb-2">Avg Salary</label><input type="range" min="30000" max="150000" step="5000" value={calc.avgSalary} onChange={(e) => setCalc(p => ({ ...p, avgSalary: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary cursor-pointer" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>$30k</span><span className="font-semibold text-foreground">${(calc.avgSalary / 1000).toFixed(0)}k</span><span>$150k</span></div></div>
+                <div><label className="block text-sm font-medium text-foreground mb-2">Turnover Rate</label><input type="range" min="5" max="50" value={calc.turnoverRate} onChange={(e) => setCalc(p => ({ ...p, turnoverRate: +e.target.value }))} className="w-full h-2 bg-secondary rounded-lg accent-primary cursor-pointer" /><div className="flex justify-between text-sm text-muted-foreground mt-1"><span>5%</span><span className="font-semibold text-foreground">{calc.turnoverRate}%</span><span>50%</span></div></div>
               </div>
             </AnimatedSection>
             <AnimatedSection animation="slide-left">
-              <div className="bg-primary rounded-2xl p-8 lg:p-10 text-primary-foreground">
-                <h3 className="font-display font-semibold text-2xl mb-8">Potential Annual Savings</h3>
-                <div className="bg-white/10 rounded-xl p-6 text-center mb-6"><div className="text-sm text-primary-foreground/80 mb-1">Estimated Annual ROI</div><div className="text-5xl font-display font-bold">${annualSavings.toLocaleString()}</div></div>
-                <Button asChild size="lg" variant="secondary" className="w-full"><Link to="/get-quote">Get Your Custom Analysis<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+              <div className="bg-primary rounded-2xl p-8 lg:p-10 text-primary-foreground relative overflow-hidden">
+                {/* Decorative circles */}
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/2" />
+                
+                <h3 className="font-display font-semibold text-2xl mb-8 relative z-10">Potential Annual Savings</h3>
+                <div className="bg-white/10 rounded-xl p-6 text-center mb-6 relative z-10 backdrop-blur">
+                  <div className="text-sm text-primary-foreground/80 mb-1">Estimated Annual ROI</div>
+                  <div className="text-5xl font-display font-bold">${annualSavings.toLocaleString()}</div>
+                </div>
+                <Button asChild size="lg" variant="secondary" className="w-full relative z-10"><Link to="/get-quote">Get Your Custom Analysis<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
               </div>
             </AnimatedSection>
           </div>
@@ -135,10 +190,17 @@ const EmployeeBenefits = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step, i) => { const Icon = step.icon; return (
               <AnimatedSection key={step.step} animation="fade-up" delay={i * 100}>
-                <div className="relative bg-card rounded-xl overflow-hidden h-full border border-border">
+                <div className="relative bg-card rounded-xl overflow-hidden h-full border border-border group hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
                   <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-display font-bold text-lg z-10">{step.step}</div>
-                  <div className="h-32 overflow-hidden"><img src={step.image} alt={step.title} className="w-full h-full object-cover" /><div className="absolute inset-0 h-32 bg-gradient-to-t from-card via-card/50 to-transparent" /></div>
-                  <div className="p-6 relative -mt-8"><div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center mb-4"><Icon className="h-6 w-6 text-primary" /></div><h3 className="font-display font-semibold text-lg text-foreground mb-2">{step.title}</h3><p className="text-sm text-muted-foreground">{step.description}</p></div>
+                  <div className="h-32 overflow-hidden">
+                    <img src={step.image} alt={step.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 h-32 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                  </div>
+                  <div className="p-6 relative -mt-8">
+                    <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors"><Icon className="h-6 w-6 text-primary" /></div>
+                    <h3 className="font-display font-semibold text-lg text-foreground mb-2">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
                 </div>
               </AnimatedSection>
             ); })}
