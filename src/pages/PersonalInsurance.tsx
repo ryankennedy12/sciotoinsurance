@@ -1,22 +1,30 @@
 import { Link } from "react-router-dom";
 import { 
   Phone, ArrowRight, Shield, Users, Clock, Star, 
-  Car, Home, Heart, Umbrella, ChevronRight
+  Car, Home, Heart, Umbrella, ChevronRight, ChevronLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
 import { personalInsuranceProducts, personalInsuranceReasons } from "@/data/products";
+import { Carousel, CarouselContent, CarouselItem, CarouselApi } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useState, useEffect, useRef } from "react";
 
 import ohioFamilyPorch from "@/assets/ohio-family-porch.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
+import lifeStageFirstCar from "@/assets/life-stage-first-car.jpg";
+import lifeStageFirstPlace from "@/assets/life-stage-first-place.jpg";
+import lifeStageHome from "@/assets/life-stage-home.jpg";
+import lifeStageFamily from "@/assets/life-stage-family.jpg";
+import lifeStageWealth from "@/assets/life-stage-wealth.jpg";
 
 const lifeStages = [
-  { stage: "First Car", icon: Car, coverage: "Auto Insurance", description: "Get reliable coverage from day one", link: "/personal-insurance/auto" },
-  { stage: "First Place", icon: Home, coverage: "Renters Insurance", description: "Protect your belongings anywhere", link: "/get-quote" },
-  { stage: "Home Sweet Home", icon: Home, coverage: "Homeowners Insurance", description: "Your biggest investment, protected", link: "/personal-insurance/home" },
-  { stage: "Growing Family", icon: Heart, coverage: "Life Insurance", description: "Security for those who depend on you", link: "/personal-insurance/life" },
-  { stage: "Building Wealth", icon: Umbrella, coverage: "Umbrella Coverage", description: "Extra protection as assets grow", link: "/personal-insurance/umbrella" },
+  { stage: "First Car", icon: Car, coverage: "Auto Insurance", description: "Get reliable coverage from day one. We'll find you the best rates as a new driver.", link: "/personal-insurance/auto", image: lifeStageFirstCar },
+  { stage: "First Place", icon: Home, coverage: "Renters Insurance", description: "Protect your belongings in your new apartment. Coverage starts at just $15/month.", link: "/get-quote", image: lifeStageFirstPlace },
+  { stage: "Home Sweet Home", icon: Home, coverage: "Homeowners Insurance", description: "Your biggest investment deserves the best protection. We know Ohio homes.", link: "/personal-insurance/home", image: lifeStageHome },
+  { stage: "Growing Family", icon: Heart, coverage: "Life Insurance", description: "Security for those who depend on you. Give your family peace of mind.", link: "/personal-insurance/life", image: lifeStageFamily },
+  { stage: "Building Wealth", icon: Umbrella, coverage: "Umbrella Coverage", description: "Extra protection as your assets grow. Shield everything you've built.", link: "/personal-insurance/umbrella", image: lifeStageWealth },
 ];
 
 const testimonials = [
@@ -26,6 +34,16 @@ const testimonials = [
 ];
 
 const PersonalInsurance = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+
+  useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Split-Screen Hero */}
@@ -59,33 +77,108 @@ const PersonalInsurance = () => {
         </div>
       </section>
 
-      {/* Life Stage Timeline */}
-      <section className="section-padding bg-card">
-        <div className="container-wide">
-          <AnimatedSection animation="fade-up" className="text-center mb-16">
-            <h2 className="heading-lg text-foreground mb-4">Coverage for Every Life Stage</h2>
-            <p className="body-lg text-muted-foreground max-w-2xl mx-auto">Your insurance needs change as life changes.</p>
-          </AnimatedSection>
-          <div className="flex lg:grid lg:grid-cols-5 gap-6 overflow-x-auto pb-4 lg:pb-0 snap-x">
-            {lifeStages.map((stage, index) => {
-              const Icon = stage.icon;
-              return (
-                <AnimatedSection key={stage.stage} animation="fade-up" delay={index * 100} className="flex-shrink-0 w-64 lg:w-auto snap-center">
-                  <Link to={stage.link} className="group block text-center">
-                    <div className="relative mx-auto mb-4">
-                      <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-secondary border-4 border-card group-hover:border-primary/30 transition-all flex items-center justify-center mx-auto shadow-lg">
-                        <Icon className="h-8 w-8 lg:h-10 lg:w-10 text-primary" />
+      {/* Premium Life Stage Slideshow */}
+      <section className="bg-foreground">
+        <div className="relative">
+          <AnimatedSection animation="fade-up">
+            <Carousel
+              setApi={setApi}
+              opts={{ loop: true }}
+              plugins={[plugin.current]}
+              className="w-full"
+              onMouseEnter={() => plugin.current.stop()}
+              onMouseLeave={() => plugin.current.play()}
+            >
+              <CarouselContent>
+                {lifeStages.map((stage, index) => {
+                  const Icon = stage.icon;
+                  return (
+                    <CarouselItem key={stage.stage}>
+                      <div className="relative h-[500px] lg:h-[600px] w-full">
+                        {/* Background Image */}
+                        <img 
+                          src={stage.image} 
+                          alt={stage.stage}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/60 to-transparent" />
+                        
+                        {/* Content */}
+                        <div className="relative z-10 h-full flex items-center">
+                          <div className="container-wide px-6 lg:px-12">
+                            <div className="max-w-xl">
+                              {/* Step Badge */}
+                              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 text-accent text-sm font-semibold mb-4">
+                                <Icon className="h-4 w-4" />
+                                Step {index + 1} of {lifeStages.length}
+                              </div>
+                              
+                              {/* Title */}
+                              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-3">
+                                {stage.stage}
+                              </h2>
+                              
+                              {/* Coverage Type */}
+                              <p className="text-xl md:text-2xl text-accent font-medium mb-4">
+                                {stage.coverage}
+                              </p>
+                              
+                              {/* Description */}
+                              <p className="text-lg text-white/80 mb-8 leading-relaxed">
+                                {stage.description}
+                              </p>
+                              
+                              {/* CTA */}
+                              <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-foreground rounded-xl">
+                                <Link to={stage.link}>
+                                  Learn More
+                                  <ArrowRight className="ml-2 h-5 w-5" />
+                                </Link>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex items-center justify-center">{index + 1}</div>
-                    </div>
-                    <h3 className="font-display font-semibold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">{stage.stage}</h3>
-                    <p className="text-primary font-medium text-sm mb-2">{stage.coverage}</p>
-                    <p className="text-sm text-muted-foreground">{stage.description}</p>
-                  </Link>
-                </AnimatedSection>
-              );
-            })}
-          </div>
+                    </CarouselItem>
+                  );
+                })}
+              </CarouselContent>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={() => api?.scrollPrev()}
+                className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                onClick={() => api?.scrollNext()}
+                className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </Carousel>
+
+            {/* Progress Dots */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+              {lifeStages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={`transition-all duration-300 rounded-full ${
+                    current === index 
+                      ? "w-8 h-3 bg-accent" 
+                      : "w-3 h-3 bg-white/40 hover:bg-white/60"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
