@@ -50,8 +50,14 @@ const Home = () => {
         {/* Additional gradient overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/40 to-transparent" />
 
-        {/* Content Container */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-32 lg:pb-24">
+        {/* Content Container with Fade-out on Scroll */}
+        <div 
+          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-32 lg:pb-24 will-change-transform"
+          style={{ 
+            opacity: Math.max(0, 1 - scrollY / 400),
+            transform: `translateY(${scrollY * 0.15}px)`,
+          }}
+        >
           <div className="max-w-3xl">
             {/* Main Headline - Cormorant Garamond */}
             <h1 
@@ -153,8 +159,14 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator - Desktop only */}
-        <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/70 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+        {/* Scroll Indicator - Desktop only with fade on scroll */}
+        <div 
+          className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/70 animate-fade-in" 
+          style={{ 
+            animationDelay: "0.6s",
+            opacity: Math.max(0, 1 - scrollY / 200),
+          }}
+        >
           <span className="font-body text-xs uppercase tracking-wider">Explore</span>
           <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-white/70 rounded-full animate-bounce" />
