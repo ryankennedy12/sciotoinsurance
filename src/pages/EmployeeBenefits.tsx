@@ -71,10 +71,10 @@ const EmployeeBenefits = () => {
               Employee Benefits
             </p>
             <h1 className="font-display font-semibold text-3xl lg:text-5xl text-foreground leading-tight mb-space-md">
-              Employee Benefits That Help You Compete for Talent
+              Employee Benefits That Help You Hire (and Keep) Good People
             </h1>
             <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[560px]">
-              Top candidates expect solid benefits. We help small and mid-sized businesses offer packages that compete with the big guys — without the big-guy budget.
+              Good candidates expect good benefits. We help small and mid-sized businesses put together packages that can compete with larger companies.
             </p>
             <Link
               to="/get-quote"
@@ -95,7 +95,7 @@ const EmployeeBenefits = () => {
               Employee Benefits Products
             </h2>
             <p className="font-body text-lg text-muted-foreground max-w-[600px]">
-              Comprehensive benefits solutions designed to attract, retain, and protect your team.
+              Here's what we can help you set up for your team.
             </p>
           </div>
 
@@ -185,7 +185,7 @@ const EmployeeBenefits = () => {
         <div className="max-w-[1200px] mx-auto px-space-md lg:px-space-lg">
           <div className="text-center mb-space-xl">
             <h2 className="font-display font-semibold text-3xl lg:text-4xl text-white mb-space-sm">
-              Benefits Aren't Just a Cost — They're a Strategy
+              Why Benefits Matter More Than You Think
             </h2>
           </div>
 
@@ -259,7 +259,7 @@ const EmployeeBenefits = () => {
       <section className="py-space-2xl bg-white">
         <div className="max-w-[700px] mx-auto px-space-md lg:px-space-lg text-center">
           <h2 className="font-display font-semibold text-2xl lg:text-3xl text-foreground leading-tight mb-space-md">
-            Ready to make your benefits a competitive advantage?
+            Want to see what's possible for your team?
           </h2>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md mb-space-md">
@@ -280,7 +280,7 @@ const EmployeeBenefits = () => {
           </div>
           
           <p className="font-body text-sm text-muted-foreground">
-            Free consultation • No obligation • Clear answers
+            We'll walk you through your options and answer any questions. No sales pitch.
           </p>
         </div>
       </section>
