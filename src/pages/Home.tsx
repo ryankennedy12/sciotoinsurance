@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, Clock, Users, Shield, Award } from "lucide-react";
+import { Phone, ArrowRight, Star, Clock, Users, Shield } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import CarrierLogoGrid from "@/components/CarrierLogoGrid";
+import TestimonialCard from "@/components/TestimonialCard";
 import heroFamily from "@/assets/hero-family.jpg";
 
 const Home = () => {
@@ -139,6 +141,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Carrier Logo Grid */}
+      <CarrierLogoGrid />
 
       {/* Why Scioto Insurance Group Section */}
       <section className="py-16 sm:py-space-3xl bg-cream">
@@ -399,82 +404,91 @@ const Home = () => {
       </section>
 
       {/* Testimonials & Social Proof Section */}
-      <section className="py-12 sm:py-space-2xl bg-primary">
+      <section className="py-16 sm:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           
-          {/* Stats Bar */}
-          <div className="grid grid-cols-3 gap-6 sm:gap-space-lg lg:gap-space-md mb-12 sm:mb-space-2xl text-center">
-            <AnimatedSection animation="fade-up" delay={0}>
-              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
-                29
-              </p>
-              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
-                Years of Experience
-              </p>
-            </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={100}>
-              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
-                30+
-              </p>
-              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
-                Insurance Carriers
-              </p>
-            </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={200}>
-              <p className="font-display font-semibold text-4xl sm:text-5xl lg:text-[64px] text-cream leading-none mb-1 sm:mb-space-xs">
-                2
-              </p>
-              <p className="font-body text-xs sm:text-sm text-white/70 uppercase tracking-wider">
-                People Who Answer
-              </p>
-            </AnimatedSection>
-          </div>
+          {/* Section Header */}
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[36px] text-foreground mb-3">
+              What Our Clients Say
+            </h2>
+            <p className="font-body text-muted-foreground max-w-[500px] mx-auto">
+              Real feedback from Ohio families and businesses we've helped.
+            </p>
+          </AnimatedSection>
 
           {/* Featured Testimonial */}
-          <div className="relative max-w-[800px] mx-auto text-center mb-10 sm:mb-space-2xl">
-            {/* Decorative Quote Mark - Hidden on mobile */}
-            <div className="hidden sm:block absolute -top-8 left-1/2 -translate-x-1/2 font-display text-[120px] sm:text-[200px] leading-none text-burgundy-600/20 select-none pointer-events-none">
-              "
+          <AnimatedSection animation="fade-up" delay={100} className="max-w-[800px] mx-auto mb-12">
+            <div className="relative bg-primary rounded-2xl p-8 sm:p-12 text-center">
+              {/* Decorative Quote Mark */}
+              <div className="absolute top-4 left-8 font-display text-[80px] sm:text-[120px] leading-none text-white/10 select-none pointer-events-none">
+                "
+              </div>
+              
+              {/* Stars */}
+              <div className="flex justify-center gap-1 mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
+                ))}
+              </div>
+              
+              <blockquote className="relative z-10">
+                <p className="font-display italic text-xl sm:text-2xl lg:text-[28px] text-cream leading-relaxed mb-6">
+                  After my basement flooded, Jeff had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months.
+                </p>
+                <footer>
+                  <p className="font-body font-semibold text-white mb-1">
+                    Jennifer Morrison
+                  </p>
+                  <p className="font-body text-sm text-white/70">
+                    Westerville, OH • March 2024
+                  </p>
+                  <p className="font-body text-xs text-white/50 mt-2">
+                    Helped with: Home Insurance Claim
+                  </p>
+                </footer>
+              </blockquote>
             </div>
-            
-            <blockquote className="relative z-10">
-              <p className="font-display italic text-lg sm:text-xl lg:text-2xl text-cream leading-relaxed mb-4 sm:mb-space-md">
-                "After my basement flooded, Scioto had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months."
-              </p>
-              <footer className="font-body font-medium text-sm text-white">
-                — Jennifer M., Westerville
-              </footer>
-            </blockquote>
-          </div>
+          </AnimatedSection>
 
           {/* Three Testimonial Cards */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10">
-              <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
-                "Saved us $1,800 a year on the exact same coverage. Should have switched years ago."
-              </p>
-              <p className="font-body text-sm text-white/60">
-                — David R., New Albany
-              </p>
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatedSection animation="fade-up" delay={150}>
+              <TestimonialCard
+                quote="Saved us $1,800 a year on the exact same coverage. Should have switched years ago."
+                name="David Reynolds"
+                location="New Albany, OH"
+                date="January 2024"
+                helpedWith="Auto & Home Bundle"
+                rating={5}
+                variant="light"
+              />
+            </AnimatedSection>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10">
-              <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
-                "They found a gap in our business policy that would have cost us $50K in a lawsuit. Worth every penny."
-              </p>
-              <p className="font-body text-sm text-white/60">
-                — Columbus Business Owner
-              </p>
-            </div>
+            <AnimatedSection animation="fade-up" delay={200}>
+              <TestimonialCard
+                quote="They found a gap in our business policy that would have cost us $50K in a lawsuit. Worth every penny."
+                name="Marcus Chen"
+                location="Columbus, OH"
+                date="February 2024"
+                helpedWith="Commercial Liability"
+                rating={5}
+                variant="light"
+              />
+            </AnimatedSection>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-space-md border border-white/10 sm:col-span-2 md:col-span-1">
-              <p className="font-body text-cream/90 text-sm leading-relaxed mb-3 sm:mb-space-sm">
-                "When I call, they actually know who I am. When's the last time your insurance company did that?"
-              </p>
-              <p className="font-body text-sm text-white/60">
-                — Michelle T., Gahanna
-              </p>
-            </div>
+            <AnimatedSection animation="fade-up" delay={250} className="sm:col-span-2 lg:col-span-1">
+              <TestimonialCard
+                quote="When I call, they actually know who I am. When's the last time your insurance company did that?"
+                name="Michelle Torres"
+                location="Gahanna, OH"
+                date="December 2023"
+                helpedWith="Personal Insurance"
+                rating={5}
+                variant="light"
+              />
+            </AnimatedSection>
           </div>
         </div>
       </section>
