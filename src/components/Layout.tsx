@@ -4,54 +4,67 @@ import Header from "./Header";
 import Footer from "./Footer";
 import StickyMobileCTA from "./StickyMobileCTA";
 
+// Context to share page ready state with child components
+import { createContext, useContext } from "react";
+
+export const PageReadyContext = createContext(false);
+export const usePageReady = () => useContext(PageReadyContext);
+
 const Layout = () => {
   const location = useLocation();
   const [transitionStage, setTransitionStage] = useState<"hidden" | "enter" | "exit">("hidden");
+  const [isPageReady, setIsPageReady] = useState(false);
   const isFirstMount = useRef(true);
   const previousPath = useRef(location.pathname);
   const footerRef = useRef<HTMLElement>(null);
 
-  // Handle initial mount - fade in once
+  // Handle initial mount - fade in once with longer delay for resources to settle
   useEffect(() => {
-    // Small delay to ensure DOM is ready, then fade in
     const timeout = setTimeout(() => {
       setTransitionStage("enter");
       isFirstMount.current = false;
-    }, 50);
+      // Mark page as ready after transition completes
+      setTimeout(() => setIsPageReady(true), 350);
+    }, 100);
     return () => clearTimeout(timeout);
   }, []);
 
   // Handle route changes after initial mount
   useEffect(() => {
-    // Skip if first mount or same path
     if (isFirstMount.current || location.pathname === previousPath.current) {
       return;
     }
 
     // Fade out, then fade in
+    setIsPageReady(false);
     setTransitionStage("exit");
     const timeout = setTimeout(() => {
       previousPath.current = location.pathname;
       setTransitionStage("enter");
       window.scrollTo({ top: 0, behavior: "instant" });
-    }, 200);
+      // Mark page as ready after transition completes
+      setTimeout(() => setIsPageReady(true), 350);
+    }, 250);
 
     return () => clearTimeout(timeout);
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
-      <main 
-        className={`flex-1 transition-opacity duration-200 ease-out motion-reduce:transition-none ${
-          transitionStage === "enter" ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <Outlet />
-      </main>
-      <Footer ref={footerRef} />
-      <StickyMobileCTA footerRef={footerRef} />
-    </div>
+    <PageReadyContext.Provider value={isPageReady}>
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main 
+          className={`flex-1 transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+            transitionStage === "enter" ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ willChange: transitionStage === "hidden" ? "opacity" : "auto" }}
+        >
+          <Outlet />
+        </main>
+        <Footer ref={footerRef} />
+        <StickyMobileCTA footerRef={footerRef} />
+      </div>
+    </PageReadyContext.Provider>
   );
 };
 

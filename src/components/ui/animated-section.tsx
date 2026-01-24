@@ -16,7 +16,7 @@ interface AnimatedSectionProps extends HTMLAttributes<HTMLDivElement> {
 
 const animationClasses: Record<AnimationVariant, { hidden: string; visible: string }> = {
   "fade-up": {
-    hidden: "opacity-0 translate-y-6",
+    hidden: "opacity-0 translate-y-4",
     visible: "opacity-100 translate-y-0",
   },
   "fade-in": {
@@ -24,15 +24,15 @@ const animationClasses: Record<AnimationVariant, { hidden: string; visible: stri
     visible: "opacity-100",
   },
   "slide-left": {
-    hidden: "opacity-0 translate-x-8",
+    hidden: "opacity-0 translate-x-6",
     visible: "opacity-100 translate-x-0",
   },
   "slide-right": {
-    hidden: "opacity-0 -translate-x-8",
+    hidden: "opacity-0 -translate-x-6",
     visible: "opacity-100 translate-x-0",
   },
   "scale": {
-    hidden: "opacity-0 scale-95",
+    hidden: "opacity-0 scale-[0.97]",
     visible: "opacity-100 scale-100",
   },
 };
@@ -43,8 +43,8 @@ const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
       children,
       animation = "fade-up",
       delay = 0,
-      duration = 600,
-      threshold = 0.1,
+      duration = 400,
+      threshold = 0.15,
       className,
       as: Component = "div",
       ...props

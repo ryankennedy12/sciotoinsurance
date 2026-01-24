@@ -5,7 +5,9 @@ import "./index.css";
 const root = document.getElementById("root")!;
 createRoot(root).render(<App />);
 
-// Fade in after React mounts
+// Fade in after React mounts and initial paint settles
 requestAnimationFrame(() => {
-  root.classList.add("ready");
+  requestAnimationFrame(() => {
+    root.classList.add("ready");
+  });
 });

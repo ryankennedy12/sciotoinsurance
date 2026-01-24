@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Star, Clock, Users, Shield } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { usePageReady } from "@/components/Layout";
 
 import TestimonialCard from "@/components/TestimonialCard";
 import heroFamily from "@/assets/hero-family.jpg";
@@ -11,6 +12,7 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
+  const isPageReady = usePageReady();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,7 @@ const Home = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
   // Trust row items with icons
   const trustItems = [
     { icon: Star, label: "5.0", sublabel: "Rating" },
@@ -61,23 +64,29 @@ const Home = () => {
           <div className="max-w-3xl">
             {/* Main Headline - Cormorant Garamond */}
             <h1 
-              className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 animate-slide-up"
+              className={`font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 transition-all duration-500 ease-out motion-reduce:transition-none ${
+                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
             >
               Ohio Families Trust Us to Protect What Matters Most
             </h1>
 
             {/* Subheadline - Body text, larger size */}
             <p 
-              className="font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 animate-slide-up"
-              style={{ animationDelay: "0.1s" }}
+              className={`font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 transition-all duration-500 ease-out motion-reduce:transition-none ${
+                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: isPageReady ? "75ms" : "0ms" }}
             >
               We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
             </p>
 
             {/* Trust Row - Horizontal with icons and dividers */}
             <div 
-              className="flex flex-wrap items-center gap-4 lg:gap-0 mb-8 animate-slide-up"
-              style={{ animationDelay: "0.2s" }}
+              className={`flex flex-wrap items-center gap-4 lg:gap-0 mb-8 transition-all duration-500 ease-out motion-reduce:transition-none ${
+                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: isPageReady ? "150ms" : "0ms" }}
             >
               {trustItems.map((item, index) => (
                 <div key={index} className="flex items-center">
@@ -110,8 +119,10 @@ const Home = () => {
 
             {/* Dual CTAs - Large buttons, side by side */}
             <div 
-              className="flex flex-col sm:flex-row gap-4 mb-6 animate-slide-up"
-              style={{ animationDelay: "0.3s" }}
+              className={`flex flex-col sm:flex-row gap-4 mb-6 transition-all duration-500 ease-out motion-reduce:transition-none ${
+                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: isPageReady ? "225ms" : "0ms" }}
             >
               {/* Primary CTA */}
               <Link
@@ -134,8 +145,10 @@ const Home = () => {
 
             {/* Trust Reassurances - Small text with gold checkmarks */}
             <div 
-              className="flex flex-wrap items-center gap-4 sm:gap-6 animate-slide-up"
-              style={{ animationDelay: "0.4s" }}
+              className={`flex flex-wrap items-center gap-4 sm:gap-6 transition-all duration-500 ease-out motion-reduce:transition-none ${
+                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: isPageReady ? "300ms" : "0ms" }}
             >
               <span className="flex items-center gap-2 font-body text-sm text-white/80">
                 <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
@@ -161,10 +174,12 @@ const Home = () => {
 
         {/* Scroll Indicator - Desktop only with fade on scroll */}
         <div 
-          className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/70 animate-fade-in" 
+          className={`hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/70 transition-all duration-500 ease-out motion-reduce:transition-none ${
+            isPageReady ? "opacity-100" : "opacity-0"
+          }`}
           style={{ 
-            animationDelay: "0.6s",
-            opacity: Math.max(0, 1 - scrollY / 200),
+            transitionDelay: isPageReady ? "400ms" : "0ms",
+            opacity: isPageReady ? Math.max(0, 1 - scrollY / 200) : 0,
           }}
         >
           <span className="font-body text-xs uppercase tracking-wider">Explore</span>
