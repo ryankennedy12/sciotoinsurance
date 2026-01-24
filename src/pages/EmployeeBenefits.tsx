@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
 import { employeeBenefitsProducts } from "@/data/products";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import modernOfficeTeam from "@/assets/modern-office-team.jpg";
 import hrMeeting from "@/assets/hr-meeting.jpg";
@@ -29,19 +29,47 @@ const testimonials = [
   { quote: "The 401(k) setup was seamless. They saved us $8,000 annually in fees.", name: "Jennifer L.", location: "Westerville, OH", date: "September 2024", rating: 5, helpedWith: "Retirement Planning" }
 ];
 
-const AnimatedCounter = ({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) => {
+const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) => {
   const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
-    if (!isVisible) return;
-    let current = 0;
-    const timer = setInterval(() => { current += value / 60; if (current >= value) { setCount(value); clearInterval(timer); } else { setCount(Math.floor(current)); } }, 33);
-    return () => clearInterval(timer);
-  }, [value, isVisible]);
-  return <span>{count}{suffix}</span>;
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let current = 0;
+          const duration = 2000; // 2 seconds
+          const steps = 60;
+          const increment = value / steps;
+          const stepDuration = duration / steps;
+          
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= value) {
+              setCount(value);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(current));
+            }
+          }, stepDuration);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [value, hasAnimated]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
 };
 
 const EmployeeBenefits = () => {
-  const [statsVisible, setStatsVisible] = useState(false);
   const [calc, setCalc] = useState({ employees: 25, avgSalary: 50000, turnoverRate: 20 });
   const currentTurnover = Math.round(calc.employees * (calc.turnoverRate / 100));
   const improvedTurnover = Math.round(currentTurnover * 0.75);
@@ -68,11 +96,11 @@ const EmployeeBenefits = () => {
             </AnimatedSection>
           </div>
           <div className="relative bg-primary flex items-center justify-center px-6 py-16 lg:px-12">
-            <AnimatedSection animation="fade-up" className="relative z-10 w-full max-w-md" onAnimationStart={() => setStatsVisible(true)}>
+            <AnimatedSection animation="fade-up" className="relative z-10 w-full max-w-md">
               <div className="space-y-6">
                 {heroStats.map((stat, i) => (
                   <div key={i} className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
-                    <div className="text-5xl font-display font-bold text-white mb-2"><AnimatedCounter value={stat.value} suffix={stat.suffix} isVisible={statsVisible} /></div>
+                    <div className="text-5xl font-display font-bold text-white mb-2"><AnimatedCounter value={stat.value} suffix={stat.suffix} /></div>
                     <p className="text-white/80">{stat.label}</p>
                   </div>
                 ))}
