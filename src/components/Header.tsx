@@ -1,26 +1,70 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone } from "lucide-react";
+import { Phone, Car, Home, Heart, Umbrella, Droplets, Sparkles, Shield, HardHat, Lock, Scale, Building2, Truck, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
+// Mega Menu Data - Personal Insurance
+const personalInsuranceCategories = [
+  {
+    title: "Most Popular",
+    items: [
+      { title: "Auto Insurance", href: "/personal-insurance/auto", icon: Car },
+      { title: "Home Insurance", href: "/personal-insurance/home", icon: Home },
+      { title: "Life Insurance", href: "/personal-insurance/life", icon: Heart },
+      { title: "Umbrella Insurance", href: "/personal-insurance/umbrella", icon: Umbrella },
+    ],
+  },
+  {
+    title: "Property & Specialty",
+    items: [
+      { title: "Flood Insurance", href: "/personal-insurance/flood", icon: Droplets },
+      { title: "High Net Worth", href: "/personal-insurance/high-net-worth", icon: Sparkles },
+      { title: "Renters Insurance", href: "/personal-insurance/renters", icon: Home },
+      { title: "Condo Insurance", href: "/personal-insurance/condo", icon: Building2 },
+    ],
+  },
+];
+
+// Mega Menu Data - Business Insurance
+const businessInsuranceCategories = [
+  {
+    title: "Most Popular",
+    items: [
+      { title: "General Liability", href: "/business-insurance/general-liability", icon: Shield },
+      { title: "Workers' Compensation", href: "/business-insurance/workers-comp", icon: HardHat },
+      { title: "Commercial Property", href: "/business-insurance/commercial-property", icon: Building2 },
+      { title: "Commercial Auto", href: "/business-insurance/commercial-auto", icon: Truck },
+    ],
+  },
+  {
+    title: "Professional & Cyber",
+    items: [
+      { title: "Professional Liability (E&O)", href: "/business-insurance/professional-liability", icon: Scale },
+      { title: "Cyber Liability", href: "/business-insurance/cyber-liability", icon: Lock },
+      { title: "Directors & Officers", href: "/business-insurance/directors-officers", icon: Shield },
+      { title: "Business Owners Policy", href: "/business-insurance/bop", icon: Shield },
+    ],
+  },
+];
+
+// Mobile menu items (flattened for accordion)
 const personalInsuranceItems = [
   { title: "Auto Insurance", href: "/personal-insurance/auto" },
   { title: "Home Insurance", href: "/personal-insurance/home" },
-  { title: "Renters Insurance", href: "/personal-insurance/renters" },
-  { title: "Umbrella Insurance", href: "/personal-insurance/umbrella" },
   { title: "Life Insurance", href: "/personal-insurance/life" },
-  { title: "Pet Insurance", href: "/personal-insurance/pet" },
-  { title: "Specialty Coverage", href: "/personal-insurance/specialty" },
+  { title: "Umbrella Insurance", href: "/personal-insurance/umbrella" },
+  { title: "Flood Insurance", href: "/personal-insurance/flood" },
+  { title: "High Net Worth", href: "/personal-insurance/high-net-worth" },
 ];
 
 const businessInsuranceItems = [
   { title: "General Liability", href: "/business-insurance/general-liability" },
-  { title: "Commercial Property", href: "/business-insurance/commercial-property" },
   { title: "Workers' Compensation", href: "/business-insurance/workers-comp" },
-  { title: "Professional Liability", href: "/business-insurance/professional-liability" },
+  { title: "Commercial Property", href: "/business-insurance/commercial-property" },
   { title: "Commercial Auto", href: "/business-insurance/commercial-auto" },
-  { title: "Business Owner's Policy (BOP)", href: "/business-insurance/bop" },
+  { title: "Professional Liability", href: "/business-insurance/professional-liability" },
+  { title: "Cyber Liability", href: "/business-insurance/cyber-liability" },
 ];
 
 const Header = () => {
@@ -96,7 +140,7 @@ const Header = () => {
                 About
               </NavLink>
 
-              {/* Personal Insurance Dropdown */}
+              {/* Personal Insurance Mega Menu */}
               <div
                 className="relative"
                 onMouseEnter={() => handleDropdownEnter("personal")}
@@ -105,13 +149,15 @@ const Header = () => {
                 <NavLink href="/personal-insurance" isScrolled={isScrolled} hasDropdown>
                   Personal Insurance
                 </NavLink>
-                <DropdownMenu
-                  items={personalInsuranceItems}
+                <MegaMenu
+                  categories={personalInsuranceCategories}
+                  viewAllHref="/personal-insurance"
+                  viewAllText="View All Personal Insurance"
                   isOpen={activeDropdown === "personal"}
                 />
               </div>
 
-              {/* Business Insurance Dropdown */}
+              {/* Business Insurance Mega Menu */}
               <div
                 className="relative"
                 onMouseEnter={() => handleDropdownEnter("business")}
@@ -120,8 +166,10 @@ const Header = () => {
                 <NavLink href="/business-insurance" isScrolled={isScrolled} hasDropdown>
                   Business Insurance
                 </NavLink>
-                <DropdownMenu
-                  items={businessInsuranceItems}
+                <MegaMenu
+                  categories={businessInsuranceCategories}
+                  viewAllHref="/business-insurance"
+                  viewAllText="View All Business Insurance"
                   isOpen={activeDropdown === "business"}
                 />
               </div>
@@ -382,13 +430,24 @@ const NavLink = ({ href, children, hasDropdown }: NavLinkProps) => {
   );
 };
 
-// Dropdown Menu Component
-interface DropdownMenuProps {
-  items: { title: string; href: string }[];
+// Mega Menu Component
+interface MegaMenuCategory {
+  title: string;
+  items: {
+    title: string;
+    href: string;
+    icon: React.ElementType;
+  }[];
+}
+
+interface MegaMenuProps {
+  categories: MegaMenuCategory[];
+  viewAllHref: string;
+  viewAllText: string;
   isOpen: boolean;
 }
 
-const DropdownMenu = ({ items, isOpen }: DropdownMenuProps) => {
+const MegaMenu = ({ categories, viewAllHref, viewAllText, isOpen }: MegaMenuProps) => {
   return (
     <div
       className={cn(
@@ -398,16 +457,46 @@ const DropdownMenu = ({ items, isOpen }: DropdownMenuProps) => {
           : "opacity-0 -translate-y-2 pointer-events-none"
       )}
     >
-      <div className="bg-white rounded shadow-xl border border-border min-w-[240px] py-2 overflow-hidden">
-        {items.map((item) => (
+      <div className="bg-white rounded-lg shadow-xl border border-border overflow-hidden min-w-[520px]">
+        {/* Categories Grid */}
+        <div className="grid grid-cols-2 gap-0 p-4">
+          {categories.map((category) => (
+            <div key={category.title} className="p-2">
+              <h3 className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-3">
+                {category.title}
+              </h3>
+              <ul className="space-y-1">
+                {category.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        to={item.href}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-body text-charcoal hover:bg-secondary hover:text-primary transition-colors duration-200 group"
+                      >
+                        <span className="flex-shrink-0 w-8 h-8 rounded-md bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                          <Icon className="w-4 h-4 text-accent" />
+                        </span>
+                        <span className="font-medium">{item.title}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer - View All Link */}
+        <div className="bg-secondary/50 px-6 py-3 border-t border-border">
           <Link
-            key={item.href}
-            to={item.href}
-            className="block px-5 py-3 font-body text-sm text-charcoal hover:bg-burgundy-100 hover:text-primary transition-colors duration-200"
+            to={viewAllHref}
+            className="flex items-center justify-between text-sm font-body font-medium text-primary hover:text-burgundy-800 transition-colors group"
           >
-            {item.title}
+            <span>{viewAllText}</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
-        ))}
+        </div>
       </div>
     </div>
   );
