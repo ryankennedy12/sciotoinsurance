@@ -23,9 +23,11 @@
     
     <!-- Smooth initial load -->
     <style>
-      #root { opacity: 0; transition: opacity 0.2s ease-out; }
+      #root { opacity: 0; transition: opacity 0.3s ease-out; }
       #root.ready { opacity: 1; }
     </style>
+    <!-- Preload hero image for faster LCP -->
+    <link rel="preload" as="image" href="/src/assets/hero-family.jpg">
   </head>
 
   <body class="bg-[hsl(40,43%,96%)]">

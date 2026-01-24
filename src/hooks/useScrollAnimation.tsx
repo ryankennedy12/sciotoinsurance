@@ -9,7 +9,7 @@ interface UseScrollAnimationOptions {
 export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
   options: UseScrollAnimationOptions = {}
 ): [RefObject<T>, boolean] {
-  const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
+  const { threshold = 0.15, rootMargin = "0px 0px -30px 0px", triggerOnce = true } = options;
   const ref = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -52,7 +52,7 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
 // Hook for staggered animations on multiple children
 export function useStaggeredAnimation(
   itemCount: number,
-  baseDelay: number = 100
+  baseDelay: number = 75
 ): number[] {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
