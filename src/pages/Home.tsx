@@ -44,7 +44,7 @@ const Home = () => {
               className="font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 animate-slide-up"
               style={{ animationDelay: "0.1s" }}
             >
-              We shop 30+ carriers to find coverage that actually fits your life—and your budget. No call centers. No voicemail. Just Sarah, Mike, or Tom answering your call.
+              We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Sarah, Mike, or Tom. Actual people who know your name.
             </p>
 
             {/* Trust Row - Horizontal with icons and dividers */}
@@ -150,10 +150,10 @@ const Home = () => {
             <div className="w-10 h-0.5 bg-primary mx-auto mb-4 sm:mb-space-md" />
             
             <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
-              Why 1,200+ Ohio Families Trust Scioto
+              Why 1,200+ Ohio Families Work With Us
             </h2>
             <p className="font-body text-base sm:text-lg text-muted-foreground">
-              We're not a call center. We're your neighbors.
+              We live here. We know the risks. And we pick up the phone.
             </p>
           </AnimatedSection>
 
@@ -175,7 +175,7 @@ const Home = () => {
                 Independent, Not Corporate
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                We work for you, not an insurance company. That means we shop 30+ carriers to find coverage that actually fits your situation — and your budget.
+                We don't work for one insurance company. We shop over 30 carriers to find what fits your situation and your budget. If a better deal exists, we'll find it.
               </p>
             </AnimatedSection>
 
@@ -211,7 +211,7 @@ const Home = () => {
                 A Human Answers the Phone
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                When you call, you get Sarah, Mike, or Tom — not a phone tree. When you have a claim, we're in your corner. That's not a tagline, it's how we've operated since 1995.
+                Call our office. You'll get Sarah, Mike, or Tom. Not a phone tree. Not a call center. When you have a claim, we handle it. Been doing it that way since 1995.
               </p>
             </AnimatedSection>
           </div>
@@ -492,11 +492,11 @@ const Home = () => {
       <section className="py-12 sm:py-space-2xl bg-cream">
         <AnimatedSection animation="fade-up" className="max-w-[800px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
           <h2 className="font-display font-semibold text-xl sm:text-2xl lg:text-4xl text-foreground leading-tight mb-4 sm:mb-space-md">
-            Ready to Stop Overpaying for Insurance That Underdelivers?
+            Let's See if We Can Do Better
           </h2>
           
           <p className="font-body text-base sm:text-lg text-muted-foreground mb-6 sm:mb-space-lg max-w-[600px] mx-auto">
-            Get a free, no-pressure quote in 10 minutes. We'll show you exactly what you're paying for — and what you might be missing.
+            Get a free quote in about 10 minutes. We'll look at what you're paying now and show you if there's a better option.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-4 sm:mb-space-md">
@@ -517,7 +517,7 @@ const Home = () => {
           </div>
           
           <p className="font-body text-sm text-muted-foreground/70 italic">
-            No spam. No pushy sales calls. Just honest advice from people who actually live here.
+            We won't spam you or pass your info around. Promise.
           </p>
         </AnimatedSection>
       </section>

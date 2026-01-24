@@ -67,16 +67,16 @@ const About = () => {
               
               <div className="space-y-space-md font-body text-muted-foreground leading-relaxed">
                 <p>
-                  When Tom Mitchell started Scioto Insurance Group in 1995, he had one rule: treat every client like a neighbor — because most of them were.
+                  Tom Mitchell started Scioto Insurance Group in 1995. Back then, most of his clients were neighbors. Literally. He knew their kids, their dogs, their driveways.
                 </p>
                 <p>
-                  Twenty-nine years later, that hasn't changed. We're still family-owned, still independent, and still small enough that when you call our office, you'll actually talk to someone who knows your name.
+                  Twenty-nine years later, we've grown. But we're still family-owned, still independent, and small enough that when you call, you talk to someone who knows your name.
                 </p>
                 <p>
-                  Being independent means we don't work for insurance companies. We work for you. We have access to over 30 carriers, which means we can actually shop your coverage and find the best fit — not just push whatever policy pays us the highest commission.
+                  Being independent means we don't work for any one insurance company. We have access to over 30 carriers. So we can shop around and find what actually fits you, instead of pushing whatever policy pays us the most.
                 </p>
                 <p>
-                  We've seen insurance go from paper files to smartphone apps, but one thing hasn't changed: when something bad happens, people want to talk to a human who cares. That's what we do.
+                  Insurance has changed a lot since 1995. Paper files are gone. There's an app for everything now. But when something goes wrong, people still want to talk to a human who gives a damn. That hasn't changed, and neither have we.
                 </p>
               </div>
             </div>
@@ -176,7 +176,7 @@ const About = () => {
                 Expertise Without the Ego
               </h3>
               <p className="font-body text-muted-foreground">
-                Insurance is complicated. We make it simple. No jargon, no condescension, just clear answers to your questions.
+                Insurance can be confusing. We get that. Ask us anything and we'll give you a straight answer. No industry jargon, no talking down to you.
               </p>
             </div>
           </div>
@@ -243,10 +243,10 @@ const About = () => {
       <section className="py-space-2xl bg-cream">
         <div className="max-w-[700px] mx-auto px-space-md lg:px-space-lg text-center">
           <h2 className="font-display font-semibold text-2xl lg:text-3xl text-foreground leading-tight mb-space-md">
-            Want to know if we're the right fit?
+            Want to know if we're a good fit?
           </h2>
           <p className="font-body text-lg text-muted-foreground mb-space-lg">
-            Let's talk. No pressure, no pitch — just a conversation.
+            We're happy to just talk. No sales pitch. If we're not the right agency for you, we'll say so.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">
