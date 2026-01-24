@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Check, Phone, Star, Users, Clock, ShieldCheck, ChevronLeft, User, Briefcase, Heart, HelpCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import QuoteFormExitIntent from "@/components/QuoteFormExitIntent";
 
 type CoverageType = "personal" | "business" | "benefits" | "not_sure";
 type ContactMethod = "email" | "phone" | "text";
@@ -693,8 +694,24 @@ const GetQuote = () => {
     </div>
   );
 
+  // Check if form has been submitted (step 4)
+  const hasSubmitted = currentStep === 4;
+
   return (
     <>
+      {/* Exit Intent Popup */}
+      <QuoteFormExitIntent 
+        formData={{
+          coverageType: formData.coverageType,
+          personalCoverageInterests: formData.personalCoverageInterests,
+          businessCoverageInterests: formData.businessCoverageInterests,
+          benefitsInterests: formData.benefitsInterests,
+          businessType: formData.businessType,
+          employeeCount: formData.employeeCount,
+        }}
+        hasSubmitted={hasSubmitted}
+      />
+
       {/* Hero Section */}
       <section className="pt-24 sm:pt-32 pb-4 sm:pb-space-lg bg-gradient-to-br from-cream via-white to-burgundy-100/30">
         <div className="max-w-[800px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
