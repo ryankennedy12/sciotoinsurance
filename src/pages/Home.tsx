@@ -4,6 +4,9 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import CarrierLogoGrid from "@/components/CarrierLogoGrid";
 import TestimonialCard from "@/components/TestimonialCard";
 import heroFamily from "@/assets/hero-family.jpg";
+import familyHomeService from "@/assets/family-home-service.jpg";
+import businessOffice from "@/assets/business-office.jpg";
+import teamMeeting from "@/assets/team-meeting.jpg";
 
 const Home = () => {
   // Trust row items with icons
@@ -256,12 +259,20 @@ const Home = () => {
                 to="/personal-insurance"
                 className="col-span-5 group relative z-20"
               >
-                <div className="relative bg-gradient-to-br from-primary to-burgundy-800 rounded-lg p-space-lg lg:p-space-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 min-h-[380px] flex flex-col justify-between">
+                <div className="relative bg-gradient-to-br from-primary to-burgundy-800 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 min-h-[380px] flex flex-col justify-between overflow-hidden">
+                  {/* Background Image */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                    style={{ backgroundImage: `url(${familyHomeService})` }}
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-burgundy-800/95" />
+                  
                   {/* Decorative Elements */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-gold-500/10 rounded-full translate-y-1/2 -translate-x-1/2" />
                   
-                  <div className="relative z-10">
+                  <div className="relative z-10 p-space-lg lg:p-space-xl">
                     <h3 className="font-display font-semibold text-2xl lg:text-3xl text-white mb-space-sm">
                       Personal Insurance
                     </h3>
@@ -273,7 +284,7 @@ const Home = () => {
                     </p>
                   </div>
                   
-                  <div className="relative z-10 mt-space-lg">
+                  <div className="relative z-10 p-space-lg lg:p-space-xl pt-0">
                     <span className="inline-flex items-center gap-2 font-body font-medium text-white group-hover:gap-3 transition-all duration-300">
                       Explore Personal Coverage
                       <span className="text-lg">→</span>
@@ -287,13 +298,18 @@ const Home = () => {
                 to="/business-insurance"
                 className="col-span-4 group relative z-10 lg:mt-16"
               >
-                <div className="relative bg-cream rounded-lg p-space-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[340px] flex flex-col justify-between border border-gray-200/50">
+                <div className="relative bg-cream rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[340px] flex flex-col justify-between border border-gray-200/50 overflow-hidden">
+                  {/* Background Image */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-15 transition-opacity duration-500"
+                    style={{ backgroundImage: `url(${businessOffice})` }}
+                  />
                   {/* Subtle Pattern */}
                   <div className="absolute inset-0 opacity-[0.03] rounded-lg" style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B2942' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
                   }} />
                   
-                  <div className="relative z-10">
+                  <div className="relative z-10 p-space-lg">
                     <h3 className="font-display font-semibold text-2xl text-foreground mb-space-sm">
                       Business Insurance
                     </h3>
@@ -305,7 +321,7 @@ const Home = () => {
                     </p>
                   </div>
                   
-                  <div className="relative z-10 mt-space-lg">
+                  <div className="relative z-10 p-space-lg pt-0">
                     <span className="inline-flex items-center gap-2 font-body font-medium text-primary group-hover:gap-3 transition-all duration-300">
                       Explore Business Coverage
                       <span className="text-lg">→</span>
@@ -319,8 +335,14 @@ const Home = () => {
                 to="/employee-benefits"
                 className="col-span-3 group relative z-0 lg:mt-32"
               >
-                <div className="relative bg-white rounded-lg p-space-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[300px] flex flex-col justify-between border-l-4 border-primary">
-                  <div className="relative z-10">
+                <div className="relative bg-white rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[300px] flex flex-col justify-between border-l-4 border-primary overflow-hidden">
+                  {/* Background Image */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-15 transition-opacity duration-500"
+                    style={{ backgroundImage: `url(${teamMeeting})` }}
+                  />
+                  
+                  <div className="relative z-10 p-space-lg">
                     <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
                       Employee Benefits
                     </h3>
@@ -332,7 +354,7 @@ const Home = () => {
                     </p>
                   </div>
                   
-                  <div className="relative z-10 mt-space-md">
+                  <div className="relative z-10 p-space-lg pt-0">
                     <span className="inline-flex items-center gap-2 font-body font-medium text-sm text-primary group-hover:gap-3 transition-all duration-300">
                       Explore Benefits
                       <span>→</span>

@@ -1,19 +1,103 @@
 import { AnimatedSection } from "@/components/ui/animated-section";
 
-// Carrier data with placeholder logos (using text for now, can be replaced with real logos)
+// Carrier data with actual logo SVGs
 const carriers = [
-  { name: "Nationwide", short: "NW" },
-  { name: "Progressive", short: "PRO" },
-  { name: "Travelers", short: "TRV" },
-  { name: "Safeco", short: "SAF" },
-  { name: "Liberty Mutual", short: "LM" },
-  { name: "Grange", short: "GRG" },
-  { name: "Westfield", short: "WF" },
-  { name: "Cincinnati", short: "CIN" },
-  { name: "Auto-Owners", short: "AO" },
-  { name: "Erie", short: "ERIE" },
-  { name: "The Hartford", short: "HTF" },
-  { name: "Chubb", short: "CHB" },
+  { 
+    name: "Nationwide", 
+    logo: (
+      <svg viewBox="0 0 120 40" fill="currentColor" className="h-8 w-auto">
+        <text x="0" y="28" fontFamily="Arial Black, sans-serif" fontSize="16" fontWeight="900">NATIONWIDE</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Progressive", 
+    logo: (
+      <svg viewBox="0 0 120 40" fill="currentColor" className="h-8 w-auto">
+        <text x="0" y="26" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="700">PROGRESSIVE</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Travelers", 
+    logo: (
+      <svg viewBox="0 0 100 40" fill="currentColor" className="h-8 w-auto">
+        <text x="0" y="26" fontFamily="Georgia, serif" fontSize="15" fontWeight="600">Travelers</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Safeco", 
+    logo: (
+      <svg viewBox="0 0 80 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="26" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="700">SAFECO</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Liberty Mutual", 
+    logo: (
+      <svg viewBox="0 0 130 40" fill="currentColor" className="h-8 w-auto">
+        <text x="0" y="26" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="600">Liberty Mutual</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Grange", 
+    logo: (
+      <svg viewBox="0 0 80 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="26" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="700">GRANGE</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Westfield", 
+    logo: (
+      <svg viewBox="0 0 100 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="26" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="700">WESTFIELD</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Cincinnati Insurance", 
+    logo: (
+      <svg viewBox="0 0 100 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="26" fontFamily="Georgia, serif" fontSize="14" fontWeight="600">Cincinnati</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Auto-Owners", 
+    logo: (
+      <svg viewBox="0 0 110 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="26" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="700">AUTO-OWNERS</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Erie Insurance", 
+    logo: (
+      <svg viewBox="0 0 60 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="28" fontFamily="Arial Black, sans-serif" fontSize="18" fontWeight="900">ERIE</text>
+      </svg>
+    )
+  },
+  { 
+    name: "The Hartford", 
+    logo: (
+      <svg viewBox="0 0 110 40" fill="currentColor" className="h-8 w-auto">
+        <text x="0" y="26" fontFamily="Georgia, serif" fontSize="14" fontWeight="600">The Hartford</text>
+      </svg>
+    )
+  },
+  { 
+    name: "Chubb", 
+    logo: (
+      <svg viewBox="0 0 70 40" fill="currentColor" className="h-7 w-auto">
+        <text x="0" y="28" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="800">CHUBB</text>
+      </svg>
+    )
+  },
 ];
 
 const CarrierLogoGrid = () => {
@@ -36,13 +120,13 @@ const CarrierLogoGrid = () => {
             {carriers.map((carrier, index) => (
               <div
                 key={carrier.name}
-                className="group flex items-center justify-center h-16 sm:h-20 px-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 hover:scale-105"
+                className="group flex items-center justify-center h-16 sm:h-20 px-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 hover:scale-105"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                {/* Placeholder for actual logo - using styled text */}
-                <span className="font-display font-semibold text-sm sm:text-base text-muted-foreground/60 group-hover:text-primary transition-colors duration-300 text-center">
-                  {carrier.name}
-                </span>
+                {/* Carrier logo - grayscale by default, primary color on hover */}
+                <div className="text-muted-foreground/50 group-hover:text-primary transition-colors duration-300 flex items-center justify-center">
+                  {carrier.logo}
+                </div>
               </div>
             ))}
           </div>
