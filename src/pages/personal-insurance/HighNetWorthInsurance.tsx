@@ -9,16 +9,16 @@ const HighNetWorthInsurance = () => {
       metaDescription="Comprehensive protection for affluent households. Specialized coverage for luxury homes, collections, and liability. Call (614) 612-0050."
       
       // Hero
-      heroTitle="High Net Worth Insurance: Protection Worthy of What You've Built"
+      heroTitle="High Net Worth Insurance"
       heroSubtitle="Comprehensive Coverage for Affluent Households"
-      heroDescription="Standard insurance falls short for complex estates. High net worth policies provide guaranteed replacement cost, higher liability limits, and coverage for luxury items—all with white-glove claims service."
+      heroDescription="Standard insurance policies have limits that don't make sense for complex estates. High net worth coverage gives you guaranteed replacement cost, higher liability limits, and protection for the things you actually own."
       
       // Coverage
       coverageTitle="What Does High Net Worth Insurance Cover?"
       coverageItems={[
         {
           title: "Guaranteed Replacement Cost",
-          description: "Rebuild your home exactly as it was—no limits, no depreciation. Covers increased construction costs and code upgrades."
+          description: "Rebuild your home exactly as it was. No limits, no depreciation. Covers increased construction costs and code upgrades."
         },
         {
           title: "Extended Liability Limits",
@@ -30,7 +30,7 @@ const HighNetWorthInsurance = () => {
         },
         {
           title: "Multiple Properties",
-          description: "Simplified coverage for primary home, vacation homes, and rental properties under one comprehensive program."
+          description: "One program that covers your primary home, vacation homes, and rental properties. Simplified."
         },
         {
           title: "Luxury Auto Coverage",
@@ -46,11 +46,11 @@ const HighNetWorthInsurance = () => {
         },
         {
           title: "Cash Settlement Option",
-          description: "Option to receive cash instead of repairs/replacement, giving you flexibility in how to use your claim payment."
+          description: "You can take cash instead of repairs/replacement. Gives you flexibility in how to use your claim payment."
         },
         {
           title: "Identity Theft & Cyber",
-          description: "Comprehensive protection against identity theft, cyber extortion, and online fraud."
+          description: "Protection against identity theft, cyber extortion, and online fraud."
         }
       ]}
       
@@ -58,18 +58,18 @@ const HighNetWorthInsurance = () => {
       whyChooseItems={[
         {
           icon: ShieldCheck,
-          title: "Specialized Carrier Access",
-          description: "We work with Chubb, PURE, AIG Private Client, and other carriers that specialize in protecting affluent households—not available through typical agencies."
+          title: "We Work With the Right Carriers",
+          description: "Chubb, PURE, AIG Private Client. Carriers that specialize in protecting affluent households. Not available through most agencies."
         },
         {
           icon: Users,
-          title: "Comprehensive Risk Review",
-          description: "We analyze your entire estate—properties, vehicles, collections, liability exposure—to design a coordinated protection strategy."
+          title: "We Look at Everything",
+          description: "Properties, vehicles, collections, liability exposure. We analyze your whole estate to design a coordinated protection strategy."
         },
         {
           icon: RefreshCw,
-          title: "White-Glove Claims Service",
-          description: "High net worth carriers provide dedicated claims adjusters, preferred contractors, and expedited resolution. We ensure you get the service you deserve."
+          title: "Better Claims Service",
+          description: "High net worth carriers provide dedicated adjusters, preferred contractors, and faster resolution. We make sure you get the service you're paying for."
         }
       ]}
       
@@ -78,27 +78,27 @@ const HighNetWorthInsurance = () => {
       faqs={[
         {
           question: "Who qualifies for high net worth insurance?",
-          answer: "Most high net worth carriers require a home insured for $1M+ or total insurance premiums exceeding $10,000-$15,000 annually. If you have multiple properties, valuable collections, or significant liability exposure, you likely qualify."
+          answer: "Most carriers require a home insured for $1M+ or total insurance premiums over $10,000-$15,000 per year. If you have multiple properties, valuable collections, or significant liability exposure, you probably qualify."
         },
         {
           question: "How is high net worth insurance different from regular home insurance?",
-          answer: "Key differences include guaranteed replacement cost (no limits on rebuilding), higher built-in liability, worldwide coverage, agreed-value for collections, and superior claims service. The policies are more flexible and comprehensive."
+          answer: "The big differences: guaranteed replacement cost (no caps on rebuilding), higher built-in liability, worldwide coverage, agreed-value for collections, and much better claims service. The policies are more flexible overall."
         },
         {
           question: "What's guaranteed replacement cost and why does it matter?",
-          answer: "Standard policies have limits—if rebuilding costs more than expected, you pay the difference. Guaranteed replacement cost means the carrier pays whatever it actually costs to rebuild your home to its original condition, even if costs exceed estimates."
+          answer: "Standard policies cap how much they'll pay to rebuild. If it costs more than expected, you pay the difference. Guaranteed replacement cost means the carrier pays whatever it actually costs. No surprises."
         },
         {
           question: "Do I need separate policies for my art and jewelry?",
-          answer: "With high net worth insurance, valuable items can be scheduled on your main policy with agreed-value coverage. This provides better protection than standard floaters and simplifies your insurance program."
+          answer: "With high net worth insurance, valuable items can be scheduled on your main policy with agreed-value coverage. Better protection than standard floaters and way simpler to manage."
         },
         {
           question: "Can high net worth insurance cover all my properties?",
-          answer: "Yes. One of the main benefits is consolidating coverage for your primary home, vacation homes, and rental properties under a single, coordinated program. This eliminates gaps and simplifies management."
+          answer: "Yes. That's one of the main benefits. Primary home, vacation homes, rental properties, all under one coordinated program. Eliminates gaps and makes everything easier."
         },
         {
           question: "Is high net worth insurance more expensive?",
-          answer: "Not necessarily. While premiums may be higher than basic policies, you're getting significantly more coverage. Many clients find that high net worth policies are competitively priced when you consider the guaranteed replacement, higher limits, and better service."
+          answer: "Not necessarily. Premiums may be higher than basic policies, but you're getting significantly more coverage. A lot of clients find these policies are competitively priced when you factor in the guaranteed replacement, higher limits, and better service."
         }
       ]}
       

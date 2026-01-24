@@ -7,9 +7,9 @@ const CyberLiability = () => {
       metaTitle="Cyber Liability Insurance in Columbus & Ohio | Scioto Insurance Group"
       metaDescription="Protect your business from data breaches, ransomware, and cyber attacks. Cyber insurance for Ohio businesses. Call (614) 612-0050."
       
-      heroTitle="Cyber Liability Insurance: Protection for the Digital Age"
-      heroSubtitle="Columbus & Ohio Cyber Risk Coverage"
-      heroDescription="Data breaches happen to businesses of every size. Cyber insurance covers notification costs, legal fees, ransom payments, and business interruption. In today's digital world, this coverage is essential—not optional."
+      heroTitle="Cyber Liability Insurance"
+      heroSubtitle="Columbus & Central Ohio Cyber Coverage"
+      heroDescription="Every business that uses computers, stores customer data, or accepts payments needs this now. Ransomware, data breaches, phishing attacks. They're happening to businesses of all sizes."
       
       coverageTitle="What Does Cyber Liability Insurance Cover?"
       coverageItems={[

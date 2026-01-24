@@ -7,9 +7,9 @@ const GeneralLiability = () => {
       metaTitle="General Liability Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
       metaDescription="Protect your business from lawsuits and claims with general liability insurance. We shop 30+ carriers for Ohio businesses. Call (614) 612-0050."
       
-      heroTitle="General Liability Insurance: The Foundation of Business Protection"
+      heroTitle="General Liability Insurance"
       heroSubtitle="Columbus & Central Ohio Business Coverage"
-      heroDescription="Protection when someone gets hurt on your property or claims your work caused damage. Every Ohio business needs general liability—it's the foundation of your commercial insurance program."
+      heroDescription="This is the basic coverage every Ohio business needs. It protects you when someone gets hurt on your property or claims your work caused damage. It's the foundation of your commercial insurance program."
       
       coverageTitle="What Does General Liability Insurance Cover?"
       coverageItems={[
@@ -27,7 +27,7 @@ const GeneralLiability = () => {
         },
         {
           title: "Products-Completed Operations",
-          description: "Covers claims arising from products you sell or work you've completed after leaving the job site."
+          description: "Covers claims from products you sell or work you've completed after you leave the job site."
         },
         {
           title: "Medical Payments",
@@ -35,7 +35,7 @@ const GeneralLiability = () => {
         },
         {
           title: "Legal Defense Costs",
-          description: "Covers attorney fees, court costs, and settlements—even for frivolous lawsuits."
+          description: "Covers attorney fees, court costs, and settlements. Even for frivolous lawsuits."
         },
         {
           title: "Damage to Rented Premises",
@@ -43,25 +43,25 @@ const GeneralLiability = () => {
         },
         {
           title: "Contractual Liability",
-          description: "Protection for liability you assume under certain business contracts."
+          description: "Protection for liability you take on in certain business contracts."
         }
       ]}
       
       whyChooseItems={[
         {
           icon: ShieldCheck,
-          title: "Right Coverage Limits",
-          description: "We analyze your operations, contracts, and exposure to recommend appropriate limits—not just the minimum that keeps premiums low."
+          title: "We Recommend the Right Limits",
+          description: "We look at your operations, contracts, and exposure to recommend appropriate limits. Not just the minimum that keeps premiums low."
         },
         {
           icon: Users,
-          title: "Certificate Management",
+          title: "We Handle Certificates",
           description: "Need certificates of insurance for clients or landlords? We issue them same-day and track renewal dates for you."
         },
         {
           icon: RefreshCw,
-          title: "Claims Advocacy",
-          description: "When claims happen, we guide you through the process and advocate with the carrier to ensure fair treatment."
+          title: "We Help When Claims Happen",
+          description: "When claims come in, we walk you through the process and advocate with the carrier to make sure you're treated fairly."
         }
       ]}
       
@@ -69,27 +69,27 @@ const GeneralLiability = () => {
       faqs={[
         {
           question: "How much general liability insurance do I need?",
-          answer: "Most small businesses start with $1M per occurrence / $2M aggregate limits. However, many contracts and leases require higher limits. We review your contracts and risk exposure to recommend appropriate coverage."
+          answer: "Most small businesses start with $1M per occurrence / $2M aggregate. But a lot of contracts and leases require higher limits. We look at your contracts and risk exposure to recommend appropriate coverage."
         },
         {
           question: "What's the difference between general liability and professional liability?",
-          answer: "General liability covers physical injuries and property damage from your operations. Professional liability (E&O) covers claims that your professional advice or services caused financial harm. Many businesses need both."
+          answer: "General liability covers physical injuries and property damage from your operations. Professional liability (E&O) covers claims that your professional advice or services caused financial harm. A lot of businesses need both."
         },
         {
           question: "Is general liability required by law in Ohio?",
-          answer: "No, but it's required by most commercial leases, contracts, and clients. Operating without it puts your business assets and personal assets (in some business structures) at serious risk."
+          answer: "No, but it's required by most commercial leases, contracts, and clients. Operating without it puts your business assets (and sometimes personal assets) at serious risk."
         },
         {
           question: "Does general liability cover employee injuries?",
-          answer: "No. Employee injuries are covered by workers' compensation insurance, which is separate from and required in addition to general liability in Ohio."
+          answer: "No. Employee injuries are covered by workers' compensation, which is separate from general liability. In Ohio, you need both."
         },
         {
           question: "What doesn't general liability cover?",
-          answer: "Key exclusions include employee injuries (needs workers' comp), professional errors (needs E&O), auto accidents (needs commercial auto), intentional acts, and your own property damage (needs commercial property)."
+          answer: "Key exclusions: employee injuries (that's workers' comp), professional errors (that's E&O), auto accidents (that's commercial auto), intentional acts, and damage to your own property (that's commercial property)."
         },
         {
           question: "How much does general liability insurance cost?",
-          answer: "Premiums vary widely based on your industry, revenue, and claims history. Low-risk office businesses might pay $400-$800/year, while contractors or manufacturers pay significantly more. We shop multiple carriers to find competitive rates."
+          answer: "Varies a lot by industry, revenue, and claims history. Low-risk office businesses might pay $400-$800/year, while contractors or manufacturers pay significantly more. We shop multiple carriers to find competitive rates."
         }
       ]}
       

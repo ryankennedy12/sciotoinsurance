@@ -9,20 +9,20 @@ const UmbrellaInsurance = () => {
       metaDescription="Protect your assets with umbrella liability insurance. $1M+ in additional coverage for Columbus families. Call (614) 612-0050 for a quote."
       
       // Hero
-      heroTitle="Umbrella Insurance: Protection Against Financial Ruin"
+      heroTitle="Umbrella Insurance"
       heroSubtitle="Columbus & Central Ohio Liability Protection"
-      heroDescription="When a lawsuit exceeds your auto or home policy limits, umbrella coverage is the difference between inconvenience and financial ruin. For surprisingly low premiums, protect everything you've worked for."
+      heroDescription="When a lawsuit exceeds your auto or home policy limits, umbrella coverage is what keeps you from losing everything. It costs a lot less than you'd think for a lot more protection than you might expect."
       
       // Coverage
       coverageTitle="What Does Umbrella Insurance Cover?"
       coverageItems={[
         {
           title: "Extended Liability Protection",
-          description: "Kicks in when your auto or home liability limits are exhausted. Typically provides $1M to $5M in additional coverage."
+          description: "Kicks in when your auto or home liability limits run out. Typically provides $1M to $5M in additional coverage."
         },
         {
           title: "Auto Accident Liability",
-          description: "Covers excess liability if you're at fault in a serious car accident that exceeds your auto policy limits."
+          description: "Covers excess liability if you're at fault in a serious car accident that goes beyond your auto policy limits."
         },
         {
           title: "Homeowner Liability",
@@ -30,7 +30,7 @@ const UmbrellaInsurance = () => {
         },
         {
           title: "Defamation & Libel",
-          description: "Coverage for claims of slander, libel, or defamation—increasingly relevant in the social media age."
+          description: "Coverage for claims of slander, libel, or defamation. More relevant now with social media."
         },
         {
           title: "False Arrest & Imprisonment",
@@ -42,11 +42,11 @@ const UmbrellaInsurance = () => {
         },
         {
           title: "Watercraft & RV Coverage",
-          description: "Extends to recreational vehicles and boats that are listed under your umbrella policy."
+          description: "Extends to boats and recreational vehicles that are listed under your umbrella policy."
         },
         {
           title: "Legal Defense Costs",
-          description: "Pays for attorneys, court costs, and settlements—even if the lawsuit is frivolous."
+          description: "Pays for attorneys, court costs, and settlements. Even if the lawsuit is frivolous."
         },
         {
           title: "Worldwide Coverage",
@@ -58,18 +58,18 @@ const UmbrellaInsurance = () => {
       whyChooseItems={[
         {
           icon: ShieldCheck,
-          title: "Affordable Protection",
-          description: "Umbrella insurance is surprisingly affordable—typically $200-$400/year for $1M in coverage. That's less than $1/day to protect your home, savings, and future income."
+          title: "It's Cheaper Than You Think",
+          description: "Umbrella insurance usually runs $200-$400/year for $1M in coverage. That's less than a dollar a day to protect your home, savings, and future income."
         },
         {
           icon: Users,
-          title: "Asset Protection Analysis",
-          description: "We analyze your total net worth, future earning potential, and risk exposure to recommend the right amount of umbrella coverage for your situation."
+          title: "We Figure Out How Much You Need",
+          description: "We look at your total net worth, your future earning potential, and your risk exposure to recommend the right amount."
         },
         {
           icon: RefreshCw,
-          title: "Coordinated Coverage",
-          description: "We ensure your auto, home, and umbrella policies work together seamlessly with no gaps. Proper coordination is essential for claims."
+          title: "We Make Sure Everything Works Together",
+          description: "Your auto, home, and umbrella policies need to line up properly. No gaps. We handle the coordination."
         }
       ]}
       
@@ -78,7 +78,7 @@ const UmbrellaInsurance = () => {
       faqs={[
         {
           question: "Who needs umbrella insurance?",
-          answer: "Anyone with assets to protect should consider umbrella insurance. If you own a home, have savings, earn a good income, or have teenage drivers, you're a target for lawsuits. Umbrella coverage protects your current assets AND future earnings."
+          answer: "Anyone with assets to protect. If you own a home, have savings, earn a good income, or have teenage drivers, you're a target for lawsuits. Umbrella coverage protects your current assets and your future earnings."
         },
         {
           question: "How much umbrella coverage do I need?",
@@ -86,11 +86,11 @@ const UmbrellaInsurance = () => {
         },
         {
           question: "Why is umbrella insurance so affordable?",
-          answer: "Umbrella policies only pay after your underlying policies are exhausted, so claims are less frequent. The high deductible (your auto/home limits) keeps premiums low while still providing massive protection."
+          answer: "It only pays after your other policies are exhausted, so claims don't happen that often. The high deductible (your auto/home limits) keeps premiums low while still providing a lot of protection."
         },
         {
           question: "What doesn't umbrella insurance cover?",
-          answer: "Umbrella insurance doesn't cover your own injuries or property damage, intentional acts, business activities, or professional liability. It also doesn't cover what your underlying policies exclude."
+          answer: "It won't cover your own injuries or property damage, intentional acts, business activities, or professional liability. It also doesn't cover things your underlying policies exclude."
         },
         {
           question: "Do I need higher auto/home limits for an umbrella?",
@@ -98,7 +98,7 @@ const UmbrellaInsurance = () => {
         },
         {
           question: "Does umbrella insurance cover my teenage driver?",
-          answer: "Yes—this is one of the best reasons to have umbrella coverage. Teen drivers are statistically high-risk. If your teen causes a serious accident, your regular auto policy may not be enough to cover the damages."
+          answer: "Yes. This is one of the best reasons to have it. Teen drivers are statistically high-risk. If your teen causes a serious accident, your regular auto policy may not be enough."
         }
       ]}
       
