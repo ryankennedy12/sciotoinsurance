@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroLifeInsurance from "@/assets/hero-life-insurance.jpg";
+import { LifeCoverageCalculator } from "@/components/calculators";
 
 const LifeInsurance = () => {
   return (
@@ -12,6 +14,26 @@ const LifeInsurance = () => {
       heroTitle="Life Insurance for Your Family"
       heroSubtitle="Protection for Ohio Families"
       heroDescription="Term or permanent, simple or complicated. We help you figure out what makes sense for your family. No pressure, no sales pitch. Just an honest conversation about protecting the people who depend on you."
+      heroImage={heroLifeInsurance}
+      
+      // Stats
+      stats={[
+        { value: "500+", label: "Families Protected" },
+        { value: "10+", label: "Carrier Options" },
+        { value: "Free", label: "Needs Analysis" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="How Much Coverage Do You Need?"
+      interactiveElement={<LifeCoverageCalculator />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "They took the time to explain everything without pressure. We finally got coverage we'd been putting off for years.",
+        name: "David & Amy K.",
+        location: "Westerville, OH",
+        helpedWith: "Term Life Insurance"
+      }}
       
       // Coverage
       coverageTitle="Types of Life Insurance We Offer"

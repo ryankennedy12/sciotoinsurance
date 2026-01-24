@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroAutoInsurance from "@/assets/hero-auto-insurance.jpg";
+import { AutoCoverageSlider } from "@/components/calculators";
 
 const AutoInsurance = () => {
   return (
@@ -12,6 +14,26 @@ const AutoInsurance = () => {
       heroTitle="Auto Insurance That Works for You"
       heroSubtitle="Coverage Throughout Ohio"
       heroDescription="We look at how you actually drive, what you're driving, and what you need covered. Then we compare rates from over 30 companies to find something that fits. Most people save a few hundred bucks when they switch."
+      heroImage={heroAutoInsurance}
+      
+      // Stats
+      stats={[
+        { value: "30+", label: "Carriers Compared" },
+        { value: "$400+", label: "Avg. Annual Savings" },
+        { value: "98%", label: "Renewal Rate" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="See What Coverage You Need"
+      interactiveElement={<AutoCoverageSlider />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "Tom found us better coverage for $300 less per year. The whole process took about 20 minutes.",
+        name: "Mike R.",
+        location: "Dublin, OH",
+        helpedWith: "Auto Insurance"
+      }}
       
       // Coverage
       coverageTitle="What Does Auto Insurance Cover?"

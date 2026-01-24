@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroCommercialAuto from "@/assets/hero-commercial-auto.jpg";
+import { FleetCalculator } from "@/components/calculators";
 
 const CommercialAuto = () => {
   return (
@@ -10,6 +12,26 @@ const CommercialAuto = () => {
       heroTitle="Commercial Auto Insurance"
       heroSubtitle="Fleet Coverage for Businesses Nationwide"
       heroDescription="If your business owns vehicles or your employees drive for work, personal auto won't cut it. Commercial auto covers owned vehicles, rented vehicles, and employee-owned cars when they're used for business."
+      heroImage={heroCommercialAuto}
+      
+      // Stats
+      stats={[
+        { value: "Fleet", label: "Specialists" },
+        { value: "Hired & Non-Owned", label: "Coverage" },
+        { value: "Driver Safety", label: "Programs" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Calculate Your Fleet Coverage"
+      interactiveElement={<FleetCalculator />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "Managing insurance for our 15 vehicles was a headache. Scioto consolidated everything and saved us 20% annually.",
+        name: "Central Ohio Plumbing",
+        location: "Hilliard, OH",
+        helpedWith: "Commercial Fleet"
+      }}
       
       coverageTitle="What Does Commercial Auto Insurance Cover?"
       coverageItems={[

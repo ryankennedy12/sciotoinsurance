@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroCyberLiability from "@/assets/hero-cyber-liability.jpg";
+import { CyberRiskScorecard } from "@/components/calculators";
 
 const CyberLiability = () => {
   return (
@@ -10,6 +12,26 @@ const CyberLiability = () => {
       heroTitle="Cyber Liability Insurance"
       heroSubtitle="Cyber Coverage for Businesses Nationwide"
       heroDescription="Every business that uses computers, stores customer data, or accepts payments needs this now. Ransomware, data breaches, phishing attacks. They're happening to businesses of all sizes."
+      heroImage={heroCyberLiability}
+      
+      // Stats
+      stats={[
+        { value: "43%", label: "Attacks Target SMBs" },
+        { value: "$200K+", label: "Avg. Breach Cost" },
+        { value: "24/7", label: "Incident Response" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Check Your Cyber Risk"
+      interactiveElement={<CyberRiskScorecard />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "After a ransomware attack, our cyber policy covered the forensics, customer notification, and business interruption. We'd have been out of business without it.",
+        name: "Tech Solutions Inc.",
+        location: "Dublin, OH",
+        helpedWith: "Cyber Incident"
+      }}
       
       coverageTitle="What Does Cyber Liability Insurance Cover?"
       coverageItems={[

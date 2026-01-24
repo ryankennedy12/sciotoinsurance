@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroHomeInsurance from "@/assets/hero-home-insurance.jpg";
+import { RebuildCostEstimator } from "@/components/calculators";
 
 const HomeInsurance = () => {
   return (
@@ -12,6 +14,26 @@ const HomeInsurance = () => {
       heroTitle="Home Insurance for Ohio Homeowners"
       heroSubtitle="Coverage Throughout Ohio"
       heroDescription="Your home is probably your biggest investment. We know the stuff that can go wrong with Ohio homes: clay soil, basement flooding, freeze-thaw cycles. We'll make sure you're actually covered for what matters."
+      heroImage={heroHomeInsurance}
+      
+      // Stats
+      stats={[
+        { value: "1,200+", label: "Homes Protected" },
+        { value: "24hr", label: "Claims Response" },
+        { value: "15%", label: "Avg. Bundle Savings" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Estimate Your Rebuild Cost"
+      interactiveElement={<RebuildCostEstimator />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "After a basement flood, Sarah walked us through everything. The claim was handled faster than we expected.",
+        name: "Jennifer L.",
+        location: "New Albany, OH",
+        helpedWith: "Home Insurance Claim"
+      }}
       
       // Coverage
       coverageTitle="What Does Home Insurance Cover?"

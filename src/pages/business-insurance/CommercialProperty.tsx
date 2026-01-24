@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroCommercialProperty from "@/assets/hero-commercial-property.jpg";
+import { PropertyGapChecklist } from "@/components/calculators";
 
 const CommercialProperty = () => {
   return (
@@ -10,6 +12,26 @@ const CommercialProperty = () => {
       heroTitle="Commercial Property Insurance"
       heroSubtitle="Commercial Coverage Nationwide"
       heroDescription="Your building, equipment, inventory, and everything else you need to operate. Covered against fire, theft, weather, and disasters. A single event shouldn't be able to wipe out years of work."
+      heroImage={heroCommercialProperty}
+      
+      // Stats
+      stats={[
+        { value: "Replacement", label: "Cost Valuation" },
+        { value: "Business Income", label: "Coverage Included" },
+        { value: "Annual", label: "Coverage Reviews" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Check Your Coverage Gaps"
+      interactiveElement={<PropertyGapChecklist />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "After a fire damaged our warehouse, Scioto helped us get back up and running. The business income coverage saved us.",
+        name: "Thompson Manufacturing",
+        location: "Grove City, OH",
+        helpedWith: "Property Claim"
+      }}
       
       coverageTitle="What Does Commercial Property Insurance Cover?"
       coverageItems={[

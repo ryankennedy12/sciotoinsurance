@@ -1,5 +1,7 @@
 import ProductDetailTemplate from "@/components/ProductDetailTemplate";
 import { ShieldCheck, Users, RefreshCw } from "lucide-react";
+import heroGeneralLiability from "@/assets/hero-general-liability.jpg";
+import { LiabilityLimitTool } from "@/components/calculators";
 
 const GeneralLiability = () => {
   return (
@@ -10,6 +12,26 @@ const GeneralLiability = () => {
       heroTitle="General Liability Insurance"
       heroSubtitle="Coverage for Businesses Nationwide"
       heroDescription="This is the basic coverage every business needs. It protects you when someone gets hurt on your property or claims your work caused damage. It's the foundation of your commercial insurance program."
+      heroImage={heroGeneralLiability}
+      
+      // Stats
+      stats={[
+        { value: "30+", label: "Business Carriers" },
+        { value: "Same-Day", label: "Certificates" },
+        { value: "24hr", label: "Claims Support" }
+      ]}
+      
+      // Interactive Tool
+      interactiveTitle="Find Your Recommended Limits"
+      interactiveElement={<LiabilityLimitTool />}
+      
+      // Testimonial
+      testimonial={{
+        quote: "When a customer slipped at our store, Scioto handled everything. The claim was resolved quickly and professionally.",
+        name: "Maria S.",
+        location: "Columbus, OH",
+        helpedWith: "General Liability Claim"
+      }}
       
       coverageTitle="What Does General Liability Insurance Cover?"
       coverageItems={[
