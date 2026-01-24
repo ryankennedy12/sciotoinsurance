@@ -7,8 +7,22 @@ import heroFamily from "@/assets/hero-family.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
 import businessOffice from "@/assets/business-office.jpg";
 import teamMeeting from "@/assets/team-meeting.jpg";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Only track scroll for the hero section (first viewport height)
+      if (window.scrollY < window.innerHeight) {
+        setScrollY(window.scrollY);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   // Trust row items with icons
   const trustItems = [
     { icon: Star, label: "5.0", sublabel: "Rating" },
@@ -19,12 +33,15 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section - Full Viewport with Real Family Image */}
+      {/* Hero Section - Full Viewport with Real Family Image + Parallax */}
       <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image with Parallax Effect */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroFamily})` }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 will-change-transform"
+          style={{ 
+            backgroundImage: `url(${heroFamily})`,
+            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`,
+          }}
         />
         
         {/* Burgundy Overlay - 20% opacity for text contrast */}
