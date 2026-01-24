@@ -254,37 +254,30 @@ const Home = () => {
             {/* Desktop Layout with Stagger */}
             <div className="hidden lg:grid lg:grid-cols-12 lg:gap-6 lg:items-start">
               
-              {/* Panel 1 - Personal Insurance (Larger, starts higher) */}
+              {/* Panel 1 - Personal Insurance with prominent image */}
               <Link
                 to="/personal-insurance"
                 className="col-span-5 group relative z-20"
               >
-                <div className="relative bg-gradient-to-br from-primary to-burgundy-800 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 min-h-[380px] flex flex-col justify-between overflow-hidden">
-                  {/* Background Image */}
+                <div className="relative rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 min-h-[380px] flex flex-col overflow-hidden">
+                  {/* Full Background Image */}
                   <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                    className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${familyHomeService})` }}
                   />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-burgundy-800/95" />
+                  {/* Gradient Overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/40" />
                   
-                  {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gold-500/10 rounded-full translate-y-1/2 -translate-x-1/2" />
-                  
-                  <div className="relative z-10 p-space-lg lg:p-space-xl">
+                  <div className="relative z-10 p-space-lg lg:p-space-xl flex flex-col justify-end h-full">
                     <h3 className="font-display font-semibold text-2xl lg:text-3xl text-white mb-space-sm">
                       Personal Insurance
                     </h3>
                     <p className="font-body text-cream/90 text-lg mb-space-md">
                       Protect your family, your home, and your future.
                     </p>
-                    <p className="font-body text-sm text-cream/70 tracking-wide">
+                    <p className="font-body text-sm text-cream/70 tracking-wide mb-space-md">
                       Auto • Home • Life • Umbrella • Renters
                     </p>
-                  </div>
-                  
-                  <div className="relative z-10 p-space-lg lg:p-space-xl pt-0">
                     <span className="inline-flex items-center gap-2 font-body font-medium text-white group-hover:gap-3 transition-all duration-300">
                       Explore Personal Coverage
                       <span className="text-lg">→</span>
@@ -293,36 +286,31 @@ const Home = () => {
                 </div>
               </Link>
 
-              {/* Panel 2 - Business Insurance (Middle, offset down) */}
+              {/* Panel 2 - Business Insurance with prominent image */}
               <Link
                 to="/business-insurance"
                 className="col-span-4 group relative z-10 lg:mt-16"
               >
-                <div className="relative bg-cream rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[340px] flex flex-col justify-between border border-gray-200/50 overflow-hidden">
-                  {/* Background Image */}
+                <div className="relative rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[340px] flex flex-col overflow-hidden">
+                  {/* Full Background Image */}
                   <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-15 transition-opacity duration-500"
+                    className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${businessOffice})` }}
                   />
-                  {/* Subtle Pattern */}
-                  <div className="absolute inset-0 opacity-[0.03] rounded-lg" style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B2942' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-                  }} />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
                   
-                  <div className="relative z-10 p-space-lg">
-                    <h3 className="font-display font-semibold text-2xl text-foreground mb-space-sm">
+                  <div className="relative z-10 p-space-lg flex flex-col justify-end h-full">
+                    <h3 className="font-display font-semibold text-2xl text-white mb-space-sm">
                       Business Insurance
                     </h3>
-                    <p className="font-body text-muted-foreground text-lg mb-space-md">
+                    <p className="font-body text-white/90 text-lg mb-space-md">
                       Risk management built around how you actually operate.
                     </p>
-                    <p className="font-body text-sm text-muted-foreground/70 tracking-wide">
+                    <p className="font-body text-sm text-white/70 tracking-wide mb-space-md">
                       Liability • Property • Workers' Comp • Commercial Auto
                     </p>
-                  </div>
-                  
-                  <div className="relative z-10 p-space-lg pt-0">
-                    <span className="inline-flex items-center gap-2 font-body font-medium text-primary group-hover:gap-3 transition-all duration-300">
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-white group-hover:gap-3 transition-all duration-300">
                       Explore Business Coverage
                       <span className="text-lg">→</span>
                     </span>
@@ -330,32 +318,31 @@ const Home = () => {
                 </div>
               </Link>
 
-              {/* Panel 3 - Employee Benefits (Right, offset more) */}
+              {/* Panel 3 - Employee Benefits with prominent image */}
               <Link
                 to="/employee-benefits"
                 className="col-span-3 group relative z-0 lg:mt-32"
               >
-                <div className="relative bg-white rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[300px] flex flex-col justify-between border-l-4 border-primary overflow-hidden">
-                  {/* Background Image */}
+                <div className="relative rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[300px] flex flex-col overflow-hidden">
+                  {/* Full Background Image */}
                   <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-15 transition-opacity duration-500"
+                    className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${teamMeeting})` }}
                   />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/30" />
                   
-                  <div className="relative z-10 p-space-lg">
-                    <h3 className="font-display font-semibold text-xl text-foreground mb-space-sm">
+                  <div className="relative z-10 p-space-lg flex flex-col justify-end h-full">
+                    <h3 className="font-display font-semibold text-xl text-white mb-space-sm">
                       Employee Benefits
                     </h3>
-                    <p className="font-body text-muted-foreground mb-space-md">
+                    <p className="font-body text-white/90 mb-space-md">
                       Attract and keep great people with benefits that compete.
                     </p>
-                    <p className="font-body text-xs text-muted-foreground/70 tracking-wide leading-relaxed">
+                    <p className="font-body text-xs text-white/70 tracking-wide leading-relaxed mb-space-sm">
                       Group Health • Dental & Vision • Life & Disability • 401(k)
                     </p>
-                  </div>
-                  
-                  <div className="relative z-10 p-space-lg pt-0">
-                    <span className="inline-flex items-center gap-2 font-body font-medium text-sm text-primary group-hover:gap-3 transition-all duration-300">
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-sm text-white group-hover:gap-3 transition-all duration-300">
                       Explore Benefits
                       <span>→</span>
                     </span>
@@ -364,60 +351,80 @@ const Home = () => {
               </Link>
             </div>
 
-            {/* Mobile Layout - Stacked */}
+            {/* Mobile Layout - Stacked with photos */}
             <div className="lg:hidden flex flex-col gap-space-md">
               {/* Mobile Panel 1 */}
               <Link to="/personal-insurance" className="group">
-                <div className="relative bg-gradient-to-br from-primary to-burgundy-800 rounded-lg p-space-lg shadow-lg">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-                  <h3 className="font-display font-semibold text-2xl text-white mb-space-xs relative z-10">
-                    Personal Insurance
-                  </h3>
-                  <p className="font-body text-cream/90 mb-space-sm relative z-10">
-                    Protect your family, your home, and your future.
-                  </p>
-                  <p className="font-body text-xs text-cream/70 tracking-wide mb-space-md relative z-10">
-                    Auto • Home • Life • Umbrella • Renters
-                  </p>
-                  <span className="inline-flex items-center gap-2 font-body font-medium text-white relative z-10">
-                    Explore Coverage →
-                  </span>
+                <div className="relative rounded-lg shadow-lg overflow-hidden min-h-[200px] flex flex-col justify-end">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${familyHomeService})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/30" />
+                  <div className="relative z-10 p-space-lg">
+                    <h3 className="font-display font-semibold text-2xl text-white mb-space-xs">
+                      Personal Insurance
+                    </h3>
+                    <p className="font-body text-cream/90 mb-space-sm">
+                      Protect your family, your home, and your future.
+                    </p>
+                    <p className="font-body text-xs text-cream/70 tracking-wide mb-space-md">
+                      Auto • Home • Life • Umbrella • Renters
+                    </p>
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-white">
+                      Explore Coverage →
+                    </span>
+                  </div>
                 </div>
               </Link>
 
               {/* Mobile Panel 2 */}
               <Link to="/business-insurance" className="group">
-                <div className="relative bg-cream rounded-lg p-space-lg shadow-md border border-gray-200/50">
-                  <h3 className="font-display font-semibold text-2xl text-foreground mb-space-xs">
-                    Business Insurance
-                  </h3>
-                  <p className="font-body text-muted-foreground mb-space-sm">
-                    Risk management built around how you actually operate.
-                  </p>
-                  <p className="font-body text-xs text-muted-foreground/70 tracking-wide mb-space-md">
-                    Liability • Property • Workers' Comp • Commercial Auto
-                  </p>
-                  <span className="inline-flex items-center gap-2 font-body font-medium text-primary">
-                    Explore Coverage →
-                  </span>
+                <div className="relative rounded-lg shadow-lg overflow-hidden min-h-[200px] flex flex-col justify-end">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${businessOffice})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
+                  <div className="relative z-10 p-space-lg">
+                    <h3 className="font-display font-semibold text-2xl text-white mb-space-xs">
+                      Business Insurance
+                    </h3>
+                    <p className="font-body text-white/90 mb-space-sm">
+                      Risk management built around how you actually operate.
+                    </p>
+                    <p className="font-body text-xs text-white/70 tracking-wide mb-space-md">
+                      Liability • Property • Workers' Comp • Commercial Auto
+                    </p>
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-white">
+                      Explore Coverage →
+                    </span>
+                  </div>
                 </div>
               </Link>
 
               {/* Mobile Panel 3 */}
               <Link to="/employee-benefits" className="group">
-                <div className="relative bg-white rounded-lg p-space-lg shadow-md border-l-4 border-primary">
-                  <h3 className="font-display font-semibold text-2xl text-foreground mb-space-xs">
-                    Employee Benefits
-                  </h3>
-                  <p className="font-body text-muted-foreground mb-space-sm">
-                    Attract and keep great people with benefits that compete.
-                  </p>
-                  <p className="font-body text-xs text-muted-foreground/70 tracking-wide mb-space-md">
-                    Group Health • Dental & Vision • Life & Disability • 401(k)
-                  </p>
-                  <span className="inline-flex items-center gap-2 font-body font-medium text-primary">
-                    Explore Benefits →
-                  </span>
+                <div className="relative rounded-lg shadow-lg overflow-hidden min-h-[200px] flex flex-col justify-end">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${teamMeeting})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/30" />
+                  <div className="relative z-10 p-space-lg">
+                    <h3 className="font-display font-semibold text-2xl text-white mb-space-xs">
+                      Employee Benefits
+                    </h3>
+                    <p className="font-body text-white/90 mb-space-sm">
+                      Attract and keep great people with benefits that compete.
+                    </p>
+                    <p className="font-body text-xs text-white/70 tracking-wide mb-space-md">
+                      Group Health • Dental & Vision • Life & Disability • 401(k)
+                    </p>
+                    <span className="inline-flex items-center gap-2 font-body font-medium text-white">
+                      Explore Benefits →
+                    </span>
+                  </div>
                 </div>
               </Link>
             </div>
