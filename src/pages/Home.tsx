@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Star, Clock, Users, Shield } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import CarrierLogoGrid from "@/components/CarrierLogoGrid";
+
 import TestimonialCard from "@/components/TestimonialCard";
 import heroFamily from "@/assets/hero-family.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
@@ -174,8 +174,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Carrier Logo Grid */}
-      <CarrierLogoGrid />
 
       {/* Why Scioto Insurance Group Section */}
       <section className="py-16 sm:py-space-3xl bg-cream">
