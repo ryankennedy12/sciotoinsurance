@@ -5,12 +5,12 @@ const LifeInsurance = () => {
   return (
     <ProductDetailTemplate
       // SEO
-      metaTitle="Life Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
-      metaDescription="Term and permanent life insurance for Columbus families. We help you figure out what your family actually needs. Call (614) 612-0050 for guidance."
+      metaTitle="Life Insurance in Ohio | Scioto Insurance Group"
+      metaDescription="Term and permanent life insurance for Ohio families. We help you figure out what your family actually needs. Call (614) 612-0050 for guidance."
       
       // Hero
       heroTitle="Life Insurance for Your Family"
-      heroSubtitle="Columbus & Central Ohio Life Coverage"
+      heroSubtitle="Protection for Ohio Families"
       heroDescription="Term or permanent, simple or complicated. We help you figure out what makes sense for your family. No pressure, no sales pitch. Just an honest conversation about protecting the people who depend on you."
       
       // Coverage

@@ -4,11 +4,11 @@ import { ShieldCheck, Users, RefreshCw } from "lucide-react";
 const CommercialProperty = () => {
   return (
     <ProductDetailTemplate
-      metaTitle="Commercial Property Insurance in Columbus & Ohio | Scioto Insurance Group"
-      metaDescription="Protect your building, equipment, and inventory with commercial property insurance. Coverage for Ohio businesses. Call (614) 612-0050."
+      metaTitle="Commercial Property Insurance | Scioto Insurance Group"
+      metaDescription="Protect your building, equipment, and inventory with commercial property insurance. Coverage for businesses nationwide. Call (614) 612-0050."
       
       heroTitle="Commercial Property Insurance"
-      heroSubtitle="Columbus & Central Ohio Commercial Coverage"
+      heroSubtitle="Commercial Coverage Nationwide"
       heroDescription="Your building, equipment, inventory, and everything else you need to operate. Covered against fire, theft, weather, and disasters. A single event shouldn't be able to wipe out years of work."
       
       coverageTitle="What Does Commercial Property Insurance Cover?"

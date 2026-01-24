@@ -13,10 +13,10 @@ const PersonalInsurance = () => {
               Personal Insurance
             </p>
             <h1 className="font-display font-semibold text-3xl lg:text-5xl text-foreground leading-tight mb-space-md">
-              Personal Insurance for Ohio Families
+              Personal Insurance Throughout Ohio
             </h1>
             <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[540px]">
-              Your car, your house, your family's future. We help you figure out what you actually need and find the best price for it.
+              Your car, your house, your family's future. We help Ohio families figure out what they actually need and find the best price for it.
             </p>
             <Link
               to="/get-quote"

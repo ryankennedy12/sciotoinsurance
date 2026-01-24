@@ -4,11 +4,11 @@ import { ShieldCheck, Users, RefreshCw } from "lucide-react";
 const CommercialAuto = () => {
   return (
     <ProductDetailTemplate
-      metaTitle="Commercial Auto Insurance in Columbus & Ohio | Scioto Insurance Group"
-      metaDescription="Commercial vehicle coverage for Ohio businesses. Protect company cars, trucks, and fleets. Call (614) 612-0050 for a quote."
+      metaTitle="Commercial Auto Insurance | Scioto Insurance Group"
+      metaDescription="Commercial vehicle coverage for businesses nationwide. Protect company cars, trucks, and fleets. Call (614) 612-0050 for a quote."
       
       heroTitle="Commercial Auto Insurance"
-      heroSubtitle="Columbus & Central Ohio Fleet Coverage"
+      heroSubtitle="Fleet Coverage for Businesses Nationwide"
       heroDescription="If your business owns vehicles or your employees drive for work, personal auto won't cut it. Commercial auto covers owned vehicles, rented vehicles, and employee-owned cars when they're used for business."
       
       coverageTitle="What Does Commercial Auto Insurance Cover?"

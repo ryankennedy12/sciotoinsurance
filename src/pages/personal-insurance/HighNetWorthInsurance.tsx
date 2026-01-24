@@ -5,12 +5,12 @@ const HighNetWorthInsurance = () => {
   return (
     <ProductDetailTemplate
       // SEO
-      metaTitle="High Net Worth Insurance in Columbus & New Albany, OH | Scioto Insurance Group"
+      metaTitle="High Net Worth Insurance in Ohio | Scioto Insurance Group"
       metaDescription="Comprehensive protection for affluent households. Specialized coverage for luxury homes, collections, and liability. Call (614) 612-0050."
       
       // Hero
       heroTitle="High Net Worth Insurance"
-      heroSubtitle="Comprehensive Coverage for Affluent Households"
+      heroSubtitle="Specialized Coverage for Ohio's Affluent Families"
       heroDescription="Standard insurance policies have limits that don't make sense for complex estates. High net worth coverage gives you guaranteed replacement cost, higher liability limits, and protection for the things you actually own."
       
       // Coverage

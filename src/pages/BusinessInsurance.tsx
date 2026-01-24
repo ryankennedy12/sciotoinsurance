@@ -24,10 +24,10 @@ const BusinessInsurance = () => {
               Business Insurance
             </p>
             <h1 className="font-display font-semibold text-3xl lg:text-5xl text-foreground leading-tight mb-space-md">
-              Business Insurance for Ohio Companies
+              Business Insurance Across the U.S.
             </h1>
             <p className="font-body text-lg text-muted-foreground mb-space-lg max-w-[540px]">
-              A contractor doesn't need the same coverage as a restaurant. We'll build a policy around what you actually do, not some generic template.
+              A contractor doesn't need the same coverage as a restaurant. We'll build a policy around what you actually do. We serve businesses nationwide, not just Ohio.
             </p>
             <Link
               to="/get-quote"
@@ -136,7 +136,7 @@ const BusinessInsurance = () => {
               Industries We Work With
             </h2>
             <p className="font-body text-lg text-muted-foreground max-w-[600px] mx-auto">
-              We've insured hundreds of Ohio businesses. Here are some of the industries we know best.
+              We work with businesses across the country. Here are some of the industries we know best.
             </p>
           </div>
 
