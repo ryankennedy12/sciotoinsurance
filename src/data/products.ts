@@ -34,37 +34,37 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: Home,
         name: "Home Insurance",
-        description: "Your home is your biggest investment. We make sure it's covered for what it would actually cost to rebuild.",
+        description: "Your home is probably your biggest investment. We make sure it's covered for what it would actually cost to rebuild.",
         slug: "home"
       },
       {
         icon: Car,
         name: "Auto Insurance",
-        description: "More than state minimums. Actual protection for your car, your passengers, and your peace of mind.",
+        description: "We compare rates from 30+ companies to find coverage that makes sense for how you actually drive.",
         slug: "auto"
       },
       {
         icon: Key,
         name: "Renters Insurance",
-        description: "Your landlord's insurance doesn't cover your stuff. Starting at around $15/month, there's no excuse not to have this.",
+        description: "Your landlord's insurance doesn't cover your stuff. This starts around $15/month. Worth it.",
         slug: "renters"
       },
       {
         icon: Building,
         name: "Condo Insurance",
-        description: "Covers what your HOA policy doesn't — your unit's interior, your belongings, and your liability.",
+        description: "Covers what your HOA policy doesn't. Your unit's interior, your belongings, and your liability.",
         slug: "condo"
       },
       {
         icon: Umbrella,
         name: "Umbrella Insurance",
-        description: "When a lawsuit exceeds your auto or home policy limits, umbrella coverage is the difference between inconvenience and financial ruin.",
+        description: "When a lawsuit exceeds your auto or home policy limits, this is what keeps you from losing everything.",
         slug: "umbrella"
       },
       {
         icon: PawPrint,
         name: "Pet Insurance",
-        description: "Vet bills add up fast. Pet insurance means you make medical decisions based on what's best for your pet, not your wallet.",
+        description: "Vet bills add up fast. This means you can make medical decisions based on what's best for your pet.",
         slug: "pet"
       },
     ]
@@ -75,13 +75,13 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: Heart,
         name: "Life Insurance",
-        description: "Term or permanent, simple or complex — we help you figure out what your family actually needs.",
+        description: "Term or permanent, simple or complicated. We help you figure out what makes sense for your family.",
         slug: "life"
       },
       {
         icon: Shield,
         name: "Long-Term Disability Insurance",
-        description: "Replaces your income if illness or injury keeps you from working. Your most valuable asset is your ability to earn.",
+        description: "Replaces your income if illness or injury keeps you from working. Your ability to earn is your most valuable asset.",
         slug: "long-term-disability"
       },
       {
@@ -93,13 +93,13 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: PiggyBank,
         name: "Annuities",
-        description: "Guaranteed income for retirement. We'll help you understand which type fits your situation.",
+        description: "Guaranteed income for retirement. We can help you understand which type fits your situation.",
         slug: "annuities"
       },
       {
         icon: Briefcase,
         name: "Individual Retirement",
-        description: "IRAs and retirement planning solutions to secure your future beyond employer-sponsored plans.",
+        description: "IRAs and retirement planning solutions beyond what your employer offers.",
         slug: "individual-retirement"
       },
     ]
@@ -116,7 +116,7 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: Caravan,
         name: "RV Insurance",
-        description: "Whether it's a weekend camper or a full-time home on wheels, get coverage that travels with you.",
+        description: "Whether it's a weekend camper or you're living in it full-time, we'll find coverage that travels with you.",
         slug: "rv"
       },
       {
@@ -128,13 +128,13 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: Ship,
         name: "Watercraft Insurance",
-        description: "Boats, jet skis, and personal watercraft. Coverage for the vessel, liability, and passengers.",
+        description: "Boats, jet skis, personal watercraft. Coverage for the vessel, liability, and passengers.",
         slug: "watercraft"
       },
       {
         icon: Mountain,
         name: "Off-Road Vehicle Insurance",
-        description: "ATVs, UTVs, dirt bikes, and snowmobiles. Protection for the vehicles your auto policy won't cover.",
+        description: "ATVs, UTVs, dirt bikes, snowmobiles. Your auto policy won't cover these.",
         slug: "off-road"
       },
       {
@@ -151,13 +151,13 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: Droplets,
         name: "Flood Insurance",
-        description: "Standard home insurance doesn't cover floods. If you're in a flood zone, this isn't optional.",
+        description: "Your home policy doesn't cover floods. If you're in a flood zone (or near water), you need this.",
         slug: "flood"
       },
       {
         icon: Globe,
         name: "Earthquake Insurance",
-        description: "Protect your home from ground-up damage that standard policies exclude.",
+        description: "Protects your home from ground-up damage that standard policies exclude.",
         slug: "earthquake"
       },
       {
@@ -209,7 +209,7 @@ export const personalInsuranceProducts: ProductCategory[] = [
       {
         icon: Package,
         name: "Home & Auto Bundle",
-        description: "Save money and simplify your coverage by bundling your home and auto policies together.",
+        description: "Save money and simplify things by bundling your home and auto policies together.",
         slug: "home-auto-bundle"
       },
       {
@@ -244,25 +244,25 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: Shield,
         name: "General Liability Insurance",
-        description: "Protection when someone gets hurt on your property or claims your work caused damage. The foundation of business coverage.",
+        description: "Protection when someone gets hurt on your property or claims your work caused damage. Every business needs this.",
         slug: "general-liability"
       },
       {
         icon: Briefcase,
         name: "Business Owners Policy (BOP)",
-        description: "Bundles property and liability coverage at a lower cost than buying separately. Smart choice for small to mid-sized businesses.",
+        description: "Bundles property and liability coverage at a lower cost than buying separately. Works well for small to mid-sized businesses.",
         slug: "bop"
       },
       {
         icon: Building2,
         name: "Commercial Property Insurance",
-        description: "Your building, equipment, inventory, and everything you need to operate — covered against fire, theft, and disasters.",
+        description: "Your building, equipment, inventory, and everything else you need to operate. Covered against fire, theft, and disasters.",
         slug: "commercial-property"
       },
       {
         icon: Truck,
         name: "Commercial Auto Insurance",
-        description: "If your business owns vehicles or your employees drive for work, personal auto policies won't cover you. This will.",
+        description: "If your business owns vehicles or employees drive for work, personal auto won't cut it. This will.",
         slug: "commercial-auto"
       },
     ]
@@ -273,13 +273,13 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: HardHat,
         name: "Workers' Compensation Insurance",
-        description: "Required in Ohio if you have employees. We help you stay compliant and find competitive rates.",
+        description: "Required in Ohio if you have employees. We help you stay compliant and find ways to lower your costs.",
         slug: "workers-comp"
       },
       {
         icon: Scale,
         name: "Professional Liability Insurance (E&O)",
-        description: "When a client claims your professional advice or services caused them harm. Essential for consultants, accountants, and service providers.",
+        description: "When a client claims your advice or services cost them money. Essential for consultants, accountants, and service providers.",
         slug: "professional-liability"
       },
       {
@@ -291,7 +291,7 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: Users,
         name: "Employment Practices Liability (EPLI)",
-        description: "Protection against claims of discrimination, harassment, wrongful termination, and other employment-related issues.",
+        description: "Protection against claims of discrimination, harassment, wrongful termination, and other employment issues.",
         slug: "employment-practices"
       },
       {
@@ -303,7 +303,7 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: Umbrella,
         name: "Commercial Umbrella Insurance",
-        description: "Extra liability protection that kicks in when your other policies reach their limits.",
+        description: "Extra liability protection that kicks in when your other policies hit their limits.",
         slug: "commercial-umbrella"
       },
     ]
@@ -338,7 +338,7 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: Wrench,
         name: "Contractors Insurance",
-        description: "Specialized coverage packages designed for the unique risks contractors face on every job.",
+        description: "Specialized coverage packages built for the risks contractors face on every job.",
         slug: "contractors"
       },
     ]
@@ -367,7 +367,7 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: Cog,
         name: "Systems Breakdown Insurance",
-        description: "Covers mechanical and electrical breakdown of equipment not covered by property insurance.",
+        description: "Covers mechanical and electrical breakdown of equipment that property insurance doesn't.",
         slug: "systems-breakdown"
       },
     ]
@@ -401,7 +401,7 @@ export const businessInsuranceProducts: ProductCategory[] = [
       {
         icon: BarChart3,
         name: "Risk Management",
-        description: "Consulting services to identify, assess, and mitigate risks before they become claims.",
+        description: "We help you identify and reduce risks before they become claims.",
         slug: "risk-management"
       },
     ]
@@ -420,7 +420,7 @@ export const employeeBenefitsProducts: Product[] = [
   {
     icon: Heart,
     name: "Group Health Insurance",
-    description: "Navigate the complexity of group health plans with an advisor who actually returns your calls. We work with all major carriers to find the right fit for your team and budget.",
+    description: "Group health is complicated. We help you find the right fit for your team and budget, and we actually return your calls.",
     slug: "group-health"
   },
   {
@@ -450,7 +450,7 @@ export const employeeBenefitsProducts: Product[] = [
   {
     icon: Gift,
     name: "Group Voluntary Benefits",
-    description: "Additional options employees can choose and pay for themselves — a way to enhance your package without increasing costs.",
+    description: "Additional options employees can choose and pay for themselves. Enhances your package without increasing your costs.",
     slug: "voluntary"
   },
   {
@@ -480,35 +480,35 @@ export const employeeBenefitsProducts: Product[] = [
 export const personalInsuranceReasons = [
   {
     icon: ShieldCheck,
-    title: "We shop 30+ carriers to find your best rate",
-    description: "As an independent agency, we're not locked into one company. We compare options to get you the best coverage at the best price.",
+    title: "We compare 30+ carriers for you",
+    description: "We're not locked into one company. We shop around to find the best coverage at the best price.",
   },
   {
     icon: Users,
-    title: "Local claims support when you need it most",
-    description: "When something goes wrong, you won't be transferred to a call center. We're here in New Albany, advocating for you.",
+    title: "Local support when something goes wrong",
+    description: "When you need help, you won't get transferred to a call center. We're here in New Albany, working for you.",
   },
   {
     icon: RefreshCw,
-    title: "Annual policy reviews to catch coverage gaps",
-    description: "Life changes. We proactively review your coverage each year to make sure you're never under-insured or overpaying.",
+    title: "We check your coverage every year",
+    description: "Life changes. We review your coverage each year to make sure you're not underinsured or overpaying.",
   },
 ];
 
 export const businessInsuranceReasons = [
   {
     icon: ShieldCheck,
-    title: "Industry-specific expertise",
-    description: "We understand the unique risks your industry faces and build coverage programs that address them.",
+    title: "We know your industry",
+    description: "We understand the specific risks your industry faces and build coverage programs that address them.",
   },
   {
     icon: Users,
-    title: "Dedicated account management",
-    description: "You get a real person who knows your business, not a different rep every time you call.",
+    title: "You get a real person",
+    description: "You have a dedicated account manager who knows your business. Same person every time you call.",
   },
   {
     icon: RefreshCw,
-    title: "Proactive risk management",
-    description: "We help you identify and mitigate risks before they become claims, potentially lowering your premiums.",
+    title: "We help you prevent claims",
+    description: "We identify and reduce risks before they become problems. That can lower your premiums too.",
   },
 ];
