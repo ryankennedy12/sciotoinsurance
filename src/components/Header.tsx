@@ -69,6 +69,7 @@ const businessInsuranceItems = [
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNearFooter, setIsNearFooter] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
@@ -81,6 +82,21 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Hide header when footer is visible
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsNearFooter(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, []);
 
   // Close mobile menu on route change
@@ -117,10 +133,11 @@ const Header = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,transform,opacity] duration-300",
           isScrolled
             ? "bg-white/98 backdrop-blur-sm shadow-sm"
-            : "bg-cream/80 backdrop-blur-sm"
+            : "bg-cream/80 backdrop-blur-sm",
+          isNearFooter && !isMobileMenuOpen && "-translate-y-full opacity-0"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg">
