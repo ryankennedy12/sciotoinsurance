@@ -57,13 +57,13 @@ const Home = () => {
         />
         
         {/* Burgundy Overlay - stronger on mobile for text contrast */}
-        <div className="absolute inset-0 bg-burgundy-800/40 lg:bg-burgundy-800/20" />
+        <div className="absolute inset-0 bg-burgundy-800/30 lg:bg-burgundy-800/20" />
         
         {/* Additional gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/70 via-charcoal/50 to-transparent lg:from-charcoal/60 lg:via-charcoal/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/40 to-transparent lg:from-charcoal/60 lg:via-charcoal/40" />
 
         {/* Mobile-only bottom gradient for CTA/trust badge area */}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/20 to-transparent lg:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/15 to-transparent lg:hidden" />
 
         {/* Content Container with Fade-out on Scroll */}
         <div 
