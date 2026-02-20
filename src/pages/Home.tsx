@@ -68,7 +68,7 @@ const Home = () => {
         {/* Content Container with Fade-out on Scroll */}
         <div 
           ref={heroContentRef}
-          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-24 lg:pb-16"
+          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-36 lg:pb-16"
           style={{ willChange: "transform, opacity" }}
         >
           <div className="max-w-3xl">
