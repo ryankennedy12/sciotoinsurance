@@ -55,7 +55,7 @@ const Home = () => {
 
         {/* Content Container with Fade-out on Scroll */}
         <div 
-          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-32 lg:pb-24 will-change-transform"
+          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-24 lg:pb-16 will-change-transform"
           style={{ 
             opacity: Math.max(0, 1 - scrollY / 400),
             transform: `translateY(${scrollY * 0.15}px)`,
