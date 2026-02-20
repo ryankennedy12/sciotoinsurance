@@ -17,7 +17,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
               <img 
                 src={logo} 
                 alt="Scioto Insurance Group" 
-                className="h-20 sm:h-24 w-auto"
+                className="h-24 sm:h-28 w-auto"
               />
             </Link>
             
