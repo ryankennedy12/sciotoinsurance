@@ -302,6 +302,8 @@ const Home = () => {
                 className="col-span-5 group relative z-20"
               >
                 <div className="relative rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 min-h-[380px] flex flex-col overflow-hidden">
+                  {/* Hidden img for preload scanner — forces early download */}
+                  <img src={familyHomeService} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none" />
                   {/* Full Background Image */}
                   <div 
                     className="absolute inset-0 bg-cover bg-center"
@@ -334,6 +336,8 @@ const Home = () => {
                 className="col-span-4 group relative z-10 lg:mt-16"
               >
                 <div className="relative rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[340px] flex flex-col overflow-hidden">
+                  {/* Hidden img for preload scanner — forces early download */}
+                  <img src={businessOffice} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none" />
                   {/* Full Background Image */}
                   <div 
                     className="absolute inset-0 bg-cover bg-center"
@@ -366,6 +370,8 @@ const Home = () => {
                 className="col-span-3 group relative z-0 lg:mt-32"
               >
                 <div className="relative rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 min-h-[300px] flex flex-col overflow-hidden">
+                  {/* Hidden img for preload scanner — forces early download */}
+                  <img src={teamMeeting} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none" />
                   {/* Full Background Image */}
                   <div 
                     className="absolute inset-0 bg-cover bg-center"
@@ -398,6 +404,7 @@ const Home = () => {
               {/* Mobile Panel 1 */}
               <Link to="/personal-insurance" className="group">
                 <div className="relative rounded-lg shadow-lg overflow-hidden min-h-[200px] flex flex-col justify-end">
+                  <img src={familyHomeService} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none" />
                   <div 
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${familyHomeService})` }}
@@ -423,6 +430,7 @@ const Home = () => {
               {/* Mobile Panel 2 */}
               <Link to="/business-insurance" className="group">
                 <div className="relative rounded-lg shadow-lg overflow-hidden min-h-[200px] flex flex-col justify-end">
+                  <img src={businessOffice} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none" />
                   <div 
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${businessOffice})` }}
@@ -448,6 +456,7 @@ const Home = () => {
               {/* Mobile Panel 3 */}
               <Link to="/employee-benefits" className="group">
                 <div className="relative rounded-lg shadow-lg overflow-hidden min-h-[200px] flex flex-col justify-end">
+                  <img src={teamMeeting} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none" />
                   <div 
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${teamMeeting})` }}
