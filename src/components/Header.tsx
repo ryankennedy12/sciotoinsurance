@@ -117,7 +117,7 @@ const Header = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
           isScrolled
             ? "bg-white/98 backdrop-blur-sm shadow-sm"
             : "bg-cream/80 backdrop-blur-sm"
@@ -187,7 +187,7 @@ const Header = () => {
             <Link
               to="/get-quote"
               className={cn(
-                "hidden lg:inline-flex items-center justify-center px-6 py-3 rounded text-sm font-body font-medium transition-all duration-300",
+                "hidden lg:inline-flex items-center justify-center px-6 py-3 rounded text-sm font-body font-medium transition-[transform,box-shadow,background-color] duration-300",
                 "bg-primary text-primary-foreground hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-lg"
               )}
             >
@@ -225,7 +225,7 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[100] lg:hidden transition-all duration-500",
+          "fixed inset-0 z-[100] lg:hidden transition-[opacity] duration-500",
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -254,7 +254,7 @@ const Header = () => {
         {/* Mobile Navigation Links - Scrollable */}
         <nav
           className={cn(
-            "relative z-10 h-full flex flex-col pt-20 pb-8 px-6 overflow-y-auto transition-all duration-500 delay-200",
+            "relative z-10 h-full flex flex-col pt-20 pb-8 px-6 overflow-y-auto transition-[transform,opacity] duration-500 delay-200",
             isMobileMenuOpen
               ? "opacity-100 translate-x-0"
               : "opacity-0 translate-x-8"
@@ -451,7 +451,7 @@ const MegaMenu = ({ categories, viewAllHref, viewAllText, isOpen }: MegaMenuProp
   return (
     <div
       className={cn(
-        "absolute top-full left-1/2 -translate-x-1/2 transition-all duration-300",
+        "absolute top-full left-1/2 -translate-x-1/2 transition-[transform,opacity] duration-300",
         isOpen
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 -translate-y-2 pointer-events-none"
@@ -520,7 +520,7 @@ const MobileNavLink = ({ to, children, onClick }: MobileNavLinkProps) => {
       to={to}
       onClick={onClick}
       className={cn(
-        "block py-3 font-display text-2xl font-semibold transition-all duration-300",
+        "block py-3 font-display text-2xl font-semibold transition-colors duration-300",
         isActive ? "text-white" : "text-white/90 hover:text-white"
       )}
     >

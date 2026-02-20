@@ -8,18 +8,25 @@ import heroFamily from "@/assets/hero-family.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
 import businessOffice from "@/assets/business-office.jpg";
 import teamMeeting from "@/assets/team-meeting.jpg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const Home = () => {
-  const [scrollY, setScrollY] = useState(0);
   const isPageReady = usePageReady();
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  const heroContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const heroBg = heroBgRef.current;
+    const heroContent = heroContentRef.current;
+    if (!heroBg || !heroContent) return;
+
     const handleScroll = () => {
-      // Only track scroll for the hero section (first viewport height)
-      if (window.scrollY < window.innerHeight) {
-        setScrollY(window.scrollY);
-      }
+      const y = window.scrollY;
+      if (y >= window.innerHeight) return;
+      // Write directly to DOM — zero React re-renders
+      heroBg.style.transform = `translateY(${y * 0.3}px) scale(1.1)`;
+      heroContent.style.opacity = String(Math.max(0, 1 - y / 400));
+      heroContent.style.transform = `translateY(${y * 0.15}px)`;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -40,10 +47,13 @@ const Home = () => {
       <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden">
         {/* Background Image with Parallax Effect */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 will-change-transform"
+          ref={heroBgRef}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
           style={{ 
             backgroundImage: `url(${heroFamily})`,
-            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`,
+            transform: `translateY(0px) scale(1.1)`,
+            willChange: "transform",
+            contain: "strict",
           }}
         />
         
@@ -55,16 +65,14 @@ const Home = () => {
 
         {/* Content Container with Fade-out on Scroll */}
         <div 
-          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-24 lg:pb-16 will-change-transform"
-          style={{ 
-            opacity: Math.max(0, 1 - scrollY / 400),
-            transform: `translateY(${scrollY * 0.15}px)`,
-          }}
+          ref={heroContentRef}
+          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-24 lg:pb-16"
+          style={{ willChange: "transform, opacity" }}
         >
           <div className="max-w-3xl">
             {/* Main Headline - Cormorant Garamond */}
             <h1 
-              className={`font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 transition-all duration-500 ease-out motion-reduce:transition-none ${
+              className={`font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
@@ -73,7 +81,7 @@ const Home = () => {
 
             {/* Subheadline - Body text, larger size */}
             <p 
-              className={`font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 transition-all duration-500 ease-out motion-reduce:transition-none ${
+              className={`font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: isPageReady ? "75ms" : "0ms" }}
@@ -83,7 +91,7 @@ const Home = () => {
 
             {/* Trust Row - Horizontal with icons and dividers */}
             <div 
-              className={`flex flex-wrap items-center gap-4 lg:gap-0 mb-8 transition-all duration-500 ease-out motion-reduce:transition-none ${
+              className={`flex flex-wrap items-center gap-4 lg:gap-0 mb-8 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: isPageReady ? "150ms" : "0ms" }}
@@ -119,7 +127,7 @@ const Home = () => {
 
             {/* Dual CTAs - Large buttons, side by side */}
             <div 
-              className={`flex flex-col sm:flex-row gap-4 mb-6 transition-all duration-500 ease-out motion-reduce:transition-none ${
+              className={`flex flex-col sm:flex-row gap-4 mb-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: isPageReady ? "225ms" : "0ms" }}
@@ -127,7 +135,7 @@ const Home = () => {
               {/* Primary CTA */}
               <Link
                 to="/get-quote"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,opacity,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
               >
                 Get Your Free Quote
                 <ArrowRight className="w-5 h-5" />
@@ -136,7 +144,7 @@ const Home = () => {
               {/* Secondary CTA */}
               <a
                 href="tel:6146120050"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white text-primary border-2 border-primary font-body font-semibold text-base transition-all duration-300 hover:bg-primary hover:text-white active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white text-primary border-2 border-primary font-body font-semibold text-base transition-[transform,opacity,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-white active:scale-[0.98]"
               >
                 <Phone className="w-5 h-5" />
                 Talk to a Real Person
@@ -145,7 +153,7 @@ const Home = () => {
 
             {/* Trust Reassurances - Small text with gold checkmarks */}
             <div 
-              className={`flex flex-wrap items-center gap-4 sm:gap-6 transition-all duration-500 ease-out motion-reduce:transition-none ${
+              className={`flex flex-wrap items-center gap-4 sm:gap-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: isPageReady ? "300ms" : "0ms" }}
@@ -194,7 +202,7 @@ const Home = () => {
           {/* Value Proposition Cards */}
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl">
             {/* Card 1 - Independent */}
-            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
               {/* Handshake Icon */}
               <div className="mb-4 sm:mb-space-md">
                 <Scale className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
@@ -208,7 +216,7 @@ const Home = () => {
             </AnimatedSection>
 
             {/* Card 2 - Experience */}
-            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
               {/* Shield Icon */}
               <div className="mb-4 sm:mb-space-md">
                 <ShieldCheck className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
@@ -222,7 +230,7 @@ const Home = () => {
             </AnimatedSection>
 
             {/* Card 3 - Human */}
-            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 sm:col-span-2 md:col-span-1">
+            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
               {/* Phone/Person Icon */}
               <div className="mb-4 sm:mb-space-md">
                 <PhoneCall className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
@@ -243,7 +251,7 @@ const Home = () => {
             </p>
             <Link
               to="/about"
-              className="inline-flex items-center gap-1 font-body font-medium text-primary hover:underline transition-all duration-300"
+              className="inline-flex items-center gap-1 font-body font-medium text-primary hover:underline transition-[opacity] duration-300"
             >
               See Our Reviews
               <span className="text-lg">→</span>
@@ -274,7 +282,7 @@ const Home = () => {
             <AnimatedSection animation="fade-up" delay={50}>
               <Link to="/personal-insurance" className="group block">
                 {/* Desktop: side-by-side | Mobile: stacked */}
-                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative">
+                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
                   {/* Burgundy accent bar — top of card */}
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
@@ -308,9 +316,9 @@ const Home = () => {
                         </li>
                       ))}
                     </ul>
-                    <span className="inline-flex items-center gap-2 font-body font-semibold text-primary group-hover:gap-3 transition-all duration-300 text-sm">
+                    <span className="inline-flex items-center gap-2 font-body font-semibold text-primary text-sm">
                       Explore Personal Coverage
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </div>
@@ -320,7 +328,7 @@ const Home = () => {
             {/* Card 2 — Business Insurance */}
             <AnimatedSection animation="fade-up" delay={150}>
               <Link to="/business-insurance" className="group block">
-                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative">
+                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}
@@ -352,9 +360,9 @@ const Home = () => {
                         </li>
                       ))}
                     </ul>
-                    <span className="inline-flex items-center gap-2 font-body font-semibold text-primary group-hover:gap-3 transition-all duration-300 text-sm">
+                    <span className="inline-flex items-center gap-2 font-body font-semibold text-primary text-sm">
                       Explore Business Coverage
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </div>
@@ -364,7 +372,7 @@ const Home = () => {
             {/* Card 3 — Employee Benefits */}
             <AnimatedSection animation="fade-up" delay={250}>
               <Link to="/employee-benefits" className="group block">
-                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative">
+                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}
@@ -396,9 +404,9 @@ const Home = () => {
                         </li>
                       ))}
                     </ul>
-                    <span className="inline-flex items-center gap-2 font-body font-semibold text-primary group-hover:gap-3 transition-all duration-300 text-sm">
+                    <span className="inline-flex items-center gap-2 font-body font-semibold text-primary text-sm">
                       Explore Benefits
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </div>
@@ -513,14 +521,14 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-4 sm:mb-space-md">
             <Link
               to="/get-quote"
-              className="inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[transform,opacity,box-shadow,background-color] duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
             >
               Get Your Free Quote
             </Link>
             
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 py-3 font-body font-medium text-primary hover:underline transition-all duration-300"
+              className="inline-flex items-center gap-2 py-3 font-body font-medium text-primary hover:underline transition-[opacity] duration-300"
             >
               <Phone className="w-4 h-4" />
               Or call us: (614) 612-0050

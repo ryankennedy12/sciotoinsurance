@@ -67,7 +67,7 @@ const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
           }
         }}
         className={cn(
-          "transition-all motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:translate-y-0 motion-reduce:scale-100",
+          "transition-[transform,opacity] motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:translate-y-0 motion-reduce:scale-100",
           isVisible ? visible : hidden,
           className
         )}

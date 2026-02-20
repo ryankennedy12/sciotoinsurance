@@ -54,10 +54,10 @@ const Layout = () => {
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
         <main 
-          className={`flex-1 transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+          className={`flex-1 transition-[opacity] duration-300 ease-out motion-reduce:transition-none ${
             transitionStage === "enter" ? "opacity-100" : "opacity-0"
           }`}
-          style={{ willChange: transitionStage === "hidden" ? "opacity" : "auto" }}
+          style={{ willChange: "opacity" }}
         >
           <Outlet />
         </main>
