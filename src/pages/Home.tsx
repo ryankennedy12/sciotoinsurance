@@ -111,14 +111,9 @@ const Home = () => {
                     ) : (
                       <item.icon className="w-5 h-5 text-gold-500" />
                     )}
-                    <div className="flex items-baseline gap-1">
-                      <span className="font-body font-semibold text-white text-sm lg:text-base">
-                        {item.label}
-                      </span>
-                      <span className="font-body text-white/70 text-xs hidden sm:inline">
-                        {item.sublabel}
-                      </span>
-                    </div>
+                    <span className="font-body font-semibold text-white text-sm lg:text-base">
+                      {item.label}{item.sublabel ? ` ${item.sublabel}` : ''}
+                    </span>
                   </div>
                   {/* Vertical Divider */}
                   {index < trustItems.length - 1 && (
