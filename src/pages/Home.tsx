@@ -48,7 +48,7 @@ const Home = () => {
         {/* Background Image with Parallax Effect */}
         <div 
           ref={heroBgRef}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+          className="absolute inset-0 bg-cover bg-[center_30%] md:bg-center bg-no-repeat scale-110"
           style={{ 
             backgroundImage: `url(${heroFamily})`,
             transform: `translateY(0px) scale(1.1)`,
@@ -57,11 +57,14 @@ const Home = () => {
           }}
         />
         
-        {/* Burgundy Overlay - 20% opacity for text contrast */}
-        <div className="absolute inset-0 bg-burgundy-800/20" />
+        {/* Burgundy Overlay - stronger on mobile for text contrast */}
+        <div className="absolute inset-0 bg-burgundy-800/40 lg:bg-burgundy-800/20" />
         
         {/* Additional gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/70 via-charcoal/50 to-transparent lg:from-charcoal/60 lg:via-charcoal/40" />
+
+        {/* Mobile-only bottom gradient for CTA/trust badge area */}
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/20 to-transparent lg:hidden" />
 
         {/* Content Container with Fade-out on Scroll */}
         <div 
@@ -75,6 +78,7 @@ const Home = () => {
               className={`font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
             >
               Ohio Families Trust Us to Protect What Matters Most
             </h1>
@@ -84,7 +88,7 @@ const Home = () => {
               className={`font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
                 isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
-              style={{ transitionDelay: isPageReady ? "75ms" : "0ms" }}
+              style={{ transitionDelay: isPageReady ? "75ms" : "0ms", textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
             >
               We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
             </p>
