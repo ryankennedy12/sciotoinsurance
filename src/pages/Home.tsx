@@ -172,21 +172,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator - Desktop only with fade on scroll */}
-        <div 
-          className={`hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/70 transition-all duration-500 ease-out motion-reduce:transition-none ${
-            isPageReady ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ 
-            transitionDelay: isPageReady ? "400ms" : "0ms",
-            opacity: isPageReady ? Math.max(0, 1 - scrollY / 200) : 0,
-          }}
-        >
-          <span className="font-body text-xs uppercase tracking-wider">Explore</span>
-          <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-white/70 rounded-full animate-bounce" />
-          </div>
-        </div>
       </section>
 
 
