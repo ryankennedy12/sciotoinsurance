@@ -1,78 +1,93 @@
 
-# Fix Hero Photo & Image Pop-In Loading
+# Option A: Split Photo/Text Cards — Coverage Section Redesign
 
-## Problems Identified
+## What's Changing
 
-### 1. Hero Image — Too Many People, No Clear Hierarchy
-The current hero image (`hero-family.jpg`) shows four people standing together at roughly the same visual weight — two adults and two children — with no clear focal point or emotional center. This creates visual noise rather than warmth. A better image should have 2-3 people maximum, with a clear subject (e.g., a couple in front of their home, or a parent and child) that instantly communicates "family protection."
+The current "Coverage for Every Chapter" section uses a cascading staircase layout with 3 cards that progressively shrink (col-span-5, col-span-4, col-span-3) and progressively drop lower (mt-0, mt-16, mt-32). All text sits on top of dark photo overlays, making it hard to read. This will be replaced with 3 equal-height split cards stacked vertically, each with a photo on the left and clean text on the right.
 
-**Solution:** Generate a new AI hero image — a couple (husband and wife, mid-40s) standing in front of a classic Ohio suburban home with warm golden-hour lighting. Clean, confident, emotionally clear. The home is visible and prominent in the background.
+## Visual Design — Option A
 
-### 2. Image Pop-In — CSS Background Images Don't Preload
-Every image-backed section on the homepage (the 3 service panels: Personal Insurance, Business Insurance, Employee Benefits) uses inline CSS `background-image` styles. The browser's HTML preload scanner cannot detect CSS `background-image` URLs — it can only detect `<img src>` tags and `<link rel="preload">` hints. This means those images only begin downloading after:
-1. JavaScript runs
-2. React renders the DOM
-3. The browser paints the elements and parses their inline styles
+```text
+┌────────────────────────────────────────────────────────────┐
+│  [PHOTO — left 45%]  │  Personal Insurance                │
+│  family home photo   │  Protect your family, home, future │
+│  (soft right-fade)   │  • Auto  • Home  • Life  • Umbrella │
+│                      │  Explore Personal Coverage →        │
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│  [PHOTO — left 45%]  │  Business Insurance                │
+│  business office     │  Risk management for your business  │
+│  photo               │  • Liability • Property • Workers   │
+│                      │  Explore Business Coverage →        │
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│  [PHOTO — left 45%]  │  Employee Benefits                 │
+│  team meeting        │  Attract and keep great people      │
+│  photo               │  • Group Health • 401(k) • Dental   │
+│                      │  Explore Benefits →                 │
+└────────────────────────────────────────────────────────────┘
+```
 
-By that point, the user is already looking at a blank/gray panel, and then the image "pops in."
-
-**Solution:** Convert critical background images to use a hidden `<img>` tag technique: keep the visual CSS background-image approach (for `object-fit` and overlay compatibility), but add an `<img>` element with `fetchpriority` and `loading` attributes that forces early discovery by the preload scanner. Also add `<link rel="preload">` hints in `index.html` for the 3 most critical section images.
-
----
+Each card is exactly **360px tall** on desktop. The left photo panel fades into the right text panel using a CSS `mask-image` gradient (white → transparent, right edge). The text panel sits on a clean **cream/white background** — no dark overlay, no contrast issues.
 
 ## Technical Implementation
 
-### Phase 1: New Hero Image Generation
-Generate a new hero image using AI with the following prompt:
-- A couple in their mid-40s, husband and wife, standing confidently in front of a beautiful traditional Ohio suburban home
-- Warm golden hour light, late afternoon
-- Home is clearly visible — brick exterior, well-maintained lawn, mature trees
-- The couple is smiling, looking at the camera, standing close together
-- Photo style: professional real estate / lifestyle photography
-- Horizontal landscape orientation, suitable for a full-screen website hero
-- The right half of the image should be slightly less busy (for text overlay on the left)
+**File to edit:** `src/pages/Home.tsx`, lines 255–455 (the entire Services Overview section)
 
-### Phase 2: Fix Image Pop-In with Preload Hints
-**In `index.html`:** Add `<link rel="preload" as="image">` for the 3 service panel images that appear just below the fold:
-```html
-<link rel="preload" as="image" href="/src/assets/family-home-service.jpg">
-<link rel="preload" as="image" href="/src/assets/business-office.jpg">
-<link rel="preload" as="image" href="/src/assets/team-meeting.jpg">
-```
+### Desktop Layout (lg+)
+- Section `<section>`: background `bg-cream`, `py-space-2xl`
+- A `flex flex-col gap-6` container holding 3 cards
+- Each card: `flex flex-row h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300`
+- **Left panel** (45% width): `relative w-[45%] flex-shrink-0 overflow-hidden`
+  - `<img>` with `object-cover w-full h-full group-hover:scale-105 transition-transform duration-500`
+  - Fade mask: `::after` pseudo-element OR an absolutely positioned `<div>` with `bg-gradient-to-r from-transparent to-cream` on the right edge (last 30%) to softly blend photo into text panel
+- **Right panel** (55% width): `bg-white` (or `bg-cream`) with padding `p-10 xl:p-12`, `flex flex-col justify-center`
+  - 2px burgundy-700 accent bar at the very top of the card (`absolute top-0 left-0 right-0 h-0.5 bg-primary`)
+  - Category label in gold-500, small uppercase tracking: e.g. "PERSONAL COVERAGE"
+  - H3 in `font-display font-semibold text-2xl` in `text-foreground`
+  - Description paragraph in `text-muted-foreground`
+  - Coverage bullet list: 4 items with small gold checkmark icons (`CheckCircle` lucide icon, `text-gold-500`)
+  - Arrow CTA link in `text-primary font-medium` with hover underline and animated `→`
 
-**In `Home.tsx`:** Add hidden `<img>` tags inside each service panel div. These are invisible to the user (aria-hidden, positioned absolutely, opacity-0) but fully visible to the preload scanner, so downloads start before React has even mounted:
+### Mobile Layout (below lg)
+- Cards stack vertically
+- Each card: `flex flex-col rounded-xl overflow-hidden shadow-md` (no min-height needed)
+- Top portion: photo at `h-48` with `object-cover`
+- Bottom portion: text on cream background with padding `p-6`
+- Same gold checkmark bullets and burgundy CTA
 
-```tsx
-{/* Hidden img for browser preload scanner discovery */}
-<img 
-  src={familyHomeService} 
-  alt="" 
-  aria-hidden="true"
-  fetchPriority="high"
-  className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none"
-/>
-{/* Keep existing CSS background-image for visual rendering */}
-<div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${familyHomeService})` }} />
-```
+### Hover Effects
+- Entire card lifts: `hover:-translate-y-1 hover:shadow-xl transition-all duration-300`
+- Photo subtly zooms: `group-hover:scale-105 transition-transform duration-500`
+- CTA arrow widens gap: `group-hover:gap-3`
+- No other color changes needed — the clean background already reads well
 
-This dual-layer approach ensures:
-- Images start downloading as early as possible (preload scanner)
-- Visual rendering stays exactly the same (CSS background-image + overlays)
-- No layout shift or visible change to the design
+### Coverage Bullet Items
 
-### Phase 3: TypeScript fetchpriority Type Fix
-Add an `HTMLAttributes` extension for `fetchPriority` to prevent TypeScript errors since it's a newer attribute.
+**Personal Insurance**
+- Auto Insurance
+- Home Insurance
+- Life Insurance
+- Umbrella & Renters
 
----
+**Business Insurance**
+- General Liability
+- Commercial Property
+- Workers' Compensation
+- Cyber Liability
 
-## Files to Modify
+**Employee Benefits**
+- Group Health Insurance
+- Dental & Vision
+- Life & Disability
+- 401(k) & Retirement
 
-1. **`index.html`** — Add 3 preload hints for the service panel images
-2. **`src/pages/Home.tsx`** — Add hidden `<img>` tags inside each of the 3 service panels (both desktop and mobile versions)
-3. **`src/assets/hero-family.jpg`** — Replace with AI-generated image of couple at home (cleaner, 2-person hierarchy)
+### Imports Required
+- Add `CheckCircle` to the existing lucide-react import on line 2 of `Home.tsx`
+- All 3 image imports already exist (`familyHomeService`, `businessOffice`, `teamMeeting`)
 
-## Expected Outcome
-- Hero shows a clean, clear couple-at-home image with immediate emotional resonance
-- All 3 service panel images load before or simultaneously with the page render, eliminating the "pop-in" effect
-- The site feels polished and fast from the first paint
-
+## What Stays the Same
+- Section headline "Coverage for Every Chapter" and its AnimatedSection wrapper
+- The `AnimatedSection` scroll animations on each card (staggered delay)
+- All link destinations (`/personal-insurance`, `/business-insurance`, `/employee-benefits`)
+- Everything below this section (testimonials, CTA section, footer) is completely untouched
