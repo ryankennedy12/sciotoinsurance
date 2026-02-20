@@ -212,9 +212,9 @@ const Header = () => {
                 aria-label="Open menu"
               >
                 <div className="w-6 h-5 flex flex-col justify-between">
-                  <span className="block h-0.5 w-full bg-charcoal transition-all" />
-                  <span className="block h-0.5 w-full bg-charcoal transition-all" />
-                  <span className="block h-0.5 w-full bg-charcoal transition-all" />
+                  <span className="block h-0.5 w-full bg-charcoal transition-transform" />
+                  <span className="block h-0.5 w-full bg-charcoal transition-transform" />
+                  <span className="block h-0.5 w-full bg-charcoal transition-transform" />
                 </div>
               </button>
             </div>
