@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, Clock, Users, Shield } from "lucide-react";
+import { Phone, ArrowRight, Star, Clock, Users, Shield, Scale, ShieldCheck, PhoneCall } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
@@ -197,13 +197,7 @@ const Home = () => {
             <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Handshake Icon */}
               <div className="mb-4 sm:mb-space-md">
-                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M8 28l6-6 4 4 8-8 4 4 6-6" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M14 34l-6 6M34 34l6 6" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="14" cy="20" r="4" />
-                  <circle cx="34" cy="20" r="4" />
-                  <path d="M18 20h12" strokeLinecap="round" />
-                </svg>
+                <Scale className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
                 Independent, Not Corporate
@@ -217,10 +211,7 @@ const Home = () => {
             <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               {/* Shield Icon */}
               <div className="mb-4 sm:mb-space-md">
-                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M24 4L6 12v12c0 11 8 18 18 22 10-4 18-11 18-22V12L24 4z" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M16 24l6 6 10-12" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ShieldCheck className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
                 29 Years in the Industry
@@ -234,12 +225,7 @@ const Home = () => {
             <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 sm:col-span-2 md:col-span-1">
               {/* Phone/Person Icon */}
               <div className="mb-4 sm:mb-space-md">
-                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-primary" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="24" cy="14" r="6" />
-                  <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12" strokeLinecap="round" />
-                  <path d="M36 28l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M40 32h-6" strokeLinecap="round" />
-                </svg>
+                <PhoneCall className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
                 A Human Answers the Phone
