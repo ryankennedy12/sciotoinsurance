@@ -48,12 +48,11 @@ const Home = () => {
         {/* Background Image with Parallax Effect */}
         <div 
           ref={heroBgRef}
-          className="absolute inset-0 bg-cover bg-[center_30%] md:bg-center bg-no-repeat scale-110"
+          className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat scale-110"
           style={{ 
             backgroundImage: `url(${heroFamily})`,
             transform: `translateY(0px) scale(1.1)`,
             willChange: "transform",
-            contain: "strict",
           }}
         />
         
