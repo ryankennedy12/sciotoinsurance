@@ -124,13 +124,13 @@ const Header = () => {
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
+          <div className="flex items-center justify-between h-16 sm:h-18 lg:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center group">
               <img 
                 src={logo} 
                 alt="Scioto Insurance Group" 
-                className="h-16 sm:h-20 lg:h-24 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-12 sm:h-14 lg:h-16 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
