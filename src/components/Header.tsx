@@ -84,7 +84,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Hide header when footer is visible
+  // Hide header when footer logo area is visible
   useEffect(() => {
     const footer = document.querySelector("footer");
     if (!footer) return;
@@ -93,11 +93,11 @@ const Header = () => {
       ([entry]) => {
         setIsNearFooter(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0, rootMargin: "-80px 0px 0px 0px" }
     );
     observer.observe(footer);
     return () => observer.disconnect();
-  }, []);
+  }, [location.pathname]);
 
   // Close mobile menu on route change
   useEffect(() => {
