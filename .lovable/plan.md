@@ -1,93 +1,140 @@
 
-# Option A: Split Photo/Text Cards — Coverage Section Redesign
+# Smooth Scrolling & Animation Performance Fix
 
-## What's Changing
+## Root Cause Diagnosis
 
-The current "Coverage for Every Chapter" section uses a cascading staircase layout with 3 cards that progressively shrink (col-span-5, col-span-4, col-span-3) and progressively drop lower (mt-0, mt-16, mt-32). All text sits on top of dark photo overlays, making it hard to read. This will be replaced with 3 equal-height split cards stacked vertically, each with a photo on the left and clean text on the right.
+After reading through all the relevant files, I've identified **5 specific causes** of the janky scrolling experience. Every single one is fixable without changing the visual design.
 
-## Visual Design — Option A
+---
 
-```text
-┌────────────────────────────────────────────────────────────┐
-│  [PHOTO — left 45%]  │  Personal Insurance                │
-│  family home photo   │  Protect your family, home, future │
-│  (soft right-fade)   │  • Auto  • Home  • Life  • Umbrella │
-│                      │  Explore Personal Coverage →        │
-└────────────────────────────────────────────────────────────┘
-┌────────────────────────────────────────────────────────────┐
-│  [PHOTO — left 45%]  │  Business Insurance                │
-│  business office     │  Risk management for your business  │
-│  photo               │  • Liability • Property • Workers   │
-│                      │  Explore Business Coverage →        │
-└────────────────────────────────────────────────────────────┘
-┌────────────────────────────────────────────────────────────┐
-│  [PHOTO — left 45%]  │  Employee Benefits                 │
-│  team meeting        │  Attract and keep great people      │
-│  photo               │  • Group Health • 401(k) • Dental   │
-│                      │  Explore Benefits →                 │
-└────────────────────────────────────────────────────────────┘
+## The 5 Problems (Ranked by Severity)
+
+### Problem 1 — CRITICAL: JavaScript Scroll Handler Causes React Re-renders on Every Frame
+
+**File:** `src/pages/Home.tsx`, lines 14–27
+
+```js
+const [scrollY, setScrollY] = useState(0);
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY < window.innerHeight) {
+      setScrollY(window.scrollY); // ← CALLED ON EVERY SCROLL EVENT
+    }
+  };
+  window.addEventListener("scroll", handleScroll, { passive: true });
+}, []);
 ```
 
-Each card is exactly **360px tall** on desktop. The left photo panel fades into the right text panel using a CSS `mask-image` gradient (white → transparent, right edge). The text panel sits on a clean **cream/white background** — no dark overlay, no contrast issues.
+Every pixel the user scrolls triggers `setScrollY()`, which forces React to **re-render the entire `Home` component** — all 539 lines of it. This is the #1 cause of jank. The parallax transform and opacity values are applied via inline `style={}` using this state value, which React must recalculate and repaint on every frame.
 
-## Technical Implementation
+**Fix:** Replace React state with a `useRef` + direct DOM manipulation. Write the `transform` and `opacity` values directly to the element via a ref, bypassing React's render cycle entirely. The scroll handler never touches state — it only touches the DOM element directly.
 
-**File to edit:** `src/pages/Home.tsx`, lines 255–455 (the entire Services Overview section)
+---
 
-### Desktop Layout (lg+)
-- Section `<section>`: background `bg-cream`, `py-space-2xl`
-- A `flex flex-col gap-6` container holding 3 cards
-- Each card: `flex flex-row h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300`
-- **Left panel** (45% width): `relative w-[45%] flex-shrink-0 overflow-hidden`
-  - `<img>` with `object-cover w-full h-full group-hover:scale-105 transition-transform duration-500`
-  - Fade mask: `::after` pseudo-element OR an absolutely positioned `<div>` with `bg-gradient-to-r from-transparent to-cream` on the right edge (last 30%) to softly blend photo into text panel
-- **Right panel** (55% width): `bg-white` (or `bg-cream`) with padding `p-10 xl:p-12`, `flex flex-col justify-center`
-  - 2px burgundy-700 accent bar at the very top of the card (`absolute top-0 left-0 right-0 h-0.5 bg-primary`)
-  - Category label in gold-500, small uppercase tracking: e.g. "PERSONAL COVERAGE"
-  - H3 in `font-display font-semibold text-2xl` in `text-foreground`
-  - Description paragraph in `text-muted-foreground`
-  - Coverage bullet list: 4 items with small gold checkmark icons (`CheckCircle` lucide icon, `text-gold-500`)
-  - Arrow CTA link in `text-primary font-medium` with hover underline and animated `→`
+### Problem 2 — HIGH: `transition-all` Is Being Used Everywhere
 
-### Mobile Layout (below lg)
-- Cards stack vertically
-- Each card: `flex flex-col rounded-xl overflow-hidden shadow-md` (no min-height needed)
-- Top portion: photo at `h-48` with `object-cover`
-- Bottom portion: text on cream background with padding `p-6`
-- Same gold checkmark bullets and burgundy CTA
+**Files:** `src/pages/Home.tsx`, `src/components/Header.tsx`, `src/components/ui/animated-section.tsx`
 
-### Hover Effects
-- Entire card lifts: `hover:-translate-y-1 hover:shadow-xl transition-all duration-300`
-- Photo subtly zooms: `group-hover:scale-105 transition-transform duration-500`
-- CTA arrow widens gap: `group-hover:gap-3`
-- No other color changes needed — the clean background already reads well
+`transition-all` tells the browser to watch **every animatable CSS property** for changes and smooth them all. This is extremely expensive because it forces the browser to check layout-affecting properties (width, height, padding, margin) during transitions — not just compositor-friendly ones like `transform` and `opacity`.
 
-### Coverage Bullet Items
+Specific occurrences:
+- Card hover: `transition-all duration-300` (lines 197, 211, 225, 277, 323, 367)
+- `AnimatedSection`: `transition-all` (animated-section.tsx line 70)
+- Header: `transition-all duration-300` (multiple places)
+- CTA arrow: `group-hover:gap-3 transition-all duration-300` — animating `gap` forces layout recalculation
 
-**Personal Insurance**
-- Auto Insurance
-- Home Insurance
-- Life Insurance
-- Umbrella & Renters
+**Fix:** Replace every `transition-all` with `transition-[transform,opacity,box-shadow]` — only the properties that actually change. Also change the CTA arrow animation from `gap` change to a `translateX` on the icon itself.
 
-**Business Insurance**
-- General Liability
-- Commercial Property
-- Workers' Compensation
-- Cyber Liability
+---
 
-**Employee Benefits**
-- Group Health Insurance
-- Dental & Vision
-- Life & Disability
-- 401(k) & Retirement
+### Problem 3 — HIGH: `will-change` Is Misapplied and Missing
 
-### Imports Required
-- Add `CheckCircle` to the existing lucide-react import on line 2 of `Home.tsx`
-- All 3 image imports already exist (`familyHomeService`, `businessOffice`, `teamMeeting`)
+**File:** `src/components/Layout.tsx`, line 60
 
-## What Stays the Same
-- Section headline "Coverage for Every Chapter" and its AnimatedSection wrapper
-- The `AnimatedSection` scroll animations on each card (staggered delay)
-- All link destinations (`/personal-insurance`, `/business-insurance`, `/employee-benefits`)
-- Everything below this section (testimonials, CTA section, footer) is completely untouched
+```js
+style={{ willChange: transitionStage === "hidden" ? "opacity" : "auto" }}
+```
+
+`will-change: opacity` is only being applied during the `"hidden"` stage (before the page appears). Once the page is visible and `transitionStage === "enter"`, it's reset to `"auto"` — meaning the browser gets no GPU acceleration hint for the actual scroll animations happening below.
+
+Meanwhile, the hero background div on `Home.tsx` line 43 has `will-change-transform` correctly, but the content div on line 58 (which also translates and fades on scroll) does NOT have `will-change` set. This means the browser has to promote that layer mid-animation, causing a flash/jank.
+
+**Fix:** Add `will-change: transform, opacity` to both the hero background and the hero content container as a static inline style (not conditional), and remove the misapplied conditional `willChange` from `Layout.tsx`.
+
+---
+
+### Problem 4 — MEDIUM: Too Many `AnimatedSection` Instances Creating Too Many Observers
+
+**File:** `src/hooks/useScrollAnimation.tsx` + `src/pages/Home.tsx`
+
+The Home page has **12+ separate `AnimatedSection` components**, each creating its own `IntersectionObserver` instance. While IntersectionObserver is generally cheap, 12+ observers all potentially firing during a single scroll movement adds up, especially when combined with Problems 1 and 2.
+
+Additionally, `AnimatedSection` uses `transition-all` (line 70 of animated-section.tsx) on every animated element, compounding Problem 2.
+
+**Fix:** 
+1. Fix `transition-all` in `AnimatedSection` to `transition-[transform,opacity]`
+2. Reduce stagger delays — currently delays go up to 300ms, meaning the last card doesn't fully appear until 300ms + 400ms = 700ms after it enters view. This creates a sluggish feel. Reduce max stagger to 150ms.
+
+---
+
+### Problem 5 — MEDIUM: Hero Parallax Uses `backgroundImage` + `transform` Without `contain`
+
+**File:** `src/pages/Home.tsx`, lines 42–48
+
+The hero background uses both `scale(1.1)` (to hide edges during parallax) AND a dynamic `translateY` on scroll. The 110% scale on a full-viewport background image is expensive to composite. Without `contain: layout` or `contain: paint`, browser repaints can cascade to sibling elements.
+
+**Fix:** Add `contain: strict` to the parallax container and ensure the outer section has `overflow: hidden` (it already has this via `overflow-hidden` — good). Also clamp the parallax value calculation to ensure it never triggers layout.
+
+---
+
+## Implementation Plan
+
+### Files to Change
+
+**1. `src/pages/Home.tsx`** — The highest-impact file
+- Replace `scrollY` state with a `ref`-based scroll handler that writes directly to DOM elements
+- Remove `transition-all` from all card hover classes
+- Fix the CTA arrow animation from `gap` change to `translateX`
+- Add `will-change: transform, opacity` statically to both parallax elements
+
+**2. `src/components/ui/animated-section.tsx`**
+- Replace `transition-all` with `transition-[transform,opacity]`
+- Reduce default duration from 400ms to 350ms (snappier feel)
+
+**3. `src/components/Header.tsx`**
+- Replace `transition-all` occurrences with specific properties
+- Remove `transition-all` from the MegaMenu and NavLink components
+
+**4. `src/components/Layout.tsx`**
+- Fix the `willChange` logic — apply it statically to the `<main>` element for the transition, not conditionally
+
+---
+
+## What Will Stay Exactly the Same
+
+- All visual design (colors, fonts, layout, spacing)
+- All animations (fade-up, fade-in, stagger — just faster/smoother)
+- The parallax hero effect (still works, just GPU-accelerated)
+- All hover states (cards still lift, photos still zoom)
+- All scroll-triggered reveals
+
+## What Will Feel Different (Better)
+
+- Scrolling will feel immediate — no React re-renders triggered by scroll
+- Card hover transitions will snap cleanly instead of fighting the browser
+- Section reveals will feel crisper (350ms vs 400ms, tighter easing)
+- The hero parallax will be silky smooth instead of jerky
+
+---
+
+## Technical Summary
+
+The core philosophy of this fix is: **keep animations on the GPU compositor thread, never trigger layout recalculation during scroll.** The rule is simple: only ever animate `transform` and `opacity`. Everything else causes jank.
+
+| Current | Fixed |
+|---|---|
+| `setScrollY()` on every scroll → React re-render | Ref → direct DOM write → zero React re-renders |
+| `transition-all` → browser watches all properties | `transition-[transform,opacity]` → compositor only |
+| `will-change: auto` during scroll | `will-change: transform, opacity` static |
+| 12+ IntersectionObservers with `transition-all` | Same observers, compositor-safe transitions |
+| Gap animation on CTA arrow | `translateX` on arrow icon |
