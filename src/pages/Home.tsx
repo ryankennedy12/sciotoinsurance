@@ -38,19 +38,19 @@ const Home = () => {
                   src={heroSplit}
                   alt=""
                   aria-hidden="true"
-                  className="w-full h-full object-cover object-[25%_center]"
+                  className="w-full h-full object-cover object-[30%_center]"
                 />
-                <div className="absolute inset-0 bg-cream/85" />
+                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/90 via-burgundy-800/60 to-burgundy-900/30" />
               </div>
               {/* Main Headline */}
               {/* Content wrapper above background */}
               <div className="relative z-10 flex flex-col items-center lg:items-start justify-center w-full flex-1">
-              <h1 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-foreground leading-[1.1] mb-6">
+              <h1 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white lg:text-foreground leading-[1.1] mb-6">
                 Ohio Families Trust Us to Protect What Matters Most
               </h1>
 
               {/* Subheadline */}
-              <p className="font-body text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
+              <p className="font-body text-lg sm:text-xl lg:text-2xl text-white/85 lg:text-muted-foreground leading-relaxed max-w-2xl mb-8">
                 We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
               </p>
 
@@ -65,7 +65,7 @@ const Home = () => {
                 </Link>
                 <a
                   href="tel:6146120050"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border-2 border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border-2 border-white text-white lg:bg-card lg:text-primary lg:border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
                 >
                   <Phone className="w-5 h-5" />
                   Talk to a Real Person
