@@ -27,9 +27,16 @@ const Home = () => {
       <section className="relative min-h-[100svh] lg:h-[100svh] flex items-center overflow-hidden">
         {/* Background Image - static, no transforms */}
         <div 
-          className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat will-change-auto"
-          style={{ backgroundImage: `url(${heroFamily})`, contain: "strict" }}
-        />
+          className="absolute inset-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <img
+            src={heroFamily}
+            alt=""
+            className="absolute w-full h-[120%] -top-[10%] left-0 object-cover object-[25%_center] sm:object-[30%_center] md:object-center pointer-events-none select-none"
+            draggable={false}
+          />
+        </div>
         
         {/* Burgundy Overlay - stronger on mobile for text contrast */}
         <div className="absolute inset-0 bg-burgundy-800/30 lg:bg-burgundy-800/20" />
