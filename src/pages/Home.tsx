@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <>
       {/* Hero Section - Split Layout */}
-      <section className="relative bg-burgundy-100">
+      <section className="relative bg-cream">
         <div className="max-w-[1400px] mx-auto">
           {/* Mobile: image on top, text below | Desktop: text left, image right */}
           <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-[100svh]">
