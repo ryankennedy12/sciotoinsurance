@@ -89,8 +89,7 @@ const Home = () => {
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           {/* Section Header */}
           <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
-            {/* Gold accent bar */}
-            <div className="w-12 h-1 bg-accent mx-auto mb-4 sm:mb-space-md rounded-full" />
+            <div className="w-12 h-1 bg-primary mx-auto mb-4 sm:mb-space-md rounded-full" />
             
             <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[48px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
               Why Ohio Families Work With Us
@@ -103,9 +102,9 @@ const Home = () => {
           {/* Value Proposition Cards */}
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl items-start">
             {/* Card 1 - Independent */}
-            <AnimatedSection animation="fade-up" delay={0} className="relative bg-card rounded-lg border-t-[3px] border-t-accent/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-accent/10 flex items-center justify-center border border-accent/20 mb-5">
-                <Scale className="w-7 h-7 text-accent" strokeWidth={1.5} />
+            <AnimatedSection animation="fade-up" delay={0} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
+                <Scale className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
                 Independent, Not Corporate
@@ -119,9 +118,9 @@ const Home = () => {
             </AnimatedSection>
 
             {/* Card 2 - Experience (Featured Center) */}
-            <AnimatedSection animation="fade-up" delay={100} className="relative bg-card rounded-lg border-t-[3px] border-t-accent/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 md:scale-[1.03] md:shadow-md md:z-10">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-accent/10 flex items-center justify-center border border-accent/20 mb-5">
-                <ShieldCheck className="w-7 h-7 text-accent" strokeWidth={1.5} />
+            <AnimatedSection animation="fade-up" delay={100} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 md:scale-[1.03] md:shadow-md md:z-10">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
+                <ShieldCheck className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
                 29 Years in the Industry
@@ -135,9 +134,9 @@ const Home = () => {
             </AnimatedSection>
 
             {/* Card 3 - Human */}
-            <AnimatedSection animation="fade-up" delay={200} className="relative bg-card rounded-lg border-t-[3px] border-t-accent/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-accent/10 flex items-center justify-center border border-accent/20 mb-5">
-                <PhoneCall className="w-7 h-7 text-accent" strokeWidth={1.5} />
+            <AnimatedSection animation="fade-up" delay={200} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
+                <PhoneCall className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
                 A Human Answers the Phone
