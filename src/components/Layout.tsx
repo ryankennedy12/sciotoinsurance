@@ -2,7 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import StickyMobileCTA from "./StickyMobileCTA";
+
 
 // Context to share page ready state with child components
 import { createContext, useContext } from "react";
@@ -16,7 +16,7 @@ const Layout = () => {
   const [isPageReady, setIsPageReady] = useState(false);
   const isFirstMount = useRef(true);
   const previousPath = useRef(location.pathname);
-  const footerRef = useRef<HTMLElement>(null);
+  
 
   // Handle initial mount - fade in once with longer delay for resources to settle
   useEffect(() => {
@@ -61,8 +61,7 @@ const Layout = () => {
         >
           <Outlet />
         </main>
-        <Footer ref={footerRef} />
-        <StickyMobileCTA footerRef={footerRef} />
+        <Footer />
       </div>
     </PageReadyContext.Provider>
   );
