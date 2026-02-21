@@ -427,34 +427,40 @@ const Home = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-12 sm:py-space-2xl bg-cream">
-        <AnimatedSection animation="fade-up" className="max-w-[800px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
-          <h2 className="font-display font-semibold text-xl sm:text-2xl lg:text-4xl text-foreground leading-tight mb-4 sm:mb-space-md">
+      <section className="py-20 sm:py-28 bg-primary relative overflow-hidden">
+        {/* Subtle radial glow */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, hsl(345 55% 40% / 0.4), transparent 60%)' }} />
+        
+        <AnimatedSection animation="fade-up" className="relative max-w-[800px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
+          {/* Gold accent bar */}
+          <div className="w-12 h-1 bg-accent mx-auto mb-6 rounded-full" />
+          
+          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-[1.1] mb-4 sm:mb-space-md">
             Let's See if We Can Do Better
           </h2>
           
-          <p className="font-body text-base sm:text-lg text-muted-foreground mb-6 sm:mb-space-lg max-w-[600px] mx-auto">
+          <p className="font-body text-lg sm:text-xl text-white/80 mb-8 sm:mb-10 max-w-[600px] mx-auto leading-relaxed">
             Get a free quote in about 10 minutes. We'll look at what you're paying now and show you if there's a better option.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-4 sm:mb-space-md">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-6">
             <Link
               to="/get-quote"
-              className="inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[transform,opacity,box-shadow,background-color] duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-lg bg-white text-primary font-body font-semibold text-base transition-[transform,opacity,box-shadow] duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] motion-reduce:hover:translate-y-0"
             >
               Get Your Free Quote
             </Link>
             
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 py-3 font-body font-medium text-primary hover:underline transition-[opacity] duration-300"
+              className="inline-flex items-center gap-2 py-3 font-body font-medium text-white/90 hover:text-white transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
               Or call us: (614) 612-0050
             </a>
           </div>
           
-          <p className="font-body text-sm text-muted-foreground/70 italic">
+          <p className="font-body text-sm text-white/50 italic">
             We won't spam you or pass your info around. Promise.
           </p>
         </AnimatedSection>
