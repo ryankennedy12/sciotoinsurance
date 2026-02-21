@@ -67,7 +67,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-space-lg">
+            <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
               {navLinks.map((link) => {
                 const isActive = location.pathname.startsWith(link.href);
                 return (
