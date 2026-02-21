@@ -33,7 +33,7 @@ const Home = () => {
             </div>
 
             {/* Text Panel */}
-            <div className="relative flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-6 sm:px-10 lg:px-16 pt-28 lg:pt-32 pb-16 lg:pb-20 min-h-[85svh] lg:min-h-0 lg:order-1">
+            <div className="relative flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-6 sm:px-10 lg:px-16 pt-36 lg:pt-40 pb-16 lg:pb-20 min-h-[85svh] lg:min-h-0 lg:order-1">
               {/* Mobile/Tablet background image + overlay */}
               <div className="absolute inset-0 lg:hidden">
                 <img
