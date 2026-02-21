@@ -73,7 +73,7 @@ const BusinessInsurance = () => {
           <AnimatedSection animation="fade-up" delay={100}>
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               {industries.map((ind, i) => { const Icon = ind.icon; return (
-                <button key={ind.name} onClick={() => setSelectedIndustry(i)} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all ${selectedIndustry === i ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-secondary text-foreground hover:bg-secondary/80'}`}>
+                <button key={ind.name} onClick={() => setSelectedIndustry(i)} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-[background-color,color,box-shadow] duration-200 ${selectedIndustry === i ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-secondary text-foreground hover:bg-secondary/80'}`}>
                   <Icon className="h-4 w-4" />{ind.name}
                 </button>
               ); })}
@@ -108,7 +108,7 @@ const BusinessInsurance = () => {
               <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-6 flex items-center gap-3"><div className="w-8 h-px bg-primary" />{category.title}</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {category.products.map((product) => { const Icon = product.icon; return (
-                  <Link key={product.name} to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-all">
+                  <Link key={product.name} to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-[border-color,box-shadow] duration-200">
                     <div className="absolute top-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded bg-secondary flex items-center justify-center flex-shrink-0"><Icon className="h-5 w-5 text-primary" /></div>

@@ -263,7 +263,7 @@ const Home = () => {
                       src={familyHomeService}
                       alt="Ohio family at home"
                       loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500"
                     />
                     {/* Right-edge fade into text panel (desktop only) */}
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
@@ -309,7 +309,7 @@ const Home = () => {
                       src={businessOffice}
                       alt="Business professional in office"
                       loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
                   </div>
@@ -354,7 +354,7 @@ const Home = () => {
                       src={teamMeeting}
                       alt="Team meeting discussing employee benefits"
                       loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
                   </div>

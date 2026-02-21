@@ -211,7 +211,7 @@ const GetQuote = () => {
             <button
               key={option.id}
               onClick={() => handleCoverageSelect(option.id)}
-              className="group p-4 sm:p-space-lg rounded-lg border-2 border-border bg-card text-left hover:border-primary hover:shadow-md active:scale-[0.98] transition-all duration-300"
+              className="group p-4 sm:p-space-lg rounded-lg border-2 border-border bg-card text-left hover:border-primary hover:shadow-md active:scale-[0.98] transition-[border-color,box-shadow,transform] duration-300"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 sm:mb-space-sm group-hover:bg-primary/20 transition-colors duration-300">
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
@@ -239,7 +239,7 @@ const GetQuote = () => {
           {personalCoverageOptions.map((option) => (
             <label
               key={option}
-              className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all duration-300 ${
+              className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-[border-color,background-color] duration-300 ${
                 formData.personalCoverageInterests.includes(option)
                   ? "border-primary bg-primary/5"
                   : "border-gray-200 hover:border-primary/50"
@@ -277,7 +277,7 @@ const GetQuote = () => {
             <button
               key={value ? "yes" : "no"}
               onClick={() => setFormData({ ...formData, hasCurrentCoverage: value })}
-              className={`px-6 py-3 rounded-lg border-2 font-body font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-lg border-2 font-body font-medium transition-[border-color,background-color,color] duration-300 ${
                 formData.hasCurrentCoverage === value
                   ? "border-primary bg-primary/5 text-primary"
                   : "border-gray-200 hover:border-primary/50"
@@ -349,7 +349,7 @@ const GetQuote = () => {
           {businessCoverageOptions.map((option) => (
             <label
               key={option}
-              className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all duration-300 ${
+              className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-[border-color,background-color] duration-300 ${
                 formData.businessCoverageInterests.includes(option)
                   ? "border-primary bg-primary/5"
                   : "border-gray-200 hover:border-primary/50"
@@ -422,7 +422,7 @@ const GetQuote = () => {
           {benefitsCoverageOptions.map((option) => (
             <label
               key={option}
-              className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-all duration-300 ${
+              className={`flex items-center gap-2 p-3 rounded-lg border-2 cursor-pointer transition-[border-color,background-color] duration-300 ${
                 formData.benefitsInterests.includes(option)
                   ? "border-primary bg-primary/5"
                   : "border-gray-200 hover:border-primary/50"
@@ -573,7 +573,7 @@ const GetQuote = () => {
               <button
                 key={method}
                 onClick={() => setFormData({ ...formData, preferredContact: method })}
-                className={`px-5 py-2 rounded-lg border-2 font-body font-medium capitalize transition-all duration-300 ${
+                className={`px-5 py-2 rounded-lg border-2 font-body font-medium capitalize transition-[border-color,background-color,color] duration-300 ${
                   formData.preferredContact === method
                     ? "border-primary bg-primary/5 text-primary"
                     : "border-gray-200 hover:border-primary/50"
@@ -752,7 +752,7 @@ const GetQuote = () => {
                     {currentStep === 2 && (
                       <button
                         onClick={() => setCurrentStep(3)}
-                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 sm:py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98]"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 sm:py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[background-color,transform] duration-300 hover:bg-burgundy-800 active:scale-[0.98]"
                       >
                         Continue
                       </button>
@@ -762,7 +762,7 @@ const GetQuote = () => {
                       <button
                         onClick={handleSubmit}
                         disabled={isSubmitting}
-                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 sm:py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 sm:py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[background-color,transform] duration-300 hover:bg-burgundy-800 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? "Submitting..." : "Get My Free Quote"}
                       </button>

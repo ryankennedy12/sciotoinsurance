@@ -49,7 +49,7 @@ const About = () => {
             {/* Text Content - Left Side */}
             <div className="lg:col-span-7">
               <AnimatedSection animation="fade-up">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 mb-6">
                   <span className="w-2 h-2 rounded-full bg-gold-500" />
                   <span className="font-body text-sm text-white/80">Est. 2023 • New Albany, Ohio</span>
                 </div>
@@ -318,14 +318,14 @@ const About = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-all duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
             >
               Schedule a Call
             </Link>
             
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 font-body font-medium text-primary hover:underline transition-all duration-300"
+              className="inline-flex items-center gap-2 font-body font-medium text-primary hover:underline transition-[color] duration-300"
             >
               <Phone className="w-4 h-4" />
               (614) 612-0050
