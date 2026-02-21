@@ -1,71 +1,78 @@
 
 
-# Fix Hero Section for Mobile & Tablet
+# Scrolling Performance Optimization Plan
 
-## Problems Identified
+## Problem Summary
 
-Looking at the screenshots, two clear issues:
+After profiling the site, I found several concrete issues causing sluggish scrolling, especially on mobile:
 
-1. **People are cropped awkwardly on mobile/tablet** — The hero image uses `bg-center` at all breakpoints, but on narrower screens the couple gets cut off at strange points (half a face, bodies displaced to edges). The focal point of the photo (the couple) needs to shift based on screen width.
-
-2. **Text is hard to read over the photo** — The current overlay is too light: just `bg-burgundy-800/20` plus a gradient `from-charcoal/60 via-charcoal/40 to-transparent`. On mobile where the text sits directly over the brightest parts of the photo, this doesn't provide enough contrast. The text blends into the sunlit background.
-
----
-
-## The Fix
-
-### 1. Responsive Image Focal Point
-
-Change `bg-center` to responsive positioning so the couple stays visible:
-
-- **Mobile (default):** `bg-[center_30%]` — shift the focal point slightly left so the people stay centered in the narrow viewport
-- **Tablet (md):** `bg-center` — standard centering works at this width  
-- **Desktop (lg+):** `bg-center` — no change, already looks good
-
-### 2. Stronger Text-Contrast Overlay on Mobile/Tablet
-
-Add a stronger gradient overlay that kicks in only on smaller screens where text sits directly over the bright photo. Two changes:
-
-- **Increase the base overlay** from `bg-burgundy-800/20` to a responsive value: stronger on mobile (`/40`), lighter on desktop (`/20`)
-- **Add a bottom-heavy gradient on mobile** so the lower portion of the hero (where CTAs and trust badges sit) has a darker scrim. On desktop where text sits to the left with the `from-charcoal/60` gradient, it's already fine — but on mobile, text spans the full width and needs help everywhere.
-
-Specifically:
-- Keep the existing left-to-right gradient for desktop
-- Add a separate overlay div that uses `bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent` and is only visible on mobile/tablet (`block lg:hidden`)
-
-### 3. Optional: Add a subtle text-shadow to white text
-
-Add `[text-shadow:_0_1px_8px_rgb(0_0_0_/_40%)]` to the headline and subheadline on mobile. This is a lightweight way to ensure legibility regardless of what's behind the text, without making the overlay too dark.
+1. **The logo image is 2.2MB** -- this single file is larger than the entire rest of the site combined, causing slow loads and memory pressure
+2. **`backdrop-blur-sm` on the sticky header** -- this CSS filter forces the browser to re-composite the blurred area on every single scroll frame, which is extremely expensive on mobile GPUs
+3. **`scroll-behavior: smooth` in global CSS** -- this can cause jank when the browser tries to smooth-scroll programmatic scroll calls during page transitions
+4. **Three separate scroll event listeners** all firing independently (header, hero parallax, sticky mobile CTA) -- the StickyMobileCTA listener triggers React state updates (`setState`) on every scroll, causing re-renders
+5. **`transition-all` on `.interactive-card`** in index.css -- this transitions every CSS property including expensive ones like `width`, `height`, `margin`, triggering layout recalculations
+6. **Hover scale transforms on card images** (`group-hover:scale-105`) -- these trigger GPU layer promotion on large image elements during scroll on some mobile browsers
 
 ---
 
-## Technical Details
+## Changes
+
+### 1. Compress the logo (2.2MB to ~50-100KB)
+
+Replace the current `logo.png` with a properly compressed version. A logo does not need to be a 2MB+ PNG. I will optimize it to WebP or compress the PNG significantly.
+
+**File:** `src/assets/logo.png`
+
+### 2. Remove `backdrop-blur` from the sticky header
+
+Replace the frosted-glass effect with a simple solid/semi-transparent background. This eliminates the most expensive per-frame compositing operation on mobile.
+
+**File:** `src/components/Header.tsx`
+- Change `bg-white/98 backdrop-blur-sm` to `bg-white shadow-sm`
+- Change `bg-cream/80 backdrop-blur-sm` to `bg-cream`
+
+### 3. Remove `scroll-behavior: smooth` from global CSS
+
+This conflicts with the programmatic `window.scrollTo({ behavior: "instant" })` used in page transitions and can cause frame drops.
+
+**File:** `src/index.css`
+- Remove `scroll-behavior: smooth` from the `html` rule
+
+### 4. Optimize the StickyMobileCTA scroll listener
+
+The current implementation calls `setIsVisible(scrolled)` on every scroll event, which triggers a React re-render even when the value hasn't changed. I'll add a guard so `setState` only fires when the value actually changes, and wrap the handler in `requestAnimationFrame` for frame-aligned updates.
+
+**File:** `src/components/StickyMobileCTA.tsx`
+
+### 5. Fix `transition-all` on `.interactive-card`
+
+Replace with specific properties (`transition-[transform,box-shadow]`) to avoid transitioning layout-triggering properties.
+
+**File:** `src/index.css`
+
+### 6. Disable hero parallax on mobile
+
+The parallax effect manipulates `transform` on two elements every scroll frame. On mobile, where GPU budgets are tight, this adds unnecessary compositing work for an effect that's barely noticeable on small screens. I'll disable it below the `lg` breakpoint.
+
+**File:** `src/pages/Home.tsx`
+- Add a media query check: only attach the scroll listener on screens wider than 1024px
+- On mobile, the hero will be a static background image (still looks great, just no parallax movement)
+
+### 7. Lazy-load below-fold images
+
+The three service card images (`familyHomeService`, `businessOffice`, `teamMeeting`) load eagerly. Adding `loading="lazy"` keeps them out of the critical path and reduces initial memory pressure during scroll.
 
 **File:** `src/pages/Home.tsx`
 
-### Changes to the hero background div (line 51):
-- Change `bg-center` to `bg-[center_30%] md:bg-center` so the couple stays visible on mobile
-
-### Changes to the overlay divs (lines 61-64):
-- Line 61: Change `bg-burgundy-800/20` to `bg-burgundy-800/40 lg:bg-burgundy-800/20` (stronger tint on mobile, lighter on desktop)
-- Line 64: Strengthen the gradient on mobile — change `from-charcoal/60 via-charcoal/40` to `from-charcoal/70 via-charcoal/50 lg:from-charcoal/60 lg:via-charcoal/40`
-- Add a new mobile-only bottom gradient div: `<div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/20 to-transparent lg:hidden" />`
-
-### Text shadow for headlines (lines 75, 84):
-- Add a style prop with `textShadow: "0 2px 12px rgba(0,0,0,0.3)"` to the h1 and the subheadline paragraph for extra contrast insurance
-
-### No other files need to change.
-
 ---
 
-## What Stays the Same
-- Desktop hero looks identical (overlays match current values at lg+ breakpoint)
-- Parallax effect unchanged
-- All text content, CTAs, trust badges unchanged
-- Animation timings unchanged
+## Expected Impact
 
-## What Improves
-- Mobile: People stay centered and visible in the photo
-- Mobile/Tablet: Text pops clearly against a darker scrim
-- Subtle text-shadow adds legibility without making the overlay too heavy
+- **Logo compression**: Page load drops by ~2MB, faster first paint
+- **Removing backdrop-blur**: Eliminates the single most expensive per-frame GPU operation on mobile
+- **Scroll listener optimization**: Eliminates unnecessary React re-renders during scroll
+- **Parallax disabled on mobile**: Removes two DOM writes per scroll frame on mobile
+- **transition-all fix**: Prevents accidental layout thrashing on card hover/active states
+
+These changes preserve the visual design on desktop while making mobile scrolling dramatically smoother.
 
