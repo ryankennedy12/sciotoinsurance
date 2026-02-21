@@ -168,7 +168,7 @@ const Home = () => {
                 to="/about"
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-primary text-primary font-body font-semibold text-sm hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
               >
-                See Our Reviews
+                Learn More
                 <span>→</span>
               </Link>
             </div>
