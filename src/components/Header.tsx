@@ -137,16 +137,23 @@ const Header = () => {
             : "opacity-0 pointer-events-none"
         )}
       >
+        {/* Background with gradient */}
         <div
           className={cn(
-            "absolute inset-0 bg-primary transition-transform duration-500 ease-out origin-right",
+            "absolute inset-0 bg-gradient-to-b from-burgundy-700 to-burgundy-800 transition-transform duration-500 ease-out origin-right",
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         />
 
+        {/* Gold accent bar */}
+        <div className={cn(
+          "absolute top-0 left-0 right-0 h-0.5 bg-gold-500 z-20 transition-transform duration-500 ease-out origin-right",
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        )} />
+
         <button
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-5 right-4 w-12 h-12 flex items-center justify-center z-20 bg-white/10 rounded-full active:bg-white/20 transition-colors"
+          className="absolute top-5 right-4 w-12 h-12 flex items-center justify-center z-20 border border-white/30 rounded-full active:bg-white/20 transition-colors"
           aria-label="Close menu"
           type="button"
         >
@@ -157,38 +164,50 @@ const Header = () => {
 
         <nav
           className={cn(
-            "relative z-10 h-full flex flex-col pt-20 pb-8 px-6 overflow-y-auto transition-[transform,opacity] duration-500 delay-200",
+            "relative z-10 h-full flex flex-col pt-6 pb-8 px-6 overflow-y-auto transition-[transform,opacity] duration-500 delay-200",
             isMobileMenuOpen
               ? "opacity-100 translate-x-0"
               : "opacity-0 translate-x-8"
           )}
         >
-          <div className="flex flex-col gap-2">
-            <Link
-              to="/"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-3 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors"
-            >
-              Home
-            </Link>
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="py-3 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Brand logo */}
+          <img
+            src={logo}
+            alt="Scioto Insurance Group"
+            className="h-10 w-auto self-start mb-8 brightness-0 invert opacity-90"
+          />
+
+          <div className="flex flex-col">
+            {[{ label: "Home", href: "/" }, ...navLinks].map((link, index) => {
+              const isActive = link.href === "/" 
+                ? location.pathname === "/" 
+                : location.pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    "py-3.5 font-display text-xl font-semibold text-white/90 hover:text-white transition-all border-b border-white/10",
+                    isActive && "border-l-[3px] border-l-gold-500 pl-3"
+                  )}
+                  style={{
+                    transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : "0ms",
+                  }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Mobile CTA Buttons */}
           <div className="mt-auto pt-8 space-y-3">
+            <div className="h-px bg-white/15 mb-4" />
             <Link
               to="/get-quote"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full py-4 px-8 bg-white text-primary font-body font-medium rounded text-center text-base transition-transform active:scale-[0.98]"
+              className="block w-full py-4 px-8 bg-white text-gold-500 font-body font-semibold rounded text-center text-base transition-transform active:scale-[0.98]"
             >
               Get a Quote
             </Link>
@@ -199,6 +218,7 @@ const Header = () => {
               <Phone className="w-5 h-5" />
               (614) 612-0050
             </a>
+            <p className="text-white/50 text-xs text-center pt-2 font-body">29 Years Serving Ohio Families</p>
           </div>
         </nav>
       </div>
