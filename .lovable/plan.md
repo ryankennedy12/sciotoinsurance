@@ -1,32 +1,55 @@
 
 
-# Improve Hero Text Readability Without Darkening the Overlay
+# Upgrade "Why Ohio Families Work With Us" Section to Premium
 
-## Approach
-Instead of making the overlay heavier, we enhance the text itself so it punches through the image. Three complementary techniques, all CSS-only, scoped to mobile/tablet only (`lg:` reverts to current desktop style):
+## Current State
+The section has flat white cards with small icons, uniform text sizing, and minimal visual distinction between elements. It reads as functional but generic -- there's no clear visual hierarchy drawing the eye through headline, cards, and CTA.
 
-### 1. Text Shadow
-Add a multi-layer `text-shadow` to the headline and subheadline. This creates a soft dark halo around each letter that separates it from any background -- the same technique used by Netflix, Apple TV+, and premium editorial sites.
+## Proposed Changes
 
-- Headline: `[text-shadow:_0_2px_12px_rgba(0,0,0,0.5),_0_1px_3px_rgba(0,0,0,0.4)]`
-- Subheadline: `[text-shadow:_0_1px_8px_rgba(0,0,0,0.4),_0_1px_2px_rgba(0,0,0,0.3)]`
-- Desktop (`lg:`): `lg:[text-shadow:none]` to keep current clean look
+### 1. Elevated Icon Treatment
+Wrap each icon in a rounded container with a soft gold-to-burgundy gradient background, giving them a "badge" feel. Increase icon size slightly and add a subtle ring/border in gold-500 around the container.
 
-### 2. Bump Font Weight on Mobile
-Increase the headline font weight from `font-semibold` to `font-bold` on mobile/tablet only, giving the white text more visual mass against the image. Desktop stays `font-semibold`.
+### 2. Stronger Card Visual Hierarchy
+- Add a thin gold-500 top border accent to each card (2-3px) for a premium stripe effect
+- Increase card padding and internal spacing
+- Make card headlines larger (text-xl to text-2xl on desktop) with tighter letter-spacing
+- Add a subtle "Learn more" or arrow link at the bottom of each card in burgundy-700 to create a clear endpoint
 
-### 3. Roll Back Overlay to a Lighter Value
-Since the text itself will now carry its own contrast, we can lighten the overlay back closer to the original to let the photo breathe more:
-- From: `from-burgundy-900/95 via-burgundy-900/75 to-burgundy-800/50`
-- To: `from-burgundy-900/85 via-burgundy-900/55 to-burgundy-800/30`
+### 3. Section Header Upgrade
+- Replace the thin decorative line with a small gold accent element (short gold bar or double-line)
+- Increase headline size for more dominance (text-[42px] to text-[48px] on desktop)
+- Add a subtle serif italic style to a keyword in the subtitle for personality (e.g., "picks up the phone" in italic)
+
+### 4. Background Depth
+- Add a very subtle background pattern or a light radial gradient behind the section to separate it from flat cream -- e.g., a soft burgundy-100 radial glow centered behind the cards
+
+### 5. Bottom CTA Enhancement
+- Convert the plain text link into a more prominent styled element -- a bordered pill button or a card-like callout strip with the review stars inline
+- Add the star rating (5 gold stars) next to "See Our Reviews" for immediate social proof
+
+### 6. Staggered Card Layout Polish
+- On desktop, make the center card slightly elevated (larger shadow, slight scale) to create a "featured" center-card pattern, drawing the eye to the 29-year experience differentiator
 
 ## Technical Details
 
-**Only `src/pages/Home.tsx` changes.** Three targeted edits:
+**File changed:** `src/pages/Home.tsx` only (lines ~84-158)
 
-1. **Gradient overlay div (line 43):** Lighten opacity stops
-2. **h1 (line 48):** Add text-shadow utility and `font-bold lg:font-semibold`
-3. **p (line 53):** Add lighter text-shadow utility
+**Specific edits:**
 
-No new files, no new dependencies.
+1. **Icon containers** (lines 105-106, 119-120, 133-134): Wrap each icon in a `w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-gold-500/10 flex items-center justify-center border border-gold-500/20` container
+
+2. **Card styling** (lines 103, 117, 131): Add `border-t-[3px] border-t-gold-500/60` to each card, increase padding to `p-7 sm:p-8`, and add `relative` for potential accent positioning
+
+3. **Card headlines** (lines 108, 122, 136): Bump to `text-xl sm:text-2xl` with added `tracking-tight`
+
+4. **Center card emphasis** (line 117): Add `md:scale-[1.03] md:shadow-md md:z-10` to make the middle card visually dominant
+
+5. **Card CTAs**: Add a small "Learn more" arrow link at the bottom of each card in `text-primary text-sm font-medium mt-4`
+
+6. **Section header** (lines 90-97): Change the decorative bar to gold-500, bump h2 to `lg:text-[48px]`, wrap "picks up the phone" in `<em>` with `italic text-primary`
+
+7. **Bottom CTA** (lines 146-157): Replace plain link with a flex row containing 5 gold stars + "5.0 on Google" + a styled pill button "See Our Reviews"
+
+No new files or dependencies needed. All changes are CSS/markup only within the existing component.
 
