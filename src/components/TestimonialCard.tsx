@@ -23,9 +23,9 @@ const TestimonialCard = ({
 
   return (
     <div
-      className={`rounded-xl p-6 sm:p-8 transition-[transform,box-shadow] duration-300 lg:hover:-translate-y-1 ${
+      className={`rounded-xl p-6 sm:p-8 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 ${
         isLight
-          ? "bg-card border border-border lg:hover:shadow-lg"
+          ? "bg-card border border-border hover:shadow-lg"
           : "bg-white/15 border border-white/10"
       }`}
     >

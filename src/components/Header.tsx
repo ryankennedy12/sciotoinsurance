@@ -9,19 +9,19 @@ const personalInsuranceCategories = [
   {
     title: "Most Popular",
     items: [
-      { title: "Auto Insurance", href: "/personal-insurance", icon: Car },
-      { title: "Home Insurance", href: "/personal-insurance", icon: Home },
-      { title: "Life Insurance", href: "/personal-insurance", icon: Heart },
-      { title: "Umbrella Insurance", href: "/personal-insurance", icon: Umbrella },
+      { title: "Auto Insurance", href: "/personal-insurance/auto", icon: Car },
+      { title: "Home Insurance", href: "/personal-insurance/home", icon: Home },
+      { title: "Life Insurance", href: "/personal-insurance/life", icon: Heart },
+      { title: "Umbrella Insurance", href: "/personal-insurance/umbrella", icon: Umbrella },
     ],
   },
   {
     title: "Property & Specialty",
     items: [
-      { title: "Flood Insurance", href: "/personal-insurance", icon: Droplets },
-      { title: "High Net Worth", href: "/personal-insurance", icon: Sparkles },
-      { title: "Renters Insurance", href: "/personal-insurance", icon: Home },
-      { title: "Condo Insurance", href: "/personal-insurance", icon: Building2 },
+      { title: "Flood Insurance", href: "/personal-insurance/flood", icon: Droplets },
+      { title: "High Net Worth", href: "/personal-insurance/high-net-worth", icon: Sparkles },
+      { title: "Renters Insurance", href: "/personal-insurance/renters", icon: Home },
+      { title: "Condo Insurance", href: "/personal-insurance/condo", icon: Building2 },
     ],
   },
 ];
@@ -31,40 +31,40 @@ const businessInsuranceCategories = [
   {
     title: "Most Popular",
     items: [
-      { title: "General Liability", href: "/business-insurance", icon: Shield },
-      { title: "Workers' Compensation", href: "/business-insurance", icon: HardHat },
-      { title: "Commercial Property", href: "/business-insurance", icon: Building2 },
-      { title: "Commercial Auto", href: "/business-insurance", icon: Truck },
+      { title: "General Liability", href: "/business-insurance/general-liability", icon: Shield },
+      { title: "Workers' Compensation", href: "/business-insurance/workers-comp", icon: HardHat },
+      { title: "Commercial Property", href: "/business-insurance/commercial-property", icon: Building2 },
+      { title: "Commercial Auto", href: "/business-insurance/commercial-auto", icon: Truck },
     ],
   },
   {
     title: "Professional & Cyber",
     items: [
-      { title: "Professional Liability (E&O)", href: "/business-insurance", icon: Scale },
-      { title: "Cyber Liability", href: "/business-insurance", icon: Lock },
-      { title: "Directors & Officers", href: "/business-insurance", icon: Shield },
-      { title: "Business Owners Policy", href: "/business-insurance", icon: Shield },
+      { title: "Professional Liability (E&O)", href: "/business-insurance/professional-liability", icon: Scale },
+      { title: "Cyber Liability", href: "/business-insurance/cyber-liability", icon: Lock },
+      { title: "Directors & Officers", href: "/business-insurance/directors-officers", icon: Shield },
+      { title: "Business Owners Policy", href: "/business-insurance/bop", icon: Shield },
     ],
   },
 ];
 
 // Mobile menu items (flattened for accordion)
 const personalInsuranceItems = [
-  { title: "Auto Insurance", href: "/personal-insurance" },
-  { title: "Home Insurance", href: "/personal-insurance" },
-  { title: "Life Insurance", href: "/personal-insurance" },
-  { title: "Umbrella Insurance", href: "/personal-insurance" },
-  { title: "Flood Insurance", href: "/personal-insurance" },
-  { title: "High Net Worth", href: "/personal-insurance" },
+  { title: "Auto Insurance", href: "/personal-insurance/auto" },
+  { title: "Home Insurance", href: "/personal-insurance/home" },
+  { title: "Life Insurance", href: "/personal-insurance/life" },
+  { title: "Umbrella Insurance", href: "/personal-insurance/umbrella" },
+  { title: "Flood Insurance", href: "/personal-insurance/flood" },
+  { title: "High Net Worth", href: "/personal-insurance/high-net-worth" },
 ];
 
 const businessInsuranceItems = [
-  { title: "General Liability", href: "/business-insurance" },
-  { title: "Workers' Compensation", href: "/business-insurance" },
-  { title: "Commercial Property", href: "/business-insurance" },
-  { title: "Commercial Auto", href: "/business-insurance" },
-  { title: "Professional Liability", href: "/business-insurance" },
-  { title: "Cyber Liability", href: "/business-insurance" },
+  { title: "General Liability", href: "/business-insurance/general-liability" },
+  { title: "Workers' Compensation", href: "/business-insurance/workers-comp" },
+  { title: "Commercial Property", href: "/business-insurance/commercial-property" },
+  { title: "Commercial Auto", href: "/business-insurance/commercial-auto" },
+  { title: "Professional Liability", href: "/business-insurance/professional-liability" },
+  { title: "Cyber Liability", href: "/business-insurance/cyber-liability" },
 ];
 
 const Header = () => {
@@ -76,23 +76,19 @@ const Header = () => {
 
   useEffect(() => {
     let ticking = false;
-    let lastScrolled = false;
     const handleScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const scrolled = window.scrollY > 20;
-        if (scrolled !== lastScrolled) {
-          lastScrolled = scrolled;
-          setIsScrolled(scrolled);
-        }
+        if (scrolled !== isScrolled) setIsScrolled(scrolled);
         ticking = false;
       });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -192,21 +188,17 @@ const Header = () => {
               <NavLink href="/services" isScrolled={isScrolled}>
                 Services
               </NavLink>
-
-              <NavLink href="/contact" isScrolled={isScrolled}>
-                Contact
-              </NavLink>
             </nav>
 
-            {/* Desktop: Services Button */}
+            {/* Desktop: Get a Quote Button */}
             <Link
-              to="/services"
+              to="/get-quote"
               className={cn(
                 "hidden lg:inline-flex items-center justify-center px-6 py-3 rounded text-sm font-body font-medium transition-[transform,box-shadow,background-color] duration-300",
                 "bg-primary text-primary-foreground hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-lg"
               )}
             >
-              Client Services
+              Get a Quote
             </Link>
 
             {/* Mobile: Click-to-call + Menu Button */}
@@ -383,11 +375,11 @@ const Header = () => {
           {/* Mobile CTA Buttons */}
           <div className="mt-auto pt-8 space-y-3">
             <Link
-              to="/services"
+              to="/get-quote"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full py-4 px-8 bg-white text-primary font-body font-medium rounded text-center text-base transition-transform active:scale-[0.98]"
             >
-              Client Services
+              Get a Quote
             </Link>
             <a
               href="tel:6146120050"

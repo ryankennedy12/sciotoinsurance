@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Phone, Mail, MapPin, Clock, Shield, Send, CheckCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Clock, 
+  Calendar,
+  CheckCircle,
+  Send,
+  Loader2
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -17,368 +22,385 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
-const contactSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required").max(100),
-  lastName: z.string().trim().min(1, "Last name is required").max(100),
-  email: z.string().trim().email("Please enter a valid email").max(255),
-  phone: z.string().trim().max(20).optional().or(z.literal("")),
-  subject: z.string().min(1, "Please select a subject"),
-  message: z.string().trim().min(1, "Message is required").max(2000),
-  preferredContact: z.enum(["email", "phone", "text"]),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
-
-const subjects = [
-  { value: "general", label: "General Inquiry" },
-  { value: "quote", label: "Quote Request" },
-  { value: "policy", label: "Policy Question" },
-  { value: "claims", label: "Claims Help" },
-  { value: "other", label: "Other" },
+const helpTopics = [
+  { value: "quote", label: "I need a quote" },
+  { value: "question", label: "I have a question about my policy" },
+  { value: "change", label: "I need to make a change" },
+  { value: "claim", label: "I want to report a claim" },
+  { value: "certificate", label: "I need a certificate of insurance" },
+  { value: "id-cards", label: "I need auto ID cards" },
+  { value: "payment", label: "I need help with a payment" },
+  { value: "review", label: "I want a policy review" },
+  { value: "other", label: "Something else" },
 ];
 
 const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [searchParams] = useSearchParams();
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      preferredContact: "email",
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    },
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    helpTopic: "",
+    message: "",
   });
 
-  const preferredContact = watch("preferredContact");
+  // Pre-fill help topic from URL params (from Services page links)
+  useEffect(() => {
+    const type = searchParams.get("type");
+    if (type && helpTopics.some(t => t.value === type)) {
+      setFormData(prev => ({ ...prev, helpTopic: type }));
+    }
+  }, [searchParams]);
 
-  const onSubmit = async (data: ContactFormData) => {
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+      toast({
+        title: "Please fill in required fields",
+        description: "First name, last name, and email are required.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
-    try {
-      const subjectLabel = subjects.find((s) => s.value === data.subject)?.label || data.subject;
 
+    try {
+      // Map help topic to request_type
+      const getRequestType = (topic: string) => {
+        switch (topic) {
+          case "claim": return "service_claim";
+          case "change": return "service_change";
+          case "certificate": return "service_cert";
+          case "id-cards": return "service_idcard";
+          case "review": return "service_review";
+          case "payment": return "service_payment";
+          case "quote": return "quote";
+          default: return "contact_general";
+        }
+      };
+      
+      const requestType = getRequestType(formData.helpTopic);
+      const coverageType = formData.helpTopic === "quote" ? "not_sure" : "personal";
+      
       const { error } = await supabase.from("leads").insert({
-        first_name: data.firstName,
-        last_name: data.lastName,
-        email: data.email,
-        phone: data.phone || null,
-        preferred_contact: data.preferredContact,
-        coverage_type: "not_sure" as const,
-        request_type: "contact_general" as const,
-        status: "new" as const,
-        is_read: false,
-        reply_status: "unread",
-        notes: `Contact form inquiry: ${subjectLabel}`,
-        additional_info: data.message,
+        first_name: formData.firstName.trim(),
+        last_name: formData.lastName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || null,
+        coverage_type: coverageType,
+        additional_info: formData.message.trim() || null,
+        notes: `Contact form inquiry: ${helpTopics.find(t => t.value === formData.helpTopic)?.label || "Not specified"}`,
+        request_type: requestType,
       });
 
       if (error) throw error;
 
       setIsSubmitted(true);
-      toast.success("Message sent successfully!");
-    } catch {
-      toast.error("Something went wrong. Please try again or call us directly.");
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or call us directly.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <main>
-        {/* Hero */}
-        <section className="relative bg-gradient-to-br from-primary to-burgundy-800 py-space-2xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
-            <h1 className="heading-xl text-white mb-space-sm">Thank You!</h1>
-            <p className="body-lg text-white/80 max-w-2xl mx-auto">
-              We've received your message and will be in touch soon.
-            </p>
-          </div>
-        </section>
-
-        <section className="section-padding">
-          <div className="max-w-2xl mx-auto text-center">
-            <AnimatedSection>
-              <div className="bg-primary/5 rounded-2xl p-space-xl">
-                <CheckCircle className="w-16 h-16 text-primary mx-auto mb-space-md" />
-                <h2 className="heading-md text-charcoal mb-space-sm">Message Received</h2>
-                <p className="body-lg text-muted-foreground mb-space-lg">
-                  Here's what happens next:
-                </p>
-                <div className="space-y-space-sm text-left max-w-md mx-auto">
-                  <div className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">1</span>
-                    <p className="font-body text-charcoal pt-1">We'll send a confirmation email within 1 hour</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">2</span>
-                    <p className="font-body text-charcoal pt-1">A team member will review your message</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">3</span>
-                    <p className="font-body text-charcoal pt-1">We'll respond within 1 business day</p>
-                  </div>
-                </div>
-                <div className="mt-space-lg pt-space-md border-t border-charcoal/10">
-                  <p className="font-body text-sm text-muted-foreground">
-                    Need immediate help? Call us at{" "}
-                    <a href="tel:6146120050" className="text-primary font-medium hover:underline">
-                      (614) 612-0050
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-      </main>
-    );
-  }
-
   return (
-    <main>
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-primary to-burgundy-800 py-space-2xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
-          <h1 className="heading-xl text-white mb-space-sm">Get in Touch</h1>
-          <p className="body-lg text-white/80 max-w-2xl mx-auto">
-            Have a question or need help? Reach out—you'll talk to a real person, not a call center.
-          </p>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-b from-cream to-burgundy-50 pt-24 pb-8 md:pt-32 md:pb-12">
+        <div className="container-wide px-4 md:px-space-lg">
+          <AnimatedSection animation="fade-up" className="max-w-3xl mx-auto text-center">
+            <h1 className="heading-xl text-foreground mb-4">
+              Let's Start a Conversation
+            </h1>
+            <p className="body-lg text-muted-foreground">
+              Whether you have questions, need a quote, or just want to talk through your options, we're here.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Contact Form + Sidebar */}
-      <section className="section-padding">
-        <div className="max-w-6xl mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <div className="grid lg:grid-cols-3 gap-space-xl">
-            {/* Form - Left */}
-            <div className="lg:col-span-2">
-              <AnimatedSection>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-space-md">
-                  {/* Name Row */}
-                  <div className="grid sm:grid-cols-2 gap-space-sm">
-                    <div>
-                      <Label htmlFor="firstName" className="font-body text-sm font-medium text-charcoal mb-1.5 block">
-                        First Name *
-                      </Label>
-                      <Input
-                        id="firstName"
-                        {...register("firstName")}
-                        className="font-body"
-                        placeholder="Sarah"
-                      />
-                      {errors.firstName && (
-                        <p className="text-destructive text-sm mt-1">{errors.firstName.message}</p>
-                      )}
+      {/* Two Column Layout */}
+      <section className="section-padding bg-background">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            
+            {/* Left Column: Contact Form */}
+            <AnimatedSection animation="fade-up" delay={0}>
+              <Card className="border-border/50 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-8">
+                  {isSubmitted ? (
+                    <div className="text-center py-8">
+                      <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
+                        <CheckCircle className="w-8 h-8 text-green-600" />
+                      </div>
+                      <h3 className="heading-md text-foreground mb-4">
+                        Thanks for reaching out!
+                      </h3>
+                      <p className="body-md text-muted-foreground max-w-md mx-auto">
+                        We typically respond within a few hours during business days. Talk soon.
+                      </p>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="firstName">First Name *</Label>
+                          <Input
+                            id="firstName"
+                            value={formData.firstName}
+                            onChange={(e) => handleInputChange("firstName", e.target.value)}
+                            placeholder="John"
+                            required
+                            maxLength={100}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="lastName">Last Name *</Label>
+                          <Input
+                            id="lastName"
+                            value={formData.lastName}
+                            onChange={(e) => handleInputChange("lastName", e.target.value)}
+                            placeholder="Smith"
+                            required
+                            maxLength={100}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange("email", e.target.value)}
+                          placeholder="john@example.com"
+                          required
+                          maxLength={255}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone (optional)</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange("phone", e.target.value)}
+                          placeholder="(614) 555-1234"
+                          maxLength={20}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="helpTopic">What can we help with?</Label>
+                        <Select
+                          value={formData.helpTopic}
+                          onValueChange={(value) => handleInputChange("helpTopic", value)}
+                        >
+                          <SelectTrigger id="helpTopic" className="bg-background">
+                            <SelectValue placeholder="Select a topic..." />
+                          </SelectTrigger>
+                          <SelectContent className="bg-background border-border z-50">
+                            {helpTopics.map((topic) => (
+                              <SelectItem 
+                                key={topic.value} 
+                                value={topic.value}
+                                className="cursor-pointer"
+                              >
+                                {topic.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea
+                          id="message"
+                          value={formData.message}
+                          onChange={(e) => handleInputChange("message", e.target.value)}
+                          placeholder="Tell us more about what you need..."
+                          rows={4}
+                          maxLength={2000}
+                          className="resize-none"
+                        />
+                      </div>
+
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full text-base"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-4 h-4 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  )}
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+
+            {/* Right Column: Contact Info & Map */}
+            <AnimatedSection animation="fade-up" delay={150} className="space-y-8">
+              {/* Direct Contact */}
+              <div>
+                <h2 className="heading-md text-foreground mb-6">Get in Touch</h2>
+                
+                <div className="space-y-5">
+                  {/* Phone */}
+                  <a 
+                    href="tel:6146120050"
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0 group-hover:bg-burgundy-100 transition-colors">
+                      <Phone className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <Label htmlFor="lastName" className="font-body text-sm font-medium text-charcoal mb-1.5 block">
-                        Last Name *
-                      </Label>
-                      <Input
-                        id="lastName"
-                        {...register("lastName")}
-                        className="font-body"
-                        placeholder="Mitchell"
-                      />
-                      {errors.lastName && (
-                        <p className="text-destructive text-sm mt-1">{errors.lastName.message}</p>
-                      )}
+                      <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        (614) 612-0050
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Click to call on mobile
+                      </p>
                     </div>
-                  </div>
+                  </a>
 
                   {/* Email */}
-                  <div>
-                    <Label htmlFor="email" className="font-body text-sm font-medium text-charcoal mb-1.5 block">
-                      Email *
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      {...register("email")}
-                      className="font-body"
-                      placeholder="sarah@example.com"
-                    />
-                    {errors.email && (
-                      <p className="text-destructive text-sm mt-1">{errors.email.message}</p>
-                    )}
-                  </div>
-
-                  {/* Phone */}
-                  <div>
-                    <Label htmlFor="phone" className="font-body text-sm font-medium text-charcoal mb-1.5 block">
-                      Phone <span className="text-muted-foreground">(optional)</span>
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      {...register("phone")}
-                      className="font-body"
-                      placeholder="(614) 555-0123"
-                    />
-                  </div>
-
-                  {/* Subject */}
-                  <div>
-                    <Label className="font-body text-sm font-medium text-charcoal mb-1.5 block">
-                      Subject *
-                    </Label>
-                    <Select onValueChange={(value) => setValue("subject", value)}>
-                      <SelectTrigger className="font-body">
-                        <SelectValue placeholder="Select a subject" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {subjects.map((subject) => (
-                          <SelectItem key={subject.value} value={subject.value} className="font-body">
-                            {subject.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.subject && (
-                      <p className="text-destructive text-sm mt-1">{errors.subject.message}</p>
-                    )}
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <Label htmlFor="message" className="font-body text-sm font-medium text-charcoal mb-1.5 block">
-                      Message *
-                    </Label>
-                    <Textarea
-                      id="message"
-                      {...register("message")}
-                      className="font-body min-h-[140px]"
-                      placeholder="How can we help you?"
-                    />
-                    {errors.message && (
-                      <p className="text-destructive text-sm mt-1">{errors.message.message}</p>
-                    )}
-                  </div>
-
-                  {/* Preferred Contact */}
-                  <div>
-                    <Label className="font-body text-sm font-medium text-charcoal mb-2 block">
-                      Preferred Contact Method
-                    </Label>
-                    <RadioGroup
-                      value={preferredContact}
-                      onValueChange={(value) => setValue("preferredContact", value as "email" | "phone" | "text")}
-                      className="flex gap-space-md"
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="email" id="contact-email" />
-                        <Label htmlFor="contact-email" className="font-body text-sm cursor-pointer">Email</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="phone" id="contact-phone" />
-                        <Label htmlFor="contact-phone" className="font-body text-sm cursor-pointer">Phone</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="text" id="contact-text" />
-                        <Label htmlFor="contact-text" className="font-body text-sm cursor-pointer">Text</Label>
-                      </div>
-                    </RadioGroup>
-                  </div>
-
-                  {/* Submit */}
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground hover:bg-burgundy-800 font-body font-medium"
+                  <a 
+                    href="mailto:info@sciotoinsurancegroup.com"
+                    className="flex items-start gap-4 group"
                   >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-
-                  <p className="font-body text-xs text-muted-foreground">
-                    ✓ No spam, ever &nbsp; ✓ We respond within 1 business day
-                  </p>
-                </form>
-              </AnimatedSection>
-            </div>
-
-            {/* Sidebar - Right */}
-            <div className="lg:col-span-1">
-              <AnimatedSection delay={0.2}>
-                <div className="bg-secondary rounded-2xl p-space-lg space-y-space-md sticky top-32">
-                  <h3 className="heading-sm text-charcoal">Contact Information</h3>
-
-                  <div className="space-y-space-sm">
-                    <a href="tel:6146120050" className="flex items-center gap-3 group">
-                      <span className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <Phone className="w-5 h-5 text-primary" />
-                      </span>
-                      <div>
-                        <p className="font-body text-sm font-medium text-charcoal group-hover:text-primary transition-colors">(614) 612-0050</p>
-                        <p className="font-body text-xs text-muted-foreground">Call or text</p>
-                      </div>
-                    </a>
-
-                    <a href="mailto:info@sciotoinsurancegroup.com" className="flex items-center gap-3 group">
-                      <span className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <Mail className="w-5 h-5 text-primary" />
-                      </span>
-                      <div>
-                        <p className="font-body text-sm font-medium text-charcoal group-hover:text-primary transition-colors break-all">info@sciotoinsurancegroup.com</p>
-                        <p className="font-body text-xs text-muted-foreground">Email us anytime</p>
-                      </div>
-                    </a>
-
-                    <div className="flex items-center gap-3">
-                      <span className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <MapPin className="w-5 h-5 text-primary" />
-                      </span>
-                      <div>
-                        <p className="font-body text-sm font-medium text-charcoal">102 W Main St. #491</p>
-                        <p className="font-body text-xs text-muted-foreground">New Albany, OH 43054</p>
-                      </div>
+                    <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0 group-hover:bg-burgundy-100 transition-colors">
+                      <Mail className="w-5 h-5 text-primary" />
                     </div>
-
-                    <div className="flex items-center gap-3">
-                      <span className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Clock className="w-5 h-5 text-primary" />
-                      </span>
-                      <div>
-                        <p className="font-body text-sm font-medium text-charcoal">Mon–Fri 9am–5pm</p>
-                        <p className="font-body text-xs text-muted-foreground">Sat by appointment</p>
-                      </div>
+                    <div>
+                      <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        info@sciotoinsurancegroup.com
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        We respond within hours
+                      </p>
                     </div>
-                  </div>
+                  </a>
 
-                  <div className="border-t border-charcoal/10 pt-space-sm">
-                    <div className="flex items-start gap-2">
-                      <Shield className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                      <p className="font-body text-xs text-muted-foreground">
-                        We respond within 1 business day. Your information is secure and will never be shared.
+                  {/* Address */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">
+                        102 W Main St. #491
+                      </p>
+                      <p className="text-muted-foreground">
+                        New Albany, OH 43054
                       </p>
                     </div>
                   </div>
                 </div>
-              </AnimatedSection>
-            </div>
+              </div>
+
+              {/* Business Hours */}
+              <div className="pt-6 border-t border-border">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground mb-2">Business Hours</p>
+                    <div className="space-y-1 text-muted-foreground">
+                      <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                      <p>Saturday & Sunday: Closed</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground bg-muted/50 p-4 rounded-lg">
+                  <strong>After hours?</strong> Leave a message or email us. Urgent claims? Most carriers have 24/7 claim lines — call us and we'll give you the number.
+                </p>
+              </div>
+
+              {/* Map Placeholder */}
+              <div className="pt-6 border-t border-border">
+                <div className="aspect-video rounded-xl bg-gradient-to-br from-burgundy-50 to-burgundy-100 overflow-hidden relative">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48911.87391555889!2d-82.8485!3d40.0812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388f0a4a91d2e5%3A0x1a7c05c6dbf48d33!2sNew%20Albany%2C%20OH!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Scioto Insurance Group Location"
+                    className="absolute inset-0"
+                  />
+                </div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* Schedule a Call Section */}
+      <section className="py-12 md:py-16 bg-cream">
+        <div className="container-wide">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="w-16 h-16 rounded-full bg-burgundy-100 flex items-center justify-center mx-auto mb-6">
+              <Calendar className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="heading-lg text-foreground mb-4">
+              Prefer to Schedule a Specific Time?
+            </h2>
+            <p className="body-md text-muted-foreground mb-8">
+              If you want a dedicated call without playing phone tag, pick a time that works for you.
+            </p>
+            <Button asChild size="lg" className="text-base px-8">
+              <a 
+                href="https://calendly.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Schedule a Call
+              </a>
+            </Button>
+            <p className="text-sm text-muted-foreground mt-4">
+              It's free, no strings attached.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

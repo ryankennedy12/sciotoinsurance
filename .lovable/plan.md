@@ -1,64 +1,53 @@
 
 
-# Re-implement Contact Page
+# New Logo + Mobile Performance Deep Clean
 
 ## Overview
 
-Recreate the `/contact` page with a contact form that submits to the existing `leads` table (using `request_type: "contact_general"`), matching the pattern the admin dashboard already expects. Also restore routing and navigation links.
+Two things in one pass: swap in your new compressed logo and implement all the CSS/rendering performance fixes from the approved plan.
 
 ## Changes
 
-### 1. Create `src/pages/Contact.tsx`
+### 1. Replace the logo file
+Copy your uploaded logo to `src/assets/logo.png`, replacing the 2.2MB original. This is the single biggest performance win.
 
-A full contact page with:
+### 2. Replace `transition-all` with specific properties (~20 files)
+Every instance of `transition-all` will be replaced with only the properties that element actually animates. Key files:
+- `src/pages/GetQuote.tsx` -- form buttons, option cards
+- `src/pages/Services.tsx` -- service cards
+- `src/pages/BusinessInsurance.tsx` -- tabs, cards
+- `src/pages/About.tsx` -- CTA buttons
+- `src/pages/PersonalInsurance.tsx` -- carousel buttons
+- `src/pages/EmployeeBenefits.tsx` -- stat cards
+- `src/components/Header.tsx` -- accordion, phone link
+- `src/components/CarrierLogoGrid.tsx` -- carrier tiles
+- `src/components/TestimonialCard.tsx` -- card wrapper
+- `src/components/ProductDetailTemplate.tsx` -- phone button
+- `src/index.css` -- `.touch-card`, `.touch-industry-card`
+- `src/components/ui/button.tsx` -- base variant
+- `src/components/ui/accordion.tsx`
+- `src/components/ui/floating-label-input.tsx`
 
-- **Hero section** -- gradient background matching other pages, headline "Get in Touch", subheadline about reaching a real person
-- **Two-column layout below hero:**
-  - **Left column: Contact form** with fields:
-    - First Name + Last Name (side-by-side)
-    - Email
-    - Phone (optional)
-    - Subject (dropdown: General Inquiry, Quote Request, Policy Question, Claims Help, Other)
-    - Message (textarea)
-    - Preferred contact method (radio: Email, Phone, Text)
-    - Submit button
-  - **Right column: Contact info sidebar** with:
-    - Phone number (clickable `tel:` link)
-    - Email address (clickable `mailto:` link)
-    - Office address
-    - Business hours
-    - Small trust line ("We respond within 1 business day")
+### 3. Remove all `backdrop-blur` from components
+Replace with slightly more opaque solid backgrounds:
+- `src/components/TestimonialCard.tsx`
+- `src/components/ProductDetailTemplate.tsx`
+- `src/pages/EmployeeBenefits.tsx`
+- `src/pages/PersonalInsurance.tsx`
+- `src/pages/About.tsx`
 
-- **Form submission:** Inserts into the `leads` table with:
-  - `request_type: "contact_general"`
-  - `coverage_type: "not_sure"`
-  - `status: "new"`
-  - `reply_status: "unread"`
-  - `is_read: false`
-  - `notes: "Contact form inquiry: {subject}"`
-  - `additional_info: {message text}`
-  - Standard name/email/phone/preferred_contact fields
+### 4. Restrict hover scale to desktop only
+Change `group-hover:scale-105` to `lg:group-hover:scale-105` on large images:
+- `src/components/Header.tsx` -- logo
+- `src/pages/Home.tsx` -- service card images
 
-- **Success state:** After submission, show a confirmation message with expected response timeline
+### 5. Add CSS containment
+Add `contain: content` to `.touch-card` and `.touch-industry-card` in `src/index.css`.
 
-### 2. Update `src/App.tsx`
+## Expected Result
+- ~2MB less memory pressure from the logo alone
+- ~90 fewer per-frame property checks from transition-all removal
+- 5 fewer GPU compositing operations from backdrop-blur removal
+- No unnecessary GPU layers on mobile from hover transforms
+- Dramatically smoother scrolling on mobile devices
 
-- Import the new `Contact` page
-- Replace the `/contact` redirect (`Navigate to="/services"`) with a proper route to the Contact component
-
-### 3. Update `src/components/Header.tsx`
-
-- Re-add "Contact" link in the desktop navigation
-- Re-add "Contact" link in the mobile menu
-
-### 4. Update `src/components/Footer.tsx`
-
-- No changes needed (footer currently links to `/services` which is fine, but can optionally add a Contact link back to Quick Links)
-
-## Technical Details
-
-- Uses `react-hook-form` + `zod` for form validation (already installed)
-- Uses `supabase` client to insert into the `leads` table
-- Uses `sonner` toast for success/error feedback
-- Follows existing brand styling: `heading-xl`, `body-lg`, `section-padding`, burgundy color scheme
-- The admin contacts dashboard already filters for `request_type: "contact_general"`, so submissions will appear there automatically

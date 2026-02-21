@@ -317,7 +317,7 @@ const About = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-space-md">
             <Link
-              to="/services"
+              to="/contact"
               className="inline-flex items-center justify-center px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl"
             >
               Schedule a Call

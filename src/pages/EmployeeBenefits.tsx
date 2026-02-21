@@ -86,7 +86,7 @@ const EmployeeBenefits = () => {
               <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6 tracking-tight">Employee Benefits<br /><span className="text-primary">That Work</span></h1>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Attract top talent, reduce turnover, and build a healthier workforce with benefits packages designed for real business impact.</p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button asChild size="lg" className="text-base"><Link to="/services">Get Custom Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild size="lg" className="text-base"><Link to="/get-quote">Get Custom Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -117,7 +117,7 @@ const EmployeeBenefits = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {employeeBenefitsProducts.map((product, i) => { const Icon = product.icon; return (
               <AnimatedSection key={product.name} animation="fade-up" delay={i * 75}>
-                <Link to="/services" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-200 h-full">
+                <Link to="/get-quote" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-200 h-full">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors"><Icon className="h-6 w-6 text-primary" /></div>
                     <div className="flex-1">
@@ -149,7 +149,7 @@ const EmployeeBenefits = () => {
               <div className="bg-primary rounded-2xl p-8 lg:p-10 text-primary-foreground">
                 <h3 className="font-display font-semibold text-2xl mb-8">Potential Annual Savings</h3>
                 <div className="bg-white/10 rounded-xl p-6 text-center mb-6"><div className="text-sm text-primary-foreground/80 mb-1">Estimated Annual ROI</div><div className="text-5xl font-display font-bold">${annualSavings.toLocaleString()}</div></div>
-                <Button asChild size="lg" variant="secondary" className="w-full"><Link to="/services">Get Your Custom Analysis<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild size="lg" variant="secondary" className="w-full"><Link to="/get-quote">Get Your Custom Analysis<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
               </div>
             </AnimatedSection>
           </div>
@@ -189,7 +189,7 @@ const EmployeeBenefits = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-primary-foreground text-sm font-medium mb-6"><Users className="h-4 w-4" />Schedule Your Free Consultation</div>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-primary-foreground mb-6">Ready to Build a Better Benefits Package?</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="text-base"><Link to="/services">Schedule Consultation<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+              <Button asChild size="lg" variant="secondary" className="text-base"><Link to="/contact">Schedule Consultation<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
               <Button asChild size="lg" variant="outline" className="text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
             </div>
           </AnimatedSection>
