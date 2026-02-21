@@ -1,78 +1,32 @@
 
 
-# Mobile and Tablet Hero: Bold Full-Bleed Image with Gradient
+# Improve Hero Text Readability Without Darkening the Overlay
 
-## Current Problem
-The cream overlay at 85% opacity makes the background image look washed out and unintentional on mobile and tablet. It doesn't feel premium -- it feels like a faded afterthought.
+## Approach
+Instead of making the overlay heavier, we enhance the text itself so it punches through the image. Three complementary techniques, all CSS-only, scoped to mobile/tablet only (`lg:` reverts to current desktop style):
 
-## Proposed Solution: Dark Gradient Overlay with Light Text
+### 1. Text Shadow
+Add a multi-layer `text-shadow` to the headline and subheadline. This creates a soft dark halo around each letter that separates it from any background -- the same technique used by Netflix, Apple TV+, and premium editorial sites.
 
-Use the hero image at full impact with a rich burgundy-to-transparent gradient overlay and switch the text to white. This is the look used by premium financial and insurance brands (Chubb, USAA, Lemonade) -- bold photography, confident typography, unmistakable professionalism.
+- Headline: `[text-shadow:_0_2px_12px_rgba(0,0,0,0.5),_0_1px_3px_rgba(0,0,0,0.4)]`
+- Subheadline: `[text-shadow:_0_1px_8px_rgba(0,0,0,0.4),_0_1px_2px_rgba(0,0,0,0.3)]`
+- Desktop (`lg:`): `lg:[text-shadow:none]` to keep current clean look
 
-```text
-MOBILE (<640px):
-+-----------------------------------------------+
-|  ~~~ hero image, vivid, full-bleed ~~~        |
-|  [burgundy gradient from left/bottom]         |
-|                                               |
-|  [Headline - WHITE text]                      |
-|  [Subheadline - white/90 text]                |
-|  [CTA Buttons]                                |
-|                                               |
-+-----------------------------------------------+
+### 2. Bump Font Weight on Mobile
+Increase the headline font weight from `font-semibold` to `font-bold` on mobile/tablet only, giving the white text more visual mass against the image. Desktop stays `font-semibold`.
 
-TABLET (640px-1023px):
-+-----------------------------------------------+
-|  ~~~ hero image, vivid, full-bleed ~~~        |
-|  [burgundy gradient from left]                |
-|                                               |
-|  [Headline - WHITE text]                      |
-|  [Subheadline - white/90 text]                |
-|  [CTA Buttons side-by-side]                   |
-|                                               |
-+-----------------------------------------------+
+### 3. Roll Back Overlay to a Lighter Value
+Since the text itself will now carry its own contrast, we can lighten the overlay back closer to the original to let the photo breathe more:
+- From: `from-burgundy-900/95 via-burgundy-900/75 to-burgundy-800/50`
+- To: `from-burgundy-900/85 via-burgundy-900/55 to-burgundy-800/30`
 
-DESKTOP (1024px+) -- NO CHANGE:
-+-------------------------------+-------------------------------+
-|  [Headline - dark text]       |        [Hero Image]           |
-|  [Subheadline]                |     (split layout)            |
-|  [CTA Buttons]                |                               |
-+-------------------------------+-------------------------------+
-```
+## Technical Details
 
-## Why This Will Get a "Wow"
-- The photo is vivid and present, not hidden behind a wash
-- Burgundy gradient overlay ties the image to the brand while ensuring text contrast
-- White text on a photo background is the hallmark of premium, editorial web design
-- The CTAs pop against the darker background -- the primary button stays burgundy-700, the secondary button switches to a white outline style
-- Desktop stays exactly as-is -- only mobile and tablet change
+**Only `src/pages/Home.tsx` changes.** Three targeted edits:
 
-## Technical Details (only `src/pages/Home.tsx` changes)
+1. **Gradient overlay div (line 43):** Lighten opacity stops
+2. **h1 (line 48):** Add text-shadow utility and `font-bold lg:font-semibold`
+3. **p (line 53):** Add lighter text-shadow utility
 
-### 1. Replace the cream overlay with a burgundy gradient
-Change the mobile/tablet overlay from:
-```
-bg-cream/85
-```
-To a multi-stop gradient:
-```
-bg-gradient-to-t from-burgundy-900/90 via-burgundy-800/60 to-burgundy-900/30
-```
-This creates a rich, dark-to-transparent gradient that keeps the image visible at the top while ensuring text readability at the bottom where the content sits.
-
-### 2. Switch text colors on mobile/tablet
-- Headline: Add `text-white lg:text-foreground` so it's white on mobile/tablet, dark on desktop
-- Subheadline: Add `text-white/85 lg:text-muted-foreground`
-- This ensures the text pops against the dark gradient on small screens but stays the same on desktop
-
-### 3. Adjust the secondary CTA for mobile/tablet
-The "Talk to a Real Person" button currently has `bg-card text-primary border-primary`. On the dark background, switch to:
-- Mobile/tablet: white outline style (`lg:bg-card` with `border-white text-white` below lg)
-- Desktop: unchanged
-
-### 4. Adjust image object-position
-Change from `object-[25%_center]` to `object-[30%_center]` to better frame the subjects on mobile.
-
-### 5. No other files change
-Same image, same desktop layout, same content. Only the mobile/tablet visual treatment changes.
+No new files, no new dependencies.
 
