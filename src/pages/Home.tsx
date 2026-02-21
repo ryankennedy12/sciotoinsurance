@@ -40,17 +40,17 @@ const Home = () => {
                   aria-hidden="true"
                   className="w-full h-full object-cover object-[30%_center]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/95 via-burgundy-900/75 to-burgundy-800/50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/85 via-burgundy-900/55 to-burgundy-800/30" />
               </div>
               {/* Main Headline */}
               {/* Content wrapper above background */}
               <div className="relative z-10 flex flex-col items-center lg:items-start justify-center w-full flex-1">
-              <h1 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white lg:text-foreground leading-[1.1] mb-6">
+              <h1 className="font-display font-bold lg:font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white lg:text-foreground leading-[1.1] mb-6 [text-shadow:_0_2px_12px_rgba(0,0,0,0.5),_0_1px_3px_rgba(0,0,0,0.4)] lg:[text-shadow:none]">
                 Ohio Families Trust Us to Protect What Matters Most
               </h1>
 
               {/* Subheadline */}
-              <p className="font-body text-lg sm:text-xl lg:text-2xl text-white/85 lg:text-muted-foreground leading-relaxed max-w-2xl mb-8">
+              <p className="font-body text-lg sm:text-xl lg:text-2xl text-white/85 lg:text-muted-foreground leading-relaxed max-w-2xl mb-8 [text-shadow:_0_1px_8px_rgba(0,0,0,0.4),_0_1px_2px_rgba(0,0,0,0.3)] lg:[text-shadow:none]">
                 We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
               </p>
 
