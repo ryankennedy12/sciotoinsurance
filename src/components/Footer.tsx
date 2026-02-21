@@ -5,7 +5,7 @@ import logo from "@/assets/logo.png";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <footer ref={ref} className="bg-burgundy-100 text-charcoal">
+    <footer ref={ref} className="bg-cream text-charcoal">
       {/* Main Footer Content */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg py-space-xl">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-space-md">
