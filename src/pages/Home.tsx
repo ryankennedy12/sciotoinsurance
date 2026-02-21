@@ -82,9 +82,9 @@ const Home = () => {
 
 
       {/* Why Scioto Insurance Group Section */}
-      <section className="relative py-16 sm:py-space-3xl bg-cream overflow-hidden">
+      <section className="relative py-16 sm:py-space-3xl bg-secondary overflow-hidden">
         {/* Subtle radial glow background */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 60%, hsl(340 33% 96% / 0.8), transparent 70%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, hsl(345 55% 34% / 0.04), transparent 60%)' }} />
         
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           {/* Section Header */}
