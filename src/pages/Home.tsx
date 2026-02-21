@@ -22,7 +22,7 @@ const Home = () => {
           <div className="relative lg:grid lg:grid-cols-2 lg:min-h-[85vh]">
             
             {/* Image Panel - desktop only (split layout) */}
-            <div className="hidden lg:block lg:order-2 overflow-hidden p-8">
+            <div className="hidden lg:flex lg:order-2 items-center justify-center p-10">
               <div className="relative w-full h-full rounded-xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.25)]">
                 <img
                   src={heroSplit}
