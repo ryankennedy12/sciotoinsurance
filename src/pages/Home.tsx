@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, Clock, Users, Shield, Scale, ShieldCheck, PhoneCall, CheckCircle } from "lucide-react";
+import { Phone, ArrowRight, Star, Scale, ShieldCheck, PhoneCall, CheckCircle } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
@@ -13,13 +13,6 @@ import { useEffect } from "react";
 const Home = () => {
   const isPageReady = usePageReady();
   
-  // Trust row items with icons
-  const trustItems = [
-    { icon: Star, label: "5.0", sublabel: "Rating" },
-    { icon: Clock, label: "29 Years", sublabel: "Experience" },
-    { icon: Users, label: "Father-Daughter", sublabel: "Team" },
-    { icon: Shield, label: "Independent", sublabel: "Agent" },
-  ];
 
   return (
     <>
@@ -60,31 +53,6 @@ const Home = () => {
               <p className="font-body text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
                 We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
               </p>
-
-              {/* Trust Row */}
-              <div className="flex flex-wrap items-center gap-4 lg:gap-0 mb-8">
-                {trustItems.map((item, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="flex items-center gap-2">
-                      {item.icon === Star ? (
-                        <div className="flex text-gold-500">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-current" />
-                          ))}
-                        </div>
-                      ) : (
-                        <item.icon className="w-5 h-5 text-gold-500" />
-                      )}
-                      <span className="font-body font-semibold text-foreground text-sm lg:text-base">
-                        {item.label}{item.sublabel ? ` ${item.sublabel}` : ''}
-                      </span>
-                    </div>
-                    {index < trustItems.length - 1 && (
-                      <div className="hidden lg:block w-px h-6 bg-foreground/20 mx-4" />
-                    )}
-                  </div>
-                ))}
-              </div>
 
               {/* Dual CTAs */}
               <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 mb-6">
