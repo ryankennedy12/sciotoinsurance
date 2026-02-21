@@ -1,103 +1,64 @@
 
 
-# Page Cleanup Plan
+# Re-implement Contact Page
 
-## Pages to KEEP
-- **Home** (`src/pages/Home.tsx`)
-- **About** (`src/pages/About.tsx`)
-- **Personal Insurance** (`src/pages/PersonalInsurance.tsx`)
-- **Business Insurance** (`src/pages/BusinessInsurance.tsx`)
-- **Employee Benefits** (`src/pages/EmployeeBenefits.tsx`)
-- **Services** (`src/pages/Services.tsx`)
-- **NotFound** (`src/pages/NotFound.tsx`)
-- **All Admin pages** (`src/pages/admin/*`)
+## Overview
 
-## Pages to DELETE (18 files)
+Recreate the `/contact` page with a contact form that submits to the existing `leads` table (using `request_type: "contact_general"`), matching the pattern the admin dashboard already expects. Also restore routing and navigation links.
 
-| File | Reason |
-|------|--------|
-| `src/pages/Contact.tsx` | Not one of the kept pages |
-| `src/pages/GetQuote.tsx` | Not one of the kept pages |
-| `src/pages/personal-insurance/AutoInsurance.tsx` | Product detail page |
-| `src/pages/personal-insurance/HomeInsurance.tsx` | Product detail page |
-| `src/pages/personal-insurance/LifeInsurance.tsx` | Product detail page |
-| `src/pages/personal-insurance/UmbrellaInsurance.tsx` | Product detail page |
-| `src/pages/personal-insurance/FloodInsurance.tsx` | Product detail page |
-| `src/pages/personal-insurance/HighNetWorthInsurance.tsx` | Product detail page |
-| `src/pages/business-insurance/GeneralLiability.tsx` | Product detail page |
-| `src/pages/business-insurance/WorkersComp.tsx` | Product detail page |
-| `src/pages/business-insurance/CyberLiability.tsx` | Product detail page |
-| `src/pages/business-insurance/ProfessionalLiability.tsx` | Product detail page |
-| `src/pages/business-insurance/CommercialProperty.tsx` | Product detail page |
-| `src/pages/business-insurance/CommercialAuto.tsx` | Product detail page |
+## Changes
 
-## Components to DELETE (only used by deleted pages)
+### 1. Create `src/pages/Contact.tsx`
 
-| File | Used by |
-|------|---------|
-| `src/components/ProductDetailTemplate.tsx` | All 12 product detail pages only |
-| `src/components/ProductFAQ.tsx` | ProductDetailTemplate only |
-| `src/components/QuoteFormExitIntent.tsx` | GetQuote page only |
-| `src/components/calculators/AutoCoverageSlider.tsx` | Product pages only |
-| `src/components/calculators/RebuildCostEstimator.tsx` | Product pages only |
-| `src/components/calculators/LifeCoverageCalculator.tsx` | Product pages only |
-| `src/components/calculators/UmbrellaGapCalculator.tsx` | Product pages only |
-| `src/components/calculators/FloodRiskChecker.tsx` | Product pages only |
-| `src/components/calculators/HighNetWorthChecklist.tsx` | Product pages only |
-| `src/components/calculators/LiabilityLimitTool.tsx` | Product pages only |
-| `src/components/calculators/IndustryRiskAssessment.tsx` | Product pages only |
-| `src/components/calculators/PropertyGapChecklist.tsx` | Product pages only |
-| `src/components/calculators/FleetCalculator.tsx` | Product pages only |
-| `src/components/calculators/WorkersCompEstimator.tsx` | Product pages only |
-| `src/components/calculators/CyberRiskScorecard.tsx` | Product pages only |
-| `src/components/calculators/CalculatorWrapper.tsx` | Calculator components only |
-| `src/components/calculators/index.ts` | Calculator barrel export |
+A full contact page with:
 
-## Files to UPDATE
+- **Hero section** -- gradient background matching other pages, headline "Get in Touch", subheadline about reaching a real person
+- **Two-column layout below hero:**
+  - **Left column: Contact form** with fields:
+    - First Name + Last Name (side-by-side)
+    - Email
+    - Phone (optional)
+    - Subject (dropdown: General Inquiry, Quote Request, Policy Question, Claims Help, Other)
+    - Message (textarea)
+    - Preferred contact method (radio: Email, Phone, Text)
+    - Submit button
+  - **Right column: Contact info sidebar** with:
+    - Phone number (clickable `tel:` link)
+    - Email address (clickable `mailto:` link)
+    - Office address
+    - Business hours
+    - Small trust line ("We respond within 1 business day")
 
-### `src/App.tsx`
-- Remove all imports for deleted pages (Contact, GetQuote, all 12 product detail pages)
-- Remove all routes for those pages
-- Keep wildcard redirects under `/personal-insurance/*` and `/business-insurance/*` but point them to `/` instead of `/get-quote`
+- **Form submission:** Inserts into the `leads` table with:
+  - `request_type: "contact_general"`
+  - `coverage_type: "not_sure"`
+  - `status: "new"`
+  - `reply_status: "unread"`
+  - `is_read: false`
+  - `notes: "Contact form inquiry: {subject}"`
+  - `additional_info: {message text}`
+  - Standard name/email/phone/preferred_contact fields
 
-### `src/components/Header.tsx`
-- Remove "Get a Quote" button from desktop nav
-- Remove Contact nav link from mobile menu
-- Update any remaining `/get-quote` or `/contact` links
+- **Success state:** After submission, show a confirmation message with expected response timeline
 
-### Links across kept pages
-The kept pages (Home, About, PersonalInsurance, BusinessInsurance, EmployeeBenefits, Services) contain many links to `/get-quote` and `/contact`. These will be updated to point to the Services page (`/services`) or removed, since Services is the main client action hub. Specific files:
-- `src/pages/Home.tsx` -- CTA links
-- `src/pages/About.tsx` -- contact CTA
-- `src/pages/BusinessInsurance.tsx` -- quote CTAs, product card links
-- `src/pages/PersonalInsurance.tsx` -- quote CTAs
-- `src/pages/EmployeeBenefits.tsx` -- quote CTAs
-- `src/pages/Services.tsx` -- "Get a Free Quote" link in bottom section
-- `src/components/Footer.tsx` -- any quote/contact links
-- `src/components/TestimonialCard.tsx` -- if it links to quote
-- `src/components/CarrierLogoGrid.tsx` -- if it links to quote
+### 2. Update `src/App.tsx`
 
-### `src/data/products.ts`
-- Keep this file (still used by PersonalInsurance, BusinessInsurance, EmployeeBenefits pages for card grids)
-- Remove any `slug` references that pointed to now-deleted product detail pages, so product cards link to `/services` or just show info without linking to detail pages
+- Import the new `Contact` page
+- Replace the `/contact` redirect (`Navigate to="/services"`) with a proper route to the Contact component
 
-## Hero images to DELETE (no longer referenced)
-These images were only used by the deleted product detail pages:
-- `src/assets/hero-auto-insurance.jpg`
-- `src/assets/hero-home-insurance.jpg`
-- `src/assets/hero-life-insurance.jpg`
-- `src/assets/hero-umbrella-insurance.jpg`
-- `src/assets/hero-flood-insurance.jpg`
-- `src/assets/hero-high-net-worth.jpg`
-- `src/assets/hero-general-liability.jpg`
-- `src/assets/hero-workers-comp.jpg`
-- `src/assets/hero-cyber-liability.jpg`
-- `src/assets/hero-professional-liability.jpg`
-- `src/assets/hero-commercial-property.jpg`
-- `src/assets/hero-commercial-auto.jpg`
+### 3. Update `src/components/Header.tsx`
 
-## Summary
-- **Delete**: 14 page files + 17 component files + 12 hero images = 43 files
-- **Update**: ~10 files to fix broken links
-- **Keep intact**: Home, About, PersonalInsurance, BusinessInsurance, EmployeeBenefits, Services, NotFound, all admin pages, all shared UI components, data file
+- Re-add "Contact" link in the desktop navigation
+- Re-add "Contact" link in the mobile menu
 
+### 4. Update `src/components/Footer.tsx`
+
+- No changes needed (footer currently links to `/services` which is fine, but can optionally add a Contact link back to Quick Links)
+
+## Technical Details
+
+- Uses `react-hook-form` + `zod` for form validation (already installed)
+- Uses `supabase` client to insert into the `leads` table
+- Uses `sonner` toast for success/error feedback
+- Follows existing brand styling: `heading-xl`, `body-lg`, `section-padding`, burgundy color scheme
+- The admin contacts dashboard already filters for `request_type: "contact_general"`, so submissions will appear there automatically
