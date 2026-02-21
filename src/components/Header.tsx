@@ -75,13 +75,20 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 20;
+        if (scrolled !== isScrolled) setIsScrolled(scrolled);
+        ticking = false;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -118,9 +125,9 @@ const Header = () => {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
-          isScrolled
-            ? "bg-white/98 backdrop-blur-sm shadow-sm"
-            : "bg-cream/80 backdrop-blur-sm"
+        isScrolled
+            ? "bg-white shadow-sm"
+            : "bg-cream"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg">

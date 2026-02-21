@@ -16,6 +16,10 @@ const Home = () => {
   const heroContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Disable parallax on mobile — saves two DOM writes per scroll frame
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (!isDesktop) return;
+
     const heroBg = heroBgRef.current;
     const heroContent = heroContentRef.current;
     if (!heroBg || !heroContent) return;
@@ -289,6 +293,7 @@ const Home = () => {
                     <img
                       src={familyHomeService}
                       alt="Ohio family at home"
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     {/* Right-edge fade into text panel (desktop only) */}
@@ -334,6 +339,7 @@ const Home = () => {
                     <img
                       src={businessOffice}
                       alt="Business professional in office"
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
@@ -378,6 +384,7 @@ const Home = () => {
                     <img
                       src={teamMeeting}
                       alt="Team meeting discussing employee benefits"
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
