@@ -1,30 +1,72 @@
 
-# Fix Mobile Hero Image Zoom on Scroll
 
-## Root Cause
+# Delete Extra Pages and Simplify Navigation
 
-Mobile browsers (Safari, Chrome) hide their URL/address bar when you scroll down and show it again when you scroll back up. This changes the meaning of `100vh` -- the hero section uses `min-h-screen` (which is `100vh`), so when the address bar hides, the viewport grows, the section grows, and `bg-cover` rescales the background image to fill the larger area. This is the "zoom in/out" effect.
+## Overview
 
-## Fix (1 file)
+Remove all individual product detail pages and supporting components while keeping the 7 core pages (Home, About, Personal Insurance, Business Insurance, Employee Benefits, Services, Contact) plus the Get a Quote page and flow. Replace the mega menu with a simple flat navigation.
 
-### `src/pages/Home.tsx` (line 27)
+## Files to Delete
 
-Replace the height classes on the hero `<section>`:
+### Individual Product Pages (12 files)
+- `src/pages/personal-insurance/AutoInsurance.tsx`
+- `src/pages/personal-insurance/HomeInsurance.tsx`
+- `src/pages/personal-insurance/LifeInsurance.tsx`
+- `src/pages/personal-insurance/UmbrellaInsurance.tsx`
+- `src/pages/personal-insurance/FloodInsurance.tsx`
+- `src/pages/personal-insurance/HighNetWorthInsurance.tsx`
+- `src/pages/business-insurance/GeneralLiability.tsx`
+- `src/pages/business-insurance/WorkersComp.tsx`
+- `src/pages/business-insurance/CyberLiability.tsx`
+- `src/pages/business-insurance/ProfessionalLiability.tsx`
+- `src/pages/business-insurance/CommercialProperty.tsx`
+- `src/pages/business-insurance/CommercialAuto.tsx`
 
-**Before:**
-```
-className="relative min-h-screen lg:h-screen flex items-center overflow-hidden"
-```
+### Supporting Components (no longer needed without product pages)
+- `src/components/ProductDetailTemplate.tsx`
+- `src/components/ProductFAQ.tsx`
+- `src/data/products.ts`
+- `src/components/NavLink.tsx`
+- All files in `src/components/calculators/` directory (AutoCoverageSlider, CalculatorWrapper, CyberRiskScorecard, FleetCalculator, FloodRiskChecker, HighNetWorthChecklist, IndustryRiskAssessment, LiabilityLimitTool, LifeCoverageCalculator, PropertyGapChecklist, RebuildCostEstimator, UmbrellaGapCalculator, WorkersCompEstimator, index.ts)
 
-**After:**
-```
-className="relative min-h-[100svh] lg:h-[100svh] flex items-center overflow-hidden"
-```
+## File Changes
 
-`100svh` ("small viewport height") is the viewport height with the address bar **visible**. It never changes as you scroll, so the hero stays a fixed size and the background image never rescales.
+### 1. `src/App.tsx`
+- Remove all 12 product page imports
+- Remove all `/personal-insurance/*` sub-routes (auto, home, life, umbrella, flood, high-net-worth)
+- Remove all `/business-insurance/*` sub-routes (general-liability, workers-comp, cyber-liability, professional-liability, commercial-property, commercial-auto)
+- Change the wildcard redirects (`/personal-insurance/*` and `/business-insurance/*`) to redirect to `/get-quote` (they already do this -- just keep them)
+- **Keep** the `/get-quote` route and `GetQuote` import
+- **Keep** the `/contact` route
 
-Tailwind v3 supports arbitrary values like `min-h-[100svh]` and `h-[100svh]` natively -- no config changes needed.
+### 2. `src/components/Header.tsx` (rewrite)
+- Remove all mega menu data arrays (personalInsuranceCategories, businessInsuranceCategories, personalInsuranceItems, businessInsuranceItems)
+- Remove the `MegaMenu` component entirely
+- Remove dropdown state (`activeDropdown`, `handleDropdownEnter`, `handleDropdownLeave`, `mobileDropdown`, `toggleMobileDropdown`)
+- Remove the `hasDropdown` prop from `NavLink`
 
-## Expected Result
+**Desktop nav** becomes a flat list of links:
+- About
+- Personal Insurance
+- Business Insurance
+- Employee Benefits
+- Services
+- Contact
 
-The hero image stays perfectly static on mobile scroll. No zoom, no resize, no jank. Desktop behavior is unchanged since desktop browsers don't have a collapsing address bar.
+**Desktop right side**: Keep the "Get a Quote" button linking to `/get-quote`
+
+**Mobile menu**: Same flat list of links (no accordions), keep the "Get a Quote" CTA and phone number at the bottom
+
+## What's NOT Changing
+- `src/pages/GetQuote.tsx` -- stays as-is, fully functional
+- `src/pages/Contact.tsx` -- stays as-is
+- All 7 core page components (Home, About, PersonalInsurance, BusinessInsurance, EmployeeBenefits, Services, Contact)
+- Admin pages and routes
+- Footer, Layout, and all other shared components
+- All image assets (remain in case they're used by the core pages)
+
+## Technical Details
+
+### Links on core pages that point to deleted product sub-pages
+Some core pages (e.g., BusinessInsurance.tsx, PersonalInsurance.tsx) have links like `/business-insurance/general-liability` or `/personal-insurance/auto`. With the wildcard redirects in App.tsx (`/personal-insurance/*` and `/business-insurance/*` both redirect to `/get-quote`), these links will automatically redirect users to the Get a Quote page -- which is the desired behavior for lead capture.
+
