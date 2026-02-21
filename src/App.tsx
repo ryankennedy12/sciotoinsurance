@@ -11,6 +11,7 @@ import PersonalInsurance from "./pages/PersonalInsurance";
 import BusinessInsurance from "./pages/BusinessInsurance";
 import EmployeeBenefits from "./pages/EmployeeBenefits";
 import Services from "./pages/Services";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 // Admin
@@ -42,8 +43,8 @@ const App = () => (
               <Route path="/business-insurance/*" element={<Navigate to="/business-insurance" replace />} />
               <Route path="/employee-benefits" element={<EmployeeBenefits />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/get-quote" element={<Navigate to="/services" replace />} />
-              <Route path="/contact" element={<Navigate to="/services" replace />} />
             </Route>
 
             {/* Admin routes */}
