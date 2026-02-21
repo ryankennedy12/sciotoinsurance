@@ -40,7 +40,7 @@ const Home = () => {
                   aria-hidden="true"
                   className="w-full h-full object-cover object-[30%_center]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/90 via-burgundy-800/60 to-burgundy-900/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/95 via-burgundy-900/75 to-burgundy-800/50" />
               </div>
               {/* Main Headline */}
               {/* Content wrapper above background */}
