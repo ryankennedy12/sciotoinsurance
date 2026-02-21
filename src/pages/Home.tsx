@@ -82,78 +82,97 @@ const Home = () => {
 
 
       {/* Why Scioto Insurance Group Section */}
-      <section className="py-16 sm:py-space-3xl bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
+      <section className="relative py-16 sm:py-space-3xl bg-cream overflow-hidden">
+        {/* Subtle radial glow background */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 60%, hsl(340 33% 96% / 0.8), transparent 70%)' }} />
+        
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
           {/* Section Header */}
           <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
-            {/* Decorative Line */}
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-4 sm:mb-space-md" />
+            {/* Gold accent bar */}
+            <div className="w-12 h-1 bg-accent mx-auto mb-4 sm:mb-space-md rounded-full" />
             
-            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[42px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[48px] text-foreground leading-[1.2] mb-2 sm:mb-space-sm">
               Why Ohio Families Work With Us
             </h2>
             <p className="font-body text-base sm:text-lg text-muted-foreground">
-              29 years of experience. A father-daughter team that picks up the phone.
+              29 years of experience. A father-daughter team that <em className="italic text-primary font-medium not-italic" style={{ fontStyle: 'italic' }}>picks up the phone</em>.
             </p>
           </AnimatedSection>
 
           {/* Value Proposition Cards */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl items-start">
             {/* Card 1 - Independent */}
-            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
-              {/* Handshake Icon */}
-              <div className="mb-4 sm:mb-space-md">
-                <Scale className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
+            <AnimatedSection animation="fade-up" delay={0} className="relative bg-card rounded-lg border-t-[3px] border-t-accent/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-accent/10 flex items-center justify-center border border-accent/20 mb-5">
+                <Scale className="w-7 h-7 text-accent" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
+              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
                 Independent, Not Corporate
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
                 We don't work for one insurance company. We shop over 30 carriers to find what fits your situation and your budget. If a better deal exists, we'll find it.
               </p>
+              <Link to="/about" className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-5 hover:gap-2.5 transition-[gap] duration-200">
+                Learn more <span>→</span>
+              </Link>
             </AnimatedSection>
 
-            {/* Card 2 - Experience */}
-            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
-              {/* Shield Icon */}
-              <div className="mb-4 sm:mb-space-md">
-                <ShieldCheck className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
+            {/* Card 2 - Experience (Featured Center) */}
+            <AnimatedSection animation="fade-up" delay={100} className="relative bg-card rounded-lg border-t-[3px] border-t-accent/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 md:scale-[1.03] md:shadow-md md:z-10">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-accent/10 flex items-center justify-center border border-accent/20 mb-5">
+                <ShieldCheck className="w-7 h-7 text-accent" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
+              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
                 29 Years in the Industry
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Jeff spent 29 years at Nationwide before starting this agency. He knows which carriers pay claims quickly, which ones fight you, and where coverage gaps hurt most.
               </p>
+              <Link to="/about" className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-5 hover:gap-2.5 transition-[gap] duration-200">
+                Learn more <span>→</span>
+              </Link>
             </AnimatedSection>
 
             {/* Card 3 - Human */}
-            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
-              {/* Phone/Person Icon */}
-              <div className="mb-4 sm:mb-space-md">
-                <PhoneCall className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
+            <AnimatedSection animation="fade-up" delay={200} className="relative bg-card rounded-lg border-t-[3px] border-t-accent/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-accent/10 flex items-center justify-center border border-accent/20 mb-5">
+                <PhoneCall className="w-7 h-7 text-accent" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display font-semibold text-lg sm:text-xl text-foreground mb-2 sm:mb-space-sm">
+              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
                 A Human Answers the Phone
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Call our office. You'll get Jeff or Natalie. That's the whole team. No phone tree, no call center. When you have a claim, we handle it personally.
               </p>
+              <Link to="/contact" className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-5 hover:gap-2.5 transition-[gap] duration-200">
+                Learn more <span>→</span>
+              </Link>
             </AnimatedSection>
           </div>
 
-          {/* Bottom CTA */}
+          {/* Bottom CTA with Social Proof */}
           <AnimatedSection animation="fade-up" delay={300} className="text-center">
-            <p className="font-body text-muted-foreground mb-space-sm">
+            <p className="font-body text-muted-foreground mb-4">
               Join the families and businesses who stopped worrying about insurance.
             </p>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-1 font-body font-medium text-primary hover:underline transition-[opacity] duration-300"
-            >
-              See Our Reviews
-              <span className="text-lg">→</span>
-            </Link>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+              <div className="flex items-center gap-2">
+                <div className="flex gap-0.5">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                  ))}
+                </div>
+                <span className="text-sm font-medium text-foreground">5.0 on Google</span>
+              </div>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-primary text-primary font-body font-semibold text-sm hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+              >
+                See Our Reviews
+                <span>→</span>
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>
