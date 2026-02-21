@@ -105,7 +105,7 @@ const Home = () => {
             >
               {/* Primary CTA */}
               <Link
-                to="/get-quote"
+                to="/services"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,opacity,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
               >
                 Get Your Free Quote
@@ -494,7 +494,7 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-4 sm:mb-space-md">
             <Link
-              to="/get-quote"
+              to="/services"
               className="inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[transform,opacity,box-shadow,background-color] duration-300 hover:bg-burgundy-800 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl motion-reduce:hover:translate-y-0"
             >
               Get Your Free Quote

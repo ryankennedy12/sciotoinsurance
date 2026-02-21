@@ -61,17 +61,14 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
               <Link to="/about" className="font-body text-sm text-charcoal/70 hover:text-primary transition-colors duration-300 py-1">
                 About Us
               </Link>
-              <Link to="/get-quote" className="font-body text-sm text-charcoal/70 hover:text-primary transition-colors duration-300 py-1">
-                Get a Quote
+              <Link to="/services" className="font-body text-sm text-charcoal/70 hover:text-primary transition-colors duration-300 py-1">
+                Services
               </Link>
               <Link to="/services" className="font-body text-sm text-charcoal/70 hover:text-primary transition-colors duration-300 py-1">
                 Report a Claim
               </Link>
               <Link to="/services" className="font-body text-sm text-charcoal/70 hover:text-primary transition-colors duration-300 py-1">
                 Pay Your Bill
-              </Link>
-              <Link to="/contact" className="font-body text-sm text-charcoal/70 hover:text-primary transition-colors duration-300 py-1">
-                Contact
               </Link>
             </nav>
           </div>

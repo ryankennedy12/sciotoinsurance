@@ -55,7 +55,7 @@ const BusinessInsurance = () => {
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 tracking-tight">Business Insurance<br /><span className="text-accent">Built for Growth</span></h1>
               <p className="text-xl text-white/80 mb-8 leading-relaxed max-w-2xl">Protect what you've built. From startups to established enterprises, we craft coverage that grows with your business.</p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button asChild size="lg" className="text-base bg-accent hover:bg-accent/90 text-foreground"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild size="lg" className="text-base bg-accent hover:bg-accent/90 text-foreground"><Link to="/services">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base border-white/30 text-white hover:bg-white/10 hover:text-white"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
             </AnimatedSection>
@@ -91,7 +91,7 @@ const BusinessInsurance = () => {
                     <div className="flex gap-2 mb-2">{[1,2,3,4,5].map((i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}</div>
                     <p className="text-foreground italic mb-2">"{current.caseStudy}"</p>
                   </div>
-                  <Button asChild className="w-full sm:w-auto"><Link to="/get-quote">Get {current.name} Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                  <Button asChild className="w-full sm:w-auto"><Link to="/services">Get {current.name} Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@ const BusinessInsurance = () => {
               <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-6 flex items-center gap-3"><div className="w-8 h-px bg-primary" />{category.title}</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {category.products.map((product) => { const Icon = product.icon; return (
-                  <Link key={product.name} to={product.slug ? `/business-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-[border-color,box-shadow] duration-200">
+                  <div key={product.name} className="group relative bg-card rounded-lg p-6 border border-border hover:border-primary transition-[border-color,box-shadow] duration-200">
                     <div className="absolute top-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded bg-secondary flex items-center justify-center flex-shrink-0"><Icon className="h-5 w-5 text-primary" /></div>
@@ -117,7 +117,7 @@ const BusinessInsurance = () => {
                         {product.description && <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>}
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 ); })}
               </div>
             </AnimatedSection>
@@ -142,7 +142,7 @@ const BusinessInsurance = () => {
             <AnimatedSection animation="slide-left">
               <div className="bg-card rounded-xl p-8 shadow-2xl">
                 <h3 className="font-display font-semibold text-xl text-foreground mb-6">Request Your Assessment</h3>
-                <Button asChild size="lg" className="w-full mb-4"><Link to="/contact">Schedule Free Assessment<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild size="lg" className="w-full mb-4"><Link to="/services">Schedule Free Assessment<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <div className="text-center"><span className="text-muted-foreground text-sm">Or call us directly:</span><a href="tel:6146120050" className="block text-xl font-semibold text-primary hover:text-primary/80 mt-1">(614) 612-0050</a></div>
               </div>
             </AnimatedSection>
@@ -180,7 +180,7 @@ const BusinessInsurance = () => {
           <AnimatedSection animation="fade-up">
             <h2 className="text-4xl md:text-5xl font-display font-bold text-primary-foreground mb-6">Protect Your Business Today</h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="text-base"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+              <Button asChild size="lg" variant="secondary" className="text-base"><Link to="/services">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
               <Button asChild size="lg" variant="outline" className="text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
             </div>
           </AnimatedSection>

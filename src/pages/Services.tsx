@@ -21,48 +21,48 @@ const services = [
     title: "Report a Claim",
     description: "Something happened? Let us help. We'll guide you through the process and advocate with your carrier.",
     cta: "Start a Claim",
-    link: "/contact?type=claim",
-    external: false,
+    link: "tel:6146120050",
+    external: true,
   },
   {
     icon: FilePen,
     title: "Make a Policy Change",
     description: "New car? New address? Adding a driver? Let us know and we'll update your policy.",
     cta: "Request a Change",
-    link: "/contact?type=change",
-    external: false,
+    link: "tel:6146120050",
+    external: true,
   },
   {
     icon: Award,
     title: "Request a Certificate",
     description: "Need proof of insurance for a landlord, lender, or contractor? We'll send it same-day.",
     cta: "Request Certificate",
-    link: "/contact?type=certificate",
-    external: false,
+    link: "tel:6146120050",
+    external: true,
   },
   {
     icon: CreditCard,
     title: "Get Auto ID Cards",
     description: "Lost your insurance cards? We'll email new ones within hours.",
     cta: "Request ID Cards",
-    link: "/contact?type=id-cards",
-    external: false,
+    link: "tel:6146120050",
+    external: true,
   },
   {
     icon: DollarSign,
     title: "Pay Your Bill",
     description: "Access your carrier's payment portal to pay your premium.",
     cta: "Go to Payment Portal",
-    link: "/contact?type=payment",
-    external: false,
+    link: "tel:6146120050",
+    external: true,
   },
   {
     icon: FileSearch,
     title: "Request a Policy Review",
     description: "Been a while since we talked? Let's make sure your coverage still matches your life.",
     cta: "Schedule a Review",
-    link: "/contact?type=review",
-    external: false,
+    link: "tel:6146120050",
+    external: true,
   },
 ];
 
@@ -176,9 +176,12 @@ const Services = () => {
               <p className="body-md text-muted-foreground mb-6">
                 Not a client yet? Let's change that.
               </p>
-              <Button asChild size="lg" className="text-base px-8">
-                <Link to="/get-quote">Get a Free Quote</Link>
-              </Button>
+              <a
+                href="tel:6146120050"
+                className="inline-flex items-center justify-center px-8 py-3 rounded bg-primary text-primary-foreground font-body font-medium text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800"
+              >
+                Call Us: (614) 612-0050
+              </a>
             </div>
           </div>
         </div>
