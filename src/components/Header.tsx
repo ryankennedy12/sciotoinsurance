@@ -51,23 +51,33 @@ const Header = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
-          isScrolled ? "bg-white shadow-sm" : "bg-cream"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-white shadow-md"
+            : "bg-cream border-b border-border/40"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <div className="flex items-center justify-between h-18 sm:h-20 lg:h-24">
+          <div
+            className={cn(
+              "flex items-center justify-between transition-all duration-300",
+              isScrolled ? "h-16 lg:h-[72px]" : "h-16 sm:h-18 lg:h-[88px]"
+            )}
+          >
             {/* Logo */}
-            <Link to="/" className="flex items-center group">
+            <Link to="/" className="flex items-center shrink-0 group">
               <img
                 src={logo}
                 alt="Scioto Insurance Group"
-                className="h-14 sm:h-16 lg:h-20 w-auto transition-transform duration-300 lg:group-hover:scale-105 mix-blend-multiply"
+                className={cn(
+                  "w-auto transition-all duration-300 mix-blend-multiply",
+                  isScrolled ? "h-12 sm:h-14 lg:h-16" : "h-14 sm:h-16 lg:h-[72px]"
+                )}
               />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-space-lg">
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
               {navLinks.map((link) => {
                 const isActive = location.pathname.startsWith(link.href);
                 return (
@@ -75,51 +85,55 @@ const Header = () => {
                     key={link.href}
                     to={link.href}
                     className={cn(
-                      "relative font-body text-sm font-medium transition-colors duration-300 py-2 group",
-                      isActive ? "text-primary" : "text-charcoal hover:text-primary"
+                      "font-body text-[13px] uppercase tracking-[0.08em] font-medium transition-colors duration-200 py-2",
+                      isActive
+                        ? "text-primary font-semibold"
+                        : "text-charcoal/80 hover:text-primary"
                     )}
                   >
                     {link.label}
-                    <span
-                      className={cn(
-                        "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 ease-out",
-                        isActive ? "w-full" : "w-0 group-hover:w-full"
-                      )}
-                    />
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Desktop: Get a Quote Button */}
-            <Link
-              to="/get-quote"
-              className={cn(
-                "hidden lg:inline-flex items-center justify-center px-6 py-3 rounded text-sm font-body font-medium transition-[transform,box-shadow,background-color] duration-300",
-                "bg-primary text-primary-foreground hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-lg"
-              )}
-            >
-              Get a Quote
-            </Link>
+            {/* Desktop: Phone + Get a Quote */}
+            <div className="hidden lg:flex items-center gap-5">
+              <a
+                href="tel:6146120050"
+                className="flex items-center gap-2 group"
+              >
+                <Phone className="w-4 h-4 text-gold-500 transition-colors group-hover:text-primary" />
+                <span className="font-body text-sm font-medium text-charcoal/80 group-hover:text-primary transition-colors">
+                  (614) 612-0050
+                </span>
+              </a>
+              <Link
+                to="/get-quote"
+                className="inline-flex items-center justify-center px-7 py-2.5 rounded-full text-sm font-body font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
+              >
+                Get a Quote
+              </Link>
+            </div>
 
             {/* Mobile: Click-to-call + Menu Button */}
             <div className="flex items-center gap-2 lg:hidden">
               <a
                 href="tel:6146120050"
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground hover:bg-burgundy-800 transition-colors"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-burgundy-800 transition-colors"
                 aria-label="Call us"
               >
                 <Phone className="w-5 h-5" />
               </a>
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="flex items-center justify-center w-11 h-11 -mr-2"
+                className="flex items-center justify-center w-12 h-12 rounded-lg hover:bg-charcoal/5 transition-colors -mr-2"
                 aria-label="Open menu"
               >
                 <div className="w-6 h-5 flex flex-col justify-between">
-                  <span className="block h-0.5 w-full bg-charcoal transition-transform" />
-                  <span className="block h-0.5 w-full bg-charcoal transition-transform" />
-                  <span className="block h-0.5 w-full bg-charcoal transition-transform" />
+                  <span className="block h-[2.5px] w-full bg-charcoal rounded-full" />
+                  <span className="block h-[2.5px] w-full bg-charcoal rounded-full" />
+                  <span className="block h-[2.5px] w-full bg-charcoal rounded-full" />
                 </div>
               </button>
             </div>
@@ -130,7 +144,7 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[100] lg:hidden transition-[opacity] duration-500",
+          "fixed inset-0 z-[100] lg:hidden transition-opacity duration-500",
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -145,7 +159,7 @@ const Header = () => {
 
         <button
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-5 right-4 w-12 h-12 flex items-center justify-center z-20 bg-white/10 rounded-full active:bg-white/20 transition-colors"
+          className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center z-20 bg-white/10 rounded-full active:bg-white/20 transition-colors"
           aria-label="Close menu"
           type="button"
         >
@@ -156,17 +170,26 @@ const Header = () => {
 
         <nav
           className={cn(
-            "relative z-10 h-full flex flex-col pt-20 pb-8 px-6 overflow-y-auto transition-[transform,opacity] duration-500 delay-200",
+            "relative z-10 h-full flex flex-col pt-6 pb-8 px-6 overflow-y-auto transition-all duration-500 delay-200",
             isMobileMenuOpen
               ? "opacity-100 translate-x-0"
               : "opacity-0 translate-x-8"
           )}
         >
-          <div className="flex flex-col gap-2">
+          {/* Logo in mobile menu */}
+          <div className="mb-8">
+            <img
+              src={logo}
+              alt="Scioto Insurance Group"
+              className="h-14 w-auto brightness-0 invert"
+            />
+          </div>
+
+          <div className="flex flex-col">
             <Link
               to="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-3 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors"
+              className="py-4 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors border-b border-white/10"
             >
               Home
             </Link>
@@ -175,7 +198,7 @@ const Header = () => {
                 key={link.href}
                 to={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="py-3 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors"
+                className="py-4 font-display text-2xl font-semibold text-white/90 hover:text-white transition-colors border-b border-white/10"
               >
                 {link.label}
               </Link>
@@ -187,13 +210,13 @@ const Header = () => {
             <Link
               to="/get-quote"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full py-4 px-8 bg-white text-primary font-body font-medium rounded text-center text-base transition-transform active:scale-[0.98]"
+              className="block w-full py-4 px-8 bg-white text-primary font-body font-semibold rounded-full text-center text-base transition-transform active:scale-[0.98]"
             >
               Get a Quote
             </Link>
             <a
               href="tel:6146120050"
-              className="flex items-center justify-center gap-2 w-full py-4 px-8 border-2 border-white/50 text-white font-body font-medium rounded text-center text-base transition-all hover:bg-white/10"
+              className="flex items-center justify-center gap-2 w-full py-4 px-8 border-2 border-white/50 text-white font-body font-medium rounded-full text-center text-base transition-all hover:bg-white/10"
             >
               <Phone className="w-5 h-5" />
               (614) 612-0050
