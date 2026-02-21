@@ -1,72 +1,72 @@
 
 
-# Delete Extra Pages and Simplify Navigation
+# Redesign the Navigation Bar
 
-## Overview
+## Current Issues
 
-Remove all individual product detail pages and supporting components while keeping the 7 core pages (Home, About, Personal Insurance, Business Insurance, Employee Benefits, Services, Contact) plus the Get a Quote page and flow. Replace the mega menu with a simple flat navigation.
+**Desktop:**
+- The header feels flat and utilitarian -- no visual separation or depth
+- Logo is small relative to the header height
+- Nav links are plain text with no visual grouping or weight
+- The "Get a Quote" CTA button has sharp corners and lacks presence
+- No phone number visible on desktop (important for an insurance site)
+- The bottom border/shadow is too subtle
 
-## Files to Delete
+**Mobile:**
+- The phone icon and hamburger are small, plain circles with no visual identity
+- No branding visible in the top bar (logo is tiny)
+- The full-screen burgundy overlay menu, while functional, feels heavy
 
-### Individual Product Pages (12 files)
-- `src/pages/personal-insurance/AutoInsurance.tsx`
-- `src/pages/personal-insurance/HomeInsurance.tsx`
-- `src/pages/personal-insurance/LifeInsurance.tsx`
-- `src/pages/personal-insurance/UmbrellaInsurance.tsx`
-- `src/pages/personal-insurance/FloodInsurance.tsx`
-- `src/pages/personal-insurance/HighNetWorthInsurance.tsx`
-- `src/pages/business-insurance/GeneralLiability.tsx`
-- `src/pages/business-insurance/WorkersComp.tsx`
-- `src/pages/business-insurance/CyberLiability.tsx`
-- `src/pages/business-insurance/ProfessionalLiability.tsx`
-- `src/pages/business-insurance/CommercialProperty.tsx`
-- `src/pages/business-insurance/CommercialAuto.tsx`
+## Proposed Design
 
-### Supporting Components (no longer needed without product pages)
-- `src/components/ProductDetailTemplate.tsx`
-- `src/components/ProductFAQ.tsx`
-- `src/data/products.ts`
-- `src/components/NavLink.tsx`
-- All files in `src/components/calculators/` directory (AutoCoverageSlider, CalculatorWrapper, CyberRiskScorecard, FleetCalculator, FloodRiskChecker, HighNetWorthChecklist, IndustryRiskAssessment, LiabilityLimitTool, LifeCoverageCalculator, PropertyGapChecklist, RebuildCostEstimator, UmbrellaGapCalculator, WorkersCompEstimator, index.ts)
+### Desktop Header
 
-## File Changes
+```text
++-----------------------------------------------------------------------+
+|  [LOGO]     About  Personal Insurance  Business Insurance              |
+|             Employee Benefits  Services  Contact                       |
+|                                                                        |
+|                              (614) 612-0050    [ Get a Quote ]         |
++-----------------------------------------------------------------------+
+```
 
-### 1. `src/App.tsx`
-- Remove all 12 product page imports
-- Remove all `/personal-insurance/*` sub-routes (auto, home, life, umbrella, flood, high-net-worth)
-- Remove all `/business-insurance/*` sub-routes (general-liability, workers-comp, cyber-liability, professional-liability, commercial-property, commercial-auto)
-- Change the wildcard redirects (`/personal-insurance/*` and `/business-insurance/*`) to redirect to `/get-quote` (they already do this -- just keep them)
-- **Keep** the `/get-quote` route and `GetQuote` import
-- **Keep** the `/contact` route
+Revised layout:
+- **Taller header** (h-20 to h-[88px]) with a subtle bottom border for definition
+- **Logo stays left**, slightly larger (h-16 to h-[72px] on desktop)
+- **Nav links centered** with slightly more letter-spacing and uppercase text for a premium insurance feel
+- **Right side**: Add a phone number with icon (styled in gold-500 for the icon, charcoal for text) PLUS the "Get a Quote" button
+- **"Get a Quote" button**: Rounded-full (pill shape) with slightly more padding for a more polished, modern look
+- **On scroll**: White background with a stronger shadow (`shadow-md` instead of `shadow-sm`) and slightly reduced header height for a compact feel
 
-### 2. `src/components/Header.tsx` (rewrite)
-- Remove all mega menu data arrays (personalInsuranceCategories, businessInsuranceCategories, personalInsuranceItems, businessInsuranceItems)
-- Remove the `MegaMenu` component entirely
-- Remove dropdown state (`activeDropdown`, `handleDropdownEnter`, `handleDropdownLeave`, `mobileDropdown`, `toggleMobileDropdown`)
-- Remove the `hasDropdown` prop from `NavLink`
+### Mobile Header
 
-**Desktop nav** becomes a flat list of links:
-- About
-- Personal Insurance
-- Business Insurance
-- Employee Benefits
-- Services
-- Contact
+- **Increase header height** slightly for better tap targets
+- **Show the logo** more prominently (currently it's there but small)
+- **Phone button**: Keep the burgundy circle but increase size to w-12 h-12
+- **Hamburger**: Style with thicker lines and a subtle rounded background on tap
+- **Mobile menu overlay**: Keep the existing burgundy slide-in design (it's on-brand), but add the logo at the top of the overlay in white, and add a subtle divider between nav links
 
-**Desktop right side**: Keep the "Get a Quote" button linking to `/get-quote`
+## Technical Changes
 
-**Mobile menu**: Same flat list of links (no accordions), keep the "Get a Quote" CTA and phone number at the bottom
+### `src/components/Header.tsx` (rewrite)
 
-## What's NOT Changing
-- `src/pages/GetQuote.tsx` -- stays as-is, fully functional
-- `src/pages/Contact.tsx` -- stays as-is
-- All 7 core page components (Home, About, PersonalInsurance, BusinessInsurance, EmployeeBenefits, Services, Contact)
-- Admin pages and routes
-- Footer, Layout, and all other shared components
-- All image assets (remain in case they're used by the core pages)
+**Desktop changes:**
+1. Add a phone number + icon element to the right side of the nav, before the CTA button
+2. Change nav link styling: add `uppercase tracking-wide text-[13px]` for a refined insurance look
+3. Make "Get a Quote" button `rounded-full` (pill) with `px-7 py-2.5`
+4. Increase desktop header height from `lg:h-24` to `lg:h-[88px]`
+5. Add a subtle `border-b border-gray-200/60` when not scrolled, strengthen shadow on scroll
 
-## Technical Details
+**Mobile changes:**
+1. Increase phone button and hamburger to `w-12 h-12` for better tap targets
+2. Add the logo (white version or with a filter) at the top of the mobile overlay menu
+3. Add subtle `border-b border-white/10` dividers between mobile nav links for visual structure
+4. Slightly increase mobile header height from `h-18` to `h-16` (standardize)
 
-### Links on core pages that point to deleted product sub-pages
-Some core pages (e.g., BusinessInsurance.tsx, PersonalInsurance.tsx) have links like `/business-insurance/general-liability` or `/personal-insurance/auto`. With the wildcard redirects in App.tsx (`/personal-insurance/*` and `/business-insurance/*` both redirect to `/get-quote`), these links will automatically redirect users to the Get a Quote page -- which is the desired behavior for lead capture.
+**Active state refinement:**
+- Replace the bottom underline animation with a more subtle approach: active links get `text-primary font-semibold` instead of the animated underline bar (cleaner for uppercase nav)
+
+### No other files change
+- All routing, Layout, Footer, pages remain untouched
+- Brand colors remain exact
 
