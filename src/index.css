@@ -116,7 +116,7 @@
   }
   
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth removed — causes jank with programmatic scrollTo */
   }
   
   body {
@@ -273,7 +273,7 @@
   
   /* Interactive card - only hover on devices that support it */
   .interactive-card {
-    @apply transition-all duration-300;
+    @apply transition-[transform,box-shadow] duration-300;
   }
   
   /* Hover effects only on pointer devices (mouse/trackpad) */
