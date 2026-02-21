@@ -106,10 +106,10 @@ const Header = () => {
             <div className="flex items-center gap-2 lg:hidden">
               <a
                 href="tel:6146120050"
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-primary text-primary-foreground hover:bg-burgundy-800 transition-colors"
+                className="flex items-center justify-center w-11 h-11 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
                 aria-label="Call us"
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-4 h-4" strokeWidth={2} />
               </a>
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
