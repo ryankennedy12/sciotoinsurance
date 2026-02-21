@@ -22,12 +22,12 @@ const Home = () => {
           <div className="relative lg:grid lg:grid-cols-2 lg:min-h-[85vh]">
             
             {/* Image Panel - desktop only (split layout) */}
-            <div className="hidden lg:flex lg:order-2 items-center justify-center p-10">
-              <div className="relative w-full max-h-[calc(85vh-5rem)] rounded-2xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.25)]">
+            <div className="hidden lg:flex lg:order-2 items-center justify-center py-24 px-10">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.25)]">
                 <img
                   src={heroSplit}
                   alt="Ohio family in front of their home"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-auto rounded-2xl object-cover object-center"
                 />
               </div>
             </div>
