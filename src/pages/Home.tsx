@@ -4,7 +4,7 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
 import TestimonialCard from "@/components/TestimonialCard";
-import heroFamily from "@/assets/hero-family.jpg";
+import heroSplit from "@/assets/hero-split.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
 import businessOffice from "@/assets/business-office.jpg";
 import teamMeeting from "@/assets/team-meeting.jpg";
@@ -23,131 +23,95 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section - Full Viewport with Real Family Image */}
-      <section className="relative min-h-[100svh] lg:h-[100svh] flex items-center overflow-hidden">
-        {/* Background Image - static, no transforms */}
-        <div 
-          className="absolute inset-0 overflow-hidden"
-          aria-hidden="true"
-        >
-          <img
-            src={heroFamily}
-            alt=""
-            className="absolute w-full h-[120%] -top-[10%] left-0 object-cover object-[25%_center] sm:object-[30%_center] md:object-center pointer-events-none select-none"
-            draggable={false}
-          />
-        </div>
-        
-        {/* Burgundy Overlay - stronger on mobile for text contrast */}
-        <div className="absolute inset-0 bg-burgundy-800/30 lg:bg-burgundy-800/20" />
-        
-        {/* Additional gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/40 to-transparent lg:from-charcoal/60 lg:via-charcoal/40" />
+      {/* Hero Section - Split Layout */}
+      <section className="relative bg-burgundy-100">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Mobile: image on top, text below | Desktop: text left, image right */}
+          <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-[100svh]">
+            
+            {/* Image Panel - shows first on mobile */}
+            <div className="relative h-[45svh] lg:h-auto lg:order-2 overflow-hidden">
+              <img
+                src={heroSplit}
+                alt="Ohio family in front of their home"
+                className="w-full h-full object-cover object-top lg:object-center"
+              />
+            </div>
 
-        {/* Mobile-only bottom gradient for CTA/trust badge area */}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/15 to-transparent lg:hidden" />
+            {/* Text Panel */}
+            <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-10 lg:py-20 lg:order-1">
+              {/* Main Headline */}
+              <h1 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-foreground leading-[1.1] mb-6">
+                Ohio Families Trust Us to Protect What Matters Most
+              </h1>
 
-        {/* Content Container */}
-        <div 
-          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-36 lg:pb-16"
-        >
-          <div className="max-w-3xl">
-            {/* Main Headline - Cormorant Garamond */}
-            <h1 
-              className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6"
-              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
-            >
-              Ohio Families Trust Us to Protect What Matters Most
-            </h1>
+              {/* Subheadline */}
+              <p className="font-body text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
+                We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
+              </p>
 
-            {/* Subheadline - Body text, larger size */}
-            <p 
-              className="font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8"
-              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
-            >
-              We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
-            </p>
-
-            {/* Trust Row - Horizontal with icons and dividers */}
-            <div 
-              className="flex flex-wrap items-center gap-4 lg:gap-0 mb-8"
-            >
-              {trustItems.map((item, index) => (
-                <div key={index} className="flex items-center">
-                  <div className="flex items-center gap-2">
-                    {item.icon === Star ? (
-                      <div className="flex text-gold-500">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-current" />
-                        ))}
-                      </div>
-                    ) : (
-                      <item.icon className="w-5 h-5 text-gold-500" />
+              {/* Trust Row */}
+              <div className="flex flex-wrap items-center gap-4 lg:gap-0 mb-8">
+                {trustItems.map((item, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className="flex items-center gap-2">
+                      {item.icon === Star ? (
+                        <div className="flex text-gold-500">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-current" />
+                          ))}
+                        </div>
+                      ) : (
+                        <item.icon className="w-5 h-5 text-gold-500" />
+                      )}
+                      <span className="font-body font-semibold text-foreground text-sm lg:text-base">
+                        {item.label}{item.sublabel ? ` ${item.sublabel}` : ''}
+                      </span>
+                    </div>
+                    {index < trustItems.length - 1 && (
+                      <div className="hidden lg:block w-px h-6 bg-foreground/20 mx-4" />
                     )}
-                    <span className="font-body font-semibold text-white text-sm lg:text-base">
-                      {item.label}{item.sublabel ? ` ${item.sublabel}` : ''}
-                    </span>
                   </div>
-                  {/* Vertical Divider */}
-                  {index < trustItems.length - 1 && (
-                    <div className="hidden lg:block w-px h-6 bg-white/30 mx-4" />
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Dual CTAs - Large buttons, side by side */}
-            <div 
-              className="flex flex-col sm:flex-row gap-4 mb-6"
-            >
-              {/* Primary CTA */}
-              <Link
-                to="/get-quote"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,opacity,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
-              >
-                Get Your Free Quote
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              
-              {/* Secondary CTA */}
-              <a
-                href="tel:6146120050"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white text-primary border-2 border-primary font-body font-semibold text-base transition-[transform,opacity,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-white active:scale-[0.98]"
-              >
-                <Phone className="w-5 h-5" />
-                Talk to a Real Person
-              </a>
-            </div>
+              {/* Dual CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <Link
+                  to="/get-quote"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
+                >
+                  Get Your Free Quote
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+                <a
+                  href="tel:6146120050"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border-2 border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
+                >
+                  <Phone className="w-5 h-5" />
+                  Talk to a Real Person
+                </a>
+              </div>
 
-            {/* Trust Reassurances - Small text with gold checkmarks */}
-            <div 
-              className={`flex flex-wrap items-center gap-4 sm:gap-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
-                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-              style={{ transitionDelay: isPageReady ? "300ms" : "0ms" }}
-            >
-              <span className="flex items-center gap-2 font-body text-sm text-white/80">
-                <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                No spam, ever
-              </span>
-              <span className="flex items-center gap-2 font-body text-sm text-white/80">
-                <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Quote in under 10 minutes
-              </span>
-              <span className="flex items-center gap-2 font-body text-sm text-white/80">
-                <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                We'll call you back today
-              </span>
+              {/* Trust Reassurances */}
+              <div
+                className={`flex flex-wrap items-center gap-4 sm:gap-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
+                  isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+                style={{ transitionDelay: isPageReady ? "300ms" : "0ms" }}
+              >
+                {["No spam, ever", "Quote in under 10 minutes", "We'll call you back today"].map((text) => (
+                  <span key={text} className="flex items-center gap-2 font-body text-sm text-muted-foreground">
+                    <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {text}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-
       </section>
 
 
