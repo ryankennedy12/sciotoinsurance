@@ -203,7 +203,7 @@ const Home = () => {
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}
-                  <div className="relative w-full lg:w-[45%] flex-shrink-0 h-48 lg:h-auto overflow-hidden">
+                  <div className="relative w-full lg:w-[45%] flex-shrink-0 aspect-[16/10] lg:aspect-auto lg:h-auto overflow-hidden">
                     <img
                       src={familyHomeService}
                       alt="Ohio family at home"
@@ -249,7 +249,7 @@ const Home = () => {
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}
-                  <div className="relative w-full lg:w-[45%] flex-shrink-0 h-48 lg:h-auto overflow-hidden">
+                  <div className="relative w-full lg:w-[45%] flex-shrink-0 aspect-[16/10] lg:aspect-auto lg:h-auto overflow-hidden">
                     <img
                       src={businessOffice}
                       alt="Business professional in office"
@@ -294,7 +294,7 @@ const Home = () => {
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}
-                  <div className="relative w-full lg:w-[45%] flex-shrink-0 h-48 lg:h-auto overflow-hidden">
+                  <div className="relative w-full lg:w-[45%] flex-shrink-0 aspect-[16/10] lg:aspect-auto lg:h-auto overflow-hidden">
                     <img
                       src={teamMeeting}
                       alt="Team meeting discussing employee benefits"
