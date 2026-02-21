@@ -192,6 +192,10 @@ const Header = () => {
               <NavLink href="/services" isScrolled={isScrolled}>
                 Services
               </NavLink>
+
+              <NavLink href="/contact" isScrolled={isScrolled}>
+                Contact
+              </NavLink>
             </nav>
 
             {/* Desktop: Services Button */}
@@ -370,6 +374,9 @@ const Header = () => {
             </MobileNavLink>
             <MobileNavLink to="/services" onClick={() => setIsMobileMenuOpen(false)}>
               Services
+            </MobileNavLink>
+            <MobileNavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+              Contact
             </MobileNavLink>
           </div>
 
