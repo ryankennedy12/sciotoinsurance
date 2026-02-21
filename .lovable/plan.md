@@ -1,72 +1,68 @@
 
 
-# Redesign the Navigation Bar
+# Redesign the Hero Section
 
-## Current Issues
+## Problem
+The current hero uses a full-bleed photo with text overlaid directly on top, causing the headline and body text to cover the people's faces. This looks unprofessional and reduces both readability and the emotional impact of the image.
 
-**Desktop:**
-- The header feels flat and utilitarian -- no visual separation or depth
-- Logo is small relative to the header height
-- Nav links are plain text with no visual grouping or weight
-- The "Get a Quote" CTA button has sharp corners and lacks presence
-- No phone number visible on desktop (important for an insurance site)
-- The bottom border/shadow is too subtle
+## Proposed Solution: Split-Layout Hero
 
-**Mobile:**
-- The phone icon and hamburger are small, plain circles with no visual identity
-- No branding visible in the top bar (logo is tiny)
-- The full-screen burgundy overlay menu, while functional, feels heavy
-
-## Proposed Design
-
-### Desktop Header
+Instead of trying to find a photo where subjects happen to be on the right, switch to a **split layout** where text and image occupy separate halves of the hero. This is a proven, premium pattern used by top insurance and financial services websites.
 
 ```text
-+-----------------------------------------------------------------------+
-|  [LOGO]     About  Personal Insurance  Business Insurance              |
-|             Employee Benefits  Services  Contact                       |
-|                                                                        |
-|                              (614) 612-0050    [ Get a Quote ]         |
-+-----------------------------------------------------------------------+
+DESKTOP (1024px+):
++-------------------------------+-------------------------------+
+|                               |                               |
+|  [Headline]                   |                               |
+|  [Subheadline]                |        [Hero Image]           |
+|  [Trust Row]                  |     (full height, rounded)    |
+|  [CTA Buttons]                |                               |
+|                               |                               |
++-------------------------------+-------------------------------+
+  burgundy-100 background             image with no overlay
+
+TABLET (640-1023px):
+Same split but 50/50 with smaller text
+
+MOBILE (<640px):
++-----------------------------------------------+
+|          [Hero Image - top half]              |
+|          (shorter, cropped nicely)            |
++-----------------------------------------------+
+|  [Headline]                                   |
+|  [Subheadline]                                |
+|  [Trust Row]                                  |
+|  [CTA Buttons]                                |
++-----------------------------------------------+
+  cream/burgundy-100 background for text area
 ```
 
-Revised layout:
-- **Taller header** (h-20 to h-[88px]) with a subtle bottom border for definition
-- **Logo stays left**, slightly larger (h-16 to h-[72px] on desktop)
-- **Nav links centered** with slightly more letter-spacing and uppercase text for a premium insurance feel
-- **Right side**: Add a phone number with icon (styled in gold-500 for the icon, charcoal for text) PLUS the "Get a Quote" button
-- **"Get a Quote" button**: Rounded-full (pill shape) with slightly more padding for a more polished, modern look
-- **On scroll**: White background with a stronger shadow (`shadow-md` instead of `shadow-sm`) and slightly reduced header height for a compact feel
+## Why Split Layout
+- Text never covers the image -- both elements get full visual impact
+- Works perfectly at every breakpoint without complex object-position hacks
+- Feels premium and intentional (not "stock photo with overlay")
+- The image can be a generated, high-quality lifestyle photo composed for a portrait/square crop
 
-### Mobile Header
-
-- **Increase header height** slightly for better tap targets
-- **Show the logo** more prominently (currently it's there but small)
-- **Phone button**: Keep the burgundy circle but increase size to w-12 h-12
-- **Hamburger**: Style with thicker lines and a subtle rounded background on tap
-- **Mobile menu overlay**: Keep the existing burgundy slide-in design (it's on-brand), but add the logo at the top of the overlay in white, and add a subtle divider between nav links
+## AI-Generated Hero Image
+Use Lovable AI image generation to create a custom hero image of an Ohio family on a front porch or in front of a home -- warm, natural, and professional. The image will be composed for a **portrait/square aspect ratio** (right half of desktop, top portion of mobile) so subjects are always fully visible.
 
 ## Technical Changes
 
-### `src/components/Header.tsx` (rewrite)
+### 1. Generate hero image
+- Use the AI image generation API to create a warm, professional photo of a family in front of a suburban Ohio home
+- Save it as a new asset (e.g., `src/assets/hero-split.jpg`)
 
-**Desktop changes:**
-1. Add a phone number + icon element to the right side of the nav, before the CTA button
-2. Change nav link styling: add `uppercase tracking-wide text-[13px]` for a refined insurance look
-3. Make "Get a Quote" button `rounded-full` (pill) with `px-7 py-2.5`
-4. Increase desktop header height from `lg:h-24` to `lg:h-[88px]`
-5. Add a subtle `border-b border-gray-200/60` when not scrolled, strengthen shadow on scroll
+### 2. Rewrite the hero section in `src/pages/Home.tsx` (lines 27-130 approximately)
+- Replace the full-bleed image + overlay layout with a CSS Grid split layout
+- **Desktop**: `grid-cols-2` with text on left (vertically centered, `bg-burgundy-100` or `bg-cream`) and image on right (object-cover, optional rounded corners)
+- **Mobile**: Stack vertically -- image on top (constrained height ~45vh), text below on a solid background
+- Remove all dark overlays and text-shadow hacks (no longer needed since text sits on a solid background)
+- Keep the exact same content: headline, subheadline, trust row, dual CTAs
+- Text color changes from white to `charcoal` (since it's on a light background now)
+- Trust row icons stay `gold-500`
+- CTA buttons keep their current styling (burgundy primary, white outline secondary)
 
-**Mobile changes:**
-1. Increase phone button and hamburger to `w-12 h-12` for better tap targets
-2. Add the logo (white version or with a filter) at the top of the mobile overlay menu
-3. Add subtle `border-b border-white/10` dividers between mobile nav links for visual structure
-4. Slightly increase mobile header height from `h-18` to `h-16` (standardize)
-
-**Active state refinement:**
-- Replace the bottom underline animation with a more subtle approach: active links get `text-primary font-semibold` instead of the animated underline bar (cleaner for uppercase nav)
-
-### No other files change
-- All routing, Layout, Footer, pages remain untouched
-- Brand colors remain exact
+### 3. No other files change
+- Header, Footer, Layout, routing -- all untouched
+- The `HeroVisual.tsx` abstract shapes component is not used in Home.tsx currently, so no impact
 
