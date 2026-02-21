@@ -11,25 +11,7 @@ import PersonalInsurance from "./pages/PersonalInsurance";
 import BusinessInsurance from "./pages/BusinessInsurance";
 import EmployeeBenefits from "./pages/EmployeeBenefits";
 import Services from "./pages/Services";
-import GetQuote from "./pages/GetQuote";
-import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-
-// Personal Insurance Product Pages
-import AutoInsurance from "./pages/personal-insurance/AutoInsurance";
-import HomeInsurance from "./pages/personal-insurance/HomeInsurance";
-import LifeInsurance from "./pages/personal-insurance/LifeInsurance";
-import UmbrellaInsurance from "./pages/personal-insurance/UmbrellaInsurance";
-import FloodInsurance from "./pages/personal-insurance/FloodInsurance";
-import HighNetWorthInsurance from "./pages/personal-insurance/HighNetWorthInsurance";
-
-// Business Insurance Product Pages
-import GeneralLiability from "./pages/business-insurance/GeneralLiability";
-import WorkersComp from "./pages/business-insurance/WorkersComp";
-import CyberLiability from "./pages/business-insurance/CyberLiability";
-import ProfessionalLiability from "./pages/business-insurance/ProfessionalLiability";
-import CommercialProperty from "./pages/business-insurance/CommercialProperty";
-import CommercialAuto from "./pages/business-insurance/CommercialAuto";
 
 // Admin
 import { AdminLayout } from "./components/admin/AdminLayout";
@@ -55,25 +37,13 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/personal-insurance" element={<PersonalInsurance />} />
-              <Route path="/personal-insurance/auto" element={<AutoInsurance />} />
-              <Route path="/personal-insurance/home" element={<HomeInsurance />} />
-              <Route path="/personal-insurance/life" element={<LifeInsurance />} />
-              <Route path="/personal-insurance/umbrella" element={<UmbrellaInsurance />} />
-              <Route path="/personal-insurance/flood" element={<FloodInsurance />} />
-              <Route path="/personal-insurance/high-net-worth" element={<HighNetWorthInsurance />} />
-              <Route path="/personal-insurance/*" element={<Navigate to="/get-quote" replace />} />
+              <Route path="/personal-insurance/*" element={<Navigate to="/personal-insurance" replace />} />
               <Route path="/business-insurance" element={<BusinessInsurance />} />
-              <Route path="/business-insurance/general-liability" element={<GeneralLiability />} />
-              <Route path="/business-insurance/workers-comp" element={<WorkersComp />} />
-              <Route path="/business-insurance/cyber-liability" element={<CyberLiability />} />
-              <Route path="/business-insurance/professional-liability" element={<ProfessionalLiability />} />
-              <Route path="/business-insurance/commercial-property" element={<CommercialProperty />} />
-              <Route path="/business-insurance/commercial-auto" element={<CommercialAuto />} />
-              <Route path="/business-insurance/*" element={<Navigate to="/get-quote" replace />} />
+              <Route path="/business-insurance/*" element={<Navigate to="/business-insurance" replace />} />
               <Route path="/employee-benefits" element={<EmployeeBenefits />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/get-quote" element={<GetQuote />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/get-quote" element={<Navigate to="/services" replace />} />
+              <Route path="/contact" element={<Navigate to="/services" replace />} />
             </Route>
 
             {/* Admin routes */}

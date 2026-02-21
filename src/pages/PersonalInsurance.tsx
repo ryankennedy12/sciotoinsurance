@@ -20,11 +20,11 @@ import lifeStageFamily from "@/assets/life-stage-family.jpg";
 import lifeStageWealth from "@/assets/life-stage-wealth.jpg";
 
 const lifeStages = [
-  { stage: "First Car", icon: Car, coverage: "Auto Insurance", description: "Get reliable coverage from day one. We'll find you the best rates as a new driver.", link: "/personal-insurance/auto", image: lifeStageFirstCar },
-  { stage: "First Place", icon: Home, coverage: "Renters Insurance", description: "Protect your belongings in your new apartment. Coverage starts at just $15/month.", link: "/get-quote", image: lifeStageFirstPlace },
-  { stage: "Home Sweet Home", icon: Home, coverage: "Homeowners Insurance", description: "Your biggest investment deserves the best protection. We know Ohio homes.", link: "/personal-insurance/home", image: lifeStageHome },
-  { stage: "Growing Family", icon: Heart, coverage: "Life Insurance", description: "Security for those who depend on you. Give your family peace of mind.", link: "/personal-insurance/life", image: lifeStageFamily },
-  { stage: "Building Wealth", icon: Umbrella, coverage: "Umbrella Coverage", description: "Extra protection as your assets grow. Shield everything you've built.", link: "/personal-insurance/umbrella", image: lifeStageWealth },
+  { stage: "First Car", icon: Car, coverage: "Auto Insurance", description: "Get reliable coverage from day one. We'll find you the best rates as a new driver.", link: "/services", image: lifeStageFirstCar },
+  { stage: "First Place", icon: Home, coverage: "Renters Insurance", description: "Protect your belongings in your new apartment. Coverage starts at just $15/month.", link: "/services", image: lifeStageFirstPlace },
+  { stage: "Home Sweet Home", icon: Home, coverage: "Homeowners Insurance", description: "Your biggest investment deserves the best protection. We know Ohio homes.", link: "/services", image: lifeStageHome },
+  { stage: "Growing Family", icon: Heart, coverage: "Life Insurance", description: "Security for those who depend on you. Give your family peace of mind.", link: "/services", image: lifeStageFamily },
+  { stage: "Building Wealth", icon: Umbrella, coverage: "Umbrella Coverage", description: "Extra protection as your assets grow. Shield everything you've built.", link: "/services", image: lifeStageWealth },
 ];
 
 const testimonials = [
@@ -63,7 +63,7 @@ const PersonalInsurance = () => {
                 <div className="flex items-center gap-2 text-sm text-muted-foreground"><Users className="h-5 w-5 text-accent" /><span>Real People</span></div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <Button asChild size="lg" className="text-base rounded-xl"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild size="lg" className="text-base rounded-xl"><Link to="/services">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base rounded-xl"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
               <p className="text-sm text-muted-foreground">✓ No spam, ever &nbsp;&nbsp; ✓ Quote in under 10 minutes</p>
@@ -193,12 +193,11 @@ const PersonalInsurance = () => {
                 {category.products.map((product) => {
                   const Icon = product.icon;
                   return (
-                    <Link key={product.name} to={product.slug ? `/personal-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-200">
+                    <div key={product.name} className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-200">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center mb-4"><Icon className="h-6 w-6 text-primary" /></div>
-                      <h4 className="font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{product.name}</h4>
+                      <h4 className="font-display font-semibold text-foreground mb-2">{product.name}</h4>
                       {product.description && <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>}
-                      <span className="inline-flex items-center text-sm font-medium text-primary">{product.slug ? "Learn More" : "Get Quote"}<ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" /></span>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
@@ -248,7 +247,7 @@ const PersonalInsurance = () => {
               <h2 className="heading-lg text-foreground mb-4">Ready to See What You Could Save?</h2>
               <p className="body-lg text-muted-foreground mb-8 max-w-xl mx-auto">Get a free, no-pressure quote in under 10 minutes.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="text-base rounded-xl"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
+                <Button asChild size="lg" className="text-base rounded-xl"><Link to="/services">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base rounded-xl"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
             </div>
