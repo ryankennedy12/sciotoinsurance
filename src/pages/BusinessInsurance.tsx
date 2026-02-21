@@ -46,7 +46,7 @@ const BusinessInsurance = () => {
         </div>
         <div className="relative z-10 container-wide px-6 py-20">
           <div className="max-w-3xl">
-            <AnimatedSection animation="fade-up">
+            <div>
               <div className="flex flex-wrap gap-6 mb-8">
                 {["1,200+ Businesses Protected", "29 Years Experience", "A+ BBB Rating"].map((t) => (
                   <div key={t} className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-accent" /><span className="text-white/80 text-sm font-medium">{t}</span></div>
@@ -58,7 +58,7 @@ const BusinessInsurance = () => {
                 <Button asChild size="lg" className="text-base bg-accent hover:bg-accent/90 text-foreground"><Link to="/get-quote">Get Your Free Quote<ArrowRight className="ml-2 h-5 w-5" /></Link></Button>
                 <Button asChild variant="outline" size="lg" className="text-base border-white/30 text-white hover:bg-white/10 hover:text-white"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
-            </AnimatedSection>
+            </div>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-background" style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)' }} />

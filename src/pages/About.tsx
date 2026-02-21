@@ -48,29 +48,29 @@ const About = () => {
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Content - Left Side */}
             <div className="lg:col-span-7">
-              <AnimatedSection animation="fade-up">
+              <div>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 mb-6">
                   <span className="w-2 h-2 rounded-full bg-gold-500" />
                   <span className="font-body text-sm text-white/80">Est. 2023 • New Albany, Ohio</span>
                 </div>
-              </AnimatedSection>
+              </div>
               
-              <AnimatedSection animation="fade-up" delay={100}>
+              <div>
                 <h1 className="font-display font-semibold text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.1] mb-6">
                   A Father-Daughter Team That Picks Up the Phone
                 </h1>
-              </AnimatedSection>
+              </div>
               
-              <AnimatedSection animation="fade-up" delay={200}>
+              <div>
                 <p className="font-body text-lg lg:text-xl text-cream/90 leading-relaxed max-w-[550px]">
                   29 years of industry experience. A new agency built on doing things the right way.
                 </p>
-              </AnimatedSection>
+              </div>
             </div>
             
             {/* Image - Right Side (Desktop only) */}
             <div className="hidden lg:block lg:col-span-5">
-              <AnimatedSection animation="fade-up" delay={300}>
+              <div>
                 <div className="relative">
                   {/* Main image */}
                   <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10">
@@ -95,7 +95,7 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-              </AnimatedSection>
+              </div>
             </div>
           </div>
         </div>

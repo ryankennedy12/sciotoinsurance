@@ -81,7 +81,7 @@ const EmployeeBenefits = () => {
       <section className="relative min-h-[90vh] lg:min-h-screen">
         <div className="grid lg:grid-cols-2 min-h-[90vh] lg:min-h-screen">
           <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-12 xl:px-20 bg-card">
-            <AnimatedSection animation="fade-up" className="max-w-xl">
+            <div className="max-w-xl">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8"><TrendingUp className="h-4 w-4" />Strategic Benefits Partner</div>
               <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6 tracking-tight">Employee Benefits<br /><span className="text-primary">That Work</span></h1>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Attract top talent, reduce turnover, and build a healthier workforce with benefits packages designed for real business impact.</p>
@@ -93,10 +93,10 @@ const EmployeeBenefits = () => {
                 <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Free consultation</span></div>
                 <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Multiple carriers</span></div>
               </div>
-            </AnimatedSection>
+            </div>
           </div>
           <div className="relative bg-primary flex items-center justify-center px-6 py-16 lg:px-12">
-            <AnimatedSection animation="fade-up" className="relative z-10 w-full max-w-md">
+            <div className="relative z-10 w-full max-w-md">
               <div className="space-y-6">
                 {heroStats.map((stat, i) => (
                   <div key={i} className="bg-white/15 rounded-xl p-6 border border-white/20">
@@ -105,7 +105,7 @@ const EmployeeBenefits = () => {
                   </div>
                 ))}
               </div>
-            </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
