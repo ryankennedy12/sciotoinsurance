@@ -44,7 +44,7 @@ const Home = () => {
               </div>
               {/* Main Headline */}
               {/* Content wrapper above background */}
-              <div className="relative z-10 flex flex-col items-center lg:items-start w-full">
+              <div className="relative z-10 flex flex-col items-center lg:items-start justify-center w-full flex-1">
               <h1 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-foreground leading-[1.1] mb-6">
                 Ohio Families Trust Us to Protect What Matters Most
               </h1>
