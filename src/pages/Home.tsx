@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <>
       {/* Hero Section - Full Viewport with Real Family Image */}
-      <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[100svh] lg:h-[100svh] flex items-center overflow-hidden">
         {/* Background Image - static, no transforms */}
         <div 
           className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat will-change-auto"
