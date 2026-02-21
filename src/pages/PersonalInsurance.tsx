@@ -50,7 +50,7 @@ const PersonalInsurance = () => {
       <section className="relative min-h-[90vh] lg:min-h-screen">
         <div className="grid lg:grid-cols-2 min-h-[90vh] lg:min-h-screen">
           <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-12 xl:px-20 bg-secondary order-2 lg:order-1">
-            <AnimatedSection animation="fade-up" className="max-w-xl">
+            <div className="max-w-xl">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border mb-8">
                 <div className="flex">{[1,2,3,4,5].map((i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}</div>
                 <span className="text-sm text-muted-foreground">Trusted by 1,200+ Ohio Families</span>
@@ -67,7 +67,7 @@ const PersonalInsurance = () => {
                 <Button asChild variant="outline" size="lg" className="text-base rounded-xl"><a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a></Button>
               </div>
               <p className="text-sm text-muted-foreground">✓ No spam, ever &nbsp;&nbsp; ✓ Quote in under 10 minutes</p>
-            </AnimatedSection>
+            </div>
           </div>
           <div className="relative h-64 lg:h-auto order-1 lg:order-2">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${ohioFamilyPorch})` }}>

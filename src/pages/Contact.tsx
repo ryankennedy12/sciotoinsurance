@@ -128,14 +128,14 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-cream to-burgundy-50 pt-24 pb-8 md:pt-32 md:pb-12">
         <div className="container-wide px-4 md:px-space-lg">
-          <AnimatedSection animation="fade-up" className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center">
             <h1 className="heading-xl text-foreground mb-4">
               Let's Start a Conversation
             </h1>
             <p className="body-lg text-muted-foreground">
               Whether you have questions, need a quote, or just want to talk through your options, we're here.
             </p>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 

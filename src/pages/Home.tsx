@@ -47,9 +47,7 @@ const Home = () => {
           <div className="max-w-3xl">
             {/* Main Headline - Cormorant Garamond */}
             <h1 
-              className={`font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
-                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
+              className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-[1.1] mb-6"
               style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
             >
               Ohio Families Trust Us to Protect What Matters Most
@@ -57,20 +55,15 @@ const Home = () => {
 
             {/* Subheadline - Body text, larger size */}
             <p 
-              className={`font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
-                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-              style={{ transitionDelay: isPageReady ? "75ms" : "0ms", textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
+              className="font-body text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl mb-8"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.3)" }}
             >
               We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
             </p>
 
             {/* Trust Row - Horizontal with icons and dividers */}
             <div 
-              className={`flex flex-wrap items-center gap-4 lg:gap-0 mb-8 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
-                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-              style={{ transitionDelay: isPageReady ? "150ms" : "0ms" }}
+              className="flex flex-wrap items-center gap-4 lg:gap-0 mb-8"
             >
               {trustItems.map((item, index) => (
                 <div key={index} className="flex items-center">
@@ -98,10 +91,7 @@ const Home = () => {
 
             {/* Dual CTAs - Large buttons, side by side */}
             <div 
-              className={`flex flex-col sm:flex-row gap-4 mb-6 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
-                isPageReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-              style={{ transitionDelay: isPageReady ? "225ms" : "0ms" }}
+              className="flex flex-col sm:flex-row gap-4 mb-6"
             >
               {/* Primary CTA */}
               <Link

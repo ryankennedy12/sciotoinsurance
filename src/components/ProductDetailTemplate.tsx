@@ -143,7 +143,7 @@ const ProductDetailTemplate = ({
           </nav>
 
           <div className="max-w-3xl">
-            <AnimatedSection animation="fade-up">
+            <div>
               <p className="text-accent font-display text-lg mb-4">{heroSubtitle}</p>
               <h1 className="heading-xl text-white mb-6">{heroTitle}</h1>
               <p className="body-lg text-white/90 mb-8 max-w-2xl">
@@ -165,7 +165,7 @@ const ProductDetailTemplate = ({
                   </a>
                 </Button>
               </div>
-            </AnimatedSection>
+            </div>
 
             {/* Stats Bar - NEW */}
             {stats && stats.length > 0 && (
