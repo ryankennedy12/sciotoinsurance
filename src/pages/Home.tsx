@@ -23,12 +23,12 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section - Full Viewport with Real Family Image + Parallax */}
+      {/* Hero Section - Full Viewport with Real Family Image */}
       <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image - static, no transforms */}
         <div 
-          className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroFamily})` }}
+          className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat will-change-auto"
+          style={{ backgroundImage: `url(${heroFamily})`, contain: "strict" }}
         />
         
         {/* Burgundy Overlay - stronger on mobile for text contrast */}
