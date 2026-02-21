@@ -26,21 +26,32 @@ const Home = () => {
       {/* Hero Section - Split Layout */}
       <section className="relative bg-cream">
         <div className="max-w-[1400px] mx-auto">
-          {/* Mobile: image on top, text below | Desktop: text left, image right */}
-          <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-[100svh]">
+          <div className="relative lg:grid lg:grid-cols-2 lg:min-h-[85vh]">
             
-            {/* Image Panel - shows first on mobile */}
-            <div className="relative h-[45svh] lg:h-auto lg:order-2 overflow-hidden">
+            {/* Image Panel - desktop only (split layout) */}
+            <div className="hidden lg:block lg:order-2 overflow-hidden">
               <img
                 src={heroSplit}
                 alt="Ohio family in front of their home"
-                className="w-full h-full object-cover object-top lg:object-center"
+                className="w-full h-full object-cover object-center"
               />
             </div>
 
             {/* Text Panel */}
-            <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-10 lg:py-20 lg:order-1">
+            <div className="relative flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-6 sm:px-10 lg:px-16 py-16 lg:py-20 min-h-[85svh] lg:min-h-0 lg:order-1">
+              {/* Mobile/Tablet background image + overlay */}
+              <div className="absolute inset-0 lg:hidden">
+                <img
+                  src={heroSplit}
+                  alt=""
+                  aria-hidden="true"
+                  className="w-full h-full object-cover object-[25%_center]"
+                />
+                <div className="absolute inset-0 bg-cream/85" />
+              </div>
               {/* Main Headline */}
+              {/* Content wrapper above background */}
+              <div className="relative z-10 flex flex-col items-center lg:items-start w-full">
               <h1 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-foreground leading-[1.1] mb-6">
                 Ohio Families Trust Us to Protect What Matters Most
               </h1>
@@ -76,7 +87,7 @@ const Home = () => {
               </div>
 
               {/* Dual CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 mb-6">
                 <Link
                   to="/get-quote"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
@@ -109,6 +120,7 @@ const Home = () => {
                   </span>
                 ))}
               </div>
+              </div> {/* end z-10 wrapper */}
             </div>
           </div>
         </div>
