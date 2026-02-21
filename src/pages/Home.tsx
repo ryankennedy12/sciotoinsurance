@@ -173,7 +173,7 @@ const Home = () => {
           {/* Value Proposition Cards */}
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-space-md mb-10 sm:mb-space-xl">
             {/* Card 1 - Independent */}
-            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
+            <AnimatedSection animation="fade-up" delay={0} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm lg:hover:shadow-lg lg:hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
               {/* Handshake Icon */}
               <div className="mb-4 sm:mb-space-md">
                 <Scale className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
@@ -187,7 +187,7 @@ const Home = () => {
             </AnimatedSection>
 
             {/* Card 2 - Experience */}
-            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
+            <AnimatedSection animation="fade-up" delay={100} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm lg:hover:shadow-lg lg:hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
               {/* Shield Icon */}
               <div className="mb-4 sm:mb-space-md">
                 <ShieldCheck className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
@@ -201,7 +201,7 @@ const Home = () => {
             </AnimatedSection>
 
             {/* Card 3 - Human */}
-            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
+            <AnimatedSection animation="fade-up" delay={200} className="bg-card rounded-lg p-5 sm:p-space-lg shadow-sm lg:hover:shadow-lg lg:hover:-translate-y-1 transition-[transform,box-shadow] duration-300 sm:col-span-2 md:col-span-1">
               {/* Phone/Person Icon */}
               <div className="mb-4 sm:mb-space-md">
                 <PhoneCall className="w-10 h-10 sm:w-12 sm:h-12 text-primary" strokeWidth={1.5} />
@@ -253,7 +253,7 @@ const Home = () => {
             <AnimatedSection animation="fade-up" delay={50}>
               <Link to="/personal-insurance" className="group block">
                 {/* Desktop: side-by-side | Mobile: stacked */}
-                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
+                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md lg:hover:shadow-xl lg:hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
                   {/* Burgundy accent bar — top of card */}
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
@@ -300,7 +300,7 @@ const Home = () => {
             {/* Card 2 — Business Insurance */}
             <AnimatedSection animation="fade-up" delay={150}>
               <Link to="/business-insurance" className="group block">
-                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
+                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md lg:hover:shadow-xl lg:hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}
@@ -345,7 +345,7 @@ const Home = () => {
             {/* Card 3 — Employee Benefits */}
             <AnimatedSection animation="fade-up" delay={250}>
               <Link to="/employee-benefits" className="group block">
-                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
+                <div className="flex flex-col lg:flex-row lg:h-[360px] rounded-xl overflow-hidden shadow-md lg:hover:shadow-xl lg:hover:-translate-y-1 transition-[transform,box-shadow] duration-300 relative">
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-primary z-10" />
 
                   {/* Left: Photo Panel */}

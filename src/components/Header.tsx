@@ -76,19 +76,23 @@ const Header = () => {
 
   useEffect(() => {
     let ticking = false;
+    let lastScrolled = false;
     const handleScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const scrolled = window.scrollY > 20;
-        if (scrolled !== isScrolled) setIsScrolled(scrolled);
+        if (scrolled !== lastScrolled) {
+          lastScrolled = scrolled;
+          setIsScrolled(scrolled);
+        }
         ticking = false;
       });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isScrolled]);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
