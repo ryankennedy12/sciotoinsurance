@@ -91,11 +91,11 @@ const Home = () => {
           <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
             <div className="w-12 h-1 bg-primary mx-auto mb-4 sm:mb-space-md rounded-full" />
             
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[48px] text-foreground leading-[1.15] mb-3 sm:mb-space-sm">
+            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-[52px] text-foreground leading-[1.1] mb-4 sm:mb-space-sm">
               Why Ohio Families Work With Us
             </h2>
-            <p className="font-body text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              29 years of experience. A father-daughter team that <em className="italic text-primary font-medium not-italic" style={{ fontStyle: 'italic' }}>picks up the phone</em>.
+            <p className="font-body text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed font-medium">
+              29 years of experience. A father-daughter team that <em className="italic text-primary font-semibold not-italic" style={{ fontStyle: 'italic' }}>picks up the phone</em>.
             </p>
           </AnimatedSection>
 
