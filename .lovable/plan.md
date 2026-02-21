@@ -1,61 +1,78 @@
 
 
-# Fix Hero Image on Mobile and Tablet
+# Mobile and Tablet Hero: Bold Full-Bleed Image with Gradient
 
-## Problem
-The current "image stacked on top" approach crops the subjects badly on smaller screens and pushes the headline/CTAs below the fold.
+## Current Problem
+The cream overlay at 85% opacity makes the background image look washed out and unintentional on mobile and tablet. It doesn't feel premium -- it feels like a faded afterthought.
 
-## Solution: Background Image with Overlay on Mobile/Tablet
+## Proposed Solution: Dark Gradient Overlay with Light Text
 
-On mobile and tablet, use the hero image as a **full-section background** behind the text with a cream/burgundy gradient overlay for readability. This keeps the photo visible and atmospheric without fighting the text for space. On desktop, keep the clean split layout as-is.
+Use the hero image at full impact with a rich burgundy-to-transparent gradient overlay and switch the text to white. This is the look used by premium financial and insurance brands (Chubb, USAA, Lemonade) -- bold photography, confident typography, unmistakable professionalism.
 
 ```text
+MOBILE (<640px):
++-----------------------------------------------+
+|  ~~~ hero image, vivid, full-bleed ~~~        |
+|  [burgundy gradient from left/bottom]         |
+|                                               |
+|  [Headline - WHITE text]                      |
+|  [Subheadline - white/90 text]                |
+|  [CTA Buttons]                                |
+|                                               |
++-----------------------------------------------+
+
+TABLET (640px-1023px):
++-----------------------------------------------+
+|  ~~~ hero image, vivid, full-bleed ~~~        |
+|  [burgundy gradient from left]                |
+|                                               |
+|  [Headline - WHITE text]                      |
+|  [Subheadline - white/90 text]                |
+|  [CTA Buttons side-by-side]                   |
+|                                               |
++-----------------------------------------------+
+
 DESKTOP (1024px+) -- NO CHANGE:
 +-------------------------------+-------------------------------+
-|  [Headline]                   |                               |
-|  [Subheadline]                |        [Hero Image]           |
-|  [Trust Row]                  |     (full height, cover)      |
+|  [Headline - dark text]       |        [Hero Image]           |
+|  [Subheadline]                |     (split layout)            |
 |  [CTA Buttons]                |                               |
 +-------------------------------+-------------------------------+
-
-MOBILE / TABLET (<1024px) -- NEW:
-+-----------------------------------------------+
-|  ~~~ hero image as background ~~~             |
-|  [soft cream overlay for contrast]            |
-|                                               |
-|  [Headline]                                   |
-|  [Subheadline]                                |
-|  [Trust Row]                                  |
-|  [CTA Buttons]                                |
-|  [Trust Reassurances]                         |
-|                                               |
-+-----------------------------------------------+
-  Image fills section, overlay ensures text readability
 ```
 
-## Why This Works
-- The photo is always present, giving the hero visual impact on every screen
-- No awkward cropping -- the image is background-sized to cover, so composition shifts naturally
-- Text readability is guaranteed by the overlay (no faces-under-text problem since the overlay handles contrast)
-- Content is immediately visible without scrolling past a separate image block
-- On desktop, the split layout stays untouched -- best of both worlds
+## Why This Will Get a "Wow"
+- The photo is vivid and present, not hidden behind a wash
+- Burgundy gradient overlay ties the image to the brand while ensuring text contrast
+- White text on a photo background is the hallmark of premium, editorial web design
+- The CTAs pop against the darker background -- the primary button stays burgundy-700, the secondary button switches to a white outline style
+- Desktop stays exactly as-is -- only mobile and tablet change
 
-## Technical Details (changes only in `src/pages/Home.tsx`, hero section ~lines 27-114)
+## Technical Details (only `src/pages/Home.tsx` changes)
 
-1. **Restructure the image panel**: Change from a separate stacked `div` to a background layer that only shows on mobile/tablet:
-   - Add an `absolute inset-0` image container with `lg:hidden` so it renders behind text on small screens
-   - Add a `bg-cream/85` overlay on top of the image so text stays readable (light, warm feel -- not a dark moody overlay)
-   - Keep the existing separate image column for desktop (`hidden lg:block`)
+### 1. Replace the cream overlay with a burgundy gradient
+Change the mobile/tablet overlay from:
+```
+bg-cream/85
+```
+To a multi-stop gradient:
+```
+bg-gradient-to-t from-burgundy-900/90 via-burgundy-800/60 to-burgundy-900/30
+```
+This creates a rich, dark-to-transparent gradient that keeps the image visible at the top while ensuring text readability at the bottom where the content sits.
 
-2. **Remove stacked image div on mobile**: The current `h-[45svh]` image block becomes `hidden lg:block lg:order-2` (desktop only)
+### 2. Switch text colors on mobile/tablet
+- Headline: Add `text-white lg:text-foreground` so it's white on mobile/tablet, dark on desktop
+- Subheadline: Add `text-white/85 lg:text-muted-foreground`
+- This ensures the text pops against the dark gradient on small screens but stays the same on desktop
 
-3. **Add background image for mobile/tablet**: New absolutely-positioned image + overlay inside the text panel wrapper, visible only below `lg`
+### 3. Adjust the secondary CTA for mobile/tablet
+The "Talk to a Real Person" button currently has `bg-card text-primary border-primary`. On the dark background, switch to:
+- Mobile/tablet: white outline style (`lg:bg-card` with `border-white text-white` below lg)
+- Desktop: unchanged
 
-4. **Text panel adjustments**:
-   - Add `relative z-10` so text sits above the background image
-   - Add `min-h-[85svh] lg:min-h-0` so the mobile hero has enough height for the background to be visible
-   - Center text on mobile: `text-center lg:text-left`, `items-center lg:items-start`
-   - Center CTAs: `justify-center lg:justify-start` on the button row
+### 4. Adjust image object-position
+Change from `object-[25%_center]` to `object-[30%_center]` to better frame the subjects on mobile.
 
-5. **No other files change** -- same image asset, same content, same desktop layout
+### 5. No other files change
+Same image, same desktop layout, same content. Only the mobile/tablet visual treatment changes.
 
