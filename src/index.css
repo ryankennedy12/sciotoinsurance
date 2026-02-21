@@ -290,7 +290,8 @@
   
   /* Touch-friendly card - effects only on press, not scroll */
   .touch-card {
-    @apply transition-all duration-200;
+    @apply transition-[border-color,box-shadow] duration-200;
+    contain: content;
   }
   
   /* Hover only for mouse/trackpad users */
@@ -327,7 +328,8 @@
   
   /* Industry card touch handling */
   .touch-industry-card {
-    @apply transition-all duration-200;
+    @apply transition-[border-color,box-shadow] duration-200;
+    contain: content;
   }
   
   @media (hover: hover) and (pointer: fine) {

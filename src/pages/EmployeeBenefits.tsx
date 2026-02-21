@@ -99,7 +99,7 @@ const EmployeeBenefits = () => {
             <AnimatedSection animation="fade-up" className="relative z-10 w-full max-w-md">
               <div className="space-y-6">
                 {heroStats.map((stat, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur rounded-xl p-6 border border-white/20">
+                  <div key={i} className="bg-white/15 rounded-xl p-6 border border-white/20">
                     <div className="text-5xl font-display font-bold text-white mb-2"><AnimatedCounter value={stat.value} suffix={stat.suffix} /></div>
                     <p className="text-white/80">{stat.label}</p>
                   </div>
@@ -117,7 +117,7 @@ const EmployeeBenefits = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {employeeBenefitsProducts.map((product, i) => { const Icon = product.icon; return (
               <AnimatedSection key={product.name} animation="fade-up" delay={i * 75}>
-                <Link to="/get-quote" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all h-full">
+                <Link to="/get-quote" className="group block bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-200 h-full">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors"><Icon className="h-6 w-6 text-primary" /></div>
                     <div className="flex-1">

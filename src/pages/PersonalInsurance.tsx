@@ -147,14 +147,14 @@ const PersonalInsurance = () => {
               {/* Navigation Arrows */}
               <button
                 onClick={() => api?.scrollPrev()}
-                className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+                className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-[background-color] duration-200"
                 aria-label="Previous slide"
               >
                 <ChevronLeft className="h-6 w-6" />
               </button>
               <button
                 onClick={() => api?.scrollNext()}
-                className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+                className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-[background-color] duration-200"
                 aria-label="Next slide"
               >
                 <ChevronRight className="h-6 w-6" />
@@ -167,7 +167,7 @@ const PersonalInsurance = () => {
                 <button
                   key={index}
                   onClick={() => api?.scrollTo(index)}
-                  className={`transition-all duration-300 rounded-full ${
+                  className={`transition-[width,background-color] duration-300 rounded-full ${
                     current === index 
                       ? "w-8 h-3 bg-accent" 
                       : "w-3 h-3 bg-white/40 hover:bg-white/60"
@@ -193,7 +193,7 @@ const PersonalInsurance = () => {
                 {category.products.map((product) => {
                   const Icon = product.icon;
                   return (
-                    <Link key={product.name} to={product.slug ? `/personal-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all">
+                    <Link key={product.name} to={product.slug ? `/personal-insurance/${product.slug}` : "/get-quote"} className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-200">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center mb-4"><Icon className="h-6 w-6 text-primary" /></div>
                       <h4 className="font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{product.name}</h4>
                       {product.description && <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>}

@@ -340,7 +340,7 @@ const ProductDetailTemplate = ({
               <Button
                 asChild
                 size="lg"
-                className="bg-white/20 text-white border-2 border-white hover:bg-white/30 font-semibold backdrop-blur-sm"
+                className="bg-white/25 text-white border-2 border-white hover:bg-white/35 font-semibold"
               >
                 <a href="tel:+16146120050">
                   <Phone className="w-5 h-5 mr-2" />

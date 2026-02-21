@@ -120,7 +120,7 @@ const CarrierLogoGrid = () => {
             {carriers.map((carrier, index) => (
               <div
                 key={carrier.name}
-                className="group flex items-center justify-center h-16 sm:h-20 px-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all duration-300 hover:scale-105"
+                className="group flex items-center justify-center h-16 sm:h-20 px-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-[background-color,transform] duration-300 lg:hover:scale-105"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {/* Carrier logo - grayscale by default, primary color on hover */}

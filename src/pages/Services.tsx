@@ -90,7 +90,7 @@ const Services = () => {
             {services.map((service, index) => (
               <Card 
                 key={index}
-                className="group border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300 bg-card"
+                className="group border-border/50 hover:border-primary/30 hover:shadow-lg transition-[border-color,box-shadow] duration-300 bg-card"
               >
                 <CardContent className="p-8">
                   {/* Icon */}
