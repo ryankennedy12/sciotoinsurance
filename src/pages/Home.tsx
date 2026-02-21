@@ -8,34 +8,10 @@ import heroFamily from "@/assets/hero-family.jpg";
 import familyHomeService from "@/assets/family-home-service.jpg";
 import businessOffice from "@/assets/business-office.jpg";
 import teamMeeting from "@/assets/team-meeting.jpg";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
   const isPageReady = usePageReady();
-  const heroBgRef = useRef<HTMLDivElement>(null);
-  const heroContentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Disable parallax on mobile — saves two DOM writes per scroll frame
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    if (!isDesktop) return;
-
-    const heroBg = heroBgRef.current;
-    const heroContent = heroContentRef.current;
-    if (!heroBg || !heroContent) return;
-
-    const handleScroll = () => {
-      const y = window.scrollY;
-      if (y >= window.innerHeight) return;
-      // Write directly to DOM — zero React re-renders
-      heroBg.style.transform = `translateY(${y * 0.3}px) scale(1.1)`;
-      heroContent.style.opacity = String(Math.max(0, 1 - y / 400));
-      heroContent.style.transform = `translateY(${y * 0.15}px)`;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   
   // Trust row items with icons
   const trustItems = [
@@ -49,15 +25,10 @@ const Home = () => {
     <>
       {/* Hero Section - Full Viewport with Real Family Image + Parallax */}
       <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden">
-        {/* Background Image with Parallax Effect */}
+        {/* Background Image */}
         <div 
-          ref={heroBgRef}
-          className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat scale-110"
-          style={{ 
-            backgroundImage: `url(${heroFamily})`,
-            transform: `translateY(0px) scale(1.1)`,
-            willChange: "transform",
-          }}
+          className="absolute inset-0 bg-cover bg-[25%_center] sm:bg-[30%_center] md:bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroFamily})` }}
         />
         
         {/* Burgundy Overlay - stronger on mobile for text contrast */}
@@ -69,11 +40,9 @@ const Home = () => {
         {/* Mobile-only bottom gradient for CTA/trust badge area */}
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/15 to-transparent lg:hidden" />
 
-        {/* Content Container with Fade-out on Scroll */}
+        {/* Content Container */}
         <div 
-          ref={heroContentRef}
           className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-36 lg:pb-16"
-          style={{ willChange: "transform, opacity" }}
         >
           <div className="max-w-3xl">
             {/* Main Headline - Cormorant Garamond */}
