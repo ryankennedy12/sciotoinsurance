@@ -1,65 +1,30 @@
 
+# Fix Mobile Hero Image Zoom on Scroll
 
-# Remove All Hero Section Animations
+## Root Cause
 
-## Overview
+Mobile browsers (Safari, Chrome) hide their URL/address bar when you scroll down and show it again when you scroll back up. This changes the meaning of `100vh` -- the hero section uses `min-h-screen` (which is `100vh`), so when the address bar hides, the viewport grows, the section grows, and `bg-cover` rescales the background image to fill the larger area. This is the "zoom in/out" effect.
 
-Every page's hero section currently uses either `AnimatedSection` wrappers or `isPageReady`-based fade-up transitions. This plan removes all of them so hero content renders instantly -- no fade, no slide, no delay.
+## Fix (1 file)
 
-## Changes by File
+### `src/pages/Home.tsx` (line 27)
 
-### 1. `src/pages/Home.tsx`
-The hero uses `isPageReady` state-based transitions (not AnimatedSection). Four elements have conditional opacity/translate classes and `transitionDelay`:
-- h1 (line ~50-53)
-- Subheadline p (line ~59-63)
-- Trust row div (line ~69-73)
-- Dual CTAs div (line ~100-104)
+Replace the height classes on the hero `<section>`:
 
-**Change:** Remove the ternary `isPageReady ? "opacity-100 ..." : "opacity-0 ..."` from all four, replace with static `opacity-100 translate-y-0`. Remove the `transitionDelay` style props and the `transition-[transform,opacity]` classes. The `isPageReady` variable and `usePageReady` import can stay (used elsewhere or harmless).
+**Before:**
+```
+className="relative min-h-screen lg:h-screen flex items-center overflow-hidden"
+```
 
-### 2. `src/pages/About.tsx`
-Four `AnimatedSection` wrappers in the hero (lines ~51-98):
-- Badge pill
-- h1
-- Subheadline p
-- Desktop image block
+**After:**
+```
+className="relative min-h-[100svh] lg:h-[100svh] flex items-center overflow-hidden"
+```
 
-**Change:** Replace each `<AnimatedSection>` with a plain `<div>`, removing `animation` and `delay` props.
+`100svh` ("small viewport height") is the viewport height with the address bar **visible**. It never changes as you scroll, so the hero stays a fixed size and the background image never rescales.
 
-### 3. `src/pages/PersonalInsurance.tsx`
-One `AnimatedSection` wrapping the entire hero text content (line ~53-70).
-
-**Change:** Replace with a plain `<div>` keeping the className.
-
-### 4. `src/pages/BusinessInsurance.tsx`
-One `AnimatedSection` wrapping the hero content block (lines ~49-61).
-
-**Change:** Replace with a plain `<div>`.
-
-### 5. `src/pages/EmployeeBenefits.tsx`
-Two `AnimatedSection` wrappers in the hero:
-- Left side text content (line ~84-96)
-- Right side stat cards (line ~99)
-
-**Change:** Replace both with plain `<div>` tags keeping classNames.
-
-### 6. `src/pages/Contact.tsx`
-One `AnimatedSection` wrapping the hero heading/subheading (line ~131-138).
-
-**Change:** Replace with a plain `<div>` keeping the className.
-
-### 7. `src/components/ProductDetailTemplate.tsx`
-One `AnimatedSection` wrapping the hero subtitle, h1, description, and CTA buttons (lines ~146-168). This affects all product detail pages (Auto, Home, Life, Umbrella, Flood, High Net Worth, General Liability, Professional Liability, Workers Comp, Cyber Liability, Commercial Auto, Commercial Property, etc.).
-
-**Change:** Replace with a plain `<div>`.
-
-## What's NOT Changing
-
-- AnimatedSection usage outside of hero sections (value prop cards, testimonials, coverage grids, etc.) remains untouched
-- The `AnimatedSection` component itself stays in the codebase
-- No other CSS or structural changes
+Tailwind v3 supports arbitrary values like `min-h-[100svh]` and `h-[100svh]` natively -- no config changes needed.
 
 ## Expected Result
 
-All hero content on every page renders instantly on load with zero animation delay, improving perceived load speed and eliminating any initial content shift.
-
+The hero image stays perfectly static on mobile scroll. No zoom, no resize, no jank. Desktop behavior is unchanged since desktop browsers don't have a collapsing address bar.
