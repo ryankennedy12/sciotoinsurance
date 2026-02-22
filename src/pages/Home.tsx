@@ -32,32 +32,74 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Text Panel */}
-            <div className="relative flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-6 sm:px-10 lg:px-16 pt-36 lg:pt-40 pb-16 lg:pb-20 min-h-[85svh] lg:min-h-0 lg:order-1">
-              {/* Mobile/Tablet background image + overlay */}
-              <div className="absolute inset-0 lg:hidden">
-                <img
-                  src={heroSplit}
-                  alt=""
-                  aria-hidden="true"
-                  className="w-full h-full object-cover object-[30%_center]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/85 via-burgundy-900/55 to-burgundy-800/30" />
+            {/* Mobile/Tablet: Card Stack layout */}
+            <div className="lg:hidden">
+              {/* Photo Card */}
+              <div className="mx-5 sm:mx-8 pt-28 sm:pt-32">
+                <div className="rounded-2xl overflow-hidden border-2 border-gold-500/40 shadow-lg">
+                  <img
+                    src={heroSplit}
+                    alt="Ohio family in front of their home"
+                    className="w-full aspect-[16/10] sm:aspect-[16/9] object-cover object-[30%_center]"
+                  />
+                </div>
               </div>
-              {/* Main Headline */}
-              {/* Content wrapper above background */}
-              <div className="relative z-10 flex flex-col items-center lg:items-start justify-center w-full flex-1">
-              <h1 className="font-display font-bold lg:font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white lg:text-foreground leading-[1.1] mb-6 [text-shadow:_0_2px_12px_rgba(0,0,0,0.5),_0_1px_3px_rgba(0,0,0,0.4)] lg:[text-shadow:none]">
+
+              {/* Text Content */}
+              <div className="px-6 sm:px-10 pt-8 pb-12 sm:pb-16 text-center">
+                {/* Burgundy divider */}
+                <div className="w-12 h-1 bg-primary rounded-full mx-auto mb-6" />
+
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-6">
+                  Ohio Families Trust Us to Protect What Matters Most
+                </h1>
+
+                <p className="font-body text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
+                  We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
+                </p>
+
+                {/* Dual CTAs */}
+                <div className="flex flex-col sm:flex-row sm:justify-center gap-4 mb-6">
+                  <Link
+                    to="/get-quote"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
+                  >
+                    Get Your Free Quote
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <a
+                    href="tel:6146120050"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Talk to a Real Person
+                  </a>
+                </div>
+
+                {/* Trust row */}
+                <div className="flex items-center justify-center gap-2 text-muted-foreground">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
+                    ))}
+                  </div>
+                  <span className="text-xs font-body">Independent Agency · Est. 1995</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Text Panel */}
+            <div className="hidden lg:flex flex-col justify-center items-start text-left px-16 pt-40 pb-20 lg:order-1">
+              <h1 className="font-display font-semibold text-[56px] text-foreground leading-[1.1] mb-6">
                 Ohio Families Trust Us to Protect What Matters Most
               </h1>
 
-              {/* Subheadline */}
-              <p className="font-body text-lg sm:text-xl lg:text-2xl text-white/85 lg:text-muted-foreground leading-relaxed max-w-2xl mb-8 [text-shadow:_0_1px_8px_rgba(0,0,0,0.4),_0_1px_2px_rgba(0,0,0,0.3)] lg:[text-shadow:none]">
+              <p className="font-body text-2xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
                 We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
               </p>
 
               {/* Dual CTAs */}
-              <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 mb-6">
+              <div className="flex flex-row gap-4 mb-6">
                 <Link
                   to="/get-quote"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
@@ -67,14 +109,12 @@ const Home = () => {
                 </Link>
                 <a
                   href="tel:6146120050"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border-2 border-white text-white lg:bg-card lg:text-primary lg:border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
                 >
                   <Phone className="w-5 h-5" />
                   Talk to a Real Person
                 </a>
               </div>
-
-              </div> {/* end z-10 wrapper */}
             </div>
           </div>
         </div>
