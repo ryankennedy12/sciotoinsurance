@@ -48,7 +48,7 @@ const PolaroidCard = ({
 
   return (
     <div
-      className={`group/polaroid ${!isMobile ? 'polaroid-flip' : ''}`}
+      className="group/polaroid"
       style={{ perspective: "1000px" }}
     >
       {/* Accessible hidden content for screen readers */}
@@ -214,8 +214,8 @@ const BusinessInsurance = () => {
         <div className="container-wide">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3 block">Industries We Serve</span>
-            <h2 className="heading-lg text-foreground">Real Stories from Real<br className="hidden sm:inline" /> Ohio Businesses</h2>
-            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Flip a card to see how we helped.</p>
+            <h2 className="heading-lg text-foreground">Coverage Built for<br className="hidden sm:inline" /> Your Industry</h2>
+            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Tap a card to see what we cover.</p>
           </AnimatedSection>
 
           <AnimatedSection animation="fade-up" delay={100}>
@@ -226,11 +226,7 @@ const BusinessInsurance = () => {
                   industry={industry}
                   index={i}
                   isFlipped={flippedCard === i}
-                  onFlip={() => {
-                    if (isMobile) {
-                      setFlippedCard(flippedCard === i ? null : i);
-                    }
-                  }}
+                onFlip={() => setFlippedCard(flippedCard === i ? null : i)}
                   isMobile={isMobile}
                 />
               ))}
