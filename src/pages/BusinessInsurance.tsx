@@ -407,7 +407,7 @@ const BusinessInsurance = () => {
                 <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
-                <a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a>
+                <a href="tel:6146120050">(614) 612-0050</a>
               </Button>
             </div>
           </AnimatedSection>
