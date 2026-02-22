@@ -1,260 +1,326 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, ShieldCheck, Users, MessageSquare, Mail, MapPin } from "lucide-react";
+import { Phone, ArrowRight, ShieldCheck, Users, MessageSquare, Mail, Award, MapPin, Calendar } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import TeamPhotoPlaceholder from "@/components/TeamPhotoPlaceholder";
 import ohioNeighborhood from "@/assets/ohio-neighborhood.jpg";
-import officeInterior from "@/assets/office-interior.jpg";
 
 const About = () => {
-  const teamMembers = [
+  const milestones = [
     {
-      name: "Jeff Pireu",
-      title: "Principal Agent & Founder",
-      bio: "Jeff spent 29 years at Nationwide learning what works (and what doesn't) in insurance. He started Scioto Insurance Group in 2023 because he wanted to do things differently. As an independent agent, he can shop 30+ carriers to find the right fit for each client, not just push whatever one company offers.",
-      phone: "(614) 612-0050",
-      email: "info@sciotoinsurancegroup.com",
-      specialty: "High-value homes, umbrella policies, complex coverage needs",
+      year: "1994",
+      headline: "A Career Begins",
+      description: "Jeff starts his career at Nationwide, learning the industry from the ground up — underwriting, claims, complex risk analysis.",
     },
     {
-      name: "Natalie Kennedy",
-      title: "Account Manager",
-      bio: "Natalie handles the day-to-day: policy questions, changes, renewals, and making sure nothing falls through the cracks. When you call, you'll probably talk to her. She believes insurance shouldn't be confusing, and she'll explain things in plain English.",
-      phone: "(614) 612-0050",
-      email: "info@sciotoinsurancegroup.com",
-      specialty: "Policy changes, renewals, certificates of insurance",
+      year: "2010",
+      headline: "Senior Agent, Bigger Questions",
+      description: "Promoted to senior agent managing commercial accounts. But Jeff starts noticing how the system fails families who need it most.",
+    },
+    {
+      year: "2020",
+      headline: "The Breaking Point",
+      description: "After 26 years, Jeff sees too many clients locked into one-size-fits-all policies. He starts planning something different.",
+    },
+    {
+      year: "2023",
+      headline: "Scioto Insurance Group Is Born",
+      description: "Jeff launches an independent agency in New Albany. His daughter Natalie joins as Account Manager. Two people, 30+ carriers, zero call centers.",
+    },
+    {
+      year: "Today",
+      headline: "Small on Purpose",
+      description: "A two-person team serving Ohio families and businesses nationwide. Every client gets Jeff or Natalie — not a phone tree.",
     },
   ];
 
   return (
     <>
-      {/* Hero Section - Split Layout matching Homepage */}
-      <section className="relative bg-cream">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="relative lg:grid lg:grid-cols-2 lg:min-h-[85vh]">
+      {/* ── Section 1: Immersive Hero ── */}
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        {/* Background image */}
+        <img
+          src={ohioNeighborhood}
+          alt="Ohio neighborhood street"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Burgundy gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-burgundy-800/50 via-burgundy-800/60 to-burgundy-900/85" />
 
-            {/* Image Panel - desktop only */}
-            <div className="hidden lg:flex lg:order-2 items-center justify-center py-24 px-10">
-              <div className="relative w-full rounded-2xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.25)]">
-                <img
-                  src={ohioNeighborhood}
-                  alt="Beautiful Ohio neighborhood in New Albany"
-                  className="w-full h-auto rounded-2xl object-cover object-center"
-                />
-              </div>
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center pt-24">
+          <AnimatedSection animation="fade-up">
+            <p className="font-body text-sm font-semibold tracking-[0.2em] text-white/60 uppercase mb-6">
+              Est. 2023 · New Albany, Ohio
+            </p>
+            <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[68px] text-white leading-[1.08] mb-6 [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]">
+              29 Years of Knowing What Matters
+            </h1>
+            <p className="font-body text-lg sm:text-xl text-white/80 leading-relaxed max-w-xl mx-auto mb-8 [text-shadow:_0_1px_8px_rgba(0,0,0,0.3)]">
+              Jeff built a career at Nationwide. Then he built something better.
+            </p>
+            {/* Gold divider */}
+            <div className="w-16 h-0.5 bg-accent mx-auto" />
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── Section 2: The Origin Story ── */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[720px] mx-auto px-6">
+          <AnimatedSection animation="fade-up">
+            <div className="w-10 h-0.5 bg-primary mx-auto mb-8" />
+            <h2 className="font-display font-semibold text-3xl sm:text-4xl text-foreground text-center mb-12">
+              Our Story
+            </h2>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-up" delay={100}>
+            <div className="font-body text-muted-foreground text-lg leading-[1.85] space-y-6">
+              <p>
+                After 29 years working at Nationwide, Jeff Pireu knew insurance inside and out. He also knew what frustrated people about it: the one-size-fits-all policies, the 1-800 numbers, the feeling that you're just a policy number.
+              </p>
+              <p>
+                In 2023, he decided to do something about it. He started Scioto Insurance Group with a simple idea: be independent, so he could actually shop for the best coverage instead of pushing one company's products.
+              </p>
+
+              {/* Pull quote */}
+              <blockquote className="relative py-8 my-10 border-y border-border">
+                <p className="font-display italic text-2xl sm:text-3xl text-primary leading-snug text-center">
+                  "I spent 29 years learning what works. Then I went and did it myself."
+                </p>
+              </blockquote>
+
+              <p>
+                His daughter Natalie joined him to handle the day-to-day operations. When you call, you get one of them. Not a call center. Not a phone tree. Just two people who know your name and your policy.
+              </p>
+              <p>
+                We're new as an agency, but not new to insurance. Jeff's seen just about everything in three decades. And we're building something we're proud of: an agency that works for you, not the insurance companies.
+              </p>
             </div>
+          </AnimatedSection>
 
-            {/* Text Panel */}
-            <div className="relative flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-6 sm:px-10 lg:px-16 pt-36 lg:pt-40 pb-16 lg:pb-20 min-h-[85svh] lg:min-h-0 lg:order-1">
-              {/* Mobile/Tablet background image + overlay */}
-              <div className="absolute inset-0 lg:hidden">
-                <img
-                  src={ohioNeighborhood}
-                  alt=""
-                  aria-hidden="true"
-                  className="w-full h-full object-cover object-[30%_center]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/85 via-burgundy-900/55 to-burgundy-800/30" />
+          {/* Gold divider + Stats */}
+          <AnimatedSection animation="fade-up" delay={200}>
+            <div className="w-12 h-0.5 bg-accent mx-auto mt-14 mb-10" />
+            <div className="flex justify-center gap-12 sm:gap-16">
+              {[
+                { value: "29", label: "Years Experience" },
+                { value: "30+", label: "Carriers" },
+                { value: "2", label: "Person Team" },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-3xl sm:text-4xl font-display font-bold text-primary">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── Section 3: Meet Jeff and Natalie ── */}
+
+      {/* Jeff's Profile */}
+      <section className="py-16 sm:py-24 bg-cream">
+        <div className="max-w-[1100px] mx-auto px-6">
+          <AnimatedSection animation="fade-up">
+            <div className="grid lg:grid-cols-[280px_1fr] gap-10 lg:gap-16 items-start">
+              {/* Photo */}
+              <div className="flex justify-center lg:justify-start">
+                <TeamPhotoPlaceholder name="Jeff Pireu" className="[&>div]:w-[260px] [&>div]:h-[310px]" />
               </div>
 
               {/* Content */}
-              <div className="relative z-10 flex flex-col items-center lg:items-start justify-center w-full flex-1">
-                <p className="font-body text-sm font-semibold tracking-widest text-white/70 lg:text-accent uppercase mb-4">
-                  Est. 2023 · New Albany, Ohio
+              <div>
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <h3 className="font-display font-bold text-2xl sm:text-3xl text-foreground">Jeff Pireu</h3>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-body font-semibold">
+                    <Award className="w-3.5 h-3.5" />
+                    Principal Agent & Founder
+                  </span>
+                </div>
+
+                <p className="font-body text-sm text-accent font-semibold uppercase tracking-wider mb-5">
+                  Specialty: High-value homes, umbrella policies, complex coverage needs
                 </p>
 
-                <h1 className="font-display font-bold lg:font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white lg:text-foreground leading-[1.1] mb-6 [text-shadow:_0_2px_12px_rgba(0,0,0,0.5),_0_1px_3px_rgba(0,0,0,0.4)] lg:[text-shadow:none]">
-                  A Father-Daughter Team That Picks Up the Phone
-                </h1>
+                <blockquote className="font-display italic text-xl text-primary leading-snug mb-6 pl-4 border-l-2 border-accent">
+                  "I started this agency because I was tired of watching good people get bad advice."
+                </blockquote>
 
-                <p className="font-body text-lg sm:text-xl lg:text-2xl text-white/85 lg:text-muted-foreground leading-relaxed max-w-2xl mb-8 [text-shadow:_0_1px_8px_rgba(0,0,0,0.4),_0_1px_2px_rgba(0,0,0,0.3)] lg:[text-shadow:none]">
-                  29 years of industry experience. A new agency built on doing things the right way.
+                <p className="font-body text-muted-foreground leading-relaxed mb-6">
+                  Jeff spent 29 years at Nationwide learning what works (and what doesn't) in insurance. He started Scioto Insurance Group in 2023 because he wanted to do things differently. As an independent agent, he can shop 30+ carriers to find the right fit for each client, not just push whatever one company offers.
                 </p>
 
-                {/* Dual CTAs */}
-                <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
-                  <Link
-                    to="/get-quote"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
-                  >
-                    Get Your Free Quote
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <a
-                    href="tel:6146120050"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border-2 border-white text-white lg:bg-card lg:text-primary lg:border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
-                  >
-                    <Phone className="w-5 h-5" />
-                    Talk to a Real Person
+                {/* Credential chips */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {["29 Years at Nationwide", "Licensed in OH", "Independent Agent", "Commercial & Personal Lines"].map((cred) => (
+                    <span key={cred} className="inline-block px-3 py-1.5 rounded-full bg-secondary text-foreground text-xs font-body font-medium border border-border">
+                      {cred}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Contact */}
+                <div className="flex flex-wrap gap-5 text-sm text-muted-foreground">
+                  <a href="tel:6146120050" className="inline-flex items-center gap-2 hover:text-primary transition-colors">
+                    <Phone className="w-4 h-4" /> (614) 612-0050
+                  </a>
+                  <a href="mailto:info@sciotoinsurancegroup.com" className="inline-flex items-center gap-2 hover:text-primary transition-colors">
+                    <Mail className="w-4 h-4" /> info@sciotoinsurancegroup.com
                   </a>
                 </div>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Our Story Section */}
-      <section className="py-16 sm:py-space-2xl bg-white">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-space-xl items-start">
-            {/* Text Content */}
-            <AnimatedSection animation="fade-up">
-              <div className="w-10 h-0.5 bg-primary mb-space-md" />
-              <h2 className="font-display font-semibold text-3xl lg:text-4xl text-foreground mb-space-lg">
-                Our Story
-              </h2>
+      {/* Natalie's Profile (reversed layout) */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-[1100px] mx-auto px-6">
+          <AnimatedSection animation="fade-up">
+            <div className="grid lg:grid-cols-[1fr_280px] gap-10 lg:gap-16 items-start">
+              {/* Content */}
+              <div className="order-2 lg:order-1">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <h3 className="font-display font-bold text-2xl sm:text-3xl text-foreground">Natalie Kennedy</h3>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-body font-semibold">
+                    <Award className="w-3.5 h-3.5" />
+                    Account Manager
+                  </span>
+                </div>
 
-              <div className="space-y-space-md font-body text-muted-foreground leading-relaxed">
-                <p>
-                  After 29 years working at Nationwide, Jeff Pireu knew insurance inside and out. He also knew what frustrated people about it: the one-size-fits-all policies, the 1-800 numbers, the feeling that you're just a policy number.
+                <p className="font-body text-sm text-accent font-semibold uppercase tracking-wider mb-5">
+                  Specialty: Policy changes, renewals, certificates of insurance
                 </p>
-                <p>
-                  In 2023, he decided to do something about it. He started Scioto Insurance Group with a simple idea: be independent, so he could actually shop for the best coverage instead of pushing one company's products.
+
+                <blockquote className="font-display italic text-xl text-primary leading-snug mb-6 pl-4 border-l-2 border-accent">
+                  "Insurance shouldn't be confusing. If you don't understand something, that's on us — not you."
+                </blockquote>
+
+                <p className="font-body text-muted-foreground leading-relaxed mb-6">
+                  Natalie handles the day-to-day: policy questions, changes, renewals, and making sure nothing falls through the cracks. When you call, you'll probably talk to her. She believes insurance shouldn't be confusing, and she'll explain things in plain English.
                 </p>
-                <p>
-                  His daughter Natalie joined him to handle the day-to-day operations. When you call, you get one of them. Not a call center. Not a phone tree. Just two people who know your name and your policy.
-                </p>
-                <p>
-                  We're new as an agency, but not new to insurance. Jeff's seen just about everything in three decades. And we're building something we're proud of: an agency that works for you, not the insurance companies.
-                </p>
+
+                {/* Credential chips */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {["Policy Management", "Licensed in OH", "Client Advocate", "Renewals & Certificates"].map((cred) => (
+                    <span key={cred} className="inline-block px-3 py-1.5 rounded-full bg-secondary text-foreground text-xs font-body font-medium border border-border">
+                      {cred}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Contact */}
+                <div className="flex flex-wrap gap-5 text-sm text-muted-foreground">
+                  <a href="tel:6146120050" className="inline-flex items-center gap-2 hover:text-primary transition-colors">
+                    <Phone className="w-4 h-4" /> (614) 612-0050
+                  </a>
+                  <a href="mailto:info@sciotoinsurancegroup.com" className="inline-flex items-center gap-2 hover:text-primary transition-colors">
+                    <Mail className="w-4 h-4" /> info@sciotoinsurancegroup.com
+                  </a>
+                </div>
               </div>
 
-              {/* Stats Bar */}
-              <div className="flex flex-wrap gap-8 mt-8 pt-8 border-t border-border">
-                {[
-                  { value: "29", label: "Years Experience" },
-                  { value: "30+", label: "Carriers" },
-                  { value: "2", label: "Person Team" },
-                ].map((stat, i) => (
-                  <div key={i} className="text-center">
-                    <div className="text-2xl sm:text-3xl font-display font-bold text-primary">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </div>
-                ))}
+              {/* Photo */}
+              <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+                <TeamPhotoPlaceholder name="Natalie Kennedy" className="[&>div]:w-[260px] [&>div]:h-[310px]" />
               </div>
-            </AnimatedSection>
-
-            {/* Image */}
-            <AnimatedSection animation="fade-up" delay={150}>
-              <div className="relative w-full rounded-2xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.15)]">
-                <img
-                  src={officeInterior}
-                  alt="Scioto Insurance Group office"
-                  className="w-full h-[350px] lg:h-[450px] object-cover rounded-2xl"
-                  loading="lazy"
-                />
-              </div>
-            </AnimatedSection>
-          </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Values Section - matching homepage card style */}
-      <section className="relative py-16 sm:py-space-3xl bg-secondary overflow-hidden">
+      {/* ── Section 4: Timeline ── */}
+      <section className="relative py-16 sm:py-24 bg-secondary overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, hsl(345 55% 34% / 0.04), transparent 60%)' }} />
 
-        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
-            <div className="w-12 h-1 bg-primary mx-auto mb-4 sm:mb-space-md rounded-full" />
-            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-[52px] text-foreground leading-[1.1]">
+        <div className="relative max-w-[900px] mx-auto px-6">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
+            <div className="w-12 h-1 bg-primary mx-auto mb-4 rounded-full" />
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-foreground leading-[1.1]">
+              The Journey
+            </h2>
+          </AnimatedSection>
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Center line */}
+            <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-0.5 bg-accent/40 -translate-x-1/2" />
+
+            <div className="space-y-12">
+              {milestones.map((m, i) => (
+                <AnimatedSection key={i} animation="fade-up" delay={i * 80}>
+                  <div className={`relative flex items-start gap-6 lg:gap-0 ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+                    {/* Node */}
+                    <div className="absolute left-6 lg:left-1/2 w-4 h-4 rounded-full bg-accent border-[3px] border-secondary -translate-x-1/2 mt-1 z-10" />
+
+                    {/* Spacer for mobile */}
+                    <div className="w-12 shrink-0 lg:hidden" />
+
+                    {/* Card */}
+                    <div className={`flex-1 lg:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'lg:pr-12 lg:text-right' : 'lg:pl-12 lg:text-left'}`}>
+                      <div className="bg-card rounded-lg p-6 shadow-sm border border-border">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-body font-bold mb-3">
+                          <Calendar className="w-3.5 h-3.5" />
+                          {m.year}
+                        </span>
+                        <h3 className="font-display font-semibold text-lg text-foreground mb-2">{m.headline}</h3>
+                        <p className="font-body text-sm text-muted-foreground leading-relaxed">{m.description}</p>
+                      </div>
+                    </div>
+
+                    {/* Opposite spacer for desktop */}
+                    <div className="hidden lg:block lg:w-[calc(50%-2rem)]" />
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 5: Values ── */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="max-w-[900px] mx-auto px-6">
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <div className="w-12 h-1 bg-primary mx-auto mb-4 rounded-full" />
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-foreground leading-[1.1]">
               What We Stand For
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-space-md">
-            {/* Card 1 */}
-            <AnimatedSection animation="fade-up" delay={0} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
-                <ShieldCheck className="w-7 h-7 text-primary" strokeWidth={1.5} />
-              </div>
-              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
-                Independence Over Commission
-              </h3>
-              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                We represent you, not insurance companies. Our advice is based on what's best for your family or business, period.
-              </p>
-            </AnimatedSection>
-
-            {/* Card 2 */}
-            <AnimatedSection animation="fade-up" delay={100} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 lg:scale-[1.03] lg:shadow-md lg:z-10">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
-                <Users className="w-7 h-7 text-primary" strokeWidth={1.5} />
-              </div>
-              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
-                Small on Purpose
-              </h3>
-              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                We're a two-person team because that's how we want it. It means we actually know our clients, not just their policy numbers.
-              </p>
-            </AnimatedSection>
-
-            {/* Card 3 */}
-            <AnimatedSection animation="fade-up" delay={200} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
-                <MessageSquare className="w-7 h-7 text-primary" strokeWidth={1.5} />
-              </div>
-              <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
-                Straight Talk
-              </h3>
-              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Insurance can be confusing. We get that. Ask us anything and we'll give you a straight answer. No jargon, no runaround.
-              </p>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 sm:py-space-2xl bg-secondary">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          <AnimatedSection animation="fade-up" className="text-center mb-10 sm:mb-space-xl">
-            <div className="w-12 h-1 bg-primary mx-auto mb-4 sm:mb-space-md rounded-full" />
-            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-[52px] text-foreground leading-[1.1] mb-4">
-              Meet the Team
-            </h2>
-            <p className="font-body text-lg text-muted-foreground">
-              This is everyone. Literally.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-space-lg max-w-[900px] mx-auto">
-            {teamMembers.map((member, index) => (
-              <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
-                <div className="bg-card rounded-lg border-t-[3px] border-t-primary/60 p-8 text-center shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300">
-                  <TeamPhotoPlaceholder name={member.name} className="mb-space-md" />
-
-                  <h3 className="font-display font-semibold text-xl text-foreground mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="font-body text-sm text-primary font-medium mb-3">
-                    {member.title}
-                  </p>
-                  <p className="font-body text-xs text-accent font-semibold uppercase tracking-wider mb-space-md">
-                    {member.specialty}
-                  </p>
-                  <p className="font-body text-muted-foreground leading-relaxed mb-6">
-                    {member.bio}
-                  </p>
-
-                  {/* Gold divider */}
-                  <div className="w-12 h-0.5 bg-gold-500/40 mx-auto mb-6" />
-
-                  {/* Contact */}
-                  <div className="flex flex-col gap-space-sm">
-                    <a
-                      href={`tel:${member.phone.replace(/[^0-9]/g, '')}`}
-                      className="inline-flex items-center justify-center gap-2 font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                    >
-                      <Phone className="w-4 h-4" />
-                      {member.phone}
-                    </a>
-                    <a
-                      href={`mailto:${member.email}`}
-                      className="inline-flex items-center justify-center gap-2 font-body text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                    >
-                      <Mail className="w-4 h-4" />
-                      {member.email}
-                    </a>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {[
+              {
+                icon: ShieldCheck,
+                title: "Independence Over Commission",
+                body: "We represent you, not insurance companies. Our advice is based on what's best for your family or business, period.",
+              },
+              {
+                icon: Users,
+                title: "Small on Purpose",
+                body: "We're a two-person team because that's how we want it. It means we actually know our clients, not just their policy numbers.",
+              },
+              {
+                icon: MessageSquare,
+                title: "Straight Talk",
+                body: "Insurance can be confusing. We get that. Ask us anything and we'll give you a straight answer. No jargon, no runaround.",
+              },
+              {
+                icon: MapPin,
+                title: "Rooted in Ohio",
+                body: "We live here, work here, and raise our families here. We understand the risks Ohio homeowners and businesses face because we face them too.",
+              },
+            ].map((v, i) => (
+              <AnimatedSection key={i} animation="fade-up" delay={i * 80}>
+                <div className="flex gap-5 p-6 rounded-lg bg-secondary border-l-[3px] border-l-accent">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
+                    <v.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-semibold text-lg text-foreground mb-1">{v.title}</h3>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">{v.body}</p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -263,39 +329,40 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA Section - Burgundy Gradient */}
-      <section className="relative py-16 sm:py-space-2xl bg-gradient-to-br from-burgundy-700 to-burgundy-800 overflow-hidden">
+      {/* ── Section 6: CTA ── */}
+      <section className="relative py-16 sm:py-24 bg-gradient-to-br from-burgundy-700 to-burgundy-800 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, hsl(345 55% 34% / 0.15), transparent 60%)' }} />
 
-        <div className="relative max-w-[700px] mx-auto px-4 sm:px-space-md lg:px-space-lg text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-white leading-[1.1] mb-space-md">
-            Want to know if we're a good fit?
-          </h2>
-          <p className="font-body text-lg text-white/80 mb-8 leading-relaxed">
-            We're happy to just talk. No sales pitch. If we're not the right agency for you, we'll say so.
-          </p>
+        <div className="relative max-w-[700px] mx-auto px-6 text-center">
+          <AnimatedSection animation="fade-up">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-white leading-[1.1] mb-6">
+              Want to Know If We're the Right Fit?
+            </h2>
+            <p className="font-body text-lg text-white/80 mb-10 leading-relaxed">
+              We're happy to just talk. No sales pitch. If we're not the right agency for you, we'll say so.
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg bg-white text-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
-            >
-              Schedule a Call
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg bg-white text-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
+              >
+                Schedule a Call
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <a
+                href="tel:6146120050"
+                className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg border-2 border-white/60 text-white font-body font-semibold text-base transition-[transform,box-shadow,background-color,color,border-color] duration-300 hover:bg-white hover:text-primary hover:border-white active:scale-[0.98]"
+              >
+                <Phone className="w-5 h-5" />
+                (614) 612-0050
+              </a>
+            </div>
 
-            <a
-              href="tel:6146120050"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg border-2 border-white/60 text-white font-body font-semibold text-base transition-[transform,box-shadow,background-color,color,border-color] duration-300 hover:bg-white hover:text-primary hover:border-white active:scale-[0.98]"
-            >
-              <Phone className="w-5 h-5" />
-              (614) 612-0050
-            </a>
-          </div>
-
-          <p className="font-body text-sm text-white/50">
-            29 Years Serving Ohio Families
-          </p>
+            <p className="font-body text-sm text-white/50">
+              Est. 2023 in New Albany, Ohio
+            </p>
+          </AnimatedSection>
         </div>
       </section>
     </>
