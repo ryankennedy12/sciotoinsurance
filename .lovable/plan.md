@@ -1,60 +1,126 @@
 
 
-## Homepage Hero Redesign — Mobile/Tablet Only (Card Stack)
+## Personal Insurance Page Redesign
 
-Replace the current full-bleed photo + dark overlay pattern on mobile/tablet with a clean, light-background layout where the hero image sits in a styled card and the text lives below it on cream.
-
-Desktop remains completely unchanged.
+The current page feels too similar to the homepage -- same split-screen hero pattern, same bg-secondary card grid, same layout rhythms. Here's a plan to give it a distinct identity while staying on-brand.
 
 ---
 
-### Layout (mobile and tablet, below `lg` breakpoint)
+### Design Philosophy: "Editorial Product Page"
 
-The hero section becomes a vertical stack on a `bg-cream` background with no photo overlay:
+Where the homepage is warm and inviting (Card Stack, cream tones) and the About page is narrative and immersive (dark burgundy hero, timeline), the Personal Insurance page should feel like a **curated product catalog** -- clean, organized, and confidence-inspiring. Think of a high-end brochure.
 
-**1. Photo Card (top)**
-- The hero image sits inside a rounded container (`rounded-2xl`) with a `border-2 border-gold-500/40` (dusty rose) and a subtle shadow
-- The card has slight horizontal margins (`mx-5 sm:mx-8`) so it doesn't touch the screen edges
-- Top padding of `pt-28 sm:pt-32` to clear the fixed nav
-- The image uses `aspect-[16/10]` on mobile and `aspect-[16/9]` on tablet for a cinematic feel
-- `object-cover object-[30%_center]` to keep the family visible
-
-**2. Text Content (below the card)**
-- Sits on the cream background with `px-6 sm:px-10 pt-8 pb-12 sm:pb-16`
-- Text is centered
-- Headline: `text-foreground` (charcoal) instead of white — no text shadows needed
-- Subheadline: `text-muted-foreground` — clean and readable
-- A small burgundy divider line (`w-12 h-1 bg-primary rounded-full mx-auto mb-6`) sits above the headline for a branded touch
-
-**3. CTAs**
-- "Get Your Free Quote" stays `bg-primary text-primary-foreground`
-- "Talk to a Real Person" becomes `bg-card text-primary border border-primary` (no more white border that was designed for dark backgrounds)
-- Both are full-width on mobile (`w-full sm:w-auto`), side-by-side on tablet
-
-**4. Trust row (optional enhancement)**
-- Below CTAs, a small muted line: five dusty rose stars + "Independent Agency · Est. 2023"
+**Key differentiators from other pages:**
+- No split-screen or card-stack hero -- instead, a compact **text-only hero on a white background** with a bold typographic headline (no hero image at all)
+- Coverage products presented in a **two-column editorial layout** with larger cards (not a 4-column grid)
+- A **horizontal scrolling life-stage strip** instead of the current full-height dark slideshow
+- Alternating white/cream sections (no dark sections like the About page)
 
 ---
 
-### What Stays the Same
+### Section 1: Typographic Hero (No Photo)
 
-- Desktop (`lg:` and up) layout is completely untouched — split grid with image on right, text on left
-- All text content (headline, subheadline, CTA labels) stays the same
-- The same `heroSplit` image is used
+A clean, typography-driven hero that immediately signals "this is a different page." No background image -- just beautiful type on white.
+
+- Background: `bg-white`
+- Top padding: `pt-32 sm:pt-40` to clear nav
+- Small uppercase label: "PERSONAL INSURANCE" in dusty rose with tracking
+- Large display headline: "Coverage That Fits Your Life" -- `text-4xl sm:text-5xl lg:text-6xl` in Cormorant Garamond, charcoal
+- A gold divider line (`w-16 h-0.5 bg-accent`)
+- Subtext: one sentence in Inter, muted -- "We shop 30+ carriers so you get the right protection at the right price."
+- Dual CTAs: "Get Your Free Quote" (primary) + "Call (614) 612-0050" (text link, not a button)
+- Bottom padding: `pb-16 sm:pb-20`
+
+This is a complete departure from both the Home (card stack/split) and About (dark immersive photo) heroes.
 
 ---
 
-### Technical Details
+### Section 2: Life Stage Strip (Horizontal Scroll)
 
-**File: `src/pages/Home.tsx`** (lines 20-81)
+Replace the current tall, dark, full-bleed slideshow with a compact horizontal scroll strip on cream background.
 
-Restructure the hero section so mobile/tablet renders the Card Stack layout while desktop renders the existing split grid:
+- Background: `bg-cream`
+- Section header: "Coverage for Every Stage of Life" with burgundy divider
+- Horizontal scrollable row of 5 cards (not a full-viewport carousel)
+- Each card: `w-[260px]` fixed width, rounded-xl, with the life stage photo on top (aspect-[4/3]), stage name, coverage type in dusty rose, and a "Learn More" link
+- Cards scroll horizontally on mobile with `overflow-x-auto` and snap-scroll behavior
+- On desktop (lg), all 5 cards fit in a single row without scrolling
+- No dark overlay, no navigation arrows, no autoplay -- simple and clean
 
-- The outer section keeps `bg-cream`
-- On `lg:`, the current grid layout is preserved exactly
-- Below `lg:`, instead of the absolute-positioned background image + gradient overlay, render:
-  1. A visible `<img>` inside a bordered rounded card
-  2. The headline/subheadline/CTAs below on the cream background
-- Remove the mobile-specific `text-white`, `text-shadow`, and white border styles — replace with charcoal text on cream
-- Remove the `min-h-[85svh]` on mobile since the content naturally determines height
-- The `absolute inset-0 lg:hidden` image block and its gradient overlay are removed entirely
+This is visually distinct from the Home page's large service cards and the About page's timeline.
+
+---
+
+### Section 3: Coverage Products (Two-Column Editorial Grid)
+
+Replace the current compact 4-column card grid with a more spacious, editorial two-column layout.
+
+- Background: `bg-white`
+- No category subheadings ("Most Popular", "Property & Specialty") -- instead, all 8 products in one flowing grid
+- Each card is larger: `p-8`, with the icon in a dusty-rose-tinted circle, product name in display font, 2-3 line description, and a "Get a Quote" link
+- Grid: `grid-cols-1 md:grid-cols-2` with generous `gap-6`
+- Cards have a left border accent (`border-l-3 border-primary/40`) instead of the rounded icon-box pattern used on the homepage
+- Hover: border becomes full primary color, subtle lift
+
+---
+
+### Section 4: Why Choose Scioto (Horizontal Stats Bar)
+
+Replace the current image + text split with a clean stats/reasons bar.
+
+- Background: `bg-cream`
+- Three stat blocks in a horizontal row (`grid-cols-1 sm:grid-cols-3`)
+- Each block: large number/stat in display font (primary color), label below, brief description
+  - "$847/yr" / "Average Savings"
+  - "30+" / "Insurance Carriers"
+  - "Same Day" / "Quote Response"
+- Below the stats: a single centered CTA -- "See What You Could Save"
+
+This replaces the photo-heavy split layout used on the homepage, keeping it data-forward.
+
+---
+
+### Section 5: Testimonials (Single Featured Quote)
+
+Instead of a 3-column testimonial grid (used on the homepage), use a single large featured testimonial.
+
+- Background: `bg-white`
+- Large pull-quote style: Cormorant Garamond italic, `text-2xl`, centered
+- Name, location, and "Helped with" below
+- Five dusty-rose stars above the quote
+- Simple and elegant -- one powerful story instead of three shorter ones
+
+---
+
+### Section 6: CTA Banner
+
+- Background: `bg-primary` (burgundy) with subtle radial glow (matches Home page CTA style for consistency)
+- Headline: "Ready to See What You Could Save?"
+- Subtext + dual CTAs (Get Quote button in white, phone as text link)
+- This section can stay similar to the homepage CTA for brand consistency -- it's a recurring site-wide pattern
+
+---
+
+### Technical Summary
+
+**File modified:** `src/pages/PersonalInsurance.tsx` (full rewrite of the JSX)
+
+**What's removed:**
+- Split-screen hero with background image
+- Full-height dark slideshow carousel (Embla/Autoplay imports removed)
+- 4-column coverage card grid with category headers
+- Photo + text split "Why Choose" section
+- 3-column testimonial grid
+- Generic rounded CTA card
+
+**What's added:**
+- Typography-only hero on white
+- Horizontal scroll life-stage strip on cream
+- Two-column editorial coverage grid on white
+- Stats bar on cream
+- Single featured testimonial on white
+- Burgundy CTA banner
+
+**Data:** Still uses `personalInsuranceProducts` and `personalInsuranceReasons` from `src/data/products.ts`. Life stages data stays inline.
+
+**No new dependencies or files needed.**
