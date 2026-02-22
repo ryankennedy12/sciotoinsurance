@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench, AlertTriangle } from "lucide-react";
+import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench, MapPin, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { businessInsuranceProducts } from "@/data/products";
@@ -16,14 +16,14 @@ import manufacturingFacility from "@/assets/manufacturing-facility.jpg";
 import professionalServices from "@/assets/professional-services.jpg";
 
 const industries = [
-  { name: "Contractors", icon: HardHat, image: constructionSite, riskText: "One injury on-site could cost you everything", protectedText: "We helped Smith Roofing reduce Workers' Comp by 18%", caseStudy: "We helped Smith Roofing reduce their Workers' Comp by 18%." },
-  { name: "Restaurants", icon: UtensilsCrossed, image: restaurantInterior, riskText: "A kitchen fire can shut you down for months", protectedText: "We got Mario's Pizza claim paid in 11 days", caseStudy: "After a kitchen fire, we helped Mario's Pizza get their claim paid in 11 days." },
-  { name: "Retail", icon: ShoppingBag, image: retailStore, riskText: "One slip-and-fall lawsuit wipes your margins", protectedText: "A local boutique saved $3,200/year", caseStudy: "A local boutique saved $3,200/year after we found gaps in their policy." },
-  { name: "Healthcare", icon: Stethoscope, image: healthcareClinic, riskText: "A HIPAA breach triggers six-figure fines", protectedText: "40+ Ohio medical practices, zero coverage disputes", caseStudy: "We've insured 40+ Ohio medical practices with zero coverage disputes." },
-  { name: "Transportation", icon: Truck, image: transportationFleet, riskText: "One accident grounds your entire fleet", protectedText: "Restructured coverage, 22% premium reduction", caseStudy: "A trucking company reduced their premium 22% by restructuring coverage." },
-  { name: "Manufacturing", icon: Factory, image: manufacturingFacility, riskText: "Equipment failure halts production for weeks", protectedText: "Full OSHA audit navigated with our documentation", caseStudy: "We helped a machine shop navigate an OSHA audit with full documentation." },
-  { name: "Professional", icon: Briefcase, image: professionalServices, riskText: "One client dispute becomes a $500K lawsuit", protectedText: "Proper E&O coverage prevented a $500K loss", caseStudy: "An accounting firm avoided a $500K lawsuit thanks to proper E&O coverage." },
-  { name: "Trades", icon: Wrench, image: constructionSite, riskText: "A burst pipe at a client's home — are you covered?", protectedText: "Bundled policies saved $4,100/year", caseStudy: "A plumbing company saved $4,100/year after we bundled their policies." },
+  { name: "Contractors", icon: HardHat, image: constructionSite, location: "Hilliard", pinX: 28, pinY: 48, description: "General liability, tools coverage, workers' comp.", caseStudy: "We helped Smith Roofing reduce their Workers' Comp by 18%.", savings: "$4,800/yr saved" },
+  { name: "Restaurants", icon: UtensilsCrossed, image: restaurantInterior, location: "Short North", pinX: 52, pinY: 42, description: "Liquor liability, food spoilage, property protection.", caseStudy: "After a kitchen fire, we helped Mario's Pizza get their claim paid in 11 days.", savings: "Claim paid in 11 days" },
+  { name: "Retail", icon: ShoppingBag, image: retailStore, location: "Easton", pinX: 68, pinY: 35, description: "Inventory protection, customer liability, theft coverage.", caseStudy: "A local boutique saved $3,200/year after we found gaps in their policy.", savings: "$3,200/yr saved" },
+  { name: "Healthcare", icon: Stethoscope, image: healthcareClinic, location: "Dublin", pinX: 32, pinY: 28, description: "Malpractice, HIPAA compliance, specialized coverage.", caseStudy: "We've insured 40+ Ohio medical practices with zero coverage disputes.", savings: "40+ practices" },
+  { name: "Transportation", icon: Truck, image: transportationFleet, location: "Grove City", pinX: 38, pinY: 72, description: "Fleet coverage, cargo insurance, driver protection.", caseStudy: "A trucking company reduced their premium 22% by restructuring coverage.", savings: "22% premium cut" },
+  { name: "Manufacturing", icon: Factory, image: manufacturingFacility, location: "Obetz", pinX: 56, pinY: 68, description: "Equipment breakdown, product liability, workplace safety.", caseStudy: "We helped a machine shop navigate an OSHA audit with full documentation.", savings: "Full OSHA compliance" },
+  { name: "Professional", icon: Briefcase, image: professionalServices, location: "Downtown", pinX: 50, pinY: 50, description: "E&O coverage, cyber liability, professional indemnity.", caseStudy: "An accounting firm avoided a $500K lawsuit thanks to proper E&O coverage.", savings: "$500K loss prevented" },
+  { name: "Trades", icon: Wrench, image: constructionSite, location: "Westerville", pinX: 58, pinY: 22, description: "Tools, vehicles, liability for HVAC, plumbing, electrical.", caseStudy: "A plumbing company saved $4,100/year after we bundled their policies.", savings: "$4,100/yr saved" },
 ];
 
 const testimonials = [
@@ -38,85 +38,9 @@ const stats = [
   { value: "Same Day", label: "Response Time", description: "Real people. No phone trees. Right here in Columbus." },
 ];
 
-const IndustryRiskCard = ({ industry, isActive, onToggle }: { industry: typeof industries[0]; isActive: boolean; onToggle: () => void }) => {
-  const Icon = industry.icon;
-  return (
-    <div
-      className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer focus-ring"
-      tabIndex={0}
-      role="button"
-      aria-label={`${industry.name}: ${isActive ? industry.protectedText : industry.riskText}`}
-      onClick={onToggle}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
-    >
-      {/* Background photo */}
-      <img
-        src={industry.image}
-        alt={industry.name}
-        className="absolute inset-0 w-full h-full object-cover transition-[filter] duration-500"
-        style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(1)' }}
-      />
-
-      {/* Desktop hover override for grayscale */}
-      <style>{`
-        @media (hover: hover) and (pointer: fine) {
-          .group:hover img { filter: grayscale(0) !important; }
-          .group:hover .risk-overlay { opacity: 0 !important; }
-          .group:hover .protected-overlay { opacity: 1 !important; }
-          .group:hover .risk-content { opacity: 0 !important; }
-          .group:hover .protected-content { opacity: 1 !important; }
-        }
-      `}</style>
-
-      {/* Risk state overlay (dark, muted) */}
-      <div
-        className="risk-overlay absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-charcoal/20 transition-opacity duration-500"
-        style={{ opacity: isActive ? 0 : 1 }}
-      />
-
-      {/* Protected state overlay (burgundy/warm) */}
-      <div
-        className="protected-overlay absolute inset-0 transition-opacity duration-500"
-        style={{
-          opacity: isActive ? 1 : 0,
-          background: 'linear-gradient(to top, hsl(345 55% 34% / 0.92) 0%, hsl(345 55% 34% / 0.7) 40%, hsl(345 55% 34% / 0.3) 100%)',
-        }}
-      />
-
-      {/* Risk state content */}
-      <div
-        className="risk-content absolute inset-0 flex flex-col justify-end p-5 transition-opacity duration-400"
-        style={{ opacity: isActive ? 0 : 1 }}
-      >
-        <AlertTriangle className="h-5 w-5 text-amber-400 mb-2" />
-        <p className="font-display font-semibold text-white text-lg leading-tight">{industry.riskText}</p>
-        <span className="text-white/60 text-xs mt-2 uppercase tracking-wider font-semibold">{industry.name}</span>
-      </div>
-
-      {/* Protected state content */}
-      <div
-        className="protected-content absolute inset-0 flex flex-col justify-end p-5 transition-opacity duration-400"
-        style={{ opacity: isActive ? 1 : 0 }}
-      >
-        <div className="flex items-center gap-2 mb-2">
-          <Icon className="h-5 w-5 text-accent" />
-          <span className="text-white font-semibold text-sm">{industry.name}</span>
-        </div>
-        <p className="font-display font-semibold text-white text-lg leading-tight mb-3">{industry.protectedText}</p>
-        <Link
-          to="/get-quote"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-white transition-colors"
-          onClick={(e) => e.stopPropagation()}
-        >
-          Get a Quote <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-      </div>
-    </div>
-  );
-};
-
 const BusinessInsurance = () => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<number | null>(null);
+  const selected = selectedIndustry !== null ? industries[selectedIndustry] : null;
 
   const allProducts = businessInsuranceProducts.flatMap((cat) => cat.products);
 
@@ -176,25 +100,135 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Section 2: Industries We Serve — Before/After Risk Cards */}
+      {/* Section 2: Interactive Central Ohio Map */}
       <section className="section-padding bg-background">
         <div className="container-wide">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3 block">Industries We Serve</span>
-            <h2 className="heading-lg text-foreground">Every Business Has Risks.<br className="hidden sm:inline" /> We Eliminate the Surprises.</h2>
-            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Hover to see how we've helped Ohio businesses like yours.</p>
+            <h2 className="heading-lg text-foreground">Protecting Businesses<br className="hidden sm:inline" /> Across Central Ohio</h2>
+            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Click a pin to see how we've helped businesses in your area.</p>
           </AnimatedSection>
 
           <AnimatedSection animation="fade-up" delay={100}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {industries.map((ind, i) => (
-                <IndustryRiskCard
-                  key={ind.name}
-                  industry={ind}
-                  isActive={activeCard === i}
-                  onToggle={() => setActiveCard(activeCard === i ? null : i)}
-                />
-              ))}
+            <div className="grid lg:grid-cols-5 gap-6 items-start">
+              {/* Map area */}
+              <div className="lg:col-span-3 relative">
+                <div className="relative w-full aspect-[4/3] bg-secondary/30 rounded-2xl border border-border overflow-hidden">
+                  {/* Stylized map background */}
+                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
+                    {/* Abstract road grid representing Central Ohio */}
+                    <rect width="100" height="100" fill="hsl(340 33% 96%)" />
+                    {/* Major highways */}
+                    <line x1="50" y1="0" x2="50" y2="100" stroke="hsl(0 0% 90%)" strokeWidth="0.8" />
+                    <line x1="0" y1="50" x2="100" y2="50" stroke="hsl(0 0% 90%)" strokeWidth="0.8" />
+                    <line x1="20" y1="0" x2="80" y2="100" stroke="hsl(0 0% 90%)" strokeWidth="0.5" />
+                    <line x1="80" y1="0" x2="20" y2="100" stroke="hsl(0 0% 90%)" strokeWidth="0.5" />
+                    {/* I-270 outer belt */}
+                    <circle cx="50" cy="48" r="25" fill="none" stroke="hsl(0 0% 85%)" strokeWidth="0.6" strokeDasharray="2 1" />
+                    {/* Downtown marker */}
+                    <circle cx="50" cy="48" r="4" fill="hsl(345 55% 34% / 0.08)" stroke="hsl(345 55% 34% / 0.15)" strokeWidth="0.3" />
+                    {/* "Columbus" label */}
+                    <text x="50" y="57" textAnchor="middle" fontSize="3" fill="hsl(0 0% 55%)" fontFamily="Inter, sans-serif" fontWeight="600">COLUMBUS</text>
+                  </svg>
+
+                  {/* Industry pins */}
+                  {industries.map((ind, i) => {
+                    const Icon = ind.icon;
+                    const isSelected = selectedIndustry === i;
+                    return (
+                      <button
+                        key={ind.name}
+                        onClick={() => setSelectedIndustry(isSelected ? null : i)}
+                        className={`absolute z-10 group/pin transition-all duration-300 -translate-x-1/2 -translate-y-1/2 focus-ring rounded-full ${isSelected ? 'scale-125 z-20' : 'hover:scale-110'}`}
+                        style={{ left: `${ind.pinX}%`, top: `${ind.pinY}%` }}
+                        aria-label={`${ind.name} in ${ind.location}`}
+                      >
+                        {/* Pulse ring for selected */}
+                        {isSelected && (
+                          <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
+                        )}
+                        <div className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg transition-colors duration-300 ${isSelected ? 'bg-primary' : 'bg-card border border-border group-hover/pin:bg-primary group-hover/pin:border-primary'}`}>
+                          <Icon className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors duration-300 ${isSelected ? 'text-primary-foreground' : 'text-primary group-hover/pin:text-primary-foreground'}`} />
+                        </div>
+                        {/* Label tooltip */}
+                        <div className={`absolute left-1/2 -translate-x-1/2 -bottom-7 whitespace-nowrap text-[10px] sm:text-xs font-semibold transition-opacity duration-200 ${isSelected ? 'opacity-100 text-primary' : 'opacity-0 group-hover/pin:opacity-100 text-muted-foreground'}`}>
+                          {ind.location}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Detail panel */}
+              <div className="lg:col-span-2">
+                {selected ? (
+                  <div className="bg-card rounded-xl border border-border overflow-hidden shadow-lg animate-fade-in">
+                    <div className="relative h-44 overflow-hidden">
+                      <img src={selected.image} alt={selected.name} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 to-transparent" />
+                      <button
+                        onClick={() => setSelectedIndustry(null)}
+                        className="absolute top-3 right-3 w-8 h-8 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors"
+                        aria-label="Close"
+                      >
+                        <X className="h-4 w-4 text-foreground" />
+                      </button>
+                      <div className="absolute bottom-4 left-5">
+                        <div className="flex items-center gap-2">
+                          <selected.icon className="h-5 w-5 text-accent" />
+                          <h3 className="font-display font-bold text-xl text-primary-foreground">{selected.name}</h3>
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-1">
+                          <MapPin className="h-3 w-3 text-accent" />
+                          <span className="text-primary-foreground/80 text-xs">{selected.location}, OH</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">{selected.description}</p>
+                      <div className="bg-secondary/50 rounded-lg p-4 mb-4">
+                        <div className="flex gap-1 mb-2">
+                          {[1, 2, 3, 4, 5].map((s) => (
+                            <Star key={s} className="h-3 w-3 fill-accent text-accent" />
+                          ))}
+                        </div>
+                        <p className="text-foreground text-sm italic leading-relaxed">"{selected.caseStudy}"</p>
+                      </div>
+                      <div className="flex items-center gap-2 mb-5 px-3 py-2 bg-primary/5 rounded-lg">
+                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                        <span className="text-sm font-semibold text-primary">{selected.savings}</span>
+                      </div>
+                      <Button asChild className="w-full">
+                        <Link to="/get-quote">
+                          Get {selected.name} Quote <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-card rounded-xl border border-border p-8 text-center h-full flex flex-col items-center justify-center min-h-[320px]">
+                    <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center mb-4">
+                      <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-display font-semibold text-lg text-foreground mb-2">Select an Industry</h3>
+                    <p className="text-sm text-muted-foreground max-w-xs">Click any pin on the map to see how we've helped businesses in that industry across Central Ohio.</p>
+                    {/* Mobile: show list of industries as tappable pills */}
+                    <div className="flex flex-wrap gap-2 mt-6 justify-center lg:hidden">
+                      {industries.map((ind, i) => (
+                        <button
+                          key={ind.name}
+                          onClick={() => setSelectedIndustry(i)}
+                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-secondary text-foreground text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
+                        >
+                          <ind.icon className="h-3.5 w-3.5" />
+                          {ind.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </AnimatedSection>
         </div>
