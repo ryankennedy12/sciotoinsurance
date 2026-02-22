@@ -10,7 +10,6 @@ import {
   Send,
   Loader2
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,6 +37,33 @@ const helpTopics = [
   { value: "other", label: "Something else" },
 ];
 
+const channels = [
+  {
+    icon: Phone,
+    title: "Call Us",
+    detail: "(614) 612-0050",
+    subtitle: "We pick up on the second ring",
+    href: "tel:6146120050",
+    priority: true,
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    detail: "info@sciotoinsurancegroup.com",
+    subtitle: "We respond within hours",
+    href: "mailto:info@sciotoinsurancegroup.com",
+    priority: false,
+  },
+  {
+    icon: MapPin,
+    title: "Visit Us",
+    detail: "102 W Main St. #491",
+    subtitle: "New Albany, OH 43054",
+    href: undefined,
+    priority: false,
+  },
+];
+
 const Contact = () => {
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
@@ -53,7 +79,6 @@ const Contact = () => {
     message: "",
   });
 
-  // Pre-fill help topic from URL params (from Services page links)
   useEffect(() => {
     const type = searchParams.get("type");
     if (type && helpTopics.some(t => t.value === type)) {
@@ -80,7 +105,6 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Map help topic to request_type
       const getRequestType = (topic: string) => {
         switch (topic) {
           case "claim": return "service_claim";
@@ -125,10 +149,13 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-cream to-burgundy-50 pt-24 pb-8 md:pt-32 md:pb-12">
+      {/* Section 1: Minimal Hero */}
+      <section className="bg-card pt-24 pb-8 md:pt-32 md:pb-12">
         <div className="container-wide px-4 md:px-space-lg">
           <div className="max-w-3xl mx-auto text-center">
+            <span className="text-xs font-body font-semibold uppercase tracking-[0.2em] text-accent mb-4 block">
+              Contact
+            </span>
             <h1 className="heading-xl text-foreground mb-4">
               Let's Start a Conversation
             </h1>
@@ -139,251 +166,233 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Two Column Layout */}
-      <section className="section-padding bg-background">
-        <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            
-            {/* Left Column: Contact Form */}
-            <AnimatedSection animation="fade-up" delay={0}>
-              <Card className="border-border/50 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-8">
-                  {isSubmitted ? (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle className="w-8 h-8 text-green-600" />
-                      </div>
-                      <h3 className="heading-md text-foreground mb-4">
-                        Thanks for reaching out!
-                      </h3>
-                      <p className="body-md text-muted-foreground max-w-md mx-auto">
-                        We typically respond within a few hours during business days. Talk soon.
-                      </p>
+      {/* Section 2: Channel Cards */}
+      <section className="py-8 md:py-12 bg-background">
+        <div className="container-wide px-4 md:px-space-lg">
+          <AnimatedSection animation="fade-up" delay={0}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              {channels.map((channel) => {
+                const Wrapper = channel.href ? "a" : "div";
+                const wrapperProps = channel.href
+                  ? { href: channel.href, ...(channel.href.startsWith("mailto") ? { target: "_blank", rel: "noopener noreferrer" } : {}) }
+                  : {};
+                return (
+                  <Wrapper
+                    key={channel.title}
+                    {...wrapperProps}
+                    className={`rounded-2xl p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
+                      channel.priority
+                        ? "bg-secondary border-l-4 border-primary"
+                        : "bg-card border border-border"
+                    }`}
+                  >
+                    <channel.icon className="w-6 h-6 text-primary mb-4" />
+                    <h3 className="font-display font-semibold text-lg text-foreground">
+                      {channel.title}
+                    </h3>
+                    <p className="text-primary font-medium mt-1 text-sm">
+                      {channel.detail}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {channel.subtitle}
+                    </p>
+                  </Wrapper>
+                );
+              })}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Section 3: Centered Form */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container-wide px-4 md:px-space-lg">
+          <div className="max-w-xl mx-auto">
+            <AnimatedSection animation="fade-up" delay={100}>
+              <span className="text-xs font-body font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-8 block text-center">
+                Or send us a message
+              </span>
+
+              {isSubmitted ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="heading-md text-foreground mb-4">
+                    Thanks for reaching out!
+                  </h3>
+                  <p className="body-md text-muted-foreground max-w-md mx-auto">
+                    We typically respond within a few hours during business days. Talk soon.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First Name *</Label>
+                      <Input
+                        id="firstName"
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange("firstName", e.target.value)}
+                        placeholder="John"
+                        required
+                        maxLength={100}
+                      />
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="firstName">First Name *</Label>
-                          <Input
-                            id="firstName"
-                            value={formData.firstName}
-                            onChange={(e) => handleInputChange("firstName", e.target.value)}
-                            placeholder="John"
-                            required
-                            maxLength={100}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="lastName">Last Name *</Label>
-                          <Input
-                            id="lastName"
-                            value={formData.lastName}
-                            onChange={(e) => handleInputChange("lastName", e.target.value)}
-                            placeholder="Smith"
-                            required
-                            maxLength={100}
-                          />
-                        </div>
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Input
+                        id="lastName"
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange("lastName", e.target.value)}
+                        placeholder="Smith"
+                        required
+                        maxLength={100}
+                      />
+                    </div>
+                  </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange("email", e.target.value)}
-                          placeholder="john@example.com"
-                          required
-                          maxLength={255}
-                        />
-                      </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      placeholder="john@example.com"
+                      required
+                      maxLength={255}
+                    />
+                  </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone (optional)</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange("phone", e.target.value)}
-                          placeholder="(614) 555-1234"
-                          maxLength={20}
-                        />
-                      </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone (optional)</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="(614) 555-1234"
+                      maxLength={20}
+                    />
+                  </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="helpTopic">What can we help with?</Label>
-                        <Select
-                          value={formData.helpTopic}
-                          onValueChange={(value) => handleInputChange("helpTopic", value)}
-                        >
-                          <SelectTrigger id="helpTopic" className="bg-background">
-                            <SelectValue placeholder="Select a topic..." />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border z-50">
-                            {helpTopics.map((topic) => (
-                              <SelectItem 
-                                key={topic.value} 
-                                value={topic.value}
-                                className="cursor-pointer"
-                              >
-                                {topic.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="helpTopic">What can we help with?</Label>
+                    <Select
+                      value={formData.helpTopic}
+                      onValueChange={(value) => handleInputChange("helpTopic", value)}
+                    >
+                      <SelectTrigger id="helpTopic" className="bg-background">
+                        <SelectValue placeholder="Select a topic..." />
+                      </SelectTrigger>
+                      <SelectContent className="bg-background border-border z-50">
+                        {helpTopics.map((topic) => (
+                          <SelectItem 
+                            key={topic.value} 
+                            value={topic.value}
+                            className="cursor-pointer"
+                          >
+                            {topic.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Message</Label>
-                        <Textarea
-                          id="message"
-                          value={formData.message}
-                          onChange={(e) => handleInputChange("message", e.target.value)}
-                          placeholder="Tell us more about what you need..."
-                          rows={4}
-                          maxLength={2000}
-                          className="resize-none"
-                        />
-                      </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => handleInputChange("message", e.target.value)}
+                      placeholder="Tell us more about what you need..."
+                      rows={4}
+                      maxLength={2000}
+                      className="resize-none"
+                    />
+                  </div>
 
-                      <Button 
-                        type="submit" 
-                        size="lg" 
-                        className="w-full text-base"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="w-4 h-4 mr-2" />
-                            Send Message
-                          </>
-                        )}
-                      </Button>
-                    </form>
-                  )}
-                </CardContent>
-              </Card>
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full text-base"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+
+                  <p className="text-xs text-muted-foreground text-center">
+                    We'll respond within one business day. No spam, ever.
+                  </p>
+                </form>
+              )}
             </AnimatedSection>
+          </div>
+        </div>
+      </section>
 
-            {/* Right Column: Contact Info & Map */}
-            <AnimatedSection animation="fade-up" delay={150} className="space-y-8">
-              {/* Direct Contact */}
-              <div>
-                <h2 className="heading-md text-foreground mb-6">Get in Touch</h2>
-                
-                <div className="space-y-5">
-                  {/* Phone */}
-                  <a 
-                    href="tel:6146120050"
-                    className="flex items-start gap-4 group"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0 group-hover:bg-burgundy-100 transition-colors">
-                      <Phone className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        (614) 612-0050
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Click to call on mobile
-                      </p>
-                    </div>
-                  </a>
-
-                  {/* Email */}
-                  <a 
-                    href="mailto:info@sciotoinsurancegroup.com"
-                    className="flex items-start gap-4 group"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0 group-hover:bg-burgundy-100 transition-colors">
-                      <Mail className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        info@sciotoinsurancegroup.com
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        We respond within hours
-                      </p>
-                    </div>
-                  </a>
-
-                  {/* Address */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">
-                        102 W Main St. #491
-                      </p>
-                      <p className="text-muted-foreground">
-                        New Albany, OH 43054
-                      </p>
-                    </div>
-                  </div>
+      {/* Section 4: Hours + Map Row */}
+      <section className="py-12 md:py-16 bg-cream">
+        <div className="container-wide px-4 md:px-space-lg">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <AnimatedSection animation="fade-up" delay={0}>
+              <div className="bg-card border border-border rounded-2xl p-6 h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <Clock className="w-5 h-5 text-primary" />
+                  <h3 className="font-display font-semibold text-lg text-foreground">Business Hours</h3>
                 </div>
-              </div>
-
-              {/* Business Hours */}
-              <div className="pt-6 border-t border-border">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-burgundy-50 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground mb-2">Business Hours</p>
-                    <div className="space-y-1 text-muted-foreground">
-                      <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
-                      <p>Saturday & Sunday: Closed</p>
-                    </div>
-                  </div>
+                <div className="space-y-1 text-muted-foreground text-sm mb-4">
+                  <p>Monday – Friday: 9:00 AM – 5:00 PM</p>
+                  <p>Saturday & Sunday: Closed</p>
                 </div>
-                <p className="text-sm text-muted-foreground bg-muted/50 p-4 rounded-lg">
+                <p className="text-xs text-muted-foreground bg-muted/50 p-3 rounded-lg">
                   <strong>After hours?</strong> Leave a message or email us. Urgent claims? Most carriers have 24/7 claim lines — call us and we'll give you the number.
                 </p>
               </div>
+            </AnimatedSection>
 
-              {/* Map Placeholder */}
-              <div className="pt-6 border-t border-border">
-                <div className="aspect-video rounded-xl bg-gradient-to-br from-burgundy-50 to-burgundy-100 overflow-hidden relative">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48911.87391555889!2d-82.8485!3d40.0812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388f0a4a91d2e5%3A0x1a7c05c6dbf48d33!2sNew%20Albany%2C%20OH!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Scioto Insurance Group Location"
-                    className="absolute inset-0"
-                  />
-                </div>
+            <AnimatedSection animation="fade-up" delay={100}>
+              <div className="aspect-video rounded-2xl overflow-hidden relative border border-border">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48911.87391555889!2d-82.8485!3d40.0812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388f0a4a91d2e5%3A0x1a7c05c6dbf48d33!2sNew%20Albany%2C%20OH!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Scioto Insurance Group Location"
+                  className="absolute inset-0"
+                />
               </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Schedule a Call Section */}
-      <section className="py-12 md:py-16 bg-cream">
+      {/* Section 5: Schedule a Call */}
+      <section className="py-12 md:py-16 bg-background border-b border-border">
         <div className="container-wide">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="w-16 h-16 rounded-full bg-burgundy-100 flex items-center justify-center mx-auto mb-6">
-              <Calendar className="w-8 h-8 text-primary" />
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Calendar className="w-6 h-6 text-primary" />
+              <h2 className="heading-lg text-foreground">
+                Prefer to Schedule a Specific Time?
+              </h2>
             </div>
-            <h2 className="heading-lg text-foreground mb-4">
-              Prefer to Schedule a Specific Time?
-            </h2>
-            <p className="body-md text-muted-foreground mb-8">
-              If you want a dedicated call without playing phone tag, pick a time that works for you.
+            <p className="body-md text-muted-foreground mb-6">
+              Pick a time that works for you — no phone tag.
             </p>
             <Button asChild size="lg" className="text-base px-8">
               <a 
