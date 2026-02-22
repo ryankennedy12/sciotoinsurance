@@ -1,112 +1,85 @@
 
 
-## About Page Redesign: "The People Behind Your Policy"
+## Elevating "The Journey" and "What We Stand For" Sections
 
-Give the About page its own distinct identity -- warmer, more personal, and story-driven compared to the homepage's clean sales-focused layout. The goal: make visitors feel like they already know Jeff and Natalie before they ever pick up the phone.
-
----
-
-### The Big Idea
-
-Instead of mirroring the homepage layout, the About page gets a **narrative-first design**. Each section tells a chapter of the story, flowing like a conversation rather than a sales pitch. The page should feel like sitting across the table from Jeff and Natalie.
+These two sections currently blend together visually -- both use standard bordered cards on light backgrounds. The goal is to make each one feel distinct, premium, and memorable.
 
 ---
 
-### Section 1: Hero -- Bold Statement, No Split Layout
+### Section 4: "The Journey" -- Immersive Dark Timeline
 
-**What changes:** Drop the homepage-style split layout. Instead, use a full-width, immersive hero with a large-scale background photo (ohio-neighborhood.jpg) and a centered text overlay. This immediately signals "different page, different feel."
+**Problem:** The current timeline sits on a light `bg-secondary` background with standard white cards and a thin gold line. It looks clean but reads as "just more cards." There is nothing that makes it feel like a cinematic story unfolding.
 
-- Full-viewport background image with a warm burgundy gradient overlay (darker at bottom for text contrast)
-- Centered layout with all text stacked
-- Oversized display headline: "29 Years of Knowing What Matters"
-- Subline: "Jeff built a career at Nationwide. Then he built something better."
-- A single subtle gold divider line below the subline
-- No CTAs in the hero -- let the story breathe. The CTAs come later when trust is earned.
+**New Design: Full-width dark burgundy section with glowing timeline**
 
----
+Background and Atmosphere:
+- Change the section background to a rich burgundy gradient: `bg-gradient-to-b from-burgundy-800 to-burgundy-900`
+- Add a subtle radial glow behind the center line (burgundy-700 at low opacity) to create depth
+- All text switches to white/white-80 for contrast
+- The section heading and subheadline render in white with a gold divider
 
-### Section 2: The Origin Story -- Editorial Long-Form
+Timeline Line:
+- The center line changes from `bg-accent/40` to a brighter `bg-gold-500/60` so it glows against the dark background
+- Timeline nodes become larger (w-5 h-5) with a gold fill and a burgundy-800 border ring, creating a "lit" dot effect
 
-**What changes:** Replace the current side-by-side text+image grid with a narrower, single-column editorial layout (max-width ~720px, centered). This reads like a magazine article, not a corporate blurb.
+Milestone Cards:
+- Remove the white card background entirely
+- Instead, each milestone becomes a "glass" card: `bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl`
+- Year badge stays gold but becomes more prominent: `bg-gold-500/20 text-gold-500 border border-gold-500/30`
+- Headline text in white, description in white/70
+- On hover (desktop only), the card gets a subtle `bg-white/10` lift
 
-- Narrow centered column with generous line-height and paragraph spacing
-- A large pull-quote styled in Cormorant Garamond italic, set in burgundy, breaking up the text: *"I spent 29 years learning what works. Then I went and did it myself."*
-- The story is told in a more emotional, conversational arc -- not just facts but the *why* behind the agency
-- After the text, a thin gold divider, then a horizontal row of 3 stats (29 Years / 30+ Carriers / 2 People) styled minimally
-
----
-
-### Section 3: Meet Jeff and Natalie -- Full-Width Feature Profiles
-
-**What changes:** This is the signature section. Instead of small cards side-by-side, each team member gets a **full-width horizontal feature block** (like a magazine profile spread). This is where the page really stands apart.
-
-**Jeff's Block:**
-- Full-width section with `bg-cream` background
-- Desktop: Two columns -- left side has the photo placeholder (larger, ~280px wide), right side has his story
-- Title, role, and a gold "Specialty" tag
-- A personal quote in italic Cormorant Garamond: *"I started this agency because I was tired of watching good people get bad advice."*
-- His bio text in body font
-- A row of "credential chips" -- small pill badges showing key qualifications (e.g., "29 Years at Nationwide", "CPCU", "Licensed in OH")
-- Contact info (phone + email) with icons
-
-**Natalie's Block:**
-- Same layout but reversed (photo on right, text on left) on desktop for visual variety
-- White background (alternating with Jeff's cream)
-- Her quote, bio, credential chips, contact info
-
-This alternating pattern creates rhythm and gives each person the spotlight they deserve.
+The overall effect: the timeline feels like stepping into a darker, more dramatic chapter of the page. It visually separates from everything above and below.
 
 ---
 
-### Section 4: Timeline -- The Journey
+### Section 5: "What We Stand For" -- Large Statement Cards
 
-**What changes:** Add a brand-new vertical timeline section that visually tells the agency's story through key milestones. This adds depth and makes the "new agency, deep experience" story concrete.
+**Problem:** The current values section uses compact horizontal cards (icon left, text right) in a 2-column grid on `bg-white`. They feel utilitarian and blend with the timeline cards above.
 
-- Section background: `bg-secondary` with the radial glow
-- Centered vertical line (gold-500, 2px wide) with milestone nodes
-- Each node: a small gold circle on the line, with a card extending left or right (alternating on desktop, stacked on mobile)
-- 4-5 milestones:
-  - **1994** -- "Jeff begins his career at Nationwide"
-  - **2010** -- "Promoted to senior agent, managing complex commercial accounts"
-  - **2020** -- "After 26 years, Jeff sees how the industry is failing families"
-  - **2023** -- "Scioto Insurance Group is born. Natalie joins as Account Manager."
-  - **Today** -- "A two-person team serving Ohio families and businesses nationwide"
-- Each milestone card has a year badge, a headline, and 1-2 sentences
+**New Design: Full-width single-column statement blocks**
 
----
+Background and Layout:
+- Switch to `bg-cream` background to contrast with the dark timeline above
+- Instead of a 2x2 grid, use a single-column layout where each value gets a full-width row
+- Each row is a large, airy block with generous vertical padding (py-8 to py-10)
+- Separate values with thin `border-b border-border` dividers (no border on the last one)
 
-### Section 5: Values -- Keep but Elevate
+Card Structure (per value):
+- Layout: number/index on the far left (large display numeral like "01", "02" in gold-500, `font-display text-4xl`), then the icon in its gradient badge, then the title and body text
+- Desktop: horizontal row with the number, icon, and text flowing left to right
+- Mobile: stack the number + icon above the text
+- No card background, no border, no shadow -- just clean content with generous whitespace
 
-**What changes:** The current value cards are solid. Keep the content but switch from the identical homepage pattern to something that feels more personal:
+The numbering adds structure and implies intentionality ("these are our four pillars, in order"). The larger format gives each value room to breathe and feel important rather than crammed into a grid.
 
-- Change to a 2-column layout on desktop (instead of 3), with larger cards that have more breathing room
-- Add a subtle left-side gold accent bar (instead of top border) for a different visual signature
-- Keep the same Lucide icons and copy
-- White background section to create contrast with the timeline above and CTA below
-
----
-
-### Section 6: CTA -- Warm and Personal
-
-**What changes:** Keep the burgundy gradient but make the messaging warmer and more personal:
-
-- Headline: "Want to Know If We're the Right Fit?"
-- Subline: "We're happy to just talk. No sales pitch. If we're not the right agency for you, we'll say so."
-- Keep dual CTAs
-- Add a small trust line: "Est. 2023 in New Albany, Ohio"
+Add a short intro line below the section heading: "Four principles that guide every recommendation we make." in `text-muted-foreground`.
 
 ---
 
 ### Technical Summary
 
-**File: `src/pages/About.tsx`** -- Full rewrite of the page component
+**File: `src/pages/About.tsx`**
 
-1. **Hero:** Full-width immersive background image with centered text overlay, burgundy gradient, no split layout. No CTAs.
-2. **Origin Story:** Narrow single-column editorial layout (~720px centered), pull-quote in italic display font, horizontal stats row at bottom.
-3. **Team Profiles:** Two full-width horizontal feature blocks (one per person), alternating layout (photo left/right), personal quotes, credential pills, larger photo placeholders.
-4. **Timeline:** New vertical timeline component built inline -- gold center line, alternating milestone cards, responsive (stacked on mobile).
-5. **Values:** 2-column layout with left gold accent bars instead of top borders, same content.
-6. **CTA:** Same burgundy gradient, warmer copy, trust line.
+**Journey Section (lines 234-281):**
+1. Change section background from `bg-secondary` to `bg-gradient-to-b from-burgundy-800 to-burgundy-900`
+2. Update radial glow to use `burgundy-700` at higher opacity for depth
+3. Change heading, all text to white (`text-white`, `text-white/70`, `text-white/80`)
+4. Update gold divider under heading to `bg-gold-500`
+5. Timeline center line: `bg-gold-500/60`
+6. Timeline nodes: `w-5 h-5 bg-gold-500 border-[3px] border-burgundy-800`
+7. Milestone cards: remove `bg-card border border-border shadow-sm`, replace with `bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl`
+8. Year badges: `bg-gold-500/20 text-gold-500 border border-gold-500/30`
+9. Headline: `text-white`, description: `text-white/70`
+10. Add hover state on cards: `hover:bg-white/10 transition-colors`
 
-No new component files needed. Everything is built within `About.tsx` using existing utility classes, Lucide icons, and the `AnimatedSection` component. The `TeamPhotoPlaceholder` component is reused but with a larger size prop passed via className.
+**Values Section (lines 283-330):**
+1. Change section background from `bg-white` to `bg-cream`
+2. Replace 2-column grid with single-column `space-y-0` layout using `border-b border-border` dividers
+3. Each value becomes a full-width row: large gold numeral ("01") on the left, icon badge, then title + body
+4. Desktop: `flex items-start gap-8` horizontal layout
+5. Mobile: number + icon in a row, text below
+6. Remove card backgrounds, borders, and the left gold accent bar
+7. Number styling: `font-display text-4xl sm:text-5xl font-bold text-gold-500/40`
+8. Add intro subline below section heading
 
