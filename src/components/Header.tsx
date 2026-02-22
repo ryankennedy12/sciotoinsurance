@@ -131,56 +131,53 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[100] lg:hidden transition-[opacity] duration-500",
-          isMobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+          "fixed inset-0 z-[100] lg:hidden",
+          isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
-        {/* Background with gradient */}
+        {/* Backdrop */}
         <div
+          onClick={() => setIsMobileMenuOpen(false)}
           className={cn(
-            "absolute inset-0 bg-gradient-to-b from-burgundy-700 to-burgundy-800 transition-transform duration-500 ease-out origin-right",
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            "absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300",
+            isMobileMenuOpen ? "opacity-100" : "opacity-0"
           )}
         />
 
-        {/* Gold accent bar */}
-        <div className={cn(
-          "absolute top-0 left-0 right-0 h-0.5 bg-gold-500 z-20 transition-transform duration-500 ease-out origin-right",
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        )} />
-
-        <button
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-5 right-4 w-12 h-12 flex items-center justify-center z-20 border border-white/30 rounded-full active:bg-white/20 transition-colors"
-          aria-label="Close menu"
-          type="button"
-        >
-          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <nav
+        {/* Slide-in Panel */}
+        <div
           className={cn(
-            "relative z-10 h-full flex flex-col pt-6 pb-8 px-6 overflow-y-auto transition-[transform,opacity] duration-500 delay-200",
-            isMobileMenuOpen
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 translate-x-8"
+            "absolute top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-white border-l-2 border-l-gold-500 rounded-l-2xl shadow-2xl flex flex-col transition-transform duration-400 ease-out",
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
-          {/* Brand logo */}
-          <img
-            src={logo}
-            alt="Scioto Insurance Group"
-            className="h-10 w-auto self-start mb-8 brightness-0 invert opacity-90"
-          />
+          {/* Close Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute top-5 right-4 w-10 h-10 flex items-center justify-center text-charcoal hover:text-primary transition-colors"
+            aria-label="Close menu"
+            type="button"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
-          <div className="flex flex-col">
+          {/* Brand Header */}
+          <div className="px-6 pt-6 pb-4">
+            <img
+              src={logo}
+              alt="Scioto Insurance Group"
+              className="h-12 w-auto mix-blend-multiply"
+            />
+            <div className="mt-4 h-px bg-gold-500/40" />
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex-1 overflow-y-auto px-6">
             {[{ label: "Home", href: "/" }, ...navLinks].map((link, index) => {
-              const isActive = link.href === "/" 
-                ? location.pathname === "/" 
+              const isActive = link.href === "/"
+                ? location.pathname === "/"
                 : location.pathname.startsWith(link.href);
               return (
                 <Link
@@ -188,39 +185,55 @@ const Header = () => {
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
-                    "py-3.5 font-display text-xl font-semibold text-white/90 hover:text-white transition-all border-b border-white/10",
-                    isActive && "border-l-[3px] border-l-gold-500 pl-3"
+                    "block py-4 font-display text-lg text-charcoal transition-all duration-300",
+                    isActive
+                      ? "text-primary border-l-[3px] border-l-gold-500 pl-3 font-semibold"
+                      : "hover:text-primary hover:pl-1"
                   )}
                   style={{
-                    transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : "0ms",
+                    opacity: isMobileMenuOpen ? 1 : 0,
+                    transform: isMobileMenuOpen ? "translateY(0)" : "translateY(8px)",
+                    transition: `opacity 300ms ease-out ${index * 50}ms, transform 300ms ease-out ${index * 50}ms`,
                   }}
                 >
                   {link.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Mobile CTA Buttons */}
-          <div className="mt-auto pt-8 space-y-3">
-            <div className="h-px bg-white/15 mb-4" />
+          {/* CTAs */}
+          <div className="px-6 pb-4 space-y-3">
+            <div className="h-px bg-border mb-2" />
             <Link
               to="/get-quote"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full py-4 px-8 bg-white text-gold-500 font-body font-semibold rounded text-center text-base transition-transform active:scale-[0.98]"
+              className="block w-full py-3.5 bg-primary text-primary-foreground font-body font-semibold rounded-lg text-center text-base transition-colors hover:bg-burgundy-800 active:scale-[0.98]"
             >
               Get a Quote
             </Link>
             <a
               href="tel:6146120050"
-              className="flex items-center justify-center gap-2 w-full py-4 px-8 border-2 border-white/50 text-white font-body font-medium rounded text-center text-base transition-all hover:bg-white/10"
+              className="flex items-center justify-center gap-2 w-full py-3.5 border border-primary text-primary font-body font-medium rounded-lg text-center text-base transition-colors hover:bg-primary/5"
             >
-              <Phone className="w-5 h-5" />
+              <Phone className="w-4 h-4" />
               (614) 612-0050
             </a>
-            <p className="text-white/50 text-xs text-center pt-2 font-body">29 Years Serving Ohio Families</p>
           </div>
-        </nav>
+
+          {/* Trust Footer */}
+          <div className="px-6 pb-6 text-center">
+            <div className="flex items-center justify-center gap-0.5 mb-1">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-4 h-4 text-gold-500 fill-gold-500" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+              <span className="text-xs text-muted-foreground ml-1.5 font-body">5.0 on Google</span>
+            </div>
+            <p className="text-xs text-muted-foreground font-body">Est. 1995 · New Albany, Ohio</p>
+          </div>
+        </div>
       </div>
     </>
   );
