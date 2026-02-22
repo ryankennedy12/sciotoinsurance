@@ -1,69 +1,82 @@
 
 
-## Services Page Redesign: "Client Command Center"
+## Contact Page Redesign: "Direct Line"
 
 ### Design Concept
 
-Every other page on the site is a marketing page — selling, persuading, building trust. The Services page is different: it's for **existing clients who need to get something done**. The redesign leans into that by making it feel like a **lightweight client portal or command center** — app-like, utility-first, with clear visual hierarchy that says "we respect your time."
+The Services page became a "command center" with its bento grid. The Contact page needs its own distinct identity. The concept: **a single-scroll conversation starter** that feels more like a modern messaging app than a traditional contact form page. Instead of the standard two-column form + sidebar layout (which looks like every other insurance site), we'll use a **centered, single-column flow** with distinct visual zones stacked vertically.
 
-This is the only page that will use a **bento grid layout** — mixed-size tiles instead of uniform cards — giving it an immediately distinct look from the 3-column grids on other pages.
+The distinguishing feature: **three "channel cards"** at the top that let users pick HOW they want to connect (call, email, or form) before they even see the form. This is the only page on the site that uses this "pick your path" interaction pattern.
 
 ### Section-by-Section Design
 
-**Section 1: Minimal Greeting Hero**
-- No gradient background, no big photo — just a clean white section
-- Small "Client Services" label in uppercase tracking (dusty rose accent)
-- Headline: "How Can We Help Today?"
-- Subtitle: one line, warm and direct
-- Below: a prominent **"Need Help Now?"** phone link styled as a pill — not a big circle+number like the current design, but a compact, app-style action chip
-- This hero is intentionally short — gets out of the way fast
+**Section 1: Minimal Hero (matches Services page tone)**
+- Clean white background, no gradient (departing from other pages)
+- Small "Contact" uppercase tracking label in dusty rose
+- Headline: "Let's Start a Conversation"
+- One-line subtitle
+- Intentionally short, like the Services hero
 
-**Section 2: Bento Grid — Action Tiles**
-- A **2x3 bento grid on desktop** where the first tile (Report a Claim) is double-width, spanning both columns — it's the most urgent/important action
-- The claim tile gets a subtle burgundy-100 background and a left border accent in burgundy, making it visually distinct as the "priority action"
-- Remaining 5 tiles are single-width in a clean grid
-- Each tile is minimal: large icon (centered), bold title, one-line description, and a subtle arrow link at the bottom
-- No card borders — just a light background fill with rounded corners and hover shadow
-- On mobile: single column, all tiles same size, claim tile keeps its accent styling
+**Section 2: Three Channel Cards (the signature element)**
+- Three side-by-side cards in a `grid-cols-1 md:grid-cols-3` layout
+- Each card represents a contact method with a large icon, bold label, and direct action:
+  - **Call Us**: Phone icon, "(614) 612-0050", clickable `tel:` link, subtitle "We pick up on the second ring"
+  - **Email Us**: Mail icon, the email address, clickable `mailto:` link, subtitle "We respond within hours"
+  - **Visit Us**: MapPin icon, the address, subtitle "New Albany, OH 43054"
+- Cards have a subtle border, rounded-2xl, and hover lift effect
+- The Call card gets a subtle burgundy-100 background and left border accent (like the priority claim tile on Services) since phone is the preferred contact method
+- This pattern doesn't exist anywhere else on the site
 
-**Section 3: Response Times Strip**
-- A new section that doesn't exist on any other page: a **horizontal strip with 3 response-time promises**
-- Cream background with three inline items:
-  - "Claims: Within 1 hour"
-  - "Policy Changes: Same day"  
-  - "Certificates: Within 2 hours"
-- Each item has a small clock icon and uses a monospace-style number treatment (large, bold number + unit)
-- This builds trust while being purely functional — no other page has this pattern
+**Section 3: The Form (centered, no sidebar)**
+- Instead of the current two-column layout, the form lives in a **single centered column** (max-w-xl)
+- Above the form: a small "Or send us a message" label
+- The form itself is clean and minimal — no Card wrapper, just fields on the page background with subtle bottom borders instead of full input boxes (a more modern, app-like feel... actually, keep the current Input components for consistency, but remove the Card wrapper for a lighter feel)
+- Keep all existing form fields and logic exactly as-is
+- Below the submit button: a trust line "We'll respond within one business day. No spam, ever."
+- Success state stays the same
 
-**Section 4: Contact Fallback (Simplified)**
-- Keep the "Can't Find What You Need?" section but simplify it
-- Remove the large burgundy circle around the phone icon — just show the phone number large and clickable
-- Stack phone, email, and hours vertically in a compact card with a subtle border
-- Move the "Not a client yet?" CTA into a small, understated text link — this page is for existing clients, so the quote CTA should be secondary
+**Section 4: Business Hours + Map (compact row)**
+- Instead of stacking hours and map vertically in a sidebar, place them **side-by-side in a single row** below the form
+- Left side: Business hours in a compact card with clock icon
+- Right side: The Google Maps embed
+- Both in a `grid-cols-1 md:grid-cols-2` layout
+- This keeps the useful info but pushes it below the form where it's secondary
+
+**Section 5: Schedule a Call (keep but simplify)**
+- Remove the large burgundy circle around the Calendar icon
+- Keep the centered CTA but make it more compact
+- Add a subtle `border-b border-border` at the bottom to separate from footer
 
 ### Technical Details
 
-**File changed:** `src/pages/Services.tsx`
+**File changed:** `src/pages/Contact.tsx`
 
-**Bento grid implementation:**
-- CSS Grid with `grid-cols-1 md:grid-cols-2` and `col-span-2` on the first tile (Report a Claim)
-- No Card component wrapper — use plain `div` with `rounded-2xl bg-card` for a lighter feel
-- Claim tile: `bg-burgundy-50 border-l-4 border-primary`
+**Hero changes:**
+- Replace `bg-gradient-to-b from-cream to-burgundy-50` with `bg-card`
+- Add uppercase tracking label: `text-xs font-body font-semibold uppercase tracking-[0.2em] text-accent`
+- Keep headline and subtitle
 
-**Response times strip:**
-- New data array with 3 items: `{ label, time, unit }` 
-- Horizontal flex on desktop, vertical stack on mobile
-- Numbers styled with `font-display text-3xl font-bold text-primary`
+**Channel cards:**
+- New data array with 3 items: `{ icon, title, detail, subtitle, href, priority }`
+- `grid grid-cols-1 md:grid-cols-3 gap-4` layout
+- Call card: `bg-secondary border-l-4 border-primary`
+- Other cards: `bg-card border border-border`
+- All: `rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all`
 
-**Hero simplification:**
-- Remove gradient background classes
-- Replace with `bg-white pt-28 pb-10`
-- Phone pill: `inline-flex rounded-full bg-primary/10 text-primary px-5 py-2`
+**Form restructure:**
+- Remove `grid grid-cols-1 lg:grid-cols-2` two-column layout
+- Center the form in `max-w-xl mx-auto`
+- Remove the `Card` / `CardContent` wrapper — form fields sit directly in a `div`
+- Keep all form state, validation, submission logic, and Supabase insert unchanged
 
-**Contact section cleanup:**
-- Remove the `w-16 h-16 rounded-full bg-primary` phone circle
-- Phone number: `text-3xl font-display font-bold text-primary` (direct, no wrapper)
-- Compact vertical card for all contact methods
+**Hours + Map row:**
+- Move business hours and map into a new `grid grid-cols-1 md:grid-cols-2 gap-6` section below the form
+- Hours: compact card with border
+- Map: keep the existing iframe, same aspect ratio
 
-No new dependencies, no database changes. All changes are purely presentational within the single file.
+**Schedule section:**
+- Remove the `w-16 h-16 rounded-full bg-burgundy-100` icon wrapper
+- Keep Calendar icon inline with heading
+- Add `border-b border-border` to section
 
+No new files, no new dependencies, no database changes. All form logic and Supabase integration stays exactly the same.
