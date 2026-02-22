@@ -1,126 +1,125 @@
 
 
-## Personal Insurance Page Redesign
+## Business Insurance Page Redesign
 
-The current page feels too similar to the homepage -- same split-screen hero pattern, same bg-secondary card grid, same layout rhythms. Here's a plan to give it a distinct identity while staying on-brand.
+### The Problem
 
----
+The current Business Insurance page uses a dark, full-bleed photo hero with text overlay -- nearly identical to the About page's pattern. The coverage grid and "Why Choose" section also mirror layouts found on the homepage. It needs its own visual identity.
 
-### Design Philosophy: "Editorial Product Page"
+### Design Philosophy: "Command Center"
 
-Where the homepage is warm and inviting (Card Stack, cream tones) and the About page is narrative and immersive (dark burgundy hero, timeline), the Personal Insurance page should feel like a **curated product catalog** -- clean, organized, and confidence-inspiring. Think of a high-end brochure.
+Where the homepage is warm (card stack, cream), Personal Insurance is editorial (white typography, two-column grid), and About is narrative (dark immersive, timeline), the Business Insurance page should feel like a **confident, structured command center** -- geometric, data-driven, and authoritative. Think corporate annual report, not family brochure.
 
 **Key differentiators from other pages:**
-- No split-screen or card-stack hero -- instead, a compact **text-only hero on a white background** with a bold typographic headline (no hero image at all)
-- Coverage products presented in a **two-column editorial layout** with larger cards (not a 4-column grid)
-- A **horizontal scrolling life-stage strip** instead of the current full-height dark slideshow
-- Alternating white/cream sections (no dark sections like the About page)
+- No full-bleed photo hero -- instead, a **structured split hero** with a charcoal left panel and a cropped industry photo on the right (geometric, not immersive)
+- Industry selector becomes a **sidebar + content panel layout** instead of pill tabs
+- Coverage products shown as a **numbered list with category headers** (not cards, not editorial two-column)
+- A **dark charcoal section** for the risk assessment CTA (unique to this page -- no other page uses charcoal backgrounds)
 
 ---
 
-### Section 1: Typographic Hero (No Photo)
+### Section 1: Structured Split Hero
 
-A clean, typography-driven hero that immediately signals "this is a different page." No background image -- just beautiful type on white.
+A geometric, confident hero that immediately says "business" -- not warm and family-oriented like the homepage, and not minimal like Personal Insurance.
+
+- **Left panel** (60% width on desktop): `bg-charcoal` (#1A1A1A) background
+  - Small uppercase label: "BUSINESS INSURANCE" in gold/accent with wide tracking
+  - Large headline: "Protect What You've Built" in white, Cormorant Garamond
+  - Gold divider line (same as Personal Insurance for brand consistency)
+  - Subtext in white/80
+  - Dual CTAs: Gold "Get Your Free Quote" button + white outline "Call" button
+  - Trust badges row at bottom: "300+ Businesses" / "Nationwide Coverage" / "A+ BBB"
+- **Right panel** (40% width): The Columbus skyline photo cropped into a clean rectangle, no overlay -- just the raw image filling the space
+- **Mobile**: Stacks vertically -- charcoal text block on top, photo below (compact, `aspect-[16/10]`)
+
+This is completely distinct: charcoal background (unique), geometric split (different from Home's cream card-stack and Personal's white typography).
+
+---
+
+### Section 2: Industry Selector (Sidebar Layout)
+
+Replace the current pill-tab selector with a more structured sidebar-and-panel layout that feels like a professional tool.
 
 - Background: `bg-white`
-- Top padding: `pt-32 sm:pt-40` to clear nav
-- Small uppercase label: "PERSONAL INSURANCE" in dusty rose with tracking
-- Large display headline: "Coverage That Fits Your Life" -- `text-4xl sm:text-5xl lg:text-6xl` in Cormorant Garamond, charcoal
-- A gold divider line (`w-16 h-0.5 bg-accent`)
-- Subtext: one sentence in Inter, muted -- "We shop 30+ carriers so you get the right protection at the right price."
-- Dual CTAs: "Get Your Free Quote" (primary) + "Call (614) 612-0050" (text link, not a button)
-- Bottom padding: `pb-16 sm:pb-20`
-
-This is a complete departure from both the Home (card stack/split) and About (dark immersive photo) heroes.
+- **Desktop**: Two-column layout with a narrow left sidebar listing all 8 industries as rows (icon + name), with the selected one highlighted with a primary left-border accent. Right panel shows the selected industry's photo, description, and case study.
+- **Mobile**: Industries become a horizontal scrollable row of compact chips, with the content panel below
+- The selected industry panel keeps the photo + case study + CTA pattern but in a cleaner card layout
+- This sidebar pattern is unique to this page -- no other page uses it
 
 ---
 
-### Section 2: Life Stage Strip (Horizontal Scroll)
+### Section 3: Coverage Products (Numbered Category List)
 
-Replace the current tall, dark, full-bleed slideshow with a compact horizontal scroll strip on cream background.
+Instead of the current 4-column card grid (similar to homepage patterns), use a clean **numbered list grouped by category** -- a pattern unique to this page.
 
 - Background: `bg-cream`
-- Section header: "Coverage for Every Stage of Life" with burgundy divider
-- Horizontal scrollable row of 5 cards (not a full-viewport carousel)
-- Each card: `w-[260px]` fixed width, rounded-xl, with the life stage photo on top (aspect-[4/3]), stage name, coverage type in dusty rose, and a "Learn More" link
-- Cards scroll horizontally on mobile with `overflow-x-auto` and snap-scroll behavior
-- On desktop (lg), all 5 cards fit in a single row without scrolling
-- No dark overlay, no navigation arrows, no autoplay -- simple and clean
+- Two category groups: "Core Coverage" and "Professional & Cyber" -- each with a bold category header
+- Products listed as clean rows (not cards): number badge on the left (1-8 in primary circles), product name in display font, description to the right, and a subtle arrow link
+- On desktop: two columns of 4 products each (one column per category)
+- Hover: the row gets a subtle cream-to-white background shift
 
-This is visually distinct from the Home page's large service cards and the About page's timeline.
+This numbered-list pattern is distinct from Home (service cards), Personal Insurance (two-column editorial cards), and About (timeline).
 
 ---
 
-### Section 3: Coverage Products (Two-Column Editorial Grid)
+### Section 4: Risk Assessment CTA (Charcoal Block)
 
-Replace the current compact 4-column card grid with a more spacious, editorial two-column layout.
+Keep the risk assessment section but redesign it on a solid charcoal background (no background photo) for a sharp, modern feel unique to this page.
+
+- Background: solid `bg-charcoal` (#1A1A1A) -- no photo overlay
+- Left side: headline in white, checklist items with gold checkmarks
+- Right side: a white card with the CTA form/button (high contrast)
+- This solid dark section is unique -- the About page uses burgundy overlay on a photo, which is different
+
+---
+
+### Section 5: Why Choose (Compact Stat Cards)
+
+Replace the current 3-column reason cards with a **single-row stat strip** -- compact, horizontal, data-forward.
 
 - Background: `bg-white`
-- No category subheadings ("Most Popular", "Property & Specialty") -- instead, all 8 products in one flowing grid
-- Each card is larger: `p-8`, with the icon in a dusty-rose-tinted circle, product name in display font, 2-3 line description, and a "Get a Quote" link
-- Grid: `grid-cols-1 md:grid-cols-2` with generous `gap-6`
-- Cards have a left border accent (`border-l-3 border-primary/40`) instead of the rounded icon-box pattern used on the homepage
-- Hover: border becomes full primary color, subtle lift
+- Six items from `businessInsuranceReasons` displayed in a `grid-cols-2 sm:grid-cols-3 lg:grid-cols-6` layout
+- Each item: icon on top (gold), bold title below, one-line description in small muted text
+- No card borders -- clean and airy, separated by subtle vertical dividers on desktop
+- Compact and punchy compared to the large padded reason cards used elsewhere
 
 ---
 
-### Section 4: Why Choose Scioto (Horizontal Stats Bar)
+### Section 6: Testimonials (Horizontal Scroll Cards)
 
-Replace the current image + text split with a clean stats/reasons bar.
+Instead of the 3-column grid (used on Home), display testimonials in a **horizontal scroll strip** -- similar in mechanic to Personal Insurance's life stage strip, but visually distinct with a charcoal-tinted card style.
 
 - Background: `bg-cream`
-- Three stat blocks in a horizontal row (`grid-cols-1 sm:grid-cols-3`)
-- Each block: large number/stat in display font (primary color), label below, brief description
-  - "$847/yr" / "Average Savings"
-  - "30+" / "Insurance Carriers"
-  - "Same Day" / "Quote Response"
-- Below the stats: a single centered CTA -- "See What You Could Save"
-
-This replaces the photo-heavy split layout used on the homepage, keeping it data-forward.
+- Three testimonial cards in a horizontal scrollable row on mobile, fitting inline on desktop
+- Cards have a subtle `bg-white` with a top accent line in primary color
+- Keeps the existing testimonial data
 
 ---
 
-### Section 5: Testimonials (Single Featured Quote)
+### Section 7: CTA Banner
 
-Instead of a 3-column testimonial grid (used on the homepage), use a single large featured testimonial.
-
-- Background: `bg-white`
-- Large pull-quote style: Cormorant Garamond italic, `text-2xl`, centered
-- Name, location, and "Helped with" below
-- Five dusty-rose stars above the quote
-- Simple and elegant -- one powerful story instead of three shorter ones
-
----
-
-### Section 6: CTA Banner
-
-- Background: `bg-primary` (burgundy) with subtle radial glow (matches Home page CTA style for consistency)
-- Headline: "Ready to See What You Could Save?"
-- Subtext + dual CTAs (Get Quote button in white, phone as text link)
-- This section can stay similar to the homepage CTA for brand consistency -- it's a recurring site-wide pattern
+- Background: `bg-primary` (burgundy) -- consistent site-wide pattern
+- Headline: "Protect Your Business Today"
+- Dual CTAs matching other pages
 
 ---
 
 ### Technical Summary
 
-**File modified:** `src/pages/PersonalInsurance.tsx` (full rewrite of the JSX)
+**File modified:** `src/pages/BusinessInsurance.tsx` (full rewrite of JSX)
 
-**What's removed:**
-- Split-screen hero with background image
-- Full-height dark slideshow carousel (Embla/Autoplay imports removed)
-- 4-column coverage card grid with category headers
-- Photo + text split "Why Choose" section
-- 3-column testimonial grid
-- Generic rounded CTA card
+**What changes:**
+- Full-bleed dark photo hero replaced with geometric charcoal split hero
+- Pill-tab industry selector replaced with sidebar/panel layout
+- 4-column coverage card grid replaced with numbered category list on cream
+- Photo-overlay risk assessment replaced with solid charcoal block
+- 3-column reason cards replaced with compact 6-column stat strip
+- 3-column testimonial grid replaced with horizontal scroll strip
 
-**What's added:**
-- Typography-only hero on white
-- Horizontal scroll life-stage strip on cream
-- Two-column editorial coverage grid on white
-- Stats bar on cream
-- Single featured testimonial on white
-- Burgundy CTA banner
-
-**Data:** Still uses `personalInsuranceProducts` and `personalInsuranceReasons` from `src/data/products.ts`. Life stages data stays inline.
+**What stays:**
+- All existing data arrays (industries, testimonials, products from `products.ts`)
+- All image imports
+- All links and CTAs
 
 **No new dependencies or files needed.**
+
