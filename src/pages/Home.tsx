@@ -36,7 +36,7 @@ const Home = () => {
             <div className="lg:hidden">
               {/* Headline on top */}
               <div className="px-6 sm:px-10 pt-28 sm:pt-32 pb-6 text-center">
-                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-6">
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-6 text-balance">
                   Ohio Families Trust Us to Protect What Matters Most
                 </h1>
                 <div className="w-12 h-1 bg-primary rounded-full mx-auto" />
