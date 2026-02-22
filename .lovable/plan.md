@@ -1,106 +1,114 @@
 
 
-## Business Insurance Page Redesign
+## Business Insurance Page Redesign: "Confident Warmth"
 
-### The Problem
-
-The current Business Insurance page uses a dark, full-bleed photo hero with text overlay -- nearly identical to the About page's pattern. The coverage grid and "Why Choose" section also mirror layouts found on the homepage. It needs its own visual identity.
-
-### Design Philosophy: "Command Center"
-
-Where the homepage is warm (card stack, cream), Personal Insurance is editorial (white typography, two-column grid), and About is narrative (dark immersive, timeline), the Business Insurance page should feel like a **confident, structured command center** -- geometric, data-driven, and authoritative. Think corporate annual report, not family brochure.
-
-**Key differentiators from other pages:**
-- No full-bleed photo hero -- instead, a **structured split hero** with a charcoal left panel and a cropped industry photo on the right (geometric, not immersive)
-- Industry selector becomes a **sidebar + content panel layout** instead of pill tabs
-- Coverage products shown as a **numbered list with category headers** (not cards, not editorial two-column)
-- A **dark charcoal section** for the risk assessment CTA (unique to this page -- no other page uses charcoal backgrounds)
+The previous "Command Center" approach was too cold and corporate -- the heavy charcoal hero, sidebar UI, and numbered lists feel like enterprise software, not a premium family-owned insurance agency. This new design stays warm and on-brand while still feeling distinctly "business" through its structure and content.
 
 ---
 
-### Section 1: Structured Split Hero
+### Design Philosophy
 
-A geometric, confident hero that immediately says "business" -- not warm and family-oriented like the homepage, and not minimal like Personal Insurance.
+The Business Insurance page should feel like the **confident, grown-up sibling** of the Personal Insurance page. Where Personal is light and editorial (white hero, pull-quote testimonial), Business should carry more visual weight with **rich photography and structured content** -- but using the brand's warm tones (cream, burgundy, dusty rose) instead of charcoal.
 
-- **Left panel** (60% width on desktop): `bg-charcoal` (#1A1A1A) background
-  - Small uppercase label: "BUSINESS INSURANCE" in gold/accent with wide tracking
-  - Large headline: "Protect What You've Built" in white, Cormorant Garamond
-  - Gold divider line (same as Personal Insurance for brand consistency)
-  - Subtext in white/80
-  - Dual CTAs: Gold "Get Your Free Quote" button + white outline "Call" button
-  - Trust badges row at bottom: "300+ Businesses" / "Nationwide Coverage" / "A+ BBB"
-- **Right panel** (40% width): The Columbus skyline photo cropped into a clean rectangle, no overlay -- just the raw image filling the space
-- **Mobile**: Stacks vertically -- charcoal text block on top, photo below (compact, `aspect-[16/10]`)
-
-This is completely distinct: charcoal background (unique), geometric split (different from Home's cream card-stack and Personal's white typography).
+**How it differs from each page:**
+- **vs. Home:** No card-stack hero or split photo panel. Uses a full-width photo hero with text overlay (but different from About -- see below).
+- **vs. Personal Insurance:** No typography-only hero, no single pull-quote, no life-stage strip. Uses industry photos and interactive tabs instead.
+- **vs. About:** About uses a burgundy gradient overlay on one photo. Business uses a **cream/white overlay on the left half** of the photo, keeping the right side fully visible -- a unique half-reveal treatment.
 
 ---
 
-### Section 2: Industry Selector (Sidebar Layout)
+### Section 1: Half-Reveal Photo Hero
 
-Replace the current pill-tab selector with a more structured sidebar-and-panel layout that feels like a professional tool.
+A warm, confident hero that leads with the Columbus skyline photo but uses a **cream panel fading into the image** rather than a dark overlay.
+
+- Full-width photo of the Columbus skyline behind everything
+- Left side: a `bg-cream/95` panel that covers roughly 55% of the width, with a soft gradient fade into the photo on the right edge
+- Inside the cream panel:
+  - Uppercase label: "BUSINESS INSURANCE" in dusty rose with letter-spacing
+  - Headline: "Protect What You've Built" in Cormorant Garamond, charcoal text (not white -- this is the key difference from About's dark hero)
+  - Dusty rose divider line
+  - Subtext in muted-foreground
+  - Dual CTAs: burgundy primary button + text link for phone
+  - Three trust badges: "300+ Businesses" / "29 Years" / "A+ BBB" as small inline items
+- Mobile: Full photo as background with cream overlay on top (stacked), keeping text legible
+- Top padding clears the sticky nav
+
+This is unique: cream-over-photo (not charcoal split, not white-only, not burgundy overlay).
+
+---
+
+### Section 2: Industry Tabs (Horizontal Tab Bar)
+
+Replace the clunky sidebar UI with a clean **horizontal tab bar** -- a pattern not used on any other page.
 
 - Background: `bg-white`
-- **Desktop**: Two-column layout with a narrow left sidebar listing all 8 industries as rows (icon + name), with the selected one highlighted with a primary left-border accent. Right panel shows the selected industry's photo, description, and case study.
-- **Mobile**: Industries become a horizontal scrollable row of compact chips, with the content panel below
-- The selected industry panel keeps the photo + case study + CTA pattern but in a cleaner card layout
-- This sidebar pattern is unique to this page -- no other page uses it
+- Section header: "Industries We Serve" centered
+- A single row of 8 industry names as text tabs (not chips, not sidebar rows) with the active one underlined in burgundy -- clean and professional
+- Below the tabs: a two-column card with the industry photo on the left and content on the right (description, case study quote, CTA button)
+- Mobile: tabs become a scrollable row of compact pills, content panel stacks below
+- The tab underline animation gives it an interactive, polished feel distinct from the static cards on other pages
 
 ---
 
-### Section 3: Coverage Products (Numbered Category List)
+### Section 3: Coverage Grid (Icon Cards on Cream)
 
-Instead of the current 4-column card grid (similar to homepage patterns), use a clean **numbered list grouped by category** -- a pattern unique to this page.
+A clean grid of 8 coverage products using a distinct visual treatment.
 
 - Background: `bg-cream`
-- Two category groups: "Core Coverage" and "Professional & Cyber" -- each with a bold category header
-- Products listed as clean rows (not cards): number badge on the left (1-8 in primary circles), product name in display font, description to the right, and a subtle arrow link
-- On desktop: two columns of 4 products each (one column per category)
-- Hover: the row gets a subtle cream-to-white background shift
-
-This numbered-list pattern is distinct from Home (service cards), Personal Insurance (two-column editorial cards), and About (timeline).
-
----
-
-### Section 4: Risk Assessment CTA (Charcoal Block)
-
-Keep the risk assessment section but redesign it on a solid charcoal background (no background photo) for a sharp, modern feel unique to this page.
-
-- Background: solid `bg-charcoal` (#1A1A1A) -- no photo overlay
-- Left side: headline in white, checklist items with gold checkmarks
-- Right side: a white card with the CTA form/button (high contrast)
-- This solid dark section is unique -- the About page uses burgundy overlay on a photo, which is different
+- Section header: "Business Coverage Options" centered with dusty rose accent
+- 2x4 grid on desktop, 2x4 on tablet, 1-column on mobile
+- Each card: white background, subtle border, a top-aligned icon in a dusty rose circle, product name in display font, one-line description, and a "Learn More" arrow link
+- No numbering, no left-border accents (those belong to Personal Insurance), no category headers
+- Hover: card lifts slightly with shadow
+- Simple, scannable, product-catalog feel
 
 ---
 
-### Section 5: Why Choose (Compact Stat Cards)
+### Section 4: Risk Assessment CTA (Burgundy Banner)
 
-Replace the current 3-column reason cards with a **single-row stat strip** -- compact, horizontal, data-forward.
+Instead of charcoal, use a **full-width burgundy section** with a subtle radial glow -- similar in spirit to the site-wide CTA banners but with richer content.
+
+- Background: `bg-primary` with subtle radial glow
+- Two-column layout on desktop:
+  - Left: headline in white ("Free Business Risk Assessment"), subtext, and a checklist with dusty rose checkmarks (coverage gap analysis, industry-specific review, claims scenario planning, pricing comparison)
+  - Right: a white card with "Request Your Assessment" headline, brief description, CTA button, and phone number
+- Mobile: stacks vertically
+- This is the page's mid-page CTA moment and uses burgundy (on-brand) rather than charcoal (off-brand)
+
+---
+
+### Section 5: Why Choose Scioto (Three Stat Blocks)
+
+A focused, data-forward section with three large stats -- not six tiny ones.
 
 - Background: `bg-white`
-- Six items from `businessInsuranceReasons` displayed in a `grid-cols-2 sm:grid-cols-3 lg:grid-cols-6` layout
-- Each item: icon on top (gold), bold title below, one-line description in small muted text
-- No card borders -- clean and airy, separated by subtle vertical dividers on desktop
-- Compact and punchy compared to the large padded reason cards used elsewhere
+- Three blocks in a horizontal row (`grid-cols-1 sm:grid-cols-3`)
+- Each block: large display number in burgundy (e.g., "300+", "30+", "Same Day"), label below, one-line description
+- Separated by subtle vertical borders on desktop
+- Below: a centered CTA link
+- Clean and confident without being cluttered
 
 ---
 
-### Section 6: Testimonials (Horizontal Scroll Cards)
+### Section 6: Featured Testimonial (Single Quote)
 
-Instead of the 3-column grid (used on Home), display testimonials in a **horizontal scroll strip** -- similar in mechanic to Personal Insurance's life stage strip, but visually distinct with a charcoal-tinted card style.
+A single powerful testimonial to match the editorial feel -- but styled differently from Personal Insurance's version.
 
 - Background: `bg-cream`
-- Three testimonial cards in a horizontal scrollable row on mobile, fitting inline on desktop
-- Cards have a subtle `bg-white` with a top accent line in primary color
-- Keeps the existing testimonial data
+- A centered card with a left burgundy border accent (`border-l-4 border-primary`)
+- Five dusty rose stars
+- Large italic quote in Cormorant Garamond
+- Name, location, and "Helped with" tag below
+- The left-border card treatment (vs. Personal Insurance's borderless centered pull-quote) makes it visually distinct
 
 ---
 
-### Section 7: CTA Banner
+### Section 7: Bottom CTA Banner
 
-- Background: `bg-primary` (burgundy) -- consistent site-wide pattern
+- Background: `bg-primary` with radial glow (consistent site-wide pattern)
 - Headline: "Protect Your Business Today"
-- Dual CTAs matching other pages
+- Subtext and dual CTAs
+- Matches the standard CTA banner used across all pages
 
 ---
 
@@ -109,17 +117,17 @@ Instead of the 3-column grid (used on Home), display testimonials in a **horizon
 **File modified:** `src/pages/BusinessInsurance.tsx` (full rewrite of JSX)
 
 **What changes:**
-- Full-bleed dark photo hero replaced with geometric charcoal split hero
-- Pill-tab industry selector replaced with sidebar/panel layout
-- 4-column coverage card grid replaced with numbered category list on cream
-- Photo-overlay risk assessment replaced with solid charcoal block
-- 3-column reason cards replaced with compact 6-column stat strip
-- 3-column testimonial grid replaced with horizontal scroll strip
+- Charcoal split hero replaced with cream-over-photo half-reveal hero
+- Sidebar industry selector replaced with horizontal tab bar
+- Numbered category list replaced with icon card grid on cream
+- Charcoal risk assessment block replaced with burgundy banner with white card
+- 6-column stat strip replaced with 3 focused stat blocks
+- Horizontal scroll testimonials replaced with single featured testimonial in bordered card
 
 **What stays:**
-- All existing data arrays (industries, testimonials, products from `products.ts`)
-- All image imports
-- All links and CTAs
+- All existing data: `industries`, `testimonials`, `businessInsuranceProducts`, `businessInsuranceReasons`
+- All image imports (Columbus skyline, industry photos, etc.)
+- All links, CTAs, and phone numbers
+- `useState` for industry tab selection
 
 **No new dependencies or files needed.**
-
