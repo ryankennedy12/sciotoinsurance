@@ -1,72 +1,74 @@
 
 
-## Employee Benefits Page: Dashboard-Style Redesign
+## Employee Benefits Page Redesign
 
-### The Core Idea
+### Current State
+The page has 6 sections: split hero (text + burgundy stat cards), product grid, ROI calculator, process timeline with photos, testimonials, and a burgundy bottom CTA. The hero feels like a generic SaaS landing page, the product cards are identical to other pages, and the process timeline cards blend in.
 
-Right now the page reads like a typical marketing page with text blocks. The "Data-Driven Advisor" concept needs actual data visualization to sell it. We'll use **recharts** (already installed) to add real chart components and restructure the layout to feel like you're looking at a benefits analytics dashboard, not a brochure.
+### Design Direction: "Data-Driven Advisor"
 
-### Section-by-Section Changes
+Employee benefits is fundamentally about numbers and outcomes. The redesign leans into that with a **dashboard-inspired aesthetic** — clean data visualization, comparison tables, and an interactive calculator that feels like a tool, not a brochure. This contrasts with Personal Insurance (editorial/lifestyle) and Business Insurance (industry-focused Polaroids).
 
-**Section 1: Hero — Keep Centered, Add a "Dashboard Preview" Below**
-- Keep the centered headline and stat ticker (they work well)
-- Below the CTAs, add a **mini dashboard strip** — three small chart cards side-by-side:
-  - Card 1: A tiny **donut/pie chart** showing "Benefits vs. No Benefits" retention split (visual, not interactive)
-  - Card 2: A tiny **bar chart** showing "Average Savings by Category" (Health, 401k, Dental)
-  - Card 3: A tiny **line chart** showing "Turnover Reduction Over Time" (a simple downward curve)
-- These are decorative/illustrative — they set the tone that "we speak in data" without needing real API data
-- Each mini chart sits in a white card with a subtle border, like dashboard widgets
+### Section-by-Section Redesign
 
-**Section 2: Benefits Products — "Dashboard Table" with Metric Columns**
-- Keep the comparison-table concept but add **two small data columns** on the right:
-  - "Avg. Savings" — a dollar figure per product (e.g., "$2,400/yr")
-  - "Adoption Rate" — a small **inline progress bar** showing a percentage (e.g., 85%)
-- This makes the table feel like a dashboard data grid, not just a list
-- On mobile, hide the metric columns and keep the simple name + description layout
+**Section 1: Hero — "The Problem" Opening**
+- Switch to a **centered typographic hero** (similar to Personal Insurance's clean approach, but with a twist)
+- Large headline: "Your Benefits Package Is Costing You Talent"
+- Below the headline, a **horizontal stat ticker** — three stats in a single row with large numbers and animated counters (keep existing AnimatedCounter)
+- Stats sit inside a subtle cream card strip, not burgundy panels
+- CTAs below: "Get Custom Quote" + phone link (text only, no icon)
+- No split layout, no burgundy half-screen — just clean, authoritative typography
 
-**Section 3: ROI Calculator — Add a Live Chart**
-- Keep all sliders and the charcoal results panel
-- Add a **bar chart** (recharts `BarChart`) inside the results panel showing:
-  - "Current Cost" bar (turnover + hiring costs at current rate) in a muted color
-  - "With Better Benefits" bar (reduced costs) in burgundy
-  - This makes the savings visual and instantly understandable
-- The chart updates live as users move the sliders — this is the wow moment
+**Section 2: Benefits Products — "Comparison Table" Style**
+- Instead of the current icon+text cards, present products in a **clean two-column layout** with a left column showing the product name and a right column with a brief description
+- Each row has a subtle bottom border, hover highlights the row
+- This feels like a dashboard/spreadsheet — distinct from the card grids on other pages
+- A "Get a Quote" link on hover for each row
 
-**Section 4: Process Timeline — Keep As-Is**
-- The horizontal stepper is already distinct. No changes needed here.
+**Section 3: ROI Calculator — Keep but Elevate**
+- This is already unique and strong. Keep the slider-based calculator
+- Improve the sliders with custom-styled range inputs (Dusty Rose track, burgundy thumb)
+- Move the results panel from a burgundy card to a **charcoal card** (#1A1A1A) — differentiates from the bottom CTA
+- Add a second result metric: "Estimated Hiring Cost Savings" alongside "Potential Annual Savings"
+
+**Section 4: Process Timeline — Horizontal Stepper**
+- Replace the 4 photo cards with a **horizontal stepper/timeline**
+- A single horizontal line connecting 4 numbered circles
+- Active/hovered step expands to show the description below
+- No photos — just clean numbered steps with icons
+- This is a completely different pattern from any other page
 
 **Section 5: Testimonials — Keep As-Is**
-- Works well, consistent with other pages.
+- The 3-card testimonial grid works well and is consistent across the site
+- No changes needed here
 
-**Section 6: Bottom CTA — Keep As-Is**
-- Already fixed for legibility.
+**Section 6: Bottom CTA — Match Other Pages**
+- Keep the burgundy full-width CTA
+- Fix the phone button legibility (use `variant="secondary"` like we did on Business Insurance)
+- Remove the phone icon, just show the number
 
 ### Technical Details
 
-**File changed:** `src/pages/EmployeeBenefits.tsx`
+**File changed:** `src/pages/EmployeeBenefits.tsx` (full rewrite of sections 1, 2, and 4; modifications to sections 3 and 6)
 
-**New imports needed:**
-- `BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid` from `recharts`
+**Hero changes:**
+- Remove the `grid lg:grid-cols-2` split layout
+- Center-align content with `max-w-3xl mx-auto text-center`
+- Stats become a horizontal row of 3 items in a cream strip below the headline
 
-**Hero dashboard strip:**
-- Three cards in a `grid grid-cols-1 md:grid-cols-3` below the CTA buttons
-- Each card: white bg, rounded-xl, subtle border, ~150px height
-- Charts use hardcoded illustrative data (no API calls)
-- Donut: two segments (burgundy + muted), no labels, just the visual
-- Bar: 3 small bars with category labels
-- Line: simple 5-point downward trend line
+**Products section:**
+- Replace the card grid with a table-like layout using `divide-y` borders
+- Each product is a flex row: icon-less, just name + description + hover arrow
 
-**Products table metrics:**
-- Add `avgSavings` and `adoptionRate` fields to the inline product data (not changing the data file — just extending locally)
-- Progress bar: a simple `div` with `bg-primary` width set by percentage
-- Hide metric columns on mobile with `hidden lg:flex`
+**Process section:**
+- Replace photo cards with a CSS-only horizontal stepper
+- 4 circles connected by a line, each with step number, title, and description below
 
-**Calculator chart:**
-- `BarChart` with 2 bars: "Current" and "Improved"
-- Data recalculates from existing `calc` state — no new state needed
-- Chart height: ~200px, sits inside the charcoal results card
-- Bar colors: muted gray for "Current", burgundy for "Improved"
-- Minimal axis labels, clean look
+**Calculator tweaks:**
+- Change results card from `bg-primary` to `bg-foreground` (charcoal)
+- Add second metric row
 
-**No new files, no new dependencies, no database changes.** Everything uses the already-installed `recharts` library and existing component patterns.
+**Bottom CTA fix:**
+- Phone button: `variant="secondary"`, remove `Phone` icon
 
+No new dependencies or database changes needed. All changes are purely presentational within the single file.
