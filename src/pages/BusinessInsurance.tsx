@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { businessInsuranceProducts } from "@/data/products";
 import { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 import columbusSkyline from "@/assets/columbus-skyline.jpg";
 import industryContractors from "@/assets/industry-contractors.jpg";
@@ -140,6 +143,60 @@ const stats = [
   { value: "Same Day", label: "Response Time", description: "Real people. No phone trees. Right here in Columbus." },
 ];
 
+const AssessmentForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ businessName: "", name: "", email: "", phone: "" });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.email.trim()) return;
+    setLoading(true);
+    const nameParts = form.name.trim().split(" ");
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || "";
+    const { error } = await supabase.from("leads").insert({
+      first_name: firstName,
+      last_name: lastName,
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      coverage_type: "business" as const,
+      business_type: form.businessName.trim() || null,
+      request_type: "quote" as const,
+      additional_info: "Free Business Risk Assessment request",
+    });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Something went wrong", description: "Please try again or call us directly.", variant: "destructive" });
+    } else {
+      setSubmitted(true);
+      toast({ title: "Assessment Requested!", description: "We'll be in touch within 1 business day." });
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="text-center py-4">
+        <CheckCircle className="h-10 w-10 text-primary mx-auto mb-3" />
+        <p className="font-display font-semibold text-lg text-foreground">We're on it!</p>
+        <p className="text-muted-foreground text-sm mt-1">Expect a call within 1 business day.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <Input placeholder="Business Name" value={form.businessName} onChange={(e) => setForm({ ...form, businessName: e.target.value })} />
+      <Input placeholder="Your Name *" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+      <Input type="email" placeholder="Email *" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+      <Input type="tel" placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+      <Button type="submit" size="lg" className="w-full" disabled={loading}>
+        {loading ? "Sending…" : "Request Free Assessment"}
+      </Button>
+    </form>
+  );
+};
+
 const BusinessInsurance = () => {
   const [flippedCard, setFlippedCard] = useState<number | null>(null);
   const isMobile = useIsMobile();
@@ -265,43 +322,47 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Section 4: Risk Assessment CTA (Burgundy Banner) */}
-      <section className="section-padding bg-primary relative overflow-hidden">
-        {/* Radial glow */}
-        <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(ellipse at 30% 50%, hsl(345 55% 50%), transparent 60%)' }} />
-        <div className="container-wide relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <AnimatedSection animation="fade-up">
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-4 block">Free Assessment</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary-foreground mb-6">
-                Free Business<br />Risk Assessment
-              </h2>
-              <p className="text-primary-foreground/60 mb-8 leading-relaxed">
-                We'll analyze your operations and identify coverage gaps—even if you don't buy from us.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {["Coverage gap analysis", "Industry-specific review", "Claims scenario planning", "Pricing comparison"].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                    <span className="text-primary-foreground/80 text-sm">{item}</span>
+      {/* Section 4: Blueprint Assessment Card */}
+      <section className="section-padding bg-cream">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up">
+            <div className="rounded-2xl overflow-hidden shadow-xl border-l-4 border-l-accent">
+              <div className="grid lg:grid-cols-5">
+                {/* Left Panel — Charcoal */}
+                <div className="lg:col-span-3 bg-foreground p-8 sm:p-10 lg:p-12">
+                  <span className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-6 block">
+                    Free for Ohio Businesses
+                  </span>
+                  <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-4 leading-tight">
+                    Find Out What<br />You're Missing
+                  </h2>
+                  <p className="text-white/60 mb-8 leading-relaxed max-w-md">
+                    We'll review your current coverage, identify gaps, and give you an honest recommendation — no strings attached.
+                  </p>
+                  <div className="space-y-3 mb-8">
+                    {["Coverage gap analysis", "Industry-specific risk review", "Claims scenario planning", "Pricing comparison vs. current policy"].map((item) => (
+                      <div key={item} className="flex items-center gap-3">
+                        <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
+                        <span className="text-white/80 text-sm">{item}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={150}>
-              <div className="bg-card rounded-xl p-8 shadow-2xl">
-                <h3 className="font-display font-semibold text-xl text-foreground mb-2">Request Your Assessment</h3>
-                <p className="text-muted-foreground text-sm mb-6">No obligation. We'll review your current coverage and show you where you stand.</p>
-                <Button asChild size="lg" className="w-full mb-4">
-                  <Link to="/contact">Schedule Free Assessment <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                </Button>
-                <div className="text-center">
-                  <span className="text-muted-foreground text-sm">Or call us directly:</span>
-                  <a href="tel:6146120050" className="block text-lg font-semibold text-primary hover:text-primary/80 mt-1">(614) 612-0050</a>
+                  <p className="text-white/40 text-xs">300+ businesses assessed since 1995</p>
+                </div>
+
+                {/* Right Panel — White Form */}
+                <div className="lg:col-span-2 bg-white p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                  <h3 className="font-display font-semibold text-xl text-foreground mb-1">Request Your Assessment</h3>
+                  <p className="text-muted-foreground text-sm mb-6">No obligation. Takes under 60 seconds.</p>
+                  <AssessmentForm />
+                  <div className="text-center mt-5">
+                    <span className="text-muted-foreground text-xs">Or call us directly:</span>
+                    <a href="tel:6146120050" className="block text-sm font-semibold text-primary hover:text-primary/80 mt-0.5">(614) 612-0050</a>
+                  </div>
                 </div>
               </div>
-            </AnimatedSection>
-          </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
