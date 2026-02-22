@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { businessInsuranceProducts } from "@/data/products";
 import { useState } from "react";
+import type { LucideIcon } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import columbusSkyline from "@/assets/columbus-skyline.jpg";
 import constructionSite from "@/assets/construction-site.jpg";
@@ -26,6 +28,113 @@ const industries = [
   { name: "Trades", icon: Wrench, image: constructionSite, location: "Westerville", pinX: 58, pinY: 22, description: "Tools, vehicles, liability for HVAC, plumbing, electrical.", caseStudy: "A plumbing company saved $4,100/year after we bundled their policies.", savings: "$4,100/yr saved" },
 ];
 
+const ROTATIONS = [-2.5, 1.5, -1, 3, -2, 1, -3, 2];
+
+const PolaroidCard = ({
+  industry,
+  index,
+  isFlipped,
+  onFlip,
+  isMobile,
+}: {
+  industry: typeof industries[0];
+  index: number;
+  isFlipped: boolean;
+  onFlip: () => void;
+  isMobile: boolean;
+}) => {
+  const Icon = industry.icon;
+  const rotation = isMobile ? 0 : ROTATIONS[index % ROTATIONS.length];
+
+  return (
+    <div
+      className={`group/polaroid ${!isMobile ? 'polaroid-flip' : ''}`}
+      style={{ perspective: "1000px" }}
+    >
+      {/* Accessible hidden content for screen readers */}
+      <div className="sr-only">
+        <h3>{industry.name} — {industry.location}, OH</h3>
+        <p>{industry.description}</p>
+        <p>{industry.caseStudy}</p>
+        <p>Result: {industry.savings}</p>
+      </div>
+
+      <button
+        onClick={onFlip}
+        aria-label={`${isFlipped ? "Flip back" : "Flip to see"} ${industry.name} case study`}
+        className="w-full focus-ring rounded-sm"
+        style={{ WebkitTapHighlightColor: "transparent" }}
+      >
+        <div
+          className="polaroid-inner relative w-full transition-all duration-500 ease-in-out"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: `rotate(${isFlipped ? 0 : rotation}deg) ${isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"}`,
+            aspectRatio: "3 / 4",
+          }}
+        >
+          {/* ===== FRONT ===== */}
+          <div
+            className="absolute inset-0 bg-white p-2 rounded-sm shadow-md transition-shadow duration-300 group-hover/polaroid:shadow-xl"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+            }}
+          >
+            {/* Photo */}
+            <div className="relative w-full h-[70%] overflow-hidden rounded-[1px]">
+              <img
+                src={industry.image}
+                alt={industry.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              {/* Vignette */}
+              <div className="absolute inset-0" style={{ boxShadow: "inset 0 0 40px 10px rgba(0,0,0,0.15)" }} />
+              {/* Icon badge */}
+              <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
+                <Icon className="h-4 w-4 text-primary" />
+              </div>
+            </div>
+            {/* Caption strip */}
+            <div className="flex flex-col items-center justify-center h-[30%] px-2">
+              <span className="font-display italic text-base sm:text-lg text-foreground leading-tight">{industry.name}</span>
+              <span className="text-xs text-muted-foreground mt-0.5">{industry.location}, OH</span>
+            </div>
+          </div>
+
+          {/* ===== BACK ===== */}
+          <div
+            className="absolute inset-0 bg-primary rounded-sm shadow-xl p-5 flex flex-col items-center justify-center text-center"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+            }}
+          >
+            <div className="w-10 h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center mb-3">
+              <Icon className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <p className="font-display italic text-sm sm:text-base text-primary-foreground/90 leading-relaxed mb-4">
+              "{industry.caseStudy}"
+            </p>
+            <div className="w-10 h-0.5 bg-accent mb-3" />
+            <span className="text-sm font-semibold text-accent">{industry.savings}</span>
+            <div className="mt-4">
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-foreground/80 bg-primary-foreground/10 px-3 py-1.5 rounded-full">
+                Get Quote <ArrowRight className="h-3 w-3" />
+              </span>
+            </div>
+            {isMobile && (
+              <span className="text-[10px] text-primary-foreground/40 mt-3">Tap to flip back</span>
+            )}
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+};
+
 const testimonials = [
   { quote: "They understood our industry from day one. No explaining what general contractors actually do.", name: "Robert M.", location: "Columbus, OH", date: "November 2024", rating: 5, helpedWith: "Contractor Insurance" },
   { quote: "When we had a break-in, they were at our store the next morning.", name: "Lisa P.", location: "Worthington, OH", date: "October 2024", rating: 5, helpedWith: "Commercial Property Claim" },
@@ -39,8 +148,8 @@ const stats = [
 ];
 
 const BusinessInsurance = () => {
-  const [selectedIndustry, setSelectedIndustry] = useState<number | null>(null);
-  const selected = selectedIndustry !== null ? industries[selectedIndustry] : null;
+  const [flippedCard, setFlippedCard] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   const allProducts = businessInsuranceProducts.flatMap((cat) => cat.products);
 
@@ -100,135 +209,31 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Section 2: Interactive Central Ohio Map */}
+      {/* Section 2: Polaroid Cards — Industries We Serve */}
       <section className="section-padding bg-background">
         <div className="container-wide">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3 block">Industries We Serve</span>
-            <h2 className="heading-lg text-foreground">Protecting Businesses<br className="hidden sm:inline" /> Across Central Ohio</h2>
-            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Click a pin to see how we've helped businesses in your area.</p>
+            <h2 className="heading-lg text-foreground">Real Stories from Real<br className="hidden sm:inline" /> Ohio Businesses</h2>
+            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Flip a card to see how we helped.</p>
           </AnimatedSection>
 
           <AnimatedSection animation="fade-up" delay={100}>
-            <div className="grid lg:grid-cols-5 gap-6 items-start">
-              {/* Map area */}
-              <div className="lg:col-span-3 relative">
-                <div className="relative w-full aspect-[4/3] bg-secondary/30 rounded-2xl border border-border overflow-hidden">
-                  {/* Stylized map background */}
-                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
-                    {/* Abstract road grid representing Central Ohio */}
-                    <rect width="100" height="100" fill="hsl(340 33% 96%)" />
-                    {/* Major highways */}
-                    <line x1="50" y1="0" x2="50" y2="100" stroke="hsl(0 0% 90%)" strokeWidth="0.8" />
-                    <line x1="0" y1="50" x2="100" y2="50" stroke="hsl(0 0% 90%)" strokeWidth="0.8" />
-                    <line x1="20" y1="0" x2="80" y2="100" stroke="hsl(0 0% 90%)" strokeWidth="0.5" />
-                    <line x1="80" y1="0" x2="20" y2="100" stroke="hsl(0 0% 90%)" strokeWidth="0.5" />
-                    {/* I-270 outer belt */}
-                    <circle cx="50" cy="48" r="25" fill="none" stroke="hsl(0 0% 85%)" strokeWidth="0.6" strokeDasharray="2 1" />
-                    {/* Downtown marker */}
-                    <circle cx="50" cy="48" r="4" fill="hsl(345 55% 34% / 0.08)" stroke="hsl(345 55% 34% / 0.15)" strokeWidth="0.3" />
-                    {/* "Columbus" label */}
-                    <text x="50" y="57" textAnchor="middle" fontSize="3" fill="hsl(0 0% 55%)" fontFamily="Inter, sans-serif" fontWeight="600">COLUMBUS</text>
-                  </svg>
-
-                  {/* Industry pins */}
-                  {industries.map((ind, i) => {
-                    const Icon = ind.icon;
-                    const isSelected = selectedIndustry === i;
-                    return (
-                      <button
-                        key={ind.name}
-                        onClick={() => setSelectedIndustry(isSelected ? null : i)}
-                        className={`absolute z-10 group/pin transition-all duration-300 -translate-x-1/2 -translate-y-1/2 focus-ring rounded-full ${isSelected ? 'scale-125 z-20' : 'hover:scale-110'}`}
-                        style={{ left: `${ind.pinX}%`, top: `${ind.pinY}%` }}
-                        aria-label={`${ind.name} in ${ind.location}`}
-                      >
-                        {/* Pulse ring for selected */}
-                        {isSelected && (
-                          <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
-                        )}
-                        <div className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg transition-colors duration-300 ${isSelected ? 'bg-primary' : 'bg-card border border-border group-hover/pin:bg-primary group-hover/pin:border-primary'}`}>
-                          <Icon className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors duration-300 ${isSelected ? 'text-primary-foreground' : 'text-primary group-hover/pin:text-primary-foreground'}`} />
-                        </div>
-                        {/* Label tooltip */}
-                        <div className={`absolute left-1/2 -translate-x-1/2 -bottom-7 whitespace-nowrap text-[10px] sm:text-xs font-semibold transition-opacity duration-200 ${isSelected ? 'opacity-100 text-primary' : 'opacity-0 group-hover/pin:opacity-100 text-muted-foreground'}`}>
-                          {ind.location}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Detail panel */}
-              <div className="lg:col-span-2">
-                {selected ? (
-                  <div className="bg-card rounded-xl border border-border overflow-hidden shadow-lg animate-fade-in">
-                    <div className="relative h-44 overflow-hidden">
-                      <img src={selected.image} alt={selected.name} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 to-transparent" />
-                      <button
-                        onClick={() => setSelectedIndustry(null)}
-                        className="absolute top-3 right-3 w-8 h-8 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center hover:bg-card transition-colors"
-                        aria-label="Close"
-                      >
-                        <X className="h-4 w-4 text-foreground" />
-                      </button>
-                      <div className="absolute bottom-4 left-5">
-                        <div className="flex items-center gap-2">
-                          <selected.icon className="h-5 w-5 text-accent" />
-                          <h3 className="font-display font-bold text-xl text-primary-foreground">{selected.name}</h3>
-                        </div>
-                        <div className="flex items-center gap-1.5 mt-1">
-                          <MapPin className="h-3 w-3 text-accent" />
-                          <span className="text-primary-foreground/80 text-xs">{selected.location}, OH</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-5">
-                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">{selected.description}</p>
-                      <div className="bg-secondary/50 rounded-lg p-4 mb-4">
-                        <div className="flex gap-1 mb-2">
-                          {[1, 2, 3, 4, 5].map((s) => (
-                            <Star key={s} className="h-3 w-3 fill-accent text-accent" />
-                          ))}
-                        </div>
-                        <p className="text-foreground text-sm italic leading-relaxed">"{selected.caseStudy}"</p>
-                      </div>
-                      <div className="flex items-center gap-2 mb-5 px-3 py-2 bg-primary/5 rounded-lg">
-                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                        <span className="text-sm font-semibold text-primary">{selected.savings}</span>
-                      </div>
-                      <Button asChild className="w-full">
-                        <Link to="/get-quote">
-                          Get {selected.name} Quote <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-card rounded-xl border border-border p-8 text-center h-full flex flex-col items-center justify-center min-h-[320px]">
-                    <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center mb-4">
-                      <MapPin className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-display font-semibold text-lg text-foreground mb-2">Select an Industry</h3>
-                    <p className="text-sm text-muted-foreground max-w-xs">Click any pin on the map to see how we've helped businesses in that industry across Central Ohio.</p>
-                    {/* Mobile: show list of industries as tappable pills */}
-                    <div className="flex flex-wrap gap-2 mt-6 justify-center lg:hidden">
-                      {industries.map((ind, i) => (
-                        <button
-                          key={ind.name}
-                          onClick={() => setSelectedIndustry(i)}
-                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-secondary text-foreground text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
-                        >
-                          <ind.icon className="h-3.5 w-3.5" />
-                          {ind.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+              {industries.map((industry, i) => (
+                <PolaroidCard
+                  key={industry.name}
+                  industry={industry}
+                  index={i}
+                  isFlipped={flippedCard === i}
+                  onFlip={() => {
+                    if (isMobile) {
+                      setFlippedCard(flippedCard === i ? null : i);
+                    }
+                  }}
+                  isMobile={isMobile}
+                />
+              ))}
             </div>
           </AnimatedSection>
         </div>
