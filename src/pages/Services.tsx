@@ -164,7 +164,7 @@ const Services = () => {
       </section>
 
       {/* Section 4: Contact Fallback */}
-      <section className="py-14 md:py-20 bg-background">
+      <section className="py-14 md:py-20 bg-background border-b border-border">
         <div className="container-wide px-4 md:px-space-lg">
           <div className="max-w-md mx-auto text-center">
             <h2 className="heading-md text-foreground mb-8">
