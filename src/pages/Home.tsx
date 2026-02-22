@@ -34,8 +34,16 @@ const Home = () => {
 
             {/* Mobile/Tablet: Card Stack layout */}
             <div className="lg:hidden">
-              {/* Photo Card */}
-              <div className="mx-5 sm:mx-8 pt-28 sm:pt-32">
+              {/* Headline on top */}
+              <div className="px-6 sm:px-10 pt-28 sm:pt-32 pb-6 text-center">
+                <div className="w-12 h-1 bg-primary rounded-full mx-auto mb-6" />
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]">
+                  Ohio Families Trust Us to Protect What Matters Most
+                </h1>
+              </div>
+
+              {/* Photo Card in the middle */}
+              <div className="mx-5 sm:mx-8">
                 <div className="rounded-2xl overflow-hidden border-2 border-gold-500/40 shadow-lg">
                   <img
                     src={heroSplit}
@@ -45,20 +53,12 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Text Content */}
+              {/* Subtext + CTAs on bottom */}
               <div className="px-6 sm:px-10 pt-8 pb-12 sm:pb-16 text-center">
-                {/* Burgundy divider */}
-                <div className="w-12 h-1 bg-primary rounded-full mx-auto mb-6" />
-
-                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-6">
-                  Ohio Families Trust Us to Protect What Matters Most
-                </h1>
-
                 <p className="font-body text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
                   We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
                 </p>
 
-                {/* Dual CTAs */}
                 <div className="flex flex-col sm:flex-row sm:justify-center gap-4 mb-6">
                   <Link
                     to="/get-quote"
@@ -76,7 +76,6 @@ const Home = () => {
                   </a>
                 </div>
 
-                {/* Trust row */}
                 <div className="flex items-center justify-center gap-2 text-muted-foreground">
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
