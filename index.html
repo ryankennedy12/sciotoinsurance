@@ -16,22 +16,21 @@
     <meta name="twitter:site" content="@SciotoInsurance" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <!-- Google Fonts - preload for faster loading -->
+    <!-- Google Fonts - non-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
     
     <!-- Smooth initial load -->
     <style>
       #root { opacity: 0; transition: opacity 0.3s ease-out; }
       #root.ready { opacity: 1; }
     </style>
-    <!-- Preload hero image for faster LCP -->
-    <link rel="preload" as="image" href="/src/assets/hero-family.jpg">
-    <!-- Preload service panel images to eliminate pop-in -->
-    <link rel="preload" as="image" href="/src/assets/family-home-service.jpg">
-    <link rel="preload" as="image" href="/src/assets/business-office.jpg">
-    <link rel="preload" as="image" href="/src/assets/team-meeting.jpg">
+    <!-- Preload critical above-the-fold assets -->
+    <link rel="preload" as="image" href="/src/assets/hero-split.jpg">
+    <link rel="preload" as="image" href="/src/assets/logo.png">
   </head>
 
   <body class="bg-[hsl(40,43%,96%)]">

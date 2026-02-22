@@ -139,7 +139,7 @@ const Header = () => {
         <div
           onClick={() => setIsMobileMenuOpen(false)}
           className={cn(
-            "absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300",
+            "absolute inset-0 bg-black/40 transition-opacity duration-300",
             isMobileMenuOpen ? "opacity-100" : "opacity-0"
           )}
         />
