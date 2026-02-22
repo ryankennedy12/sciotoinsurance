@@ -76,7 +76,7 @@ const EmployeeBenefits = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Section 1: Centered Typographic Hero */}
-      <section className="section-padding bg-card">
+      <section className="section-padding pt-32 md:pt-36 lg:pt-40 bg-card">
         <div className="container-narrow text-center">
           <AnimatedSection animation="fade-up">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-foreground mb-6 tracking-tight">
