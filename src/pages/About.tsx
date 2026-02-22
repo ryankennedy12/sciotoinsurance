@@ -232,13 +232,13 @@ const About = () => {
       </section>
 
       {/* ── Section 4: Timeline ── */}
-      <section className="relative py-16 sm:py-24 bg-secondary overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, hsl(345 55% 34% / 0.04), transparent 60%)' }} />
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-burgundy-800 to-burgundy-900 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 50%, hsl(345 55% 34% / 0.15), transparent 55%)' }} />
 
         <div className="relative max-w-[900px] mx-auto px-6">
           <AnimatedSection animation="fade-up" className="text-center mb-14">
-            <div className="w-12 h-1 bg-primary mx-auto mb-4 rounded-full" />
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-foreground leading-[1.1]">
+            <div className="w-12 h-1 bg-gold-500 mx-auto mb-4 rounded-full" />
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-white leading-[1.1]">
               The Journey
             </h2>
           </AnimatedSection>
@@ -246,27 +246,27 @@ const About = () => {
           {/* Timeline */}
           <div className="relative">
             {/* Center line */}
-            <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-0.5 bg-accent/40 -translate-x-1/2" />
+            <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gold-500/60 -translate-x-1/2" />
 
             <div className="space-y-12">
               {milestones.map((m, i) => (
                 <AnimatedSection key={i} animation="fade-up" delay={i * 80}>
                   <div className={`relative flex items-start gap-6 lg:gap-0 ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
                     {/* Node */}
-                    <div className="absolute left-6 lg:left-1/2 w-4 h-4 rounded-full bg-accent border-[3px] border-secondary -translate-x-1/2 mt-1 z-10" />
+                    <div className="absolute left-6 lg:left-1/2 w-5 h-5 rounded-full bg-gold-500 border-[3px] border-burgundy-800 -translate-x-1/2 mt-1 z-10" />
 
                     {/* Spacer for mobile */}
                     <div className="w-12 shrink-0 lg:hidden" />
 
                     {/* Card */}
                     <div className={`flex-1 lg:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'lg:pr-12 lg:text-right' : 'lg:pl-12 lg:text-left'}`}>
-                      <div className="bg-card rounded-lg p-6 shadow-sm border border-border">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-body font-bold mb-3">
+                      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/20 text-gold-500 border border-gold-500/30 text-xs font-body font-bold mb-3">
                           <Calendar className="w-3.5 h-3.5" />
                           {m.year}
                         </span>
-                        <h3 className="font-display font-semibold text-lg text-foreground mb-2">{m.headline}</h3>
-                        <p className="font-body text-sm text-muted-foreground leading-relaxed">{m.description}</p>
+                        <h3 className="font-display font-semibold text-lg text-white mb-2">{m.headline}</h3>
+                        <p className="font-body text-sm text-white/70 leading-relaxed">{m.description}</p>
                       </div>
                     </div>
 
@@ -281,16 +281,19 @@ const About = () => {
       </section>
 
       {/* ── Section 5: Values ── */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="py-16 sm:py-24 bg-cream">
         <div className="max-w-[900px] mx-auto px-6">
-          <AnimatedSection animation="fade-up" className="text-center mb-12">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
             <div className="w-12 h-1 bg-primary mx-auto mb-4 rounded-full" />
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-foreground leading-[1.1]">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-[44px] text-foreground leading-[1.1] mb-4">
               What We Stand For
             </h2>
+            <p className="font-body text-muted-foreground text-lg">
+              Four principles that guide every recommendation we make.
+            </p>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="divide-y divide-border">
             {[
               {
                 icon: ShieldCheck,
@@ -314,13 +317,20 @@ const About = () => {
               },
             ].map((v, i) => (
               <AnimatedSection key={i} animation="fade-up" delay={i * 80}>
-                <div className="flex gap-5 p-6 rounded-lg bg-secondary border-l-[3px] border-l-accent">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
-                    <v.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-8 sm:py-10">
+                  {/* Number + Icon */}
+                  <div className="flex items-center gap-4 sm:gap-6 shrink-0">
+                    <span className="font-display text-4xl sm:text-5xl font-bold text-gold-500/40 leading-none">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20">
+                      <v.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-lg text-foreground mb-1">{v.title}</h3>
-                    <p className="font-body text-sm text-muted-foreground leading-relaxed">{v.body}</p>
+                  {/* Text */}
+                  <div className="pt-1">
+                    <h3 className="font-display font-semibold text-xl text-foreground mb-2">{v.title}</h3>
+                    <p className="font-body text-muted-foreground leading-relaxed">{v.body}</p>
                   </div>
                 </div>
               </AnimatedSection>
