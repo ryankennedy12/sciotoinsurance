@@ -1,56 +1,74 @@
 
 
-## Redesign: Risk Assessment Section — Make It Stand Out
+## Employee Benefits Page Redesign
 
-### The Problem
-Right now, Section 4 (Risk Assessment) and Section 7 (Bottom CTA) are nearly identical: same burgundy background, same radial glow, same layout pattern. The Risk Assessment is a unique, high-value offer (a free analysis even if you don't buy) but it looks like just another "contact us" banner.
+### Current State
+The page has 6 sections: split hero (text + burgundy stat cards), product grid, ROI calculator, process timeline with photos, testimonials, and a burgundy bottom CTA. The hero feels like a generic SaaS landing page, the product cards are identical to other pages, and the process timeline cards blend in.
 
-### The New Concept: "Blueprint Assessment" Card
+### Design Direction: "Data-Driven Advisor"
 
-Instead of a full-width burgundy banner, this section becomes a **single, oversized card** floating on a cream background — giving it a completely different visual DNA from every other section on the page.
+Employee benefits is fundamentally about numbers and outcomes. The redesign leans into that with a **dashboard-inspired aesthetic** — clean data visualization, comparison tables, and an interactive calculator that feels like a tool, not a brochure. This contrasts with Personal Insurance (editorial/lifestyle) and Business Insurance (industry-focused Polaroids).
 
-**Layout:**
-- Section background: `bg-cream` (not burgundy — immediately different)
-- One large card with a split design: left side has a dark charcoal background with content, right side has an inline form (not a link to /contact)
-- The card has a thick left border in Dusty Rose (#C4A0A0) and a subtle shadow to feel "lifted"
+### Section-by-Section Redesign
 
-**Left Side (Dark Charcoal — #1A1A1A):**
-- Eyebrow: "FREE FOR OHIO BUSINESSES" in Dusty Rose, letter-spaced
-- Headline: "Find Out What You're Missing" in white, large display font
-- Subtext: "We'll review your current coverage, identify gaps, and give you an honest recommendation — no strings attached."
-- Checklist items with Dusty Rose checkmarks (same 4 items), but laid out vertically for better readability
-- A small trust line at the bottom: "300+ businesses assessed since 1995"
+**Section 1: Hero — "The Problem" Opening**
+- Switch to a **centered typographic hero** (similar to Personal Insurance's clean approach, but with a twist)
+- Large headline: "Your Benefits Package Is Costing You Talent"
+- Below the headline, a **horizontal stat ticker** — three stats in a single row with large numbers and animated counters (keep existing AnimatedCounter)
+- Stats sit inside a subtle cream card strip, not burgundy panels
+- CTAs below: "Get Custom Quote" + phone link (text only, no icon)
+- No split layout, no burgundy half-screen — just clean, authoritative typography
 
-**Right Side (White card panel):**
-- A simple **inline form** with 4 fields: Business Name, Your Name, Email, Phone
-- Submit button: "Request Free Assessment" in burgundy
-- Below: "Or call us: (614) 612-0050"
-- This keeps users on-page instead of sending them to /contact
+**Section 2: Benefits Products — "Comparison Table" Style**
+- Instead of the current icon+text cards, present products in a **clean two-column layout** with a left column showing the product name and a right column with a brief description
+- Each row has a subtle bottom border, hover highlights the row
+- This feels like a dashboard/spreadsheet — distinct from the card grids on other pages
+- A "Get a Quote" link on hover for each row
 
-**Why this works:**
-1. Cream background breaks the burgundy-burgundy-burgundy pattern
-2. Charcoal left panel is unique to this section — no other section uses charcoal as a primary bg
-3. Inline form reduces friction (no page navigation needed)
-4. The "card on cream" treatment feels premium and distinct from the full-bleed bottom CTA
+**Section 3: ROI Calculator — Keep but Elevate**
+- This is already unique and strong. Keep the slider-based calculator
+- Improve the sliders with custom-styled range inputs (Dusty Rose track, burgundy thumb)
+- Move the results panel from a burgundy card to a **charcoal card** (#1A1A1A) — differentiates from the bottom CTA
+- Add a second result metric: "Estimated Hiring Cost Savings" alongside "Potential Annual Savings"
 
-### Technical Changes
+**Section 4: Process Timeline — Horizontal Stepper**
+- Replace the 4 photo cards with a **horizontal stepper/timeline**
+- A single horizontal line connecting 4 numbered circles
+- Active/hovered step expands to show the description below
+- No photos — just clean numbered steps with icons
+- This is a completely different pattern from any other page
 
-**File: `src/pages/BusinessInsurance.tsx`** (lines 268-306)
+**Section 5: Testimonials — Keep As-Is**
+- The 3-card testimonial grid works well and is consistent across the site
+- No changes needed here
 
-Replace the entire Section 4 with:
-- Change section bg from `bg-primary` to `bg-cream`
-- Remove the radial glow overlay
-- Build a single card container with `grid lg:grid-cols-5` (3 cols left, 2 cols right)
-- Left panel: charcoal bg (`bg-[#1A1A1A]`), rounded-l-2xl, with the headline, description, and checklist
-- Right panel: white bg, rounded-r-2xl, with a simple contact form (4 inputs + submit)
-- Form submission: POST to the existing `contact_submissions` or `leads` table via the Supabase client, with a success toast
-- Thick left border accent: `border-l-4 border-l-accent` on the outer card
-- On mobile: stack vertically (left panel on top, form below)
+**Section 6: Bottom CTA — Match Other Pages**
+- Keep the burgundy full-width CTA
+- Fix the phone button legibility (use `variant="secondary"` like we did on Business Insurance)
+- Remove the phone icon, just show the number
 
-**No new files needed.** The form logic will use the existing Supabase client and toast notifications already in the project.
+### Technical Details
 
-### Mobile Behavior
-- Card stacks vertically: charcoal content panel on top, white form panel below
-- Full-width, no side margins (edge-to-edge card feel)
-- Form fields stack single-column
+**File changed:** `src/pages/EmployeeBenefits.tsx` (full rewrite of sections 1, 2, and 4; modifications to sections 3 and 6)
 
+**Hero changes:**
+- Remove the `grid lg:grid-cols-2` split layout
+- Center-align content with `max-w-3xl mx-auto text-center`
+- Stats become a horizontal row of 3 items in a cream strip below the headline
+
+**Products section:**
+- Replace the card grid with a table-like layout using `divide-y` borders
+- Each product is a flex row: icon-less, just name + description + hover arrow
+
+**Process section:**
+- Replace photo cards with a CSS-only horizontal stepper
+- 4 circles connected by a line, each with step number, title, and description below
+
+**Calculator tweaks:**
+- Change results card from `bg-primary` to `bg-foreground` (charcoal)
+- Add second metric row
+
+**Bottom CTA fix:**
+- Phone button: `variant="secondary"`, remove `Phone` icon
+
+No new dependencies or database changes needed. All changes are purely presentational within the single file.
