@@ -371,25 +371,49 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Section 7: Bottom CTA Banner */}
-      <section className="section-padding bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(ellipse at 50% 50%, hsl(345 55% 50%), transparent 60%)' }} />
-        <div className="container-narrow text-center relative z-10">
-          <AnimatedSection animation="fade-up">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary-foreground mb-4">
-              Protect Your Business Today
-            </h2>
-            <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto">
-              Get a free quote in 10 minutes. We'll show you exactly what you're paying for—and what you might be missing.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary">
-                <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                <a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a>
-              </Button>
+      {/* Section 7: Two Paths CTA */}
+      <section className="section-padding bg-cream">
+        <div className="container-wide">
+          <AnimatedSection animation="fade-up" className="text-center mb-10">
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3 block">Next Steps</span>
+            <h2 className="heading-lg text-foreground">Two Ways to Get Started</h2>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-up" delay={100}>
+            <div className="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {/* Path A: Direct */}
+              <div className="bg-card rounded-xl border border-border p-8 sm:p-10 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <h3 className="text-2xl font-display font-bold text-foreground mb-4">I Know What I Need</h3>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Skip the small talk. Tell us about your business and we'll have a custom quote ready within 24 hours.
+                </p>
+                <Button asChild size="lg" className="w-full sm:w-auto">
+                  <Link to="/get-quote">Get My Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                </Button>
+                <p className="text-xs text-muted-foreground mt-4">Average response: 4 hours</p>
+              </div>
+
+              {/* Path B: Consultative */}
+              <div className="bg-primary rounded-xl p-8 sm:p-10 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                <h3 className="text-2xl font-display font-bold text-primary-foreground mb-4">I'm Not Sure Yet</h3>
+                <p className="text-primary-foreground/70 leading-relaxed mb-6">
+                  No problem. We'll walk you through a free risk assessment and show you exactly where you're covered — and where you're exposed.
+                </p>
+                <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
+                  <Link to="/contact">Schedule Free Assessment <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                </Button>
+                <div className="mt-4 flex flex-col gap-1">
+                  <a href="tel:6146120050" className="text-sm text-primary-foreground/60 hover:text-primary-foreground/80 transition-colors">
+                    or call: <span className="font-semibold">(614) 612-0050</span>
+                  </a>
+                  <p className="text-xs text-primary-foreground/50">100% free. No obligation.</p>
+                </div>
+              </div>
             </div>
+
+            <p className="text-center text-sm text-muted-foreground mt-8">
+              Not ready? That's okay too. Bookmark us — we'll be here.
+            </p>
           </AnimatedSection>
         </div>
       </section>
