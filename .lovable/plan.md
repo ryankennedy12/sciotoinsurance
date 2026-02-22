@@ -1,77 +1,65 @@
 
 
-## Mobile Navigation Menu Redesign
+## Replace Gold Accent with Dusty Rose (#C4A0A0)
 
-Replace the current heavy full-screen burgundy overlay with a refined, light-themed slide-in panel that feels premium and unique to the Scioto brand.
-
----
-
-### What Changes
-
-**Current:** Full-screen burgundy gradient overlay with white text, standard link list, and a "Get a Quote" button at the bottom. Feels like every other mobile menu.
-
-**New:** A right-side slide-in panel (roughly 85% width) on a clean white/cream background with the brand's burgundy and gold used as accents rather than dominant fills. The result is lighter, more breathable, and distinctly premium.
+Swap the gold accent color (`#C9A962`) with Dusty Rose (`#C4A0A0`) across the entire codebase. Since it's defined as a CSS custom property and Tailwind token, the change is mostly centralized with a few hardcoded rgba values to update.
 
 ---
 
-### Layout and Structure
+### Step 1: Update the CSS Variable (source of truth)
 
-**Backdrop:** Semi-transparent dark overlay behind the panel (`bg-black/40 backdrop-blur-sm`) that fades in. Clicking it closes the menu.
+**File: `src/index.css`**
 
-**Panel:** Slides in from the right. White background with a thin gold accent line on the left edge (the border between the dark backdrop and the panel). Rounded top-left and bottom-left corners for a softer, modern feel.
+Change `--gold-500` from `42 47% 59%` (gold) to `0 18% 70%` (dusty rose #C4A0A0). This automatically updates every place that uses `bg-accent`, `text-accent`, `bg-gold-500`, `text-gold-500`, etc.
 
-**Close Button:** Top-right corner, a simple X icon in charcoal (not in a circle border). Clean and minimal.
-
----
-
-### Content Sections (Top to Bottom)
-
-**1. Brand Header**
-- Logo at the top left of the panel (normal colors, not inverted)
-- Below the logo, a thin gold divider line
-
-**2. Navigation Links**
-- Each link is a full-width row with generous padding (py-4)
-- Text in charcoal using the display font (Cormorant Garamond), medium weight, ~18px
-- Active link gets a left gold accent bar (3px) and burgundy text color
-- No border-bottom dividers between links -- use spacing instead for a cleaner look
-- Subtle staggered fade-in animation on open (50ms delay per item)
-
-**3. Divider + CTAs**
-- A thin `bg-border` divider line
-- "Get a Quote" button: burgundy-700 background, white text, full-width, rounded
-- "Call Us" button: outlined with burgundy border, burgundy text, phone icon, full-width
-- Both buttons have generous padding (py-3.5)
-
-**4. Trust Footer**
-- Small text at the bottom: "Est. 2023 in New Albany, Ohio"
-- Star rating line: 5 gold stars + "5.0 on Google"
-- Text in muted-foreground, centered
+Also update the comment from "gold" to "dusty rose."
 
 ---
 
-### Animations
+### Step 2: Rename the Tailwind Token
 
-- **Backdrop:** Fades in over 300ms
-- **Panel:** Slides in from right over 400ms with an ease-out curve
-- **Nav links:** Each fades in with a slight upward translate, staggered 50ms apart
-- **Close:** Panel slides out, backdrop fades out, faster (300ms)
+**File: `tailwind.config.ts`**
+
+Rename the `gold` color key to `rose` (or keep `gold` as-is for minimal churn -- renaming is optional since the variable still resolves correctly). Update the comment.
+
+For minimal disruption, the simplest approach is to keep the Tailwind key named `gold` but update the underlying CSS variable so it outputs dusty rose. No class name changes needed anywhere.
 
 ---
 
-### Technical Summary
+### Step 3: Fix Hardcoded RGBA Values
 
-**File: `src/components/Header.tsx`** (lines 131-224)
+Two places use hardcoded `rgba(201,169,98,...)` (the old gold color) instead of the CSS variable:
 
-Replace the existing mobile menu overlay with:
+**File: `src/pages/About.tsx`** (timeline node glow)
+- `shadow-[0_0_10px_3px_rgba(201,169,98,0.45)]` changes to `shadow-[0_0_10px_3px_rgba(196,160,160,0.45)]`
 
-1. **Backdrop:** `fixed inset-0 bg-black/40 backdrop-blur-sm` with fade transition
-2. **Panel:** `fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-white border-l-2 border-l-gold-500 rounded-l-2xl shadow-2xl` with slide-in from right
-3. **Logo:** Normal logo (no invert filter), smaller size
-4. **Links:** `font-display text-lg text-charcoal` with active state using `text-primary border-l-[3px] border-l-gold-500 pl-3`
-5. **CTAs:** "Get a Quote" in `bg-primary text-white`, "Call Us" in `border border-primary text-primary`
-6. **Trust footer:** Muted text with gold stars, centered at bottom
-7. **Close button:** Simple X in charcoal, no border/circle
+**File: `src/components/HeroVisual.tsx`** (accent circle gradient)
+- Any hardcoded gold rgba references change to the dusty rose equivalent `rgba(196,160,160,...)`
 
-The header bar itself and the hamburger icon remain unchanged. Only the overlay content (lines 131-224) is rewritten.
+---
+
+### Step 4: Update Comments Throughout
+
+Rename "Gold" / "gold" references in comments to "Dusty Rose" / "rose" for clarity:
+
+- `src/index.css` -- variable comment
+- `tailwind.config.ts` -- color comment
+- `src/pages/About.tsx` -- "Gold divider" comments
+- `src/pages/Home.tsx` -- "Gold accent bar" comment
+- `src/components/HeroVisual.tsx` -- "Gold accent circle" / "Small gold dot accents" comments
+
+---
+
+### Files Affected
+
+| File | What Changes |
+|---|---|
+| `src/index.css` | CSS variable value + comment |
+| `tailwind.config.ts` | Comment update |
+| `src/pages/About.tsx` | 1 hardcoded rgba + comments |
+| `src/components/HeroVisual.tsx` | Hardcoded rgba + comments |
+| `src/pages/Home.tsx` | Comments only |
+| All other files using `text-gold-500`, `bg-gold-500`, etc. | No changes needed (resolved via CSS variable) |
+
+This is a low-risk, high-impact change since 95% of gold references go through the CSS custom property. Only 2 hardcoded rgba values need manual updating.
 
