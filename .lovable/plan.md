@@ -1,85 +1,77 @@
 
 
-## Elevating "The Journey" and "What We Stand For" Sections
+## Mobile Navigation Menu Redesign
 
-These two sections currently blend together visually -- both use standard bordered cards on light backgrounds. The goal is to make each one feel distinct, premium, and memorable.
-
----
-
-### Section 4: "The Journey" -- Immersive Dark Timeline
-
-**Problem:** The current timeline sits on a light `bg-secondary` background with standard white cards and a thin gold line. It looks clean but reads as "just more cards." There is nothing that makes it feel like a cinematic story unfolding.
-
-**New Design: Full-width dark burgundy section with glowing timeline**
-
-Background and Atmosphere:
-- Change the section background to a rich burgundy gradient: `bg-gradient-to-b from-burgundy-800 to-burgundy-900`
-- Add a subtle radial glow behind the center line (burgundy-700 at low opacity) to create depth
-- All text switches to white/white-80 for contrast
-- The section heading and subheadline render in white with a gold divider
-
-Timeline Line:
-- The center line changes from `bg-accent/40` to a brighter `bg-gold-500/60` so it glows against the dark background
-- Timeline nodes become larger (w-5 h-5) with a gold fill and a burgundy-800 border ring, creating a "lit" dot effect
-
-Milestone Cards:
-- Remove the white card background entirely
-- Instead, each milestone becomes a "glass" card: `bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl`
-- Year badge stays gold but becomes more prominent: `bg-gold-500/20 text-gold-500 border border-gold-500/30`
-- Headline text in white, description in white/70
-- On hover (desktop only), the card gets a subtle `bg-white/10` lift
-
-The overall effect: the timeline feels like stepping into a darker, more dramatic chapter of the page. It visually separates from everything above and below.
+Replace the current heavy full-screen burgundy overlay with a refined, light-themed slide-in panel that feels premium and unique to the Scioto brand.
 
 ---
 
-### Section 5: "What We Stand For" -- Large Statement Cards
+### What Changes
 
-**Problem:** The current values section uses compact horizontal cards (icon left, text right) in a 2-column grid on `bg-white`. They feel utilitarian and blend with the timeline cards above.
+**Current:** Full-screen burgundy gradient overlay with white text, standard link list, and a "Get a Quote" button at the bottom. Feels like every other mobile menu.
 
-**New Design: Full-width single-column statement blocks**
+**New:** A right-side slide-in panel (roughly 85% width) on a clean white/cream background with the brand's burgundy and gold used as accents rather than dominant fills. The result is lighter, more breathable, and distinctly premium.
 
-Background and Layout:
-- Switch to `bg-cream` background to contrast with the dark timeline above
-- Instead of a 2x2 grid, use a single-column layout where each value gets a full-width row
-- Each row is a large, airy block with generous vertical padding (py-8 to py-10)
-- Separate values with thin `border-b border-border` dividers (no border on the last one)
+---
 
-Card Structure (per value):
-- Layout: number/index on the far left (large display numeral like "01", "02" in gold-500, `font-display text-4xl`), then the icon in its gradient badge, then the title and body text
-- Desktop: horizontal row with the number, icon, and text flowing left to right
-- Mobile: stack the number + icon above the text
-- No card background, no border, no shadow -- just clean content with generous whitespace
+### Layout and Structure
 
-The numbering adds structure and implies intentionality ("these are our four pillars, in order"). The larger format gives each value room to breathe and feel important rather than crammed into a grid.
+**Backdrop:** Semi-transparent dark overlay behind the panel (`bg-black/40 backdrop-blur-sm`) that fades in. Clicking it closes the menu.
 
-Add a short intro line below the section heading: "Four principles that guide every recommendation we make." in `text-muted-foreground`.
+**Panel:** Slides in from the right. White background with a thin gold accent line on the left edge (the border between the dark backdrop and the panel). Rounded top-left and bottom-left corners for a softer, modern feel.
+
+**Close Button:** Top-right corner, a simple X icon in charcoal (not in a circle border). Clean and minimal.
+
+---
+
+### Content Sections (Top to Bottom)
+
+**1. Brand Header**
+- Logo at the top left of the panel (normal colors, not inverted)
+- Below the logo, a thin gold divider line
+
+**2. Navigation Links**
+- Each link is a full-width row with generous padding (py-4)
+- Text in charcoal using the display font (Cormorant Garamond), medium weight, ~18px
+- Active link gets a left gold accent bar (3px) and burgundy text color
+- No border-bottom dividers between links -- use spacing instead for a cleaner look
+- Subtle staggered fade-in animation on open (50ms delay per item)
+
+**3. Divider + CTAs**
+- A thin `bg-border` divider line
+- "Get a Quote" button: burgundy-700 background, white text, full-width, rounded
+- "Call Us" button: outlined with burgundy border, burgundy text, phone icon, full-width
+- Both buttons have generous padding (py-3.5)
+
+**4. Trust Footer**
+- Small text at the bottom: "Est. 2023 in New Albany, Ohio"
+- Star rating line: 5 gold stars + "5.0 on Google"
+- Text in muted-foreground, centered
+
+---
+
+### Animations
+
+- **Backdrop:** Fades in over 300ms
+- **Panel:** Slides in from right over 400ms with an ease-out curve
+- **Nav links:** Each fades in with a slight upward translate, staggered 50ms apart
+- **Close:** Panel slides out, backdrop fades out, faster (300ms)
 
 ---
 
 ### Technical Summary
 
-**File: `src/pages/About.tsx`**
+**File: `src/components/Header.tsx`** (lines 131-224)
 
-**Journey Section (lines 234-281):**
-1. Change section background from `bg-secondary` to `bg-gradient-to-b from-burgundy-800 to-burgundy-900`
-2. Update radial glow to use `burgundy-700` at higher opacity for depth
-3. Change heading, all text to white (`text-white`, `text-white/70`, `text-white/80`)
-4. Update gold divider under heading to `bg-gold-500`
-5. Timeline center line: `bg-gold-500/60`
-6. Timeline nodes: `w-5 h-5 bg-gold-500 border-[3px] border-burgundy-800`
-7. Milestone cards: remove `bg-card border border-border shadow-sm`, replace with `bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl`
-8. Year badges: `bg-gold-500/20 text-gold-500 border border-gold-500/30`
-9. Headline: `text-white`, description: `text-white/70`
-10. Add hover state on cards: `hover:bg-white/10 transition-colors`
+Replace the existing mobile menu overlay with:
 
-**Values Section (lines 283-330):**
-1. Change section background from `bg-white` to `bg-cream`
-2. Replace 2-column grid with single-column `space-y-0` layout using `border-b border-border` dividers
-3. Each value becomes a full-width row: large gold numeral ("01") on the left, icon badge, then title + body
-4. Desktop: `flex items-start gap-8` horizontal layout
-5. Mobile: number + icon in a row, text below
-6. Remove card backgrounds, borders, and the left gold accent bar
-7. Number styling: `font-display text-4xl sm:text-5xl font-bold text-gold-500/40`
-8. Add intro subline below section heading
+1. **Backdrop:** `fixed inset-0 bg-black/40 backdrop-blur-sm` with fade transition
+2. **Panel:** `fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-white border-l-2 border-l-gold-500 rounded-l-2xl shadow-2xl` with slide-in from right
+3. **Logo:** Normal logo (no invert filter), smaller size
+4. **Links:** `font-display text-lg text-charcoal` with active state using `text-primary border-l-[3px] border-l-gold-500 pl-3`
+5. **CTAs:** "Get a Quote" in `bg-primary text-white`, "Call Us" in `border border-primary text-primary`
+6. **Trust footer:** Muted text with gold stars, centered at bottom
+7. **Close button:** Simple X in charcoal, no border/circle
+
+The header bar itself and the hamburger icon remain unchanged. Only the overlay content (lines 131-224) is rewritten.
 
