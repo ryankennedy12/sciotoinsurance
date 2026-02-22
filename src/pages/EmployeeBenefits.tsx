@@ -79,9 +79,6 @@ const EmployeeBenefits = () => {
       <section className="section-padding bg-card">
         <div className="container-narrow text-center">
           <AnimatedSection animation="fade-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
-              <Calculator className="h-4 w-4" />Strategic Benefits Partner
-            </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-foreground mb-6 tracking-tight">
               Your Benefits Package Is<br />
               <span className="text-primary">Costing You Talent</span>
