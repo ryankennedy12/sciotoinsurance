@@ -1,82 +1,102 @@
 
 
-## Contact Page Redesign: "Direct Line"
+## Performance and Responsiveness Optimization Plan
 
-### Design Concept
+### Current State Assessment
 
-The Services page became a "command center" with its bento grid. The Contact page needs its own distinct identity. The concept: **a single-scroll conversation starter** that feels more like a modern messaging app than a traditional contact form page. Instead of the standard two-column form + sidebar layout (which looks like every other insurance site), we'll use a **centered, single-column flow** with distinct visual zones stacked vertically.
+After profiling the site, here's what I found:
 
-The distinguishing feature: **three "channel cards"** at the top that let users pick HOW they want to connect (call, email, or form) before they even see the form. This is the only page on the site that uses this "pick your path" interaction pattern.
+- **First Contentful Paint: 4.4 seconds** -- this is slow and needs to come down significantly
+- **Full Page Load: 4.9 seconds** -- target is under 3 seconds
+- **127 resources loaded on initial page** -- all pages and assets are bundled together with no code splitting
+- **44 JPG images** in the assets folder, many loaded eagerly or imported on pages that don't need them
+- **Logo is 180KB PNG** -- should be much smaller
+- **Google Fonts are render-blocking** -- slowing first paint
+- **No route-based code splitting** -- every page loads upfront even though the user only visits one at a time
 
-### Section-by-Section Design
+### The Plan
 
-**Section 1: Minimal Hero (matches Services page tone)**
-- Clean white background, no gradient (departing from other pages)
-- Small "Contact" uppercase tracking label in dusty rose
-- Headline: "Let's Start a Conversation"
-- One-line subtitle
-- Intentionally short, like the Services hero
+---
 
-**Section 2: Three Channel Cards (the signature element)**
-- Three side-by-side cards in a `grid-cols-1 md:grid-cols-3` layout
-- Each card represents a contact method with a large icon, bold label, and direct action:
-  - **Call Us**: Phone icon, "(614) 612-0050", clickable `tel:` link, subtitle "We pick up on the second ring"
-  - **Email Us**: Mail icon, the email address, clickable `mailto:` link, subtitle "We respond within hours"
-  - **Visit Us**: MapPin icon, the address, subtitle "New Albany, OH 43054"
-- Cards have a subtle border, rounded-2xl, and hover lift effect
-- The Call card gets a subtle burgundy-100 background and left border accent (like the priority claim tile on Services) since phone is the preferred contact method
-- This pattern doesn't exist anywhere else on the site
+**1. Route-Based Code Splitting (Biggest Impact)**
 
-**Section 3: The Form (centered, no sidebar)**
-- Instead of the current two-column layout, the form lives in a **single centered column** (max-w-xl)
-- Above the form: a small "Or send us a message" label
-- The form itself is clean and minimal — no Card wrapper, just fields on the page background with subtle bottom borders instead of full input boxes (a more modern, app-like feel... actually, keep the current Input components for consistency, but remove the Card wrapper for a lighter feel)
-- Keep all existing form fields and logic exactly as-is
-- Below the submit button: a trust line "We'll respond within one business day. No spam, ever."
-- Success state stays the same
+Right now, every page (Home, About, Personal Insurance, Business Insurance, Employee Benefits, Services, Contact, GetQuote, all Admin pages) is imported eagerly in `App.tsx`. This means the browser downloads and parses ALL page code before showing anything.
 
-**Section 4: Business Hours + Map (compact row)**
-- Instead of stacking hours and map vertically in a sidebar, place them **side-by-side in a single row** below the form
-- Left side: Business hours in a compact card with clock icon
-- Right side: The Google Maps embed
-- Both in a `grid-cols-1 md:grid-cols-2` layout
-- This keeps the useful info but pushes it below the form where it's secondary
+We'll wrap each page import with `React.lazy()` and add a `<Suspense>` fallback. This means only the code for the current page loads initially -- everything else loads on demand when navigated to.
 
-**Section 5: Schedule a Call (keep but simplify)**
-- Remove the large burgundy circle around the Calendar icon
-- Keep the centered CTA but make it more compact
-- Add a subtle `border-b border-border` at the bottom to separate from footer
+**Files changed:** `src/App.tsx`
 
-### Technical Details
+---
 
-**File changed:** `src/pages/Contact.tsx`
+**2. Fix Render-Blocking Google Fonts**
 
-**Hero changes:**
-- Replace `bg-gradient-to-b from-cream to-burgundy-50` with `bg-card`
-- Add uppercase tracking label: `text-xs font-body font-semibold uppercase tracking-[0.2em] text-accent`
-- Keep headline and subtitle
+The Google Fonts `<link>` in `index.html` blocks rendering. We'll switch to a non-blocking loading strategy using `media="print" onload="this.media='all'"` or `rel="preload"` with font-display swap (which is already set via `display=swap`, but the stylesheet itself blocks).
 
-**Channel cards:**
-- New data array with 3 items: `{ icon, title, detail, subtitle, href, priority }`
-- `grid grid-cols-1 md:grid-cols-3 gap-4` layout
-- Call card: `bg-secondary border-l-4 border-primary`
-- Other cards: `bg-card border border-border`
-- All: `rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all`
+**Files changed:** `index.html`
 
-**Form restructure:**
-- Remove `grid grid-cols-1 lg:grid-cols-2` two-column layout
-- Center the form in `max-w-xl mx-auto`
-- Remove the `Card` / `CardContent` wrapper — form fields sit directly in a `div`
-- Keep all form state, validation, submission logic, and Supabase insert unchanged
+---
 
-**Hours + Map row:**
-- Move business hours and map into a new `grid grid-cols-1 md:grid-cols-2 gap-6` section below the form
-- Hours: compact card with border
-- Map: keep the existing iframe, same aspect ratio
+**3. Preload Critical Above-the-Fold Images**
 
-**Schedule section:**
-- Remove the `w-16 h-16 rounded-full bg-burgundy-100` icon wrapper
-- Keep Calendar icon inline with heading
-- Add `border-b border-border` to section
+The hero image (`hero-split.jpg`) and logo (`logo.png`) are critical for first paint. We already preload `hero-family.jpg` (which isn't even used on the homepage anymore). We'll fix the preloads to match what's actually needed:
+- Keep `hero-split.jpg` preload (the actual hero image)
+- Preload `logo.png` (header, always visible)
+- Remove stale preloads for unused images
 
-No new files, no new dependencies, no database changes. All form logic and Supabase integration stays exactly the same.
+**Files changed:** `index.html`
+
+---
+
+**4. Lazy Load Below-the-Fold Images**
+
+Several images on the Home page (like `familyHomeService`, `businessOffice`, `teamMeeting`) are imported eagerly but only appear far below the fold. They already have `loading="lazy"` on the `<img>` tags, which is correct. However, the Vite `import` statements still cause them to be fetched early.
+
+For pages like BusinessInsurance (8 industry images) and PersonalInsurance (5 life-stage images), we'll ensure all below-fold images use `loading="lazy"`.
+
+No file changes needed here -- the imports are necessary for Vite to know about the files, but `loading="lazy"` on the `<img>` tags already defers the actual network fetch.
+
+---
+
+**5. Remove Stale Preloads**
+
+`index.html` currently preloads `family-home-service.jpg`, `business-office.jpg`, and `team-meeting.jpg` -- these are below-the-fold images that should NOT be preloaded. Removing these frees up bandwidth for truly critical resources.
+
+**Files changed:** `index.html`
+
+---
+
+**6. Mobile-Specific Responsive Audit**
+
+After reviewing all pages, the responsive design is already well-implemented with proper breakpoints. A few refinements:
+
+- **Header**: Phone CTA on mobile already compact and functional
+- **Home hero**: Already has separate mobile/desktop layouts with `lg:hidden` and `hidden lg:flex`
+- **Business Insurance polaroid cards**: Already handle mobile with `isMobile` state removing rotation
+- **Employee Benefits calculator sliders**: Work on touch but could use larger touch targets
+
+The main mobile fix: ensure the `backdrop-blur-sm` on the mobile menu overlay doesn't cause jank on lower-end devices. We'll remove it since the memory documents explicitly prohibit `backdrop-blur`.
+
+**Files changed:** `src/components/Header.tsx`
+
+---
+
+**7. Eliminate Unused CSS (App.css)**
+
+`src/App.css` contains legacy Vite boilerplate CSS (`#root { max-width: 1280px }`, logo animations, etc.) that conflicts with the actual layout. This file constrains the root element and adds unnecessary CSS parsing. It's not imported anywhere visible in `main.tsx` but should be removed entirely.
+
+**Files changed:** Delete `src/App.css`
+
+---
+
+### Technical Summary
+
+| Change | File(s) | Impact |
+|--------|---------|--------|
+| Route-based code splitting with React.lazy | `src/App.tsx` | Reduces initial JS by ~60% |
+| Non-blocking Google Fonts | `index.html` | Faster first paint by ~200ms |
+| Fix preloads (remove stale, add correct) | `index.html` | Prioritizes critical resources |
+| Remove backdrop-blur from mobile menu | `src/components/Header.tsx` | Eliminates mobile compositing jank |
+| Delete unused App.css | `src/App.css` | Removes conflicting styles |
+
+No new dependencies. No database changes. All changes are performance-focused with zero visual impact.
+
