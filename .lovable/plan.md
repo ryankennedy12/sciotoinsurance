@@ -1,86 +1,74 @@
 
 
-## Make the Bottom CTA Section Unique on the Business Insurance Page
+## Fix Polaroid Cards: Real Content, Working Links, Better Photos
 
-### The Problem
+Three issues to address:
 
-Section 7 ("Protect Your Business Today") uses the exact same pattern as the bottom CTA on every other page: burgundy background, centered headline, subtitle, two buttons. It's also nearly identical to Section 4 (the Risk Assessment banner) on this same page — so you get two burgundy banners that blur together.
+### 1. Remove Fake Case Studies — Replace with Real Service Descriptions
 
-### The Solution: "Split Card" CTA with a Business-Specific Hook
+The back of each card currently shows fabricated case studies ("We helped Smith Roofing...") and fake savings numbers. We'll replace these with **honest, benefit-focused descriptions** of what Scioto actually covers for each industry — no fake names, no made-up numbers.
 
-Replace the generic burgundy banner with a distinctive two-panel layout on a cream/light background that feels completely different from every other page's closer.
+**Updated back-of-card content:**
 
-### New Design: "Two Paths" Split CTA
+| Industry | Back Text (replaces fake case study) | Tagline (replaces fake savings) |
+|---|---|---|
+| Contractors | General liability, tools & equipment, workers' comp — built for the jobsite. | Coverage that works as hard as you do |
+| Restaurants | Liquor liability, food spoilage, kitchen fires — we know the risks. | From front-of-house to back-of-house |
+| Retail | Inventory protection, customer liability, theft — keep your doors open. | Protect your storefront and your margins |
+| Healthcare | Malpractice, HIPAA compliance, specialized professional coverage. | Compliance-ready coverage for your practice |
+| Transportation | Fleet coverage, cargo insurance, driver protection for every mile. | Keep your fleet on the road |
+| Manufacturing | Equipment breakdown, product liability, workplace safety programs. | Engineered coverage for your operation |
+| Professional | E&O, cyber liability, professional indemnity for knowledge workers. | Protect your reputation and your clients |
+| Trades | Tools, vehicles, and liability for HVAC, plumbing, and electrical pros. | Built for the trades, priced for your budget |
 
-```text
-+------------------------------------------------------------------+
-|  bg-cream                                                         |
-|                                                                   |
-|  Eyebrow: "Next Steps"                                            |
-|  Headline: "Two Ways to Get Started"                              |
-|                                                                   |
-|  +---------------------------+  +------------------------------+  |
-|  |  WHITE CARD               |  |  BURGUNDY CARD               |  |
-|  |                           |  |                               |  |
-|  |  "I Know What I Need"     |  |  "I'm Not Sure Yet"          |  |
-|  |                           |  |                               |  |
-|  |  Skip the small talk.     |  |  No problem. We'll walk      |  |
-|  |  Tell us about your       |  |  you through a free risk     |  |
-|  |  business and we'll       |  |  assessment and show you     |  |
-|  |  have a quote ready       |  |  exactly where you're        |  |
-|  |  within 24 hours.         |  |  covered — and where         |  |
-|  |                           |  |  you're exposed.             |  |
-|  |  [Get My Free Quote ->]   |  |  [Schedule Assessment ->]    |  |
-|  |                           |  |  or call: (614) 612-0050     |  |
-|  |  ~ avg response: 4 hrs ~  |  |  ~ 100% free, no strings ~  |  |
-|  +---------------------------+  +------------------------------+  |
-|                                                                   |
-|  "Not ready? That's okay too. Bookmark us — we'll be here."      |
-+------------------------------------------------------------------+
-```
+### 2. Make "Get Quote" Actually Navigate
 
-### Design Details
+The current "Get Quote" on the card back is a `<span>` inside a `<button>` — it doesn't navigate anywhere. We'll change the card structure so:
 
-**Section background:** `bg-cream` (NOT burgundy) — immediately different from every other page CTA and from Section 4 above it.
+- The **flip interaction** stays on the outer `<button>` (tap/hover to flip)
+- The **"Get Quote" element** on the back becomes a real `<Link to="/get-quote">` that navigates to the quote page
+- To prevent the link click from also triggering the flip-back, we'll add `e.stopPropagation()` on the link
 
-**Left card (white):**
-- White background, subtle border, rounded-xl
-- Headline: "I Know What I Need" (font-display, bold)
-- Body text describing the fast-track quote path
-- Primary CTA button: "Get My Free Quote"
-- Soft footnote: "Average response: 4 hours"
-- Hover: subtle lift + shadow
+### 3. Remove Location from Card Front
 
-**Right card (burgundy):**
-- `bg-primary` background, cream/white text
-- Headline: "I'm Not Sure Yet" (font-display, bold)
-- Body text about the risk assessment path
-- Secondary CTA: "Schedule Free Assessment" (cream button)
-- Phone number as alternative
-- Footnote: "100% free. No obligation."
-- Hover: subtle lift + deeper shadow
+The caption strip currently shows "{industry.name}" and "{location}, OH" underneath. We'll remove the location line since these are not real office locations — just keep the industry name for a cleaner look.
 
-**Below the cards:** A single understated line in muted text — "Not ready? That's okay too. Bookmark us — we'll be here." — to reduce pressure and feel human.
+### 4. Generate Better Industry Photos
 
-**Mobile:** Cards stack vertically (white on top, burgundy below).
+The current photos are decent but some are generic (e.g., "Trades" reuses the same `constructionSite.jpg` as "Contractors"). We'll use the AI image generation model to create 8 high-quality, realistic photos tailored to each industry:
 
-### Why This Stands Out
+1. **Contractors** — Workers on an active residential construction site, hard hats, Ohio suburban setting
+2. **Restaurants** — Busy restaurant kitchen with chefs plating food, warm lighting
+3. **Retail** — Modern boutique storefront interior with displays and customers
+4. **Healthcare** — Medical clinic reception/exam room, clean and professional
+5. **Transportation** — Fleet of commercial trucks lined up at a depot
+6. **Manufacturing** — Factory floor with CNC machines and workers
+7. **Professional** — Corporate office meeting room with professionals collaborating
+8. **Trades** — Plumber or electrician working in a residential setting (distinct from contractors)
 
-1. **No other page has this pattern** — it's a split-choice layout, not a centered banner
-2. **Different background** — cream instead of burgundy breaks the monotony
-3. **User-empathy framing** — "I Know / I'm Not Sure" meets visitors where they are instead of pushing one CTA
-4. **Two distinct visual treatments** side-by-side create visual contrast within the section itself
-5. **The closing line** adds personality no other CTA has
+These will be generated via an edge function using the Nano banana pro model for higher quality, uploaded to file storage, and referenced by URL. This gives each card a unique, industry-specific photo instead of reusing assets.
 
 ### Technical Changes
 
-**File:** `src/pages/BusinessInsurance.tsx`
+**File: `src/pages/BusinessInsurance.tsx`**
 
-- Replace Section 7 (lines ~374-395) with the new "Two Paths" split card layout
-- Uses existing components: `AnimatedSection`, `Button`, `Link`
-- No new files, dependencies, or database changes
-- Background: `bg-cream` with `container-wide`
-- Two cards in a `grid lg:grid-cols-2 gap-6` layout
-- Left card: `bg-card rounded-xl border border-border p-8`
-- Right card: `bg-primary rounded-xl p-8` with cream text
+- Update the `industries` array:
+  - Replace `caseStudy` with `backDescription` (honest service text)
+  - Replace `savings` with `tagline` (benefit phrase)
+  - Remove `location`, `pinX`, `pinY` fields (no longer used)
+  - Update image imports if new generated photos are added
+- In `PolaroidCard` front face:
+  - Remove the location line (`{industry.location}, OH`) from the caption strip
+- In `PolaroidCard` back face:
+  - Replace the quoted `caseStudy` text with `backDescription`
+  - Replace `savings` stat with `tagline`
+  - Change the "Get Quote" `<span>` to a `<Link to="/get-quote">` with `onClick={e => e.stopPropagation()}` to prevent flip-back
+- Generate new photos using AI image generation edge function, store in Lovable Cloud storage, and update image references
+
+**New edge function: `supabase/functions/generate-industry-photos/index.ts`**
+- Calls the image generation API for each industry prompt
+- Uploads results to a `industry-photos` storage bucket
+- Returns public URLs
+
+No other files or database schema changes needed.
 
