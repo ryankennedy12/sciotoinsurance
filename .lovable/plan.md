@@ -1,74 +1,69 @@
 
 
-## Employee Benefits Page Redesign
+## Services Page Redesign: "Client Command Center"
 
-### Current State
-The page has 6 sections: split hero (text + burgundy stat cards), product grid, ROI calculator, process timeline with photos, testimonials, and a burgundy bottom CTA. The hero feels like a generic SaaS landing page, the product cards are identical to other pages, and the process timeline cards blend in.
+### Design Concept
 
-### Design Direction: "Data-Driven Advisor"
+Every other page on the site is a marketing page — selling, persuading, building trust. The Services page is different: it's for **existing clients who need to get something done**. The redesign leans into that by making it feel like a **lightweight client portal or command center** — app-like, utility-first, with clear visual hierarchy that says "we respect your time."
 
-Employee benefits is fundamentally about numbers and outcomes. The redesign leans into that with a **dashboard-inspired aesthetic** — clean data visualization, comparison tables, and an interactive calculator that feels like a tool, not a brochure. This contrasts with Personal Insurance (editorial/lifestyle) and Business Insurance (industry-focused Polaroids).
+This is the only page that will use a **bento grid layout** — mixed-size tiles instead of uniform cards — giving it an immediately distinct look from the 3-column grids on other pages.
 
-### Section-by-Section Redesign
+### Section-by-Section Design
 
-**Section 1: Hero — "The Problem" Opening**
-- Switch to a **centered typographic hero** (similar to Personal Insurance's clean approach, but with a twist)
-- Large headline: "Your Benefits Package Is Costing You Talent"
-- Below the headline, a **horizontal stat ticker** — three stats in a single row with large numbers and animated counters (keep existing AnimatedCounter)
-- Stats sit inside a subtle cream card strip, not burgundy panels
-- CTAs below: "Get Custom Quote" + phone link (text only, no icon)
-- No split layout, no burgundy half-screen — just clean, authoritative typography
+**Section 1: Minimal Greeting Hero**
+- No gradient background, no big photo — just a clean white section
+- Small "Client Services" label in uppercase tracking (dusty rose accent)
+- Headline: "How Can We Help Today?"
+- Subtitle: one line, warm and direct
+- Below: a prominent **"Need Help Now?"** phone link styled as a pill — not a big circle+number like the current design, but a compact, app-style action chip
+- This hero is intentionally short — gets out of the way fast
 
-**Section 2: Benefits Products — "Comparison Table" Style**
-- Instead of the current icon+text cards, present products in a **clean two-column layout** with a left column showing the product name and a right column with a brief description
-- Each row has a subtle bottom border, hover highlights the row
-- This feels like a dashboard/spreadsheet — distinct from the card grids on other pages
-- A "Get a Quote" link on hover for each row
+**Section 2: Bento Grid — Action Tiles**
+- A **2x3 bento grid on desktop** where the first tile (Report a Claim) is double-width, spanning both columns — it's the most urgent/important action
+- The claim tile gets a subtle burgundy-100 background and a left border accent in burgundy, making it visually distinct as the "priority action"
+- Remaining 5 tiles are single-width in a clean grid
+- Each tile is minimal: large icon (centered), bold title, one-line description, and a subtle arrow link at the bottom
+- No card borders — just a light background fill with rounded corners and hover shadow
+- On mobile: single column, all tiles same size, claim tile keeps its accent styling
 
-**Section 3: ROI Calculator — Keep but Elevate**
-- This is already unique and strong. Keep the slider-based calculator
-- Improve the sliders with custom-styled range inputs (Dusty Rose track, burgundy thumb)
-- Move the results panel from a burgundy card to a **charcoal card** (#1A1A1A) — differentiates from the bottom CTA
-- Add a second result metric: "Estimated Hiring Cost Savings" alongside "Potential Annual Savings"
+**Section 3: Response Times Strip**
+- A new section that doesn't exist on any other page: a **horizontal strip with 3 response-time promises**
+- Cream background with three inline items:
+  - "Claims: Within 1 hour"
+  - "Policy Changes: Same day"  
+  - "Certificates: Within 2 hours"
+- Each item has a small clock icon and uses a monospace-style number treatment (large, bold number + unit)
+- This builds trust while being purely functional — no other page has this pattern
 
-**Section 4: Process Timeline — Horizontal Stepper**
-- Replace the 4 photo cards with a **horizontal stepper/timeline**
-- A single horizontal line connecting 4 numbered circles
-- Active/hovered step expands to show the description below
-- No photos — just clean numbered steps with icons
-- This is a completely different pattern from any other page
-
-**Section 5: Testimonials — Keep As-Is**
-- The 3-card testimonial grid works well and is consistent across the site
-- No changes needed here
-
-**Section 6: Bottom CTA — Match Other Pages**
-- Keep the burgundy full-width CTA
-- Fix the phone button legibility (use `variant="secondary"` like we did on Business Insurance)
-- Remove the phone icon, just show the number
+**Section 4: Contact Fallback (Simplified)**
+- Keep the "Can't Find What You Need?" section but simplify it
+- Remove the large burgundy circle around the phone icon — just show the phone number large and clickable
+- Stack phone, email, and hours vertically in a compact card with a subtle border
+- Move the "Not a client yet?" CTA into a small, understated text link — this page is for existing clients, so the quote CTA should be secondary
 
 ### Technical Details
 
-**File changed:** `src/pages/EmployeeBenefits.tsx` (full rewrite of sections 1, 2, and 4; modifications to sections 3 and 6)
+**File changed:** `src/pages/Services.tsx`
 
-**Hero changes:**
-- Remove the `grid lg:grid-cols-2` split layout
-- Center-align content with `max-w-3xl mx-auto text-center`
-- Stats become a horizontal row of 3 items in a cream strip below the headline
+**Bento grid implementation:**
+- CSS Grid with `grid-cols-1 md:grid-cols-2` and `col-span-2` on the first tile (Report a Claim)
+- No Card component wrapper — use plain `div` with `rounded-2xl bg-card` for a lighter feel
+- Claim tile: `bg-burgundy-50 border-l-4 border-primary`
 
-**Products section:**
-- Replace the card grid with a table-like layout using `divide-y` borders
-- Each product is a flex row: icon-less, just name + description + hover arrow
+**Response times strip:**
+- New data array with 3 items: `{ label, time, unit }` 
+- Horizontal flex on desktop, vertical stack on mobile
+- Numbers styled with `font-display text-3xl font-bold text-primary`
 
-**Process section:**
-- Replace photo cards with a CSS-only horizontal stepper
-- 4 circles connected by a line, each with step number, title, and description below
+**Hero simplification:**
+- Remove gradient background classes
+- Replace with `bg-white pt-28 pb-10`
+- Phone pill: `inline-flex rounded-full bg-primary/10 text-primary px-5 py-2`
 
-**Calculator tweaks:**
-- Change results card from `bg-primary` to `bg-foreground` (charcoal)
-- Add second metric row
+**Contact section cleanup:**
+- Remove the `w-16 h-16 rounded-full bg-primary` phone circle
+- Phone number: `text-3xl font-display font-bold text-primary` (direct, no wrapper)
+- Compact vertical card for all contact methods
 
-**Bottom CTA fix:**
-- Phone button: `variant="secondary"`, remove `Phone` icon
+No new dependencies, no database changes. All changes are purely presentational within the single file.
 
-No new dependencies or database changes needed. All changes are purely presentational within the single file.
