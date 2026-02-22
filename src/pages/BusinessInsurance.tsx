@@ -59,7 +59,7 @@ const BusinessInsurance = () => {
         {/* Tablet: stronger overlay since text spans more of the width */}
         <div className="hidden sm:block lg:hidden absolute inset-y-0 left-0 w-[75%]" style={{ background: 'linear-gradient(to right, hsl(30 20% 98% / 0.98) 0%, hsl(30 20% 98% / 0.97) 60%, hsl(30 20% 98% / 0.85) 85%, hsl(30 20% 98% / 0) 100%)' }} />
         {/* Mobile: full overlay */}
-        <div className="absolute inset-0 bg-cream/90 sm:hidden" />
+        <div className="absolute inset-0 sm:hidden" style={{ background: 'linear-gradient(to bottom, hsl(30 20% 98% / 0) 0%, hsl(30 20% 98% / 0.3) 15%, hsl(30 20% 98% / 0.85) 40%, hsl(30 20% 98% / 0.98) 55%, hsl(30 20% 98% / 1) 100%)' }} />
 
         {/* Content */}
         <div className="relative z-10 container-wide h-full min-h-[70vh] lg:min-h-[85vh] flex items-center">
