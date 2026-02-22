@@ -91,10 +91,6 @@ const PolaroidCard = ({
               />
               {/* Vignette */}
               <div className="absolute inset-0" style={{ boxShadow: "inset 0 0 40px 10px rgba(0,0,0,0.15)" }} />
-              {/* Icon badge */}
-              <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
-                <Icon className="h-4 w-4 text-primary" />
-              </div>
             </div>
             {/* Caption strip */}
             <div className="flex flex-col items-center justify-center h-[30%] px-2">
@@ -111,9 +107,6 @@ const PolaroidCard = ({
               transform: "rotateY(180deg)",
             }}
           >
-            <div className="w-10 h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center mb-3">
-              <Icon className="h-5 w-5 text-primary-foreground" />
-            </div>
             <p className="font-display italic text-sm sm:text-base text-primary-foreground/90 leading-relaxed mb-4">
               {industry.backDescription}
             </p>
