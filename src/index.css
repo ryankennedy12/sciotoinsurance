@@ -358,4 +358,11 @@
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
+  
+  /* Polaroid card desktop hover flip */
+  @media (hover: hover) and (pointer: fine) {
+    .polaroid-flip:hover .polaroid-inner {
+      transform: rotate(0deg) rotateY(180deg) translateY(-8px);
+    }
+  }
 }
