@@ -34,8 +34,8 @@ export default {
         // charcoal: #1A1A1A - Body text
         cream: "hsl(var(--cream))", // #FAF9F8
         charcoal: "hsl(var(--charcoal))", // #1A1A1A
-        // Accent (EXACT hex value)
-        // gold-500: #C9A962 - Icons, trust badges, premium accents
+        // Accent (Dusty Rose)
+        // gold-500: #C4A0A0 - Icons, trust badges, premium accents
         gold: {
           500: "hsl(var(--gold-500))", // #C9A962
         },

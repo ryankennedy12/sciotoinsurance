@@ -29,11 +29,11 @@ const HeroVisual = ({ scrollY }: HeroVisualProps) => {
         }}
       />
 
-      {/* Gold accent circle */}
+      {/* Dusty rose accent circle */}
       <div
         className="absolute w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full right-8 sm:right-12 lg:right-16 top-[15%]"
         style={{
-          background: "linear-gradient(135deg, hsl(42 42% 59% / 0.6) 0%, hsl(42 42% 59% / 0.2) 100%)",
+          background: "linear-gradient(135deg, hsl(0 18% 70% / 0.6) 0%, hsl(0 18% 70% / 0.2) 100%)",
           transform: `translateY(${parallax3}px)`,
         }}
       />
@@ -66,7 +66,7 @@ const HeroVisual = ({ scrollY }: HeroVisualProps) => {
         }}
       />
 
-      {/* Small gold dot accents */}
+      {/* Small dusty rose dot accents */}
       <div
         className="absolute w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-gold-500/60 right-[45%] top-[25%]"
         style={{
@@ -97,7 +97,7 @@ const HeroVisual = ({ scrollY }: HeroVisualProps) => {
       >
         <path
           d="M20 180 Q 80 100, 150 120 T 280 40"
-          stroke="hsl(42 42% 59% / 0.5)"
+          stroke="hsl(0 18% 70% / 0.5)"
           strokeWidth="2"
           strokeLinecap="round"
           fill="none"
