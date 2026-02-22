@@ -1,67 +1,74 @@
 
 
-## Redesign: "Industries We Serve" as Scattered Polaroid Cards
+## Fix Polaroid Cards: Real Content, Working Links, Better Photos
 
-Replace the interactive map section with a tactile, photo-forward "stack of Polaroids" layout where each industry is a slightly rotated photo card that flips on hover/tap to reveal the case study on the back.
+Three issues to address:
 
-### Visual Concept
+### 1. Remove Fake Case Studies — Replace with Real Service Descriptions
 
-Cards are arranged in a responsive grid but each has a slight random rotation (-3 to +3 degrees), giving the feel of photos scattered on a table. On hover (desktop) or tap (mobile), a card "lifts" off the surface, straightens, and flips to reveal the back side with a burgundy background, case study quote, savings stat, and CTA.
+The back of each card currently shows fabricated case studies ("We helped Smith Roofing...") and fake savings numbers. We'll replace these with **honest, benefit-focused descriptions** of what Scioto actually covers for each industry — no fake names, no made-up numbers.
 
-### Card Design
+**Updated back-of-card content:**
 
-**Front Side:**
-- Full photo background (existing industry images) with a subtle vignette
-- White border (8px) mimicking a Polaroid frame
-- Bottom "caption strip": industry name in a handwritten-style font treatment (Cormorant Garamond italic) + location
-- Industry icon in a small circle at the top-right corner
-- Slight drop shadow to feel lifted off the page
+| Industry | Back Text (replaces fake case study) | Tagline (replaces fake savings) |
+|---|---|---|
+| Contractors | General liability, tools & equipment, workers' comp — built for the jobsite. | Coverage that works as hard as you do |
+| Restaurants | Liquor liability, food spoilage, kitchen fires — we know the risks. | From front-of-house to back-of-house |
+| Retail | Inventory protection, customer liability, theft — keep your doors open. | Protect your storefront and your margins |
+| Healthcare | Malpractice, HIPAA compliance, specialized professional coverage. | Compliance-ready coverage for your practice |
+| Transportation | Fleet coverage, cargo insurance, driver protection for every mile. | Keep your fleet on the road |
+| Manufacturing | Equipment breakdown, product liability, workplace safety programs. | Engineered coverage for your operation |
+| Professional | E&O, cyber liability, professional indemnity for knowledge workers. | Protect your reputation and your clients |
+| Trades | Tools, vehicles, and liability for HVAC, plumbing, and electrical pros. | Built for the trades, priced for your budget |
 
-**Back Side:**
-- Solid burgundy-700 background with cream text
-- Industry icon centered at top
-- Case study quote in italic serif
-- Savings/result stat with a gold accent line
-- "Get Quote" CTA button (cream on burgundy)
-- Small "tap to flip back" hint on mobile
+### 2. Make "Get Quote" Actually Navigate
 
-### Layout
+The current "Get Quote" on the card back is a `<span>` inside a `<button>` — it doesn't navigate anywhere. We'll change the card structure so:
 
-- **Desktop:** 4-column grid with staggered rotations (-2deg, 1deg, -1deg, 3deg, etc.)
-- **Tablet:** 2-column grid
-- **Mobile:** 2-column grid with smaller cards (no rotation on mobile for cleaner feel)
+- The **flip interaction** stays on the outer `<button>` (tap/hover to flip)
+- The **"Get Quote" element** on the back becomes a real `<Link to="/get-quote">` that navigates to the quote page
+- To prevent the link click from also triggering the flip-back, we'll add `e.stopPropagation()` on the link
 
-### Interactions
+### 3. Remove Location from Card Front
 
-- **Desktop hover:** Card lifts (translateY -8px, shadow deepens), rotation resets to 0deg, then performs a Y-axis 3D flip (180deg) to show the back. 500ms total transition.
-- **Mobile tap:** Tapping a card flips it; tapping again (or tapping another card) flips it back. Only one card flipped at a time.
-- **Accessibility:** Both sides have readable text; screen readers get all content without needing the flip.
+The caption strip currently shows "{industry.name}" and "{location}, OH" underneath. We'll remove the location line since these are not real office locations — just keep the industry name for a cleaner look.
 
-### Section Header
+### 4. Generate Better Industry Photos
 
-```
-Eyebrow: "Industries We Serve"
-Headline: "Real Stories from Real Ohio Businesses"
-Subtitle: "Flip a card to see how we helped."
-```
+The current photos are decent but some are generic (e.g., "Trades" reuses the same `constructionSite.jpg` as "Contractors"). We'll use the AI image generation model to create 8 high-quality, realistic photos tailored to each industry:
 
-### Technical Details
+1. **Contractors** — Workers on an active residential construction site, hard hats, Ohio suburban setting
+2. **Restaurants** — Busy restaurant kitchen with chefs plating food, warm lighting
+3. **Retail** — Modern boutique storefront interior with displays and customers
+4. **Healthcare** — Medical clinic reception/exam room, clean and professional
+5. **Transportation** — Fleet of commercial trucks lined up at a depot
+6. **Manufacturing** — Factory floor with CNC machines and workers
+7. **Professional** — Corporate office meeting room with professionals collaborating
+8. **Trades** — Plumber or electrician working in a residential setting (distinct from contractors)
 
-**File:** `src/pages/BusinessInsurance.tsx`
+These will be generated via an edge function using the Nano banana pro model for higher quality, uploaded to file storage, and referenced by URL. This gives each card a unique, industry-specific photo instead of reusing assets.
 
-Changes:
-1. Remove the entire map SVG, pin system, and detail panel (lines ~103-235)
-2. Remove the `selectedIndustry` state; replace with `flippedCard` state (number | null) for mobile tap toggling
-3. Build inline `PolaroidCard` component with:
-   - CSS `perspective` on the grid container (1000px)
-   - `transform-style: preserve-3d` on the card wrapper
-   - Front/back faces using `backface-visibility: hidden` and `rotateY(180deg)` for the back
-   - Desktop: CSS-only flip via `@media (hover: hover)` using `:hover` pseudo-class with `rotateY(180deg)`
-   - Mobile: flip controlled by `flippedCard` state + `onClick`
-   - Random rotation per card using a static array of rotation values
-4. Each card reuses the existing `industries` array data (photo, icon, name, location, caseStudy, savings)
-5. White Polaroid-style border via padding + white background on the outer card wrapper
-6. Section background: `bg-background` (cream)
+### Technical Changes
 
-No new files, dependencies, or database changes needed. All existing industry photos are reused.
+**File: `src/pages/BusinessInsurance.tsx`**
+
+- Update the `industries` array:
+  - Replace `caseStudy` with `backDescription` (honest service text)
+  - Replace `savings` with `tagline` (benefit phrase)
+  - Remove `location`, `pinX`, `pinY` fields (no longer used)
+  - Update image imports if new generated photos are added
+- In `PolaroidCard` front face:
+  - Remove the location line (`{industry.location}, OH`) from the caption strip
+- In `PolaroidCard` back face:
+  - Replace the quoted `caseStudy` text with `backDescription`
+  - Replace `savings` stat with `tagline`
+  - Change the "Get Quote" `<span>` to a `<Link to="/get-quote">` with `onClick={e => e.stopPropagation()}` to prevent flip-back
+- Generate new photos using AI image generation edge function, store in Lovable Cloud storage, and update image references
+
+**New edge function: `supabase/functions/generate-industry-photos/index.ts`**
+- Calls the image generation API for each industry prompt
+- Uploads results to a `industry-photos` storage bucket
+- Returns public URLs
+
+No other files or database schema changes needed.
 
