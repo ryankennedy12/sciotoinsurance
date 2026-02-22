@@ -4,8 +4,7 @@ import {
   Phone, 
   Mail, 
   MapPin, 
-  Clock, 
-  Calendar,
+  Clock,
   CheckCircle,
   Send,
   Loader2
@@ -56,8 +55,8 @@ const channels = [
   },
   {
     icon: MapPin,
-    title: "Visit Us",
-    detail: "102 W Main St. #491",
+    title: "Mailing Address",
+    detail: "P.O. Box 491",
     subtitle: "New Albany, OH 43054",
     href: undefined,
     priority: false,
@@ -342,12 +341,12 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Section 4: Hours + Map Row */}
-      <section className="py-12 md:py-16 bg-cream">
+      {/* Section 4: Business Hours */}
+      <section className="py-12 md:py-16 bg-cream border-b border-border">
         <div className="container-wide px-4 md:px-space-lg">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="max-w-xl mx-auto">
             <AnimatedSection animation="fade-up" delay={0}>
-              <div className="bg-card border border-border rounded-2xl p-6 h-full">
+              <div className="bg-card border border-border rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <Clock className="w-5 h-5 text-primary" />
                   <h3 className="font-display font-semibold text-lg text-foreground">Business Hours</h3>
@@ -361,51 +360,6 @@ const Contact = () => {
                 </p>
               </div>
             </AnimatedSection>
-
-            <AnimatedSection animation="fade-up" delay={100}>
-              <div className="aspect-video rounded-2xl overflow-hidden relative border border-border">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48911.87391555889!2d-82.8485!3d40.0812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388f0a4a91d2e5%3A0x1a7c05c6dbf48d33!2sNew%20Albany%2C%20OH!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Scioto Insurance Group Location"
-                  className="absolute inset-0"
-                />
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Schedule a Call */}
-      <section className="py-12 md:py-16 bg-background border-b border-border">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Calendar className="w-6 h-6 text-primary" />
-              <h2 className="heading-lg text-foreground">
-                Prefer to Schedule a Specific Time?
-              </h2>
-            </div>
-            <p className="body-md text-muted-foreground mb-6">
-              Pick a time that works for you — no phone tag.
-            </p>
-            <Button asChild size="lg" className="text-base px-8">
-              <a 
-                href="https://calendly.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Schedule a Call
-              </a>
-            </Button>
-            <p className="text-sm text-muted-foreground mt-4">
-              It's free, no strings attached.
-            </p>
           </div>
         </div>
       </section>
