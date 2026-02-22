@@ -406,7 +406,7 @@ const BusinessInsurance = () => {
               <Button asChild size="lg" variant="secondary">
                 <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+              <Button asChild size="lg" variant="secondary">
                 <a href="tel:6146120050"><Phone className="mr-2 h-5 w-5" />(614) 612-0050</a>
               </Button>
             </div>
