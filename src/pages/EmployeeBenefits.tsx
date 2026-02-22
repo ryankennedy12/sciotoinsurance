@@ -5,6 +5,38 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import TestimonialCard from "@/components/TestimonialCard";
 import { employeeBenefitsProducts } from "@/data/products";
 import { useState, useEffect, useRef } from "react";
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, LineChart, Line, ResponsiveContainer, CartesianGrid, Tooltip } from "recharts";
+
+// --- Illustrative chart data (decorative, not real API data) ---
+const retentionData = [
+  { name: "With Benefits", value: 72 },
+  { name: "Without", value: 28 },
+];
+const RETENTION_COLORS = ["hsl(var(--primary))", "hsl(var(--muted))"];
+
+const savingsByCategory = [
+  { category: "Health", savings: 2400 },
+  { category: "401(k)", savings: 1800 },
+  { category: "Dental", savings: 960 },
+];
+
+const turnoverTrend = [
+  { month: "Jan", rate: 22 },
+  { month: "Apr", rate: 18 },
+  { month: "Jul", rate: 14 },
+  { month: "Oct", rate: 11 },
+  { month: "Dec", rate: 8 },
+];
+
+// --- Product metric extensions (local, not changing data file) ---
+const productMetrics: Record<string, { avgSavings: string; adoptionRate: number }> = {
+  "Group Health Insurance": { avgSavings: "$2,400/yr", adoptionRate: 92 },
+  "401(k) & Retirement": { avgSavings: "$1,800/yr", adoptionRate: 78 },
+  "Life & Disability": { avgSavings: "$960/yr", adoptionRate: 65 },
+  "Dental & Vision": { avgSavings: "$720/yr", adoptionRate: 85 },
+  "HSA & FSA": { avgSavings: "$1,200/yr", adoptionRate: 58 },
+  "Voluntary Benefits": { avgSavings: "$480/yr", adoptionRate: 42 },
+};
 
 const heroStats = [
   { value: 78, suffix: "%", label: "of employees consider benefits in job decisions" },
@@ -73,6 +105,11 @@ const EmployeeBenefits = () => {
   const annualSavings = (currentTurnover - improvedTurnover) * (calc.avgSalary * 0.5);
   const hiringSavings = (currentTurnover - improvedTurnover) * (calc.avgSalary * 0.33);
 
+  const roiChartData = [
+    { name: "Current", cost: currentTurnover * calc.avgSalary * 0.5, fill: "#9CA3AF" },
+    { name: "With Benefits", cost: improvedTurnover * calc.avgSalary * 0.5, fill: "hsl(var(--primary))" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Section 1: Centered Typographic Hero */}
@@ -121,10 +158,59 @@ const EmployeeBenefits = () => {
               <div className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /><span>Multiple carriers</span></div>
             </div>
           </AnimatedSection>
+
+          {/* Dashboard Preview Strip */}
+          <AnimatedSection animation="fade-up" delay={450}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
+              {/* Donut: Retention */}
+              <div className="bg-card border border-border rounded-xl p-4">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Employee Retention</p>
+                <div className="flex items-center justify-center" style={{ height: 120 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie data={retentionData} cx="50%" cy="50%" innerRadius={32} outerRadius={48} dataKey="value" strokeWidth={0}>
+                        {retentionData.map((_, idx) => (
+                          <Cell key={idx} fill={RETENTION_COLORS[idx]} />
+                        ))}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                <p className="text-xs text-center text-muted-foreground mt-1"><span className="font-semibold text-foreground">72%</span> retained with benefits</p>
+              </div>
+
+              {/* Bar: Savings by Category */}
+              <div className="bg-card border border-border rounded-xl p-4">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Avg. Savings by Category</p>
+                <div style={{ height: 120 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={savingsByCategory} barSize={24}>
+                      <XAxis dataKey="category" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+                      <Bar dataKey="savings" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* Line: Turnover Reduction */}
+              <div className="bg-card border border-border rounded-xl p-4">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Turnover Reduction</p>
+                <div style={{ height: 120 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={turnoverTrend}>
+                      <Line type="monotone" dataKey="rate" stroke="hsl(var(--primary))" strokeWidth={2.5} dot={false} />
+                      <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+                <p className="text-xs text-center text-muted-foreground mt-1">Trend over first year</p>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Section 2: Comparison Table Products */}
+      {/* Section 2: Dashboard-Style Products with Metrics */}
       <section className="section-padding bg-background">
         <div className="container-wide">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
@@ -132,28 +218,57 @@ const EmployeeBenefits = () => {
             <p className="text-muted-foreground max-w-xl mx-auto">Everything your team needs, from one independent advisor.</p>
           </AnimatedSection>
           <AnimatedSection animation="fade-up" delay={100}>
-            <div className="max-w-3xl mx-auto divide-y divide-border border-t border-b border-border">
-              {employeeBenefitsProducts.map((product) => (
-                <Link
-                  key={product.name}
-                  to="/get-quote"
-                  className="group flex items-center justify-between py-5 px-4 hover:bg-muted/50 transition-colors"
-                >
-                  <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-8 flex-1">
-                    <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors md:w-56 shrink-0">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{product.description}</p>
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity ml-4 shrink-0 hidden md:block" />
-                </Link>
-              ))}
+            <div className="max-w-4xl mx-auto">
+              {/* Header row – desktop only */}
+              <div className="hidden lg:flex items-center py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider border-b border-border">
+                <div className="flex-1">Benefit</div>
+                <div className="w-28 text-right">Avg. Savings</div>
+                <div className="w-36 text-right">Adoption Rate</div>
+                <div className="w-8" />
+              </div>
+              <div className="divide-y divide-border border-b border-border">
+                {employeeBenefitsProducts.map((product) => {
+                  const metrics = productMetrics[product.name];
+                  return (
+                    <Link
+                      key={product.name}
+                      to="/get-quote"
+                      className="group flex items-center justify-between py-5 px-4 hover:bg-muted/50 transition-colors"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-8 flex-1 min-w-0">
+                        <h3 className="font-display font-semibold text-lg text-foreground group-hover:text-primary transition-colors md:w-56 shrink-0">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground truncate">{product.description}</p>
+                      </div>
+                      {/* Metric columns – desktop only */}
+                      {metrics && (
+                        <>
+                          <div className="hidden lg:block w-28 text-right text-sm font-semibold text-foreground">
+                            {metrics.avgSavings}
+                          </div>
+                          <div className="hidden lg:flex w-36 items-center gap-2 justify-end">
+                            <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-primary rounded-full transition-all"
+                                style={{ width: `${metrics.adoptionRate}%` }}
+                              />
+                            </div>
+                            <span className="text-xs text-muted-foreground w-8 text-right">{metrics.adoptionRate}%</span>
+                          </div>
+                        </>
+                      )}
+                      <ArrowRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity ml-4 shrink-0 hidden md:block" />
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Section 3: ROI Calculator (Elevated) */}
+      {/* Section 3: ROI Calculator with Live Chart */}
       <section className="section-padding bg-secondary">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -182,15 +297,38 @@ const EmployeeBenefits = () => {
             </AnimatedSection>
             <AnimatedSection animation="slide-left">
               <div className="bg-foreground rounded-2xl p-8 lg:p-10 text-background">
-                <h3 className="font-display font-semibold text-2xl mb-8">Potential Annual Impact</h3>
-                <div className="space-y-4 mb-8">
-                  <div className="bg-background/10 rounded-xl p-6 text-center">
-                    <div className="text-sm text-background/70 mb-1">Reduced Turnover Savings</div>
-                    <div className="text-4xl md:text-5xl font-display font-bold">${annualSavings.toLocaleString()}</div>
+                <h3 className="font-display font-semibold text-2xl mb-6">Potential Annual Impact</h3>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="bg-background/10 rounded-xl p-4 text-center">
+                    <div className="text-xs text-background/70 mb-1">Turnover Savings</div>
+                    <div className="text-2xl md:text-3xl font-display font-bold">${annualSavings.toLocaleString()}</div>
                   </div>
-                  <div className="bg-background/10 rounded-xl p-6 text-center">
-                    <div className="text-sm text-background/70 mb-1">Estimated Hiring Cost Savings</div>
-                    <div className="text-4xl md:text-5xl font-display font-bold">${hiringSavings.toLocaleString()}</div>
+                  <div className="bg-background/10 rounded-xl p-4 text-center">
+                    <div className="text-xs text-background/70 mb-1">Hiring Cost Savings</div>
+                    <div className="text-2xl md:text-3xl font-display font-bold">${hiringSavings.toLocaleString()}</div>
+                  </div>
+                </div>
+                {/* Live Bar Chart */}
+                <div className="bg-background/10 rounded-xl p-4 mb-6">
+                  <p className="text-xs text-background/70 uppercase tracking-wider mb-3">Cost Comparison</p>
+                  <div style={{ height: 180 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={roiChartData} barSize={48}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                        <XAxis dataKey="name" tick={{ fontSize: 12, fill: 'rgba(255,255,255,0.7)' }} axisLine={false} tickLine={false} />
+                        <YAxis tick={{ fontSize: 11, fill: 'rgba(255,255,255,0.5)' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+                        <Tooltip
+                          cursor={false}
+                          contentStyle={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, color: '#fff', fontSize: 13 }}
+                          formatter={(value: number) => [`$${value.toLocaleString()}`, 'Annual Cost']}
+                        />
+                        <Bar dataKey="cost" radius={[6, 6, 0, 0]}>
+                          {roiChartData.map((entry, idx) => (
+                            <Cell key={idx} fill={entry.fill} />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
                   </div>
                 </div>
                 <Button asChild size="lg" variant="secondary" className="w-full">
@@ -211,9 +349,7 @@ const EmployeeBenefits = () => {
           <AnimatedSection animation="fade-up" delay={100}>
             {/* Desktop stepper */}
             <div className="hidden md:block max-w-4xl mx-auto">
-              {/* Line + circles */}
               <div className="relative flex items-start justify-between">
-                {/* Connecting line */}
                 <div className="absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-border" />
                 {processSteps.map((step) => {
                   const Icon = step.icon;
@@ -264,7 +400,7 @@ const EmployeeBenefits = () => {
         </div>
       </section>
 
-      {/* Section 5: Testimonials (unchanged) */}
+      {/* Section 5: Testimonials */}
       <section className="section-padding bg-secondary">
         <div className="container-wide">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
@@ -278,7 +414,7 @@ const EmployeeBenefits = () => {
         </div>
       </section>
 
-      {/* Section 6: Bottom CTA (fixed legibility) */}
+      {/* Section 6: Bottom CTA */}
       <section className="section-padding bg-primary">
         <div className="container-narrow text-center">
           <AnimatedSection animation="fade-up">
