@@ -67,7 +67,7 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
 
 const EmployeeBenefits = () => {
   const [calc, setCalc] = useState({ employees: 25, avgSalary: 50000, turnoverRate: 20 });
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+  
   const currentTurnover = Math.round(calc.employees * (calc.turnoverRate / 100));
   const improvedTurnover = Math.round(currentTurnover * 0.75);
   const annualSavings = (currentTurnover - improvedTurnover) * (calc.avgSalary * 0.5);
@@ -205,62 +205,37 @@ const EmployeeBenefits = () => {
       {/* Section 4: Horizontal Stepper Process */}
       <section className="section-padding bg-card">
         <div className="container-wide">
-          <AnimatedSection animation="fade-up" className="text-center mb-16">
-            <h2 className="heading-lg text-foreground mb-4">How We Work With You</h2>
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <h2 className="heading-lg text-foreground mb-3">How We Work With You</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">A proven four-step process that makes benefits simple.</p>
           </AnimatedSection>
-          <AnimatedSection animation="fade-up" delay={100}>
-            {/* Desktop stepper */}
-            <div className="hidden md:block max-w-4xl mx-auto">
-              {/* Line + circles */}
-              <div className="relative flex items-start justify-between">
-                {/* Connecting line */}
-                <div className="absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-border" />
-                {processSteps.map((step) => {
-                  const Icon = step.icon;
-                  const isActive = activeStep === step.step;
-                  return (
-                    <div
-                      key={step.step}
-                      className="relative flex flex-col items-center w-1/4 cursor-pointer group"
-                      onMouseEnter={() => setActiveStep(step.step)}
-                      onMouseLeave={() => setActiveStep(null)}
-                    >
-                      <div className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-display font-bold text-lg transition-all duration-300 ${isActive ? 'bg-primary text-primary-foreground scale-110 shadow-lg' : 'bg-secondary text-foreground border-2 border-border'}`}>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {processSteps.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <AnimatedSection key={step.step} animation="fade-up" delay={i * 100}>
+                  <div className="group relative rounded-2xl border border-border bg-background p-6 pt-10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/30">
+                    {/* Step number pill */}
+                    <div className="absolute -top-4 left-6 flex items-center gap-2">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-display font-bold text-sm shadow-md">
                         {step.step}
-                      </div>
-                      <div className="mt-4 text-center">
-                        <div className="flex items-center justify-center gap-1.5 mb-1">
-                          <Icon className={`h-4 w-4 transition-colors ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
-                          <h3 className={`font-display font-semibold transition-colors ${isActive ? 'text-primary' : 'text-foreground'}`}>{step.title}</h3>
-                        </div>
-                        <p className={`text-sm text-muted-foreground max-w-[180px] mx-auto transition-all duration-300 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
-                          {step.description}
-                        </p>
-                      </div>
+                      </span>
+                      {i < processSteps.length - 1 && (
+                        <div className="hidden lg:block w-[calc(100%+1.5rem)] h-px bg-border absolute left-10 top-1/2" />
+                      )}
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-            {/* Mobile stepper (vertical) */}
-            <div className="md:hidden space-y-6">
-              {processSteps.map((step) => {
-                const Icon = step.icon;
-                return (
-                  <div key={step.step} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-display font-bold shrink-0">{step.step}</div>
-                    <div>
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <Icon className="h-4 w-4 text-primary" />
-                        <h3 className="font-display font-semibold text-foreground">{step.title}</h3>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{step.description}</p>
+                    {/* Icon */}
+                    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/8 text-primary transition-colors group-hover:bg-primary/15">
+                      <Icon className="h-5 w-5" />
                     </div>
+                    <h3 className="font-display font-semibold text-foreground text-lg mb-2">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
                   </div>
-                );
-              })}
-            </div>
-          </AnimatedSection>
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
       </section>
 
