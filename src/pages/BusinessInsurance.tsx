@@ -54,9 +54,11 @@ const BusinessInsurance = () => {
           alt="Columbus Ohio skyline"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        {/* Cream panel overlay - left side only */}
-        <div className="hidden sm:block absolute inset-y-0 left-0 w-[60%]" style={{ background: 'linear-gradient(to right, hsl(30 20% 98% / 0.98) 0%, hsl(30 20% 98% / 0.96) 55%, hsl(30 20% 98% / 0.8) 80%, hsl(30 20% 98% / 0) 100%)' }} />
-        {/* Mobile: full overlay for legibility */}
+        {/* Desktop: partial cream fade */}
+        <div className="hidden lg:block absolute inset-y-0 left-0 w-[60%]" style={{ background: 'linear-gradient(to right, hsl(30 20% 98% / 0.98) 0%, hsl(30 20% 98% / 0.96) 55%, hsl(30 20% 98% / 0.8) 80%, hsl(30 20% 98% / 0) 100%)' }} />
+        {/* Tablet: stronger overlay since text spans more of the width */}
+        <div className="hidden sm:block lg:hidden absolute inset-y-0 left-0 w-[75%]" style={{ background: 'linear-gradient(to right, hsl(30 20% 98% / 0.98) 0%, hsl(30 20% 98% / 0.97) 60%, hsl(30 20% 98% / 0.85) 85%, hsl(30 20% 98% / 0) 100%)' }} />
+        {/* Mobile: full overlay */}
         <div className="absolute inset-0 bg-cream/90 sm:hidden" />
 
         {/* Content */}
