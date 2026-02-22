@@ -322,49 +322,8 @@ const BusinessInsurance = () => {
         </div>
       </section>
 
-      {/* Section 4: Blueprint Assessment Card */}
-      <section className="section-padding bg-cream">
-        <div className="container-wide">
-          <AnimatedSection animation="fade-up">
-            <div className="rounded-2xl overflow-hidden shadow-xl border-l-4 border-l-accent">
-              <div className="grid lg:grid-cols-5">
-                {/* Left Panel — Charcoal */}
-                <div className="lg:col-span-3 bg-foreground p-8 sm:p-10 lg:p-12">
-                  <span className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-6 block">
-                    Free for Ohio Businesses
-                  </span>
-                  <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-4 leading-tight">
-                    Find Out What<br />You're Missing
-                  </h2>
-                  <p className="text-white/60 mb-8 leading-relaxed max-w-md">
-                    We'll review your current coverage, identify gaps, and give you an honest recommendation — no strings attached.
-                  </p>
-                  <div className="space-y-3 mb-8">
-                    {["Coverage gap analysis", "Industry-specific risk review", "Claims scenario planning", "Pricing comparison vs. current policy"].map((item) => (
-                      <div key={item} className="flex items-center gap-3">
-                        <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                        <span className="text-white/80 text-sm">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-white/40 text-xs">300+ businesses assessed since 1995</p>
-                </div>
 
-                {/* Right Panel — White Form */}
-                <div className="lg:col-span-2 bg-white p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
-                  <h3 className="font-display font-semibold text-xl text-foreground mb-1">Request Your Assessment</h3>
-                  <p className="text-muted-foreground text-sm mb-6">No obligation. Takes under 60 seconds.</p>
-                  <AssessmentForm />
-                  <div className="text-center mt-5">
-                    <span className="text-muted-foreground text-xs">Or call us directly:</span>
-                    <a href="tel:6146120050" className="block text-sm font-semibold text-primary hover:text-primary/80 mt-0.5">(614) 612-0050</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+
 
       {/* Section 5: Why Choose Scioto (Three Stat Blocks) */}
       <section className="section-padding bg-background">
