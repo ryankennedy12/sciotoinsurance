@@ -1,74 +1,56 @@
 
 
-## Fix Polaroid Cards: Real Content, Working Links, Better Photos
+## Redesign: Risk Assessment Section — Make It Stand Out
 
-Three issues to address:
+### The Problem
+Right now, Section 4 (Risk Assessment) and Section 7 (Bottom CTA) are nearly identical: same burgundy background, same radial glow, same layout pattern. The Risk Assessment is a unique, high-value offer (a free analysis even if you don't buy) but it looks like just another "contact us" banner.
 
-### 1. Remove Fake Case Studies — Replace with Real Service Descriptions
+### The New Concept: "Blueprint Assessment" Card
 
-The back of each card currently shows fabricated case studies ("We helped Smith Roofing...") and fake savings numbers. We'll replace these with **honest, benefit-focused descriptions** of what Scioto actually covers for each industry — no fake names, no made-up numbers.
+Instead of a full-width burgundy banner, this section becomes a **single, oversized card** floating on a cream background — giving it a completely different visual DNA from every other section on the page.
 
-**Updated back-of-card content:**
+**Layout:**
+- Section background: `bg-cream` (not burgundy — immediately different)
+- One large card with a split design: left side has a dark charcoal background with content, right side has an inline form (not a link to /contact)
+- The card has a thick left border in Dusty Rose (#C4A0A0) and a subtle shadow to feel "lifted"
 
-| Industry | Back Text (replaces fake case study) | Tagline (replaces fake savings) |
-|---|---|---|
-| Contractors | General liability, tools & equipment, workers' comp — built for the jobsite. | Coverage that works as hard as you do |
-| Restaurants | Liquor liability, food spoilage, kitchen fires — we know the risks. | From front-of-house to back-of-house |
-| Retail | Inventory protection, customer liability, theft — keep your doors open. | Protect your storefront and your margins |
-| Healthcare | Malpractice, HIPAA compliance, specialized professional coverage. | Compliance-ready coverage for your practice |
-| Transportation | Fleet coverage, cargo insurance, driver protection for every mile. | Keep your fleet on the road |
-| Manufacturing | Equipment breakdown, product liability, workplace safety programs. | Engineered coverage for your operation |
-| Professional | E&O, cyber liability, professional indemnity for knowledge workers. | Protect your reputation and your clients |
-| Trades | Tools, vehicles, and liability for HVAC, plumbing, and electrical pros. | Built for the trades, priced for your budget |
+**Left Side (Dark Charcoal — #1A1A1A):**
+- Eyebrow: "FREE FOR OHIO BUSINESSES" in Dusty Rose, letter-spaced
+- Headline: "Find Out What You're Missing" in white, large display font
+- Subtext: "We'll review your current coverage, identify gaps, and give you an honest recommendation — no strings attached."
+- Checklist items with Dusty Rose checkmarks (same 4 items), but laid out vertically for better readability
+- A small trust line at the bottom: "300+ businesses assessed since 1995"
 
-### 2. Make "Get Quote" Actually Navigate
+**Right Side (White card panel):**
+- A simple **inline form** with 4 fields: Business Name, Your Name, Email, Phone
+- Submit button: "Request Free Assessment" in burgundy
+- Below: "Or call us: (614) 612-0050"
+- This keeps users on-page instead of sending them to /contact
 
-The current "Get Quote" on the card back is a `<span>` inside a `<button>` — it doesn't navigate anywhere. We'll change the card structure so:
-
-- The **flip interaction** stays on the outer `<button>` (tap/hover to flip)
-- The **"Get Quote" element** on the back becomes a real `<Link to="/get-quote">` that navigates to the quote page
-- To prevent the link click from also triggering the flip-back, we'll add `e.stopPropagation()` on the link
-
-### 3. Remove Location from Card Front
-
-The caption strip currently shows "{industry.name}" and "{location}, OH" underneath. We'll remove the location line since these are not real office locations — just keep the industry name for a cleaner look.
-
-### 4. Generate Better Industry Photos
-
-The current photos are decent but some are generic (e.g., "Trades" reuses the same `constructionSite.jpg` as "Contractors"). We'll use the AI image generation model to create 8 high-quality, realistic photos tailored to each industry:
-
-1. **Contractors** — Workers on an active residential construction site, hard hats, Ohio suburban setting
-2. **Restaurants** — Busy restaurant kitchen with chefs plating food, warm lighting
-3. **Retail** — Modern boutique storefront interior with displays and customers
-4. **Healthcare** — Medical clinic reception/exam room, clean and professional
-5. **Transportation** — Fleet of commercial trucks lined up at a depot
-6. **Manufacturing** — Factory floor with CNC machines and workers
-7. **Professional** — Corporate office meeting room with professionals collaborating
-8. **Trades** — Plumber or electrician working in a residential setting (distinct from contractors)
-
-These will be generated via an edge function using the Nano banana pro model for higher quality, uploaded to file storage, and referenced by URL. This gives each card a unique, industry-specific photo instead of reusing assets.
+**Why this works:**
+1. Cream background breaks the burgundy-burgundy-burgundy pattern
+2. Charcoal left panel is unique to this section — no other section uses charcoal as a primary bg
+3. Inline form reduces friction (no page navigation needed)
+4. The "card on cream" treatment feels premium and distinct from the full-bleed bottom CTA
 
 ### Technical Changes
 
-**File: `src/pages/BusinessInsurance.tsx`**
+**File: `src/pages/BusinessInsurance.tsx`** (lines 268-306)
 
-- Update the `industries` array:
-  - Replace `caseStudy` with `backDescription` (honest service text)
-  - Replace `savings` with `tagline` (benefit phrase)
-  - Remove `location`, `pinX`, `pinY` fields (no longer used)
-  - Update image imports if new generated photos are added
-- In `PolaroidCard` front face:
-  - Remove the location line (`{industry.location}, OH`) from the caption strip
-- In `PolaroidCard` back face:
-  - Replace the quoted `caseStudy` text with `backDescription`
-  - Replace `savings` stat with `tagline`
-  - Change the "Get Quote" `<span>` to a `<Link to="/get-quote">` with `onClick={e => e.stopPropagation()}` to prevent flip-back
-- Generate new photos using AI image generation edge function, store in Lovable Cloud storage, and update image references
+Replace the entire Section 4 with:
+- Change section bg from `bg-primary` to `bg-cream`
+- Remove the radial glow overlay
+- Build a single card container with `grid lg:grid-cols-5` (3 cols left, 2 cols right)
+- Left panel: charcoal bg (`bg-[#1A1A1A]`), rounded-l-2xl, with the headline, description, and checklist
+- Right panel: white bg, rounded-r-2xl, with a simple contact form (4 inputs + submit)
+- Form submission: POST to the existing `contact_submissions` or `leads` table via the Supabase client, with a success toast
+- Thick left border accent: `border-l-4 border-l-accent` on the outer card
+- On mobile: stack vertically (left panel on top, form below)
 
-**New edge function: `supabase/functions/generate-industry-photos/index.ts`**
-- Calls the image generation API for each industry prompt
-- Uploads results to a `industry-photos` storage bucket
-- Returns public URLs
+**No new files needed.** The form logic will use the existing Supabase client and toast notifications already in the project.
 
-No other files or database schema changes needed.
+### Mobile Behavior
+- Card stacks vertically: charcoal content panel on top, white form panel below
+- Full-width, no side margins (edge-to-edge card feel)
+- Form fields stack single-column
 
