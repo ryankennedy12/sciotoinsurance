@@ -27,9 +27,9 @@
     --gray-400: 0 0% 55%;
     --gray-200: 0 0% 90%;
     
-    /* Accent (EXACT hex value from brand guide) */
-    /* gold-500: #C9A962 - Icons, trust badges, premium accents */
-    --gold-500: 42 47% 59%;
+    /* Accent (Dusty Rose) */
+    /* gold-500: #C4A0A0 - Icons, trust badges, premium accents */
+    --gold-500: 0 18% 70%;
     
     /* Spacing Scale */
     --space-xs: 0.5rem;
