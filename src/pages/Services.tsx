@@ -163,28 +163,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Section 3: Response Times Strip */}
-      <section className="py-10 md:py-14 bg-cream">
-        <div className="container-wide px-4 md:px-space-lg">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-            {responseTimes.map((item, index) => (
-              <div key={index} className="flex items-center gap-3 text-center md:text-left">
-                <Clock className="w-5 h-5 text-accent shrink-0" />
-                <div>
-                  <span className="text-sm text-muted-foreground">{item.label}</span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="font-display text-3xl font-bold text-primary leading-none">
-                      {item.time}
-                    </span>
-                    <span className="text-sm text-muted-foreground">{item.unit}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Section 4: Contact Fallback */}
       <section className="py-14 md:py-20 bg-background">
         <div className="container-wide px-4 md:px-space-lg">
