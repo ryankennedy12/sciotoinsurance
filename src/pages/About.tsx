@@ -253,7 +253,7 @@ const About = () => {
                 <AnimatedSection key={i} animation="fade-up" delay={i * 80}>
                   <div className={`relative flex items-start gap-6 lg:gap-0 ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
                     {/* Node */}
-                    <div className="absolute left-6 lg:left-1/2 w-5 h-5 rounded-full bg-gold-500 border-[3px] border-burgundy-800 -translate-x-1/2 mt-1 z-10" />
+                    <div className="absolute left-6 lg:left-1/2 w-5 h-5 rounded-full bg-gold-500 border-[3px] border-burgundy-800 -translate-x-1/2 mt-1 z-10 shadow-[0_0_10px_3px_rgba(201,169,98,0.45)]" />
 
                     {/* Spacer for mobile */}
                     <div className="w-12 shrink-0 lg:hidden" />
