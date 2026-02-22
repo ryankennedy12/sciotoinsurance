@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench, MapPin, X } from "lucide-react";
+import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { businessInsuranceProducts } from "@/data/products";
@@ -8,24 +8,24 @@ import type { LucideIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import columbusSkyline from "@/assets/columbus-skyline.jpg";
-import constructionSite from "@/assets/construction-site.jpg";
-import restaurantInterior from "@/assets/restaurant-interior.jpg";
-import retailStore from "@/assets/retail-store.jpg";
-import healthcareClinic from "@/assets/healthcare-clinic.jpg";
-import businessOffice from "@/assets/business-office.jpg";
-import transportationFleet from "@/assets/transportation-fleet.jpg";
-import manufacturingFacility from "@/assets/manufacturing-facility.jpg";
-import professionalServices from "@/assets/professional-services.jpg";
+import industryContractors from "@/assets/industry-contractors.jpg";
+import industryRestaurants from "@/assets/industry-restaurants.jpg";
+import industryRetail from "@/assets/industry-retail.jpg";
+import industryHealthcare from "@/assets/industry-healthcare.jpg";
+import industryTransportation from "@/assets/industry-transportation.jpg";
+import industryManufacturing from "@/assets/industry-manufacturing.jpg";
+import industryProfessional from "@/assets/industry-professional.jpg";
+import industryTrades from "@/assets/industry-trades.jpg";
 
 const industries = [
-  { name: "Contractors", icon: HardHat, image: constructionSite, location: "Hilliard", pinX: 28, pinY: 48, description: "General liability, tools coverage, workers' comp.", caseStudy: "We helped Smith Roofing reduce their Workers' Comp by 18%.", savings: "$4,800/yr saved" },
-  { name: "Restaurants", icon: UtensilsCrossed, image: restaurantInterior, location: "Short North", pinX: 52, pinY: 42, description: "Liquor liability, food spoilage, property protection.", caseStudy: "After a kitchen fire, we helped Mario's Pizza get their claim paid in 11 days.", savings: "Claim paid in 11 days" },
-  { name: "Retail", icon: ShoppingBag, image: retailStore, location: "Easton", pinX: 68, pinY: 35, description: "Inventory protection, customer liability, theft coverage.", caseStudy: "A local boutique saved $3,200/year after we found gaps in their policy.", savings: "$3,200/yr saved" },
-  { name: "Healthcare", icon: Stethoscope, image: healthcareClinic, location: "Dublin", pinX: 32, pinY: 28, description: "Malpractice, HIPAA compliance, specialized coverage.", caseStudy: "We've insured 40+ Ohio medical practices with zero coverage disputes.", savings: "40+ practices" },
-  { name: "Transportation", icon: Truck, image: transportationFleet, location: "Grove City", pinX: 38, pinY: 72, description: "Fleet coverage, cargo insurance, driver protection.", caseStudy: "A trucking company reduced their premium 22% by restructuring coverage.", savings: "22% premium cut" },
-  { name: "Manufacturing", icon: Factory, image: manufacturingFacility, location: "Obetz", pinX: 56, pinY: 68, description: "Equipment breakdown, product liability, workplace safety.", caseStudy: "We helped a machine shop navigate an OSHA audit with full documentation.", savings: "Full OSHA compliance" },
-  { name: "Professional", icon: Briefcase, image: professionalServices, location: "Downtown", pinX: 50, pinY: 50, description: "E&O coverage, cyber liability, professional indemnity.", caseStudy: "An accounting firm avoided a $500K lawsuit thanks to proper E&O coverage.", savings: "$500K loss prevented" },
-  { name: "Trades", icon: Wrench, image: constructionSite, location: "Westerville", pinX: 58, pinY: 22, description: "Tools, vehicles, liability for HVAC, plumbing, electrical.", caseStudy: "A plumbing company saved $4,100/year after we bundled their policies.", savings: "$4,100/yr saved" },
+  { name: "Contractors", icon: HardHat, image: industryContractors, description: "General liability, tools coverage, workers' comp.", backDescription: "General liability, tools & equipment, workers' comp — built for the jobsite.", tagline: "Coverage that works as hard as you do" },
+  { name: "Restaurants", icon: UtensilsCrossed, image: industryRestaurants, description: "Liquor liability, food spoilage, property protection.", backDescription: "Liquor liability, food spoilage, kitchen fires — we know the risks.", tagline: "From front-of-house to back-of-house" },
+  { name: "Retail", icon: ShoppingBag, image: industryRetail, description: "Inventory protection, customer liability, theft coverage.", backDescription: "Inventory protection, customer liability, theft — keep your doors open.", tagline: "Protect your storefront and your margins" },
+  { name: "Healthcare", icon: Stethoscope, image: industryHealthcare, description: "Malpractice, HIPAA compliance, specialized coverage.", backDescription: "Malpractice, HIPAA compliance, specialized professional coverage.", tagline: "Compliance-ready coverage for your practice" },
+  { name: "Transportation", icon: Truck, image: industryTransportation, description: "Fleet coverage, cargo insurance, driver protection.", backDescription: "Fleet coverage, cargo insurance, driver protection for every mile.", tagline: "Keep your fleet on the road" },
+  { name: "Manufacturing", icon: Factory, image: industryManufacturing, description: "Equipment breakdown, product liability, workplace safety.", backDescription: "Equipment breakdown, product liability, workplace safety programs.", tagline: "Engineered coverage for your operation" },
+  { name: "Professional", icon: Briefcase, image: industryProfessional, description: "E&O coverage, cyber liability, professional indemnity.", backDescription: "E&O, cyber liability, professional indemnity for knowledge workers.", tagline: "Protect your reputation and your clients" },
+  { name: "Trades", icon: Wrench, image: industryTrades, description: "Tools, vehicles, liability for HVAC, plumbing, electrical.", backDescription: "Tools, vehicles, and liability for HVAC, plumbing, and electrical pros.", tagline: "Built for the trades, priced for your budget" },
 ];
 
 const ROTATIONS = [-2.5, 1.5, -1, 3, -2, 1, -3, 2];
@@ -53,10 +53,10 @@ const PolaroidCard = ({
     >
       {/* Accessible hidden content for screen readers */}
       <div className="sr-only">
-        <h3>{industry.name} — {industry.location}, OH</h3>
+        <h3>{industry.name}</h3>
         <p>{industry.description}</p>
-        <p>{industry.caseStudy}</p>
-        <p>Result: {industry.savings}</p>
+        <p>{industry.backDescription}</p>
+        <p>{industry.tagline}</p>
       </div>
 
       <button
@@ -99,7 +99,6 @@ const PolaroidCard = ({
             {/* Caption strip */}
             <div className="flex flex-col items-center justify-center h-[30%] px-2">
               <span className="font-display italic text-base sm:text-lg text-foreground leading-tight">{industry.name}</span>
-              <span className="text-xs text-muted-foreground mt-0.5">{industry.location}, OH</span>
             </div>
           </div>
 
@@ -116,18 +115,19 @@ const PolaroidCard = ({
               <Icon className="h-5 w-5 text-primary-foreground" />
             </div>
             <p className="font-display italic text-sm sm:text-base text-primary-foreground/90 leading-relaxed mb-4">
-              "{industry.caseStudy}"
+              {industry.backDescription}
             </p>
             <div className="w-10 h-0.5 bg-accent mb-3" />
-            <span className="text-sm font-semibold text-accent">{industry.savings}</span>
+            <span className="text-sm font-semibold text-accent">{industry.tagline}</span>
             <div className="mt-4">
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-foreground/80 bg-primary-foreground/10 px-3 py-1.5 rounded-full">
+              <Link
+                to="/get-quote"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-foreground/80 bg-primary-foreground/10 px-3 py-1.5 rounded-full hover:bg-primary-foreground/20 transition-colors"
+              >
                 Get Quote <ArrowRight className="h-3 w-3" />
-              </span>
+              </Link>
             </div>
-            {isMobile && (
-              <span className="text-[10px] text-primary-foreground/40 mt-3">Tap to flip back</span>
-            )}
           </div>
         </div>
       </button>
