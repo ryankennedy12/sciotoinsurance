@@ -14,7 +14,6 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import logo from "@/assets/logo.png";
 
 const helpTopics = [
   { value: "risk-assessment", label: "Free Risk Assessment" },
@@ -70,11 +69,10 @@ const HGConnect2026 = () => {
   return (
     <div className="min-h-screen bg-cream">
       {/* Hero */}
-      <section className="bg-primary py-16 sm:py-20">
+      <section className="bg-primary pt-32 sm:pt-36 pb-16 sm:pb-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <AnimatedSection animation="fade-up">
-            <img src={logo} alt="Scioto Insurance Group" className="h-16 mx-auto mb-8 brightness-0 invert" />
-            <h1 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-[1.1] mb-4">
+            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
               H&G Connect 2026
             </h1>
             <div className="w-16 h-0.5 bg-accent mx-auto mb-6" />
