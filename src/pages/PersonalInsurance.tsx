@@ -47,10 +47,10 @@ const PersonalInsurance = () => {
                 </Button>
                 <a
                   href="tel:6146120050"
-                  className="inline-flex items-center gap-2 text-primary font-medium hover:underline underline-offset-4"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
                 >
-                  <Phone className="h-4 w-4" />
-                  (614) 612-0050
+                  <Phone className="h-5 w-5" />
+                  Give Us a Call
                 </a>
               </div>
             </div>
