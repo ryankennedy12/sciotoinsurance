@@ -12,7 +12,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   const isPageReady = usePageReady();
-  
+
 
   return (
     <>
@@ -27,8 +27,8 @@ const Home = () => {
                 <img
                   src={heroSplit}
                   alt="Ohio family in front of their home"
-                  className="w-full h-auto rounded-2xl object-cover object-center"
-                />
+                  className="w-full h-auto rounded-2xl object-cover object-center" />
+                
               </div>
             </div>
 
@@ -48,8 +48,8 @@ const Home = () => {
                   <img
                     src={heroSplit}
                     alt="Ohio family in front of their home"
-                    className="w-full aspect-[16/10] sm:aspect-[16/9] object-cover object-[30%_center]"
-                  />
+                    className="w-full aspect-[16/10] sm:aspect-[16/9] object-cover object-[30%_center]" />
+                  
                 </div>
               </div>
 
@@ -62,15 +62,15 @@ const Home = () => {
                 <div className="flex flex-col sm:flex-row sm:justify-center gap-4 mb-6">
                   <Link
                     to="/get-quote"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
-                  >
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
+                    
                     Get Your Free Quote
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                   <a
                     href="tel:6146120050"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]"
-                  >
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]">
+                    
                     <Phone className="w-5 h-5" />
                     Talk to a Real Person
                   </a>
@@ -78,9 +78,9 @@ const Home = () => {
 
                 <div className="flex items-center justify-center gap-2 text-muted-foreground">
                   <div className="flex items-center gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
-                    ))}
+                    {[...Array(5)].map((_, i) =>
+                    <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
+                    )}
                   </div>
                   <span className="text-xs font-body">Independent Agency · Est. 1995</span>
                 </div>
@@ -90,7 +90,7 @@ const Home = () => {
             {/* Desktop Text Panel */}
             <div className="hidden lg:flex flex-col justify-center items-start text-left px-16 pt-40 pb-20 lg:order-1">
               <h1 className="font-display font-semibold text-[56px] text-foreground leading-[1.1] mb-6">
-                Ohio Families Trust Us to Protect What Matters Most
+                Secure Your Peace of Mind
               </h1>
 
               <p className="font-body text-2xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
@@ -101,15 +101,15 @@ const Home = () => {
               <div className="flex flex-row gap-4 mb-6">
                 <Link
                   to="/get-quote"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
-                >
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
+                  
                   Get Your Free Quote
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <a
                   href="tel:6146120050"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
-                >
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]">
+                  
                   <Phone className="w-5 h-5" />
                   Talk to a Real Person
                 </a>
@@ -197,16 +197,16 @@ const Home = () => {
             <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
               <div className="flex items-center gap-2">
                 <div className="flex gap-0.5">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className="w-5 h-5 fill-accent text-accent" />
-                  ))}
+                  {[1, 2, 3, 4, 5].map((i) =>
+                  <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                  )}
                 </div>
                 <span className="text-sm font-medium text-foreground">5.0 on Google</span>
               </div>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-primary text-primary font-body font-semibold text-sm hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-              >
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-primary text-primary font-body font-semibold text-sm hover:bg-primary hover:text-primary-foreground transition-colors duration-200">
+                
                 Learn More
                 <span>→</span>
               </Link>
@@ -247,8 +247,8 @@ const Home = () => {
                       src={familyHomeService}
                       alt="Ohio family at home"
                       loading="lazy"
-                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500"
-                    />
+                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500" />
+                    
                     {/* Right-edge fade into text panel (desktop only) */}
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
                   </div>
@@ -265,12 +265,12 @@ const Home = () => {
                       Protect your family, your home, and your future. We shop 30+ carriers to find coverage that actually fits your life and your budget.
                     </p>
                     <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                      {["Auto Insurance", "Home Insurance", "Life Insurance", "Umbrella & Renters"].map((item) => (
-                        <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
+                      {["Auto Insurance", "Home Insurance", "Life Insurance", "Umbrella & Renters"].map((item) =>
+                      <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
                           <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                           {item}
                         </li>
-                      ))}
+                      )}
                     </ul>
                     <span className="inline-flex items-center gap-2 font-body font-semibold text-primary text-sm">
                       Explore Personal Coverage
@@ -293,8 +293,8 @@ const Home = () => {
                       src={businessOffice}
                       alt="Business professional in office"
                       loading="lazy"
-                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500"
-                    />
+                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500" />
+                    
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
                   </div>
 
@@ -310,12 +310,12 @@ const Home = () => {
                       Risk management built around how you actually operate. From small startups to established Ohio businesses, we've got you covered.
                     </p>
                     <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                      {["General Liability", "Commercial Property", "Workers' Compensation", "Cyber Liability"].map((item) => (
-                        <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
+                      {["General Liability", "Commercial Property", "Workers' Compensation", "Cyber Liability"].map((item) =>
+                      <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
                           <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                           {item}
                         </li>
-                      ))}
+                      )}
                     </ul>
                     <span className="inline-flex items-center gap-2 font-body font-semibold text-primary text-sm">
                       Explore Business Coverage
@@ -338,8 +338,8 @@ const Home = () => {
                       src={teamMeeting}
                       alt="Team meeting discussing employee benefits"
                       loading="lazy"
-                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500"
-                    />
+                      className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500" />
+                    
                     <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
                   </div>
 
@@ -355,12 +355,12 @@ const Home = () => {
                       Attract and keep great people with benefits that actually compete. We'll help you build a package your team will value.
                     </p>
                     <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                      {["Group Health Insurance", "Dental & Vision", "Life & Disability", "401(k) & Retirement"].map((item) => (
-                        <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
+                      {["Group Health Insurance", "Dental & Vision", "Life & Disability", "401(k) & Retirement"].map((item) =>
+                      <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
                           <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                           {item}
                         </li>
-                      ))}
+                      )}
                     </ul>
                     <span className="inline-flex items-center gap-2 font-body font-semibold text-primary text-sm">
                       Explore Benefits
@@ -400,9 +400,9 @@ const Home = () => {
               
               {/* Stars */}
               <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
-                ))}
+                {[...Array(5)].map((_, i) =>
+                <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
+                )}
               </div>
               
               <blockquote className="relative z-10">
@@ -434,8 +434,8 @@ const Home = () => {
                 date="January 2024"
                 helpedWith="Auto & Home Bundle"
                 rating={5}
-                variant="light"
-              />
+                variant="light" />
+              
             </AnimatedSection>
             
             <AnimatedSection animation="fade-up" delay={200}>
@@ -446,8 +446,8 @@ const Home = () => {
                 date="February 2024"
                 helpedWith="Commercial Liability"
                 rating={5}
-                variant="light"
-              />
+                variant="light" />
+              
             </AnimatedSection>
             
             <AnimatedSection animation="fade-up" delay={250} className="sm:col-span-2 lg:col-span-1">
@@ -458,8 +458,8 @@ const Home = () => {
                 date="December 2023"
                 helpedWith="Personal Insurance"
                 rating={5}
-                variant="light"
-              />
+                variant="light" />
+              
             </AnimatedSection>
           </div>
         </div>
@@ -485,15 +485,15 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-6">
             <Link
               to="/get-quote"
-              className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-lg bg-white text-primary font-body font-semibold text-base transition-[transform,opacity,box-shadow] duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] motion-reduce:hover:translate-y-0"
-            >
+              className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-lg bg-white text-primary font-body font-semibold text-base transition-[transform,opacity,box-shadow] duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] motion-reduce:hover:translate-y-0">
+              
               Get Your Free Quote
             </Link>
             
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 py-3 font-body font-medium text-white/90 hover:text-white transition-colors duration-200"
-            >
+              className="inline-flex items-center gap-2 py-3 font-body font-medium text-white/90 hover:text-white transition-colors duration-200">
+              
               <Phone className="w-4 h-4" />
               Or call us: (614) 612-0050
             </a>
@@ -504,8 +504,8 @@ const Home = () => {
           </p>
         </AnimatedSection>
       </section>
-    </>
-  );
+    </>);
+
 };
 
 export default Home;
