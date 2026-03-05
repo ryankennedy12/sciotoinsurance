@@ -41,13 +41,14 @@ const HGConnect2026 = () => {
     if (!form.firstName.trim() || !form.lastName.trim() || !form.email.trim()) return;
 
     setLoading(true);
-    const { error } = await supabase.from("contacts").insert({
+    const { error } = await supabase.from("leads").insert({
       first_name: form.firstName.trim(),
       last_name: form.lastName.trim(),
       email: form.email.trim(),
       phone: form.phone.trim() || null,
-      help_topic: form.topic || "risk-assessment",
-      message: form.message.trim() || "H&G Connect 2026 - Free Risk Assessment Request",
+      coverage_type: "not_sure" as const,
+      request_type: "contact_general" as const,
+      additional_info: `H&G Connect 2026 - Topic: ${form.topic || "risk-assessment"}. ${form.message.trim() || "Free Risk Assessment Request"}`,
     });
     setLoading(false);
 

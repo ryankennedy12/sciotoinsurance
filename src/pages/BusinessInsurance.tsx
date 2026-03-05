@@ -240,10 +240,10 @@ const BusinessInsurance = () => {
                 </Button>
                 <a
                   href="tel:6146120050"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors py-3 px-1"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
                 >
-                  <Phone className="h-4 w-4" />
-                  (614) 612-0050
+                  <Phone className="h-5 w-5" />
+                  Give Us a Call
                 </a>
               </div>
             </AnimatedSection>
@@ -336,13 +336,17 @@ const BusinessInsurance = () => {
             <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto">
               Get a free quote today. We'll show you exactly what you're paying for—and what you might be missing.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button asChild size="lg" variant="secondary">
                 <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
               </Button>
-              <Button asChild size="lg" variant="secondary">
-                <a href="tel:6146120050">(614) 612-0050</a>
-              </Button>
+              <a
+                href="tel:6146120050"
+                className="inline-flex items-center gap-2 py-3 font-body font-medium text-primary-foreground/90 hover:text-primary-foreground transition-colors duration-200"
+              >
+                <Phone className="h-4 w-4" />
+                Or call us: (614) 612-0050
+              </a>
             </div>
           </AnimatedSection>
         </div>
