@@ -25,9 +25,9 @@ const Home = () => {
             <div className="hidden lg:flex lg:order-2 items-center justify-center py-24 px-10">
               <div className="relative w-full rounded-2xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.25)]">
                 <img
-                  src={heroSplit}
+
                   alt="Ohio family in front of their home"
-                  className="w-full h-auto rounded-2xl object-cover object-center" />
+                  className="w-full h-auto rounded-2xl object-cover object-center" src="/lovable-uploads/6969f1b4-90e8-43e5-a682-1ba6bb243af3.jpg" />
                 
               </div>
             </div>
