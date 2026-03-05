@@ -16,6 +16,7 @@ const EmployeeBenefits = lazy(() => import("./pages/EmployeeBenefits"));
 const Services = lazy(() => import("./pages/Services"));
 const GetQuote = lazy(() => import("./pages/GetQuote"));
 const Contact = lazy(() => import("./pages/Contact"));
+const HGConnect2026 = lazy(() => import("./pages/HGConnect2026"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin (lazy)
@@ -50,6 +51,7 @@ const App = () => (
                 <Route path="/services" element={<Services />} />
                 <Route path="/get-quote" element={<GetQuote />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/hgconnect2026" element={<HGConnect2026 />} />
               </Route>
 
               {/* Admin routes */}

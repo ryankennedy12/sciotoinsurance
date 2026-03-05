@@ -4,10 +4,10 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
 import TestimonialCard from "@/components/TestimonialCard";
-import heroSplit from "@/assets/hero-split.jpg";
-import familyHomeService from "@/assets/family-home-service.jpg";
-import businessOffice from "@/assets/business-office.jpg";
-import teamMeeting from "@/assets/team-meeting.jpg";
+import heroFamily from "@/assets/hero-family.jpg";
+import personalCoverage from "@/assets/personal-coverage-new.jpg";
+import businessCoverage from "@/assets/business-coverage-new.jpg";
+import benefitsCoverage from "@/assets/benefits-coverage-new.jpg";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -26,8 +26,8 @@ const Home = () => {
               <div className="relative w-full rounded-2xl overflow-hidden border border-gold-500/30 shadow-[0_8px_40px_-12px_rgba(139,41,66,0.25)]">
                 <img
 
-                  alt="Ohio family in front of their home"
-                  className="w-full h-auto rounded-2xl object-cover object-center" src="/lovable-uploads/6969f1b4-90e8-43e5-a682-1ba6bb243af3.jpg" />
+                  alt="Happy family with their dog"
+                  className="w-full h-auto rounded-2xl object-cover object-center" src={heroFamily} />
                 
               </div>
             </div>
@@ -37,7 +37,7 @@ const Home = () => {
               {/* Headline on top */}
               <div className="px-6 sm:px-10 pt-28 sm:pt-32 pb-6 text-center">
                 <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-6 text-balance">
-                  Ohio Families Trust Us to Protect What Matters Most
+                  Secure Your Peace of Mind
                 </h1>
                 <div className="w-12 h-1 bg-primary rounded-full mx-auto" />
               </div>
@@ -46,8 +46,8 @@ const Home = () => {
               <div className="mx-5 sm:mx-8">
                 <div className="rounded-2xl overflow-hidden border-2 border-gold-500/40 shadow-lg">
                   <img
-                    src={heroSplit}
-                    alt="Ohio family in front of their home"
+                    src={heroFamily}
+                    alt="Happy family with their dog"
                     className="w-full aspect-[16/10] sm:aspect-[16/9] object-cover object-[30%_center]" />
                   
                 </div>
@@ -56,23 +56,23 @@ const Home = () => {
               {/* Subtext + CTAs on bottom */}
               <div className="px-6 sm:px-10 pt-8 pb-12 sm:pb-16 text-center">
                 <p className="font-body text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
-                  We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
+                  At Scioto Insurance Group, we embrace a family approach through tailoring coverage to your unique story.
                 </p>
 
                 <div className="flex flex-col sm:flex-row sm:justify-center gap-4 mb-6">
                   <Link
                     to="/get-quote"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
-                    
+
                     Get Your Free Quote
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                   <a
                     href="tel:6146120050"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]">
-                    
+
                     <Phone className="w-5 h-5" />
-                    Talk to a Real Person
+                    Give Us a Call
                   </a>
                 </div>
 
@@ -94,7 +94,7 @@ const Home = () => {
               </h1>
 
               <p className="font-body text-2xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
-                We compare rates from over 30 insurance companies so you don't have to. Call our office and you'll talk to Jeff or Natalie. That's the whole team.
+                At Scioto Insurance Group, we embrace a family approach through tailoring coverage to your unique story.
               </p>
 
               {/* Dual CTAs */}
@@ -102,16 +102,16 @@ const Home = () => {
                 <Link
                   to="/get-quote"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
-                  
+
                   Get Your Free Quote
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <a
                   href="tel:6146120050"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]">
-                  
+
                   <Phone className="w-5 h-5" />
-                  Talk to a Real Person
+                  Give Us a Call
                 </a>
               </div>
             </div>
@@ -131,10 +131,10 @@ const Home = () => {
             <div className="w-12 h-1 bg-primary mx-auto mb-4 sm:mb-space-md rounded-full" />
             
             <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-[52px] text-foreground leading-[1.1] mb-4 sm:mb-space-sm">
-              Why Ohio Families Work With Us
+              Why Work With Scioto Insurance Group?
             </h2>
             <p className="font-body text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed font-medium">
-              29 years of experience. A father-daughter team that <em className="italic text-primary font-semibold not-italic" style={{ fontStyle: 'italic' }}>picks up the phone</em>.
+              We are a local, family-owned insurance agency that brings 32+ years of industry experience as trusted advisors. From businesses to families, we are dedicated to providing personalized solutions to help secure your peace of mind.
             </p>
           </AnimatedSection>
 
@@ -146,26 +146,30 @@ const Home = () => {
                 <Scale className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
-                Independent, Not Corporate
+                We Are Independent!
               </h3>
-              <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                We don't work for one insurance company. We shop over 30 carriers to find what fits your situation and your budget. If a better deal exists, we'll find it.
-              </p>
+              <ul className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed space-y-1.5">
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />We represent multiple insurance companies.</li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />We are licensed insurance advisors.</li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />We are by your side every step of the way.</li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />We offer a wide variety of insurance solutions.</li>
+                <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />We are there for you in your time of need.</li>
+              </ul>
               <Link to="/about" className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-5 hover:gap-2.5 transition-[gap] duration-200">
                 Learn more <span>→</span>
               </Link>
             </AnimatedSection>
 
-            {/* Card 2 - Experience (Featured Center) */}
+            {/* Card 2 - Family Owned (Featured Center) */}
             <AnimatedSection animation="fade-up" delay={100} className="relative bg-card rounded-lg border-t-[3px] border-t-primary/60 p-7 sm:p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-300 lg:scale-[1.03] lg:shadow-md lg:z-10">
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy-100 to-primary/10 flex items-center justify-center border border-primary/20 mb-5">
                 <ShieldCheck className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
-                29 Years in the Industry
+                Family Owned Agency
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Jeff spent 29 years at Nationwide before starting this agency. He knows which carriers pay claims quickly, which ones fight you, and where coverage gaps hurt most.
+                As a family-owned agency, we treat you like one of our own by deeply understanding your unique story to provide the precise protection you deserve. You can count on us to be there with the same care and dedication we would show our own family, ensuring you never feel like just a policy number.
               </p>
               <Link to="/about" className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-5 hover:gap-2.5 transition-[gap] duration-200">
                 Learn more <span>→</span>
@@ -178,10 +182,10 @@ const Home = () => {
                 <PhoneCall className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-foreground tracking-tight mb-2 sm:mb-space-sm">
-                A Human Answers the Phone
+                Client-First Approach
               </h3>
               <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Call our office. You'll get Jeff or Natalie. That's the whole team. No phone tree, no call center. When you have a claim, we handle it personally.
+                We embrace a client first approach, where our commitment is providing you with the peace of mind that comes from knowing your coverage is tailored specifically to you. When you choose us, you are choosing a partner who is dedicated to your success and security, every step of the way.
               </p>
               <Link to="/contact" className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-5 hover:gap-2.5 transition-[gap] duration-200">
                 Learn more <span>→</span>
@@ -192,7 +196,7 @@ const Home = () => {
           {/* Bottom CTA with Social Proof */}
           <AnimatedSection animation="fade-up" delay={300} className="text-center">
             <p className="font-body text-muted-foreground mb-4">
-              Join the families and businesses who stopped worrying about insurance.
+              Become part of the Scioto Insurance Group family today.
             </p>
             <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
               <div className="flex items-center gap-2">
@@ -225,9 +229,6 @@ const Home = () => {
             <h2 className="font-display font-semibold text-3xl lg:text-[42px] text-foreground leading-[1.2]">
               Coverage for Every Chapter
             </h2>
-            <p className="font-body text-muted-foreground mt-2 text-lg">
-              Personal, business, or benefits — we'll find the right fit from 30+ carriers.
-            </p>
           </AnimatedSection>
 
           {/* Split Cards Stack */}
@@ -244,8 +245,8 @@ const Home = () => {
                   {/* Left: Photo Panel */}
                   <div className="relative w-full lg:w-[45%] flex-shrink-0 aspect-[16/10] lg:aspect-auto lg:h-auto overflow-hidden">
                     <img
-                      src={familyHomeService}
-                      alt="Ohio family at home"
+                      src={personalCoverage}
+                      alt="Family enjoying time together"
                       loading="lazy"
                       className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500" />
                     
@@ -262,10 +263,10 @@ const Home = () => {
                       Personal Insurance
                     </h3>
                     <p className="font-body text-muted-foreground text-base leading-relaxed mb-5">
-                      Protect your family, your home, and your future. We shop 30+ carriers to find coverage that actually fits your life and your budget.
+                      We work with our select carriers to tailor coverage specific to your insurance needs.
                     </p>
                     <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                      {["Auto Insurance", "Home Insurance", "Life Insurance", "Umbrella & Renters"].map((item) =>
+                      {["Auto Insurance", "Home Insurance", "Life Insurance", "Umbrella & many more\u2026"].map((item) =>
                       <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
                           <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                           {item}
@@ -290,8 +291,8 @@ const Home = () => {
                   {/* Left: Photo Panel */}
                   <div className="relative w-full lg:w-[45%] flex-shrink-0 aspect-[16/10] lg:aspect-auto lg:h-auto overflow-hidden">
                     <img
-                      src={businessOffice}
-                      alt="Business professional in office"
+                      src={businessCoverage}
+                      alt="Business professionals at work"
                       loading="lazy"
                       className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500" />
                     
@@ -307,10 +308,10 @@ const Home = () => {
                       Business Insurance
                     </h3>
                     <p className="font-body text-muted-foreground text-base leading-relaxed mb-5">
-                      Risk management built around how you actually operate. From small startups to established Ohio businesses, we've got you covered.
+                      Risk management and insurance solutions tailored to your business.
                     </p>
                     <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                      {["General Liability", "Commercial Property", "Workers' Compensation", "Cyber Liability"].map((item) =>
+                      {["General Liability", "Commercial Property", "Business Owners Coverage", "Cyber Liability"].map((item) =>
                       <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
                           <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                           {item}
@@ -335,8 +336,8 @@ const Home = () => {
                   {/* Left: Photo Panel */}
                   <div className="relative w-full lg:w-[45%] flex-shrink-0 aspect-[16/10] lg:aspect-auto lg:h-auto overflow-hidden">
                     <img
-                      src={teamMeeting}
-                      alt="Team meeting discussing employee benefits"
+                      src={benefitsCoverage}
+                      alt="Couple reviewing benefits options"
                       loading="lazy"
                       className="w-full h-full object-cover lg:group-hover:scale-105 transition-transform duration-500" />
                     
@@ -352,10 +353,10 @@ const Home = () => {
                       Employee Benefits
                     </h3>
                     <p className="font-body text-muted-foreground text-base leading-relaxed mb-5">
-                      Attract and keep great people with benefits that actually compete. We'll help you build a package your team will value.
+                      With benefit costs climbing and employee expectations higher than ever, we can help bridge the gap by tailoring a benefits package that makes sense for everyone involved.
                     </p>
                     <ul className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                      {["Group Health Insurance", "Dental & Vision", "Life & Disability", "401(k) & Retirement"].map((item) =>
+                      {["Group Health Benefits", "Group Vision", "Group Dental", "Disability and more\u2026"].map((item) =>
                       <li key={item} className="flex items-center gap-2 font-body text-sm text-foreground">
                           <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                           {item}
@@ -386,7 +387,7 @@ const Home = () => {
               What Our Clients Say
             </h2>
             <p className="font-body text-muted-foreground max-w-[500px] mx-auto">
-              Real feedback from Ohio families and businesses we've helped.
+              Real feedback from families and businesses we've helped.
             </p>
           </AnimatedSection>
 
@@ -475,11 +476,11 @@ const Home = () => {
           <div className="w-12 h-1 bg-accent mx-auto mb-6 rounded-full" />
           
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-[1.1] mb-4 sm:mb-space-md">
-            Let's See if We Can Do Better
+            Interested in a Free Risk Assessment?
           </h2>
-          
+
           <p className="font-body text-lg sm:text-xl text-white/80 mb-8 sm:mb-10 max-w-[600px] mx-auto leading-relaxed">
-            Get a free quote in about 10 minutes. We'll look at what you're paying now and show you if there's a better option.
+            We'll review your current coverage to identify any gaps and explore more comprehensive options that fit your needs. Get a free quote today and see if we can offer a better solution.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-space-md mb-6">

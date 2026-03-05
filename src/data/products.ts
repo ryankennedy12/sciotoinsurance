@@ -6,7 +6,7 @@ export const personalInsuranceProducts = [
     title: "Most Popular",
     products: [
       { name: "Auto Insurance", icon: Car, slug: null, description: "Coverage that actually fits your driving life." },
-      { name: "Home Insurance", icon: Home, slug: null, description: "Protect your biggest investment from Ohio-specific risks." },
+      { name: "Home Insurance", icon: Home, slug: null, description: "Protect your biggest investment." },
       { name: "Life Insurance", icon: Heart, slug: null, description: "Security for those who depend on you." },
       { name: "Umbrella Insurance", icon: Umbrella, slug: null, description: "Extra protection as your assets grow." },
     ],
@@ -16,8 +16,8 @@ export const personalInsuranceProducts = [
     products: [
       { name: "Flood Insurance", icon: Droplets, slug: null, description: "Protection standard policies don't cover." },
       { name: "High Net Worth", icon: Sparkles, slug: null, description: "Specialized coverage for complex asset portfolios." },
-      { name: "Renters Insurance", icon: Home, slug: null, description: "Protect your belongings starting at $15/month." },
-      { name: "Condo Insurance", icon: Building2, slug: null, description: "Coverage for what your HOA policy doesn't." },
+      { name: "Renters Insurance", icon: Home, slug: null, description: "Protect your belongings." },
+      { name: "Power Sports Insurance", icon: Car, slug: null, description: "Coverage for all of your off road vehicles." },
     ],
   },
 ];
@@ -34,7 +34,7 @@ export const businessInsuranceProducts = [
     title: "Core Coverage",
     products: [
       { name: "General Liability", icon: Shield, slug: null, description: "Essential protection for every business." },
-      { name: "Workers' Compensation", icon: HardHat, slug: null, description: "Required coverage, better rates." },
+      { name: "Business Owners Coverage", icon: Briefcase, slug: null, description: "Bundled coverage at a better price." },
       { name: "Commercial Property", icon: Building2, slug: null, description: "Protect your buildings and equipment." },
       { name: "Commercial Auto", icon: Truck, slug: null, description: "Fleet and vehicle coverage." },
     ],
@@ -61,10 +61,8 @@ export const businessInsuranceReasons = [
 
 // Employee Benefits
 export const employeeBenefitsProducts = [
-  { name: "Group Health Insurance", icon: Stethoscope, description: "Medical, dental, and vision plans for your team." },
-  { name: "401(k) & Retirement", icon: DollarSign, description: "Help employees build long-term financial security." },
-  { name: "Life & Disability", icon: Heart, description: "Income protection and peace of mind for your team." },
-  { name: "Dental & Vision", icon: Eye, description: "Standalone dental and vision plans." },
-  { name: "HSA & FSA", icon: Briefcase, description: "Tax-advantaged accounts for healthcare expenses." },
-  { name: "Voluntary Benefits", icon: Users, description: "Additional options employees can choose." },
+  { name: "Group Health Benefits", icon: Stethoscope, description: "Comprehensive medical plans for your team." },
+  { name: "Group Vision", icon: Eye, description: "Vision plans to keep your team seeing clearly." },
+  { name: "Group Dental", icon: Heart, description: "Dental coverage for your employees." },
+  { name: "Disability and more\u2026", icon: Shield, description: "Income protection and additional coverage options." },
 ];

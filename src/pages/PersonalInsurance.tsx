@@ -32,11 +32,11 @@ const PersonalInsurance = () => {
                 Personal Insurance
               </span>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-[1.15] text-balance">
-                Coverage That Fits Your&nbsp;Life
+                Personal Insurance
               </h1>
               <div className="w-16 h-0.5 bg-accent mx-auto mb-6" />
               <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-                We shop 30+ carriers so you get the right protection at the right price.
+                Insurance solutions tailored to your specific coverage needs.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild size="lg" className="rounded-xl text-base">
@@ -142,40 +142,7 @@ const PersonalInsurance = () => {
         </div>
       </section>
 
-      {/* Section 4: Stats Bar */}
-      <section className="bg-cream section-padding">
-        <div className="container-wide">
-          <AnimatedSection animation="fade-up">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 max-w-3xl mx-auto text-center mb-10">
-              <div>
-                <div className="font-display text-4xl sm:text-5xl font-bold text-primary mb-1">$847</div>
-                <div className="text-sm font-semibold text-foreground mb-1">Average Savings</div>
-                <p className="text-xs text-muted-foreground">Per year compared to single-carrier policies</p>
-              </div>
-              <div>
-                <div className="font-display text-4xl sm:text-5xl font-bold text-primary mb-1">30+</div>
-                <div className="text-sm font-semibold text-foreground mb-1">Insurance Carriers</div>
-                <p className="text-xs text-muted-foreground">Shopped for every quote we write</p>
-              </div>
-              <div>
-                <div className="font-display text-4xl sm:text-5xl font-bold text-primary mb-1">Same Day</div>
-                <div className="text-sm font-semibold text-foreground mb-1">Quote Response</div>
-                <p className="text-xs text-muted-foreground">Real people, not phone trees</p>
-              </div>
-            </div>
-            <div className="text-center">
-              <Button asChild size="lg" className="rounded-xl text-base">
-                <Link to="/get-quote">
-                  See What You Could Save
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Section 5: Featured Testimonial */}
+      {/* Section 4: Featured Testimonial */}
       <section className="bg-white section-padding">
         <div className="container-wide">
           <AnimatedSection animation="fade-up">
@@ -202,7 +169,7 @@ const PersonalInsurance = () => {
         </div>
       </section>
 
-      {/* Section 6: CTA Banner */}
+      {/* Section 5: CTA Banner */}
       <section className="relative bg-primary overflow-hidden">
         {/* Radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
@@ -210,10 +177,10 @@ const PersonalInsurance = () => {
           <AnimatedSection animation="fade-up">
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
-                Ready to See What You Could Save?
+                Interested in a Free Risk Assessment?
               </h2>
               <p className="text-primary-foreground/80 text-lg mb-8 max-w-lg mx-auto">
-                Get a free, no-pressure quote in under 10 minutes. We'll show you exactly what you're paying for.
+                We'll review your current coverage to identify any gaps and explore more comprehensive options that fit your needs. Get a free quote today and see if we can offer a better solution.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button

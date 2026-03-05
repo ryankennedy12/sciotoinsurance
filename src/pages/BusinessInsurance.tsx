@@ -10,7 +10,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
-import columbusSkyline from "@/assets/columbus-skyline.jpg";
+import businessInsuranceHero from "@/assets/business-insurance-hero.jpg";
 import industryContractors from "@/assets/industry-contractors.jpg";
 import industryRestaurants from "@/assets/industry-restaurants.jpg";
 import industryRetail from "@/assets/industry-retail.jpg";
@@ -209,8 +209,8 @@ const BusinessInsurance = () => {
       <section className="relative min-h-[70vh] lg:min-h-[85vh] overflow-hidden">
         {/* Background photo */}
         <img
-          src={columbusSkyline}
-          alt="Columbus Ohio skyline"
+          src={businessInsuranceHero}
+          alt="Business owners in front of their shop"
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Desktop: partial cream fade */}
@@ -228,13 +228,13 @@ const BusinessInsurance = () => {
                 Business Insurance
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight leading-[1.1]">
-                Protect What<br />You've Built
+                Business Insurance
               </h1>
               <div className="w-16 h-0.5 bg-accent mb-6" />
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
-                From startups to established enterprises, we craft coverage that grows with your business—shopping 30+ carriers to find the right fit.
+                Risk management and insurance solutions tailored to your business.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg">
                   <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
                 </Button>
@@ -246,46 +246,12 @@ const BusinessInsurance = () => {
                   (614) 612-0050
                 </a>
               </div>
-              <div className="flex flex-wrap gap-6 pt-8 border-t border-border">
-                {["300+ Businesses", "29 Years Experience", "A+ BBB Rating"].map((badge) => (
-                  <div key={badge} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    <span className="text-muted-foreground text-sm">{badge}</span>
-                  </div>
-                ))}
-              </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Section 2: Polaroid Cards — Industries We Serve */}
-      <section className="section-padding bg-background">
-        <div className="container-wide">
-          <AnimatedSection animation="fade-up" className="text-center mb-12">
-            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3 block">Industries We Serve</span>
-            <h2 className="heading-lg text-foreground">Coverage Built for<br className="hidden sm:inline" /> Your Industry</h2>
-            <p className="text-muted-foreground mt-4 max-w-lg mx-auto">Tap a card to see what we cover.</p>
-          </AnimatedSection>
-
-          <AnimatedSection animation="fade-up" delay={100}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-              {industries.map((industry, i) => (
-                <PolaroidCard
-                  key={industry.name}
-                  industry={industry}
-                  index={i}
-                  isFlipped={flippedCard === i}
-                onFlip={() => setFlippedCard(flippedCard === i ? null : i)}
-                  isMobile={isMobile}
-                />
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Section 3: Coverage Grid (Icon Cards on Cream) */}
+      {/* Section 2: Coverage Grid (Icon Cards on Cream) */}
       <section className="section-padding bg-cream">
         <div className="container-wide">
           <AnimatedSection animation="fade-up" className="text-center mb-14">
@@ -325,39 +291,7 @@ const BusinessInsurance = () => {
 
 
 
-      {/* Section 5: Why Choose Scioto (Three Stat Blocks) */}
-      <section className="section-padding bg-background">
-        <div className="container-wide">
-          <AnimatedSection animation="fade-up" className="text-center mb-12">
-            <h2 className="heading-lg text-foreground">Why Businesses Choose Scioto</h2>
-          </AnimatedSection>
-          <AnimatedSection animation="fade-up" delay={100}>
-            <div className="grid sm:grid-cols-3 gap-8 lg:gap-0">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className={`text-center px-6 lg:px-10 ${
-                    i < stats.length - 1 ? "sm:border-r sm:border-border" : ""
-                  }`}
-                >
-                  <div className="text-4xl sm:text-5xl font-display font-bold text-primary mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm font-semibold text-foreground mb-1">{stat.label}</div>
-                  <p className="text-sm text-muted-foreground">{stat.description}</p>
-                </div>
-              ))}
-            </div>
-            <div className="text-center mt-10">
-              <Link to="/about" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors">
-                Learn More About Us <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Section 6: Featured Testimonial (Single Quote) */}
+      {/* Section 3: Featured Testimonial (Single Quote) */}
       <section className="section-padding bg-cream">
         <div className="container-narrow">
           <AnimatedSection animation="fade-up">
@@ -400,7 +334,7 @@ const BusinessInsurance = () => {
               Protect Your Business Today
             </h2>
             <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto">
-              Get a free quote in 10 minutes. We'll show you exactly what you're paying for—and what you might be missing.
+              Get a free quote today. We'll show you exactly what you're paying for—and what you might be missing.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="secondary">
