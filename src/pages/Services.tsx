@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ExternalLink
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const services = [
   {
@@ -92,13 +93,12 @@ const Services = () => {
             <p className="body-base text-muted-foreground mb-8">
               Quick access to everything you need. No hold music, no runaround.
             </p>
-            <a
-              href="tel:6146120050"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
-            >
-              <Phone className="w-5 h-5" />
-              Give Us a Call
-            </a>
+            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <a href="tel:6146120050">
+                <Phone className="w-5 h-5" />
+                Give Us a Call
+              </a>
+            </Button>
           </div>
         </div>
       </section>
