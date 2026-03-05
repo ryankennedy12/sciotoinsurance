@@ -89,7 +89,7 @@ const Home = () => {
 
             {/* Desktop Text Panel */}
             <div className="hidden lg:flex flex-col justify-center items-start text-left px-16 pt-40 pb-20 lg:order-1">
-              <h1 className="font-display font-semibold text-foreground leading-[1.1] mb-6 text-5xl">
+              <h1 className="font-semibold text-foreground leading-[1.1] mb-6 font-sans text-5xl">
                 Secure Your Peace of Mind
               </h1>
 
