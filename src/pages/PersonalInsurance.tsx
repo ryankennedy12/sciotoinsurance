@@ -195,10 +195,10 @@ const PersonalInsurance = () => {
                 </Button>
                 <a
                   href="tel:6146120050"
-                  className="inline-flex items-center gap-2 text-primary-foreground/90 font-medium hover:text-primary-foreground transition-colors"
+                  className="inline-flex items-center gap-2 py-3 font-body font-medium text-primary-foreground/90 hover:text-primary-foreground transition-colors duration-200"
                 >
                   <Phone className="h-4 w-4" />
-                  (614) 612-0050
+                  Or call us: (614) 612-0050
                 </a>
               </div>
             </div>

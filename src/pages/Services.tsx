@@ -94,10 +94,10 @@ const Services = () => {
             </p>
             <a
               href="tel:6146120050"
-              className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-5 py-2.5 font-semibold text-sm hover:bg-primary/15 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-[0.98]"
             >
-              <Phone className="w-4 h-4" />
-              Need help now? (614) 612-0050
+              <Phone className="w-5 h-5" />
+              Give Us a Call
             </a>
           </div>
         </div>
