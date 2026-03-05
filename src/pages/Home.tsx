@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Star, Scale, ShieldCheck, PhoneCall, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
