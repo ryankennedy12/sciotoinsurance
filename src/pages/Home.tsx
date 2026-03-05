@@ -60,20 +60,18 @@ const Home = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row sm:justify-center gap-4 mb-6">
-                  <Link
-                    to="/get-quote"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-body font-semibold text-base transition-[transform,box-shadow,background-color] duration-300 hover:bg-burgundy-800 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
-
-                    Get Your Free Quote
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <a
-                    href="tel:6146120050"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-card text-primary border border-primary font-body font-semibold text-base transition-[transform,box-shadow,background-color,color] duration-300 hover:bg-primary hover:text-primary-foreground active:scale-[0.98]">
-
-                    <Phone className="w-5 h-5" />
-                    Give Us a Call
-                  </a>
+                  <Button asChild size="lg" className="w-full sm:w-auto text-base">
+                    <Link to="/get-quote">
+                      Get Your Free Quote
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="w-full sm:w-auto text-base border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <a href="tel:6146120050">
+                      <Phone className="w-5 h-5" />
+                      Give Us a Call
+                    </a>
+                  </Button>
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-muted-foreground">
