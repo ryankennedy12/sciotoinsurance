@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench } from "lucide-react";
+import { Phone, ArrowRight, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/ui/animated-section";
@@ -131,11 +131,6 @@ const PolaroidCard = ({
   );
 };
 
-const testimonials = [
-  { quote: "They understood our industry from day one. No explaining what general contractors actually do.", name: "Robert M.", location: "Columbus, OH", date: "November 2024", rating: 5, helpedWith: "Contractor Insurance" },
-  { quote: "When we had a break-in, they were at our store the next morning.", name: "Lisa P.", location: "Worthington, OH", date: "October 2024", rating: 5, helpedWith: "Commercial Property Claim" },
-  { quote: "An agent who doesn't just sell policies but actually helps us understand our risks.", name: "David K.", location: "Dublin, OH", date: "September 2024", rating: 5, helpedWith: "Business Insurance Review" },
-];
 
 const stats = [
   { value: "300+", label: "Businesses Protected", description: "Ohio companies trust us with their coverage." },
@@ -289,40 +284,6 @@ const BusinessInsurance = () => {
 
 
 
-
-      {/* Section 3: Featured Testimonial (Single Quote) */}
-      <section className="section-padding bg-cream">
-        <div className="container-narrow">
-          <AnimatedSection animation="fade-up">
-            <div className="bg-card rounded-xl p-8 sm:p-10 border-l-4 border-l-primary border border-border">
-              <div className="flex gap-1 mb-5">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="h-4 w-4 fill-accent text-accent" />
-                ))}
-              </div>
-              <blockquote className="font-display italic text-xl sm:text-2xl text-foreground leading-relaxed mb-6">
-                "{testimonials[0].quote}"
-              </blockquote>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-display font-semibold text-sm text-primary">
-                  {testimonials[0].name.split(" ").map((n) => n[0]).join("")}
-                </div>
-                <div>
-                  <p className="font-medium text-sm text-foreground">{testimonials[0].name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {testimonials[0].location} · {testimonials[0].date}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-border">
-                <p className="text-xs text-muted-foreground">
-                  Helped with: <span className="text-primary font-medium">{testimonials[0].helpedWith}</span>
-                </p>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* Section 7: Bottom CTA Banner */}
       <section className="section-padding bg-primary relative overflow-hidden">

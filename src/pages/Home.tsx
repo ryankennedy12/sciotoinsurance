@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
-import TestimonialCard from "@/components/TestimonialCard";
+
 import heroFamily from "@/assets/hero-family.jpg";
 import personalCoverage from "@/assets/personal-coverage-new.jpg";
 import businessCoverage from "@/assets/business-coverage-new.jpg";
@@ -369,96 +369,6 @@ const Home = () => {
               </Link>
             </AnimatedSection>
 
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials & Social Proof Section */}
-      <section className="py-16 sm:py-24 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-space-md lg:px-space-lg">
-          
-          {/* Section Header */}
-          <AnimatedSection animation="fade-up" className="text-center mb-12">
-            <div className="w-10 h-0.5 bg-primary mx-auto mb-space-md" />
-            <h2 className="font-display font-semibold text-2xl sm:text-3xl lg:text-[36px] text-foreground mb-3">
-              What Our Clients Say
-            </h2>
-            <p className="font-body text-muted-foreground max-w-[500px] mx-auto">
-              Real feedback from families and businesses we've helped.
-            </p>
-          </AnimatedSection>
-
-          {/* Featured Testimonial */}
-          <AnimatedSection animation="fade-up" delay={100} className="max-w-[800px] mx-auto mb-12">
-            <div className="relative bg-primary rounded-2xl p-8 sm:p-12 text-center">
-              {/* Decorative Quote Mark */}
-              <div className="absolute top-4 left-8 font-display text-[80px] sm:text-[120px] leading-none text-white/10 select-none pointer-events-none">
-                "
-              </div>
-              
-              {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) =>
-                <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
-                )}
-              </div>
-              
-              <blockquote className="relative z-10">
-                <p className="font-display italic text-xl sm:text-2xl lg:text-[28px] text-cream leading-relaxed mb-6">
-                  After my basement flooded, Jeff had an adjuster at my house within 24 hours and a check in my hand within a week. My old insurance company would have taken months.
-                </p>
-                <footer>
-                  <p className="font-body font-semibold text-white mb-1">
-                    Jennifer Morrison
-                  </p>
-                  <p className="font-body text-sm text-white/70">
-                    Westerville, OH • March 2024
-                  </p>
-                  <p className="font-body text-xs text-white/50 mt-2">
-                    Helped with: Home Insurance Claim
-                  </p>
-                </footer>
-              </blockquote>
-            </div>
-          </AnimatedSection>
-
-          {/* Three Testimonial Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <AnimatedSection animation="fade-up" delay={150}>
-              <TestimonialCard
-                quote="Saved us $1,800 a year on the exact same coverage. Should have switched years ago."
-                name="David Reynolds"
-                location="New Albany, OH"
-                date="January 2024"
-                helpedWith="Auto & Home Bundle"
-                rating={5}
-                variant="light" />
-              
-            </AnimatedSection>
-            
-            <AnimatedSection animation="fade-up" delay={200}>
-              <TestimonialCard
-                quote="They found a gap in our business policy that would have cost us $50K in a lawsuit. Worth every penny."
-                name="Marcus Chen"
-                location="Columbus, OH"
-                date="February 2024"
-                helpedWith="Commercial Liability"
-                rating={5}
-                variant="light" />
-              
-            </AnimatedSection>
-            
-            <AnimatedSection animation="fade-up" delay={250} className="sm:col-span-2 lg:col-span-1">
-              <TestimonialCard
-                quote="When I call, they actually know who I am. When's the last time your insurance company did that?"
-                name="Michelle Torres"
-                location="Gahanna, OH"
-                date="December 2023"
-                helpedWith="Personal Insurance"
-                rating={5}
-                variant="light" />
-              
-            </AnimatedSection>
           </div>
         </div>
       </section>
