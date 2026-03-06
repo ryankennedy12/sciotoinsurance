@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { usePageReady } from "@/components/Layout";
 
-import TestimonialCard from "@/components/TestimonialCard";
+
 import heroFamily from "@/assets/hero-family.jpg";
 import personalCoverage from "@/assets/personal-coverage-new.jpg";
 import businessCoverage from "@/assets/business-coverage-new.jpg";
