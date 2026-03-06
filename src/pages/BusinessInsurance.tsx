@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Star, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench } from "lucide-react";
+import { Phone, ArrowRight, CheckCircle, Shield, HardHat, Building2, Truck, Scale, Lock, Car, Briefcase, UtensilsCrossed, ShoppingBag, Stethoscope, Factory, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/ui/animated-section";
