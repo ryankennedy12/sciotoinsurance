@@ -141,33 +141,6 @@ const PersonalInsurance = () => {
         </div>
       </section>
 
-      {/* Section 4: Featured Testimonial */}
-      <section className="bg-white section-padding">
-        <div className="container-wide">
-          <AnimatedSection animation="fade-up">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="flex justify-center gap-1 mb-6">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="w-5 h-5 fill-accent text-accent" />
-                ))}
-              </div>
-              <blockquote className="font-display text-xl sm:text-2xl lg:text-3xl italic text-foreground leading-relaxed mb-8">
-                "When a tree fell on our garage, they handled everything. We barely had to lift a finger. Tom walked us through every step of the claim."
-              </blockquote>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm">
-                <span className="font-semibold text-foreground">— Marcus W.</span>
-                <span className="hidden sm:block text-muted-foreground">|</span>
-                <span className="text-muted-foreground">Westerville, OH</span>
-                <span className="hidden sm:block text-muted-foreground">|</span>
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                  Helped with: Home Insurance Claim
-                </span>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* Section 5: CTA Banner */}
       <section className="relative bg-primary overflow-hidden">
         {/* Radial glow */}
