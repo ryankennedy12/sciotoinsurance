@@ -94,7 +94,7 @@ const handler = async (req: Request): Promise<Response> => {
           </p>
           
           <div style="margin-top: 30px; padding: 20px; background: #8B2942; border-radius: 8px; text-align: center;">
-            <a href="${Deno.env.get("SITE_URL") || "https://your-site.lovable.app"}/admin/leads" 
+            <a href="${Deno.env.get("SITE_URL") || "https://sciotoinsurancegroup.com"}/admin/leads" 
                style="color: white; text-decoration: none; font-weight: bold; font-size: 16px;">
               View in Admin Dashboard →
             </a>
