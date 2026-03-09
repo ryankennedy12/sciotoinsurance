@@ -23,6 +23,7 @@ interface Lead {
   status: string;
   created_at: string;
   notes: string | null;
+  additional_info: string | null;
 }
 
 interface MetricCard {
