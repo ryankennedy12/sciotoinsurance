@@ -3,25 +3,9 @@ import { CheckCircle, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { AnimatedSection } from "@/components/ui/animated-section";
-
-const helpTopics = [
-  { value: "risk-assessment", label: "Free Risk Assessment" },
-  { value: "personal", label: "Personal Insurance" },
-  { value: "business", label: "Business Insurance" },
-  { value: "benefits", label: "Employee Benefits" },
-  { value: "other", label: "Something else" },
-];
 
 const HGConnect2026 = () => {
   const { toast } = useToast();
@@ -32,8 +16,6 @@ const HGConnect2026 = () => {
     lastName: "",
     email: "",
     phone: "",
-    topic: "",
-    message: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,7 +30,7 @@ const HGConnect2026 = () => {
       phone: form.phone.trim() || null,
       coverage_type: "not_sure" as const,
       request_type: "contact_general" as const,
-      additional_info: `H&G Connect 2026 - Topic: ${form.topic || "risk-assessment"}. ${form.message.trim() || "Free Risk Assessment Request"}`,
+      additional_info: "H&G Connect 2026 Event Lead",
     });
     setLoading(false);
 
@@ -74,11 +56,11 @@ const HGConnect2026 = () => {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <AnimatedSection animation="fade-up">
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
-              H&G Connect 2026
+              Let's Get You Covered
             </h1>
             <div className="w-16 h-0.5 bg-accent mx-auto mb-6" />
             <p className="font-body text-lg sm:text-xl text-white/80 leading-relaxed max-w-xl mx-auto">
-              Let us find the gaps before they find you. Sign up for a free risk assessment today!
+              Fill out the form below and one of our agents will reach out to schedule your free risk assessment.
             </p>
           </AnimatedSection>
         </div>
@@ -104,7 +86,7 @@ const HGConnect2026 = () => {
                   Get Your Free Risk Assessment
                 </h2>
                 <p className="font-body text-muted-foreground text-center mb-8">
-                  Fill out the form below and we'll reach out to schedule your assessment.
+                  We'll reach out to schedule a time that works for you.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -151,33 +133,6 @@ const HGConnect2026 = () => {
                       placeholder="(614) 555-1234"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="topic">What can we help with?</Label>
-                    <Select value={form.topic} onValueChange={(val) => setForm({ ...form, topic: val })}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a topic..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {helpTopics.map((t) => (
-                          <SelectItem key={t.value} value={t.value}>
-                            {t.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us more about what you need..."
-                      rows={4}
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
                     />
                   </div>
 
