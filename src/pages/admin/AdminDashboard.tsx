@@ -89,6 +89,10 @@ export default function AdminDashboard() {
         l => l.status === "new" && l.notes?.includes("Contact form")
       ).length;
 
+      const hgConnectSignups = allLeads.filter(
+        l => l.additional_info === "H&G Connect 2026 Event Lead"
+      ).length;
+
       setMetrics([
         {
           title: "New Leads This Week",
