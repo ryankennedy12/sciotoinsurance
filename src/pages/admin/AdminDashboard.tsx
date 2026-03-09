@@ -214,6 +214,11 @@ export default function AdminDashboard() {
                       <Badge variant="outline" className={statusColors[lead.status]}>
                         {lead.status}
                       </Badge>
+                      {lead.additional_info === "H&G Connect 2026 Event Lead" && (
+                        <Badge className="bg-accent/20 text-accent border-accent/30 text-[10px]">
+                          H&G Connect
+                        </Badge>
+                      )}
                       <span className="font-medium text-foreground truncate">
                         {lead.first_name} {lead.last_name}
                       </span>
