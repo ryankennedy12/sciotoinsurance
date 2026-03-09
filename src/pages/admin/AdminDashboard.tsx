@@ -9,7 +9,8 @@ import {
   ClipboardList, 
   Clock,
   ArrowRight,
-  TrendingUp
+  TrendingUp,
+  QrCode
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
