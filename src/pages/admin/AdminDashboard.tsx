@@ -118,6 +118,12 @@ export default function AdminDashboard() {
           icon: MessageSquare,
           description: "New messages",
         },
+        {
+          title: "H&G Connect Signups",
+          value: hgConnectSignups,
+          icon: QrCode,
+          description: "QR code event leads",
+        },
       ]);
 
       setRecentLeads(allLeads.slice(0, 10));
