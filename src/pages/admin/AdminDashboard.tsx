@@ -9,7 +9,8 @@ import {
   ClipboardList, 
   Clock,
   ArrowRight,
-  TrendingUp
+  TrendingUp,
+  QrCode
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -22,6 +23,7 @@ interface Lead {
   status: string;
   created_at: string;
   notes: string | null;
+  additional_info: string | null;
 }
 
 interface MetricCard {
@@ -88,6 +90,10 @@ export default function AdminDashboard() {
         l => l.status === "new" && l.notes?.includes("Contact form")
       ).length;
 
+      const hgConnectSignups = allLeads.filter(
+        l => l.additional_info === "H&G Connect 2026 Event Lead"
+      ).length;
+
       setMetrics([
         {
           title: "New Leads This Week",
@@ -112,6 +118,12 @@ export default function AdminDashboard() {
           value: unreadContacts,
           icon: MessageSquare,
           description: "New messages",
+        },
+        {
+          title: "H&G Connect Signups",
+          value: hgConnectSignups,
+          icon: QrCode,
+          description: "QR code event leads",
         },
       ]);
 
@@ -142,7 +154,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {metrics.map((metric, index) => (
           <Card key={index} className="border-border/50">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -203,6 +215,11 @@ export default function AdminDashboard() {
                       <Badge variant="outline" className={statusColors[lead.status]}>
                         {lead.status}
                       </Badge>
+                      {lead.additional_info === "H&G Connect 2026 Event Lead" && (
+                        <Badge className="bg-accent/20 text-accent border-accent/30 text-[10px]">
+                          H&G Connect
+                        </Badge>
+                      )}
                       <span className="font-medium text-foreground truncate">
                         {lead.first_name} {lead.last_name}
                       </span>
