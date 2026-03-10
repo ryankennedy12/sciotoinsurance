@@ -207,9 +207,6 @@ const BusinessInsurance = () => {
             {/* Text column */}
             <div className="text-center lg:text-left order-1">
               <AnimatedSection animation="fade-up">
-                <span className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-6 block">
-                  Business Insurance
-                </span>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight leading-[1.1] text-balance">
                   Protect What You've Built
                 </h1>
