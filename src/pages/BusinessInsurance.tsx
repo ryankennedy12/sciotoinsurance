@@ -200,45 +200,59 @@ const BusinessInsurance = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Section 1: Half-Reveal Photo Hero */}
-      <section className="relative min-h-[70vh] lg:min-h-[85vh] overflow-hidden">
-        {/* Background photo */}
-        <img
-          src={businessInsuranceHero}
-          alt="Business owners in front of their shop"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* Desktop: partial cream fade */}
-        <div className="hidden lg:block absolute inset-y-0 left-0 w-[60%]" style={{ background: 'linear-gradient(to right, hsl(30 20% 98% / 0.98) 0%, hsl(30 20% 98% / 0.96) 55%, hsl(30 20% 98% / 0.8) 80%, hsl(30 20% 98% / 0) 100%)' }} />
-        {/* Tablet: stronger overlay since text spans more of the width */}
-        <div className="hidden sm:block lg:hidden absolute inset-y-0 left-0 w-[75%]" style={{ background: 'linear-gradient(to right, hsl(30 20% 98% / 0.98) 0%, hsl(30 20% 98% / 0.97) 60%, hsl(30 20% 98% / 0.85) 85%, hsl(30 20% 98% / 0) 100%)' }} />
-        {/* Mobile: full overlay */}
-        <div className="absolute inset-0 sm:hidden" style={{ background: 'linear-gradient(to bottom, hsl(30 20% 98% / 0) 0%, hsl(30 20% 98% / 0.3) 15%, hsl(30 20% 98% / 0.85) 40%, hsl(30 20% 98% / 0.98) 55%, hsl(30 20% 98% / 1) 100%)' }} />
+      {/* Section 1: Stacked Card Hero */}
+      <section className="section-padding bg-cream">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Text column */}
+            <div className="text-center lg:text-left order-1">
+              <AnimatedSection animation="fade-up">
+                <span className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-6 block">
+                  Business Insurance
+                </span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight leading-[1.1] text-balance">
+                  Protect What You've Built
+                </h1>
+                <div className="w-16 h-0.5 bg-accent mb-6 mx-auto lg:mx-0" />
+              </AnimatedSection>
 
-        {/* Content */}
-        <div className="relative z-10 container-wide h-full min-h-[70vh] lg:min-h-[85vh] flex items-center">
-          <div className="px-6 sm:px-8 lg:px-0 py-24 lg:py-32 max-w-xl lg:max-w-2xl">
-            <AnimatedSection animation="fade-up">
-              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-6 block">
-                Business Insurance
-              </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight leading-[1.1]">
-                Business Insurance
-              </h1>
-              <div className="w-16 h-0.5 bg-accent mb-6" />
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
-                Risk management and insurance solutions tailored to your business.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg">
-                  <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                  <a href="tel:6146120050">
-                    <Phone className="h-5 w-5" />
-                    Give Us a Call
-                  </a>
-                </Button>
+              {/* Photo card — appears here on mobile/tablet, between divider and subtext */}
+              <AnimatedSection animation="fade-up" delay={100} className="lg:hidden mb-8">
+                <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-lg mx-auto max-w-md">
+                  <img
+                    src={businessInsuranceHero}
+                    alt="Business owners in front of their shop"
+                    className="w-full aspect-[16/10] object-cover"
+                  />
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection animation="fade-up" delay={150}>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                  Risk management and insurance solutions tailored to your business — backed by 30+ carriers and real people who answer the phone.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <Button asChild size="lg">
+                    <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <a href="tel:6146120050">
+                      <Phone className="h-5 w-5" />
+                      Give Us a Call
+                    </a>
+                  </Button>
+                </div>
+              </AnimatedSection>
+            </div>
+
+            {/* Photo card — desktop only */}
+            <AnimatedSection animation="fade-up" delay={200} className="hidden lg:block order-2">
+              <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-xl">
+                <img
+                  src={businessInsuranceHero}
+                  alt="Business owners in front of their shop"
+                  className="w-full object-cover"
+                />
               </div>
             </AnimatedSection>
           </div>
