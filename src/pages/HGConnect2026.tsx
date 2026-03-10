@@ -15,7 +15,7 @@ const HGConnect2026 = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phone: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,7 +30,7 @@ const HGConnect2026 = () => {
       phone: form.phone.trim() || null,
       coverage_type: "not_sure" as const,
       request_type: "contact_general" as const,
-      additional_info: "H&G Connect 2026 Event Lead",
+      additional_info: "H&G Connect 2026 Event Lead"
     });
     setLoading(false);
 
@@ -38,13 +38,13 @@ const HGConnect2026 = () => {
       toast({
         title: "Something went wrong",
         description: "Please try again or email us at info@sciotoinsurancegroup.com",
-        variant: "destructive",
+        variant: "destructive"
       });
     } else {
       setSubmitted(true);
       toast({
         title: "Thank you!",
-        description: "We'll be in touch soon with your free risk assessment.",
+        description: "We'll be in touch soon with your free risk assessment."
       });
     }
   };
@@ -56,7 +56,7 @@ const HGConnect2026 = () => {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <AnimatedSection animation="fade-up">
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
-              Let's Get You Covered
+              Stark County Home and Garden Show Connect 2026         
             </h1>
             <div className="w-16 h-0.5 bg-accent mx-auto mb-6" />
             <p className="font-body text-lg sm:text-xl text-white/80 leading-relaxed max-w-xl mx-auto">
@@ -70,8 +70,8 @@ const HGConnect2026 = () => {
       <section className="py-12 sm:py-16">
         <div className="max-w-xl mx-auto px-6">
           <AnimatedSection animation="fade-up">
-            {submitted ? (
-              <div className="bg-card rounded-2xl border border-border p-10 text-center shadow-sm">
+            {submitted ?
+            <div className="bg-card rounded-2xl border border-border p-10 text-center shadow-sm">
                 <CheckCircle className="h-14 w-14 text-primary mx-auto mb-4" />
                 <h2 className="font-display font-bold text-2xl text-foreground mb-2">
                   Thank You!
@@ -79,9 +79,9 @@ const HGConnect2026 = () => {
                 <p className="font-body text-muted-foreground">
                   We've received your information and will be in touch soon with your free risk assessment.
                 </p>
-              </div>
-            ) : (
-              <div className="bg-card rounded-2xl border border-border p-8 sm:p-10 shadow-sm">
+              </div> :
+
+            <div className="bg-card rounded-2xl border border-border p-8 sm:p-10 shadow-sm">
                 <h2 className="font-display font-semibold text-2xl text-foreground mb-2 text-center">
                   Get Your Free Risk Assessment
                 </h2>
@@ -94,58 +94,58 @@ const HGConnect2026 = () => {
                     <div>
                       <Label htmlFor="firstName">First Name *</Label>
                       <Input
-                        id="firstName"
-                        placeholder="John"
-                        required
-                        value={form.firstName}
-                        onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-                      />
+                      id="firstName"
+                      placeholder="John"
+                      required
+                      value={form.firstName}
+                      onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
+                    
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name *</Label>
                       <Input
-                        id="lastName"
-                        placeholder="Smith"
-                        required
-                        value={form.lastName}
-                        onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-                      />
+                      id="lastName"
+                      placeholder="Smith"
+                      required
+                      value={form.lastName}
+                      onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
+                    
                     </div>
                   </div>
 
                   <div>
                     <Label htmlFor="email">Email *</Label>
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="john@example.com"
-                      required
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    />
+                    id="email"
+                    type="email"
+                    placeholder="john@example.com"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                  
                   </div>
 
                   <div>
                     <Label htmlFor="phone">Phone (optional)</Label>
                     <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="(614) 555-1234"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    />
+                    id="phone"
+                    type="tel"
+                    placeholder="(614) 555-1234"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                  
                   </div>
 
                   <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                    {loading ? (
-                      <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Sending...</>
-                    ) : (
-                      <><Send className="h-5 w-5 mr-2" /> Send Message</>
-                    )}
+                    {loading ?
+                  <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Sending...</> :
+
+                  <><Send className="h-5 w-5 mr-2" /> Send Message</>
+                  }
                   </Button>
                 </form>
               </div>
-            )}
+            }
           </AnimatedSection>
         </div>
       </section>
@@ -156,8 +156,8 @@ const HGConnect2026 = () => {
           614-612-0050 &nbsp;|&nbsp; info@sciotoinsurancegroup.com
         </p>
       </section>
-    </div>
-  );
+    </div>);
+
 };
 
 export default HGConnect2026;
