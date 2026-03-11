@@ -53,11 +53,7 @@ export default function AdminDashboard() {
   const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchDashboardData();
-  }, []);
-
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     try {
       // Get all leads
       const { data: leads, error } = await supabase
