@@ -81,10 +81,16 @@ export default function AdminLogin() {
     }
 
     if (data.user) {
-      // Grant admin role
-      const { error: roleError } = await supabase
-        .from("user_roles")
-        .insert({ user_id: data.user.id, role: "admin" });
+      // Sign in first so we have an authenticated session
+      const { error: signInError } = await signIn(email, password);
+      if (signInError) {
+        toast({ title: "Account created but sign-in failed", description: "Please try signing in manually.", variant: "destructive" });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Grant admin role via security definer function
+      const { error: roleError } = await supabase.rpc("assign_admin_role_self");
 
       if (roleError) {
         toast({ title: "Role assignment failed", description: "Account created but couldn't assign admin role. Contact support.", variant: "destructive" });
@@ -92,8 +98,7 @@ export default function AdminLogin() {
         return;
       }
 
-      toast({ title: "Admin account created!", description: "You can now sign in with your credentials." });
-      await signIn(email, password);
+      toast({ title: "Admin account created!", description: "Welcome to the admin portal." });
       navigate("/admin");
     }
 
