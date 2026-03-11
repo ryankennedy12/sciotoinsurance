@@ -29,7 +29,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             {/* Social Icons - 44px tap targets */}
             <div className="flex gap-3">
               <a
-                href="https://www.facebook.com/profile.php?id=61550882423141#"
+                href="https://www.facebook.com/people/Scioto-Insurance-Group/61550882423141/#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors duration-300 text-primary"
