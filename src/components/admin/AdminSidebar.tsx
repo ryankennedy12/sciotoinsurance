@@ -39,44 +39,57 @@ export function AdminSidebar() {
   const location = useLocation();
   const { signOut } = useAuth();
 
-  // Fetch unread/new counts for badges
+  const fetchCounts = async () => {
+    try {
+      const { count: contactCount } = await supabase
+        .from("leads")
+        .select("*", { count: "exact", head: true })
+        .eq("request_type", "contact_general")
+        .eq("reply_status", "unread");
+
+      const { count: requestCount } = await supabase
+        .from("leads")
+        .select("*", { count: "exact", head: true })
+        .in("request_type", [
+          "service_claim",
+          "service_change",
+          "service_cert",
+          "service_idcard",
+          "service_review",
+          "service_payment",
+        ])
+        .eq("status", "new");
+
+      setBadgeCounts({
+        contacts: contactCount || 0,
+        requests: requestCount || 0,
+      });
+    } catch (error) {
+      console.error("Error fetching badge counts:", error);
+    }
+  };
+
+  // Initial fetch + polling fallback
   useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        // Unread contacts
-        const { count: contactCount } = await supabase
-          .from("leads")
-          .select("*", { count: "exact", head: true })
-          .eq("request_type", "contact_general")
-          .eq("reply_status", "unread");
-
-        // New service requests
-        const { count: requestCount } = await supabase
-          .from("leads")
-          .select("*", { count: "exact", head: true })
-          .in("request_type", [
-            "service_claim",
-            "service_change",
-            "service_cert",
-            "service_idcard",
-            "service_review",
-            "service_payment",
-          ])
-          .eq("status", "new");
-
-        setBadgeCounts({
-          contacts: contactCount || 0,
-          requests: requestCount || 0,
-        });
-      } catch (error) {
-        console.error("Error fetching badge counts:", error);
-      }
-    };
-
     fetchCounts();
-    // Refresh counts every 30 seconds
     const interval = setInterval(fetchCounts, 30000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Realtime: refresh counts instantly on any leads change
+  useEffect(() => {
+    const channel = supabase
+      .channel("sidebar-badge-counts")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "leads" },
+        () => fetchCounts()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const isActive = (path: string) => {
