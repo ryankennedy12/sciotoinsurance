@@ -1,9 +1,11 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { AdminSidebar } from "./AdminSidebar";
 import { useAuth } from "@/hooks/useAuth";
+import { useLeadNotifications } from "@/hooks/useLeadNotifications";
 
 export function AdminLayout() {
   const { user, isLoading, isAdmin } = useAuth();
+  useLeadNotifications();
 
   if (isLoading) {
     return (
