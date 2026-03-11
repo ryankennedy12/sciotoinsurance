@@ -203,19 +203,19 @@ const BusinessInsurance = () => {
       {/* Section 1: Stacked Card Hero */}
       <section className="section-padding bg-cream">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
             {/* Text column */}
             <div className="text-center lg:text-left order-1">
               <AnimatedSection animation="fade-up">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 tracking-tight leading-[1.1] text-balance">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-5 lg:mb-6 tracking-tight leading-[1.1] text-balance">
                   Protect What You've Built
                 </h1>
-                <div className="w-16 h-0.5 bg-accent mb-6 mx-auto lg:mx-0" />
+                <div className="w-16 h-0.5 bg-accent mb-5 lg:mb-6 mx-auto lg:mx-0" />
               </AnimatedSection>
 
               {/* Photo card — appears here on mobile/tablet, between divider and subtext */}
-              <AnimatedSection animation="fade-up" delay={100} className="lg:hidden mb-8">
-                <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-lg mx-auto max-w-md">
+              <AnimatedSection animation="fade-up" delay={100} className="lg:hidden mb-6 sm:mb-8">
+                <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-lg mx-auto max-w-sm sm:max-w-md">
                   <img
                     src={businessInsuranceHero}
                     alt="Business owners in front of their shop"
@@ -225,7 +225,7 @@ const BusinessInsurance = () => {
               </AnimatedSection>
 
               <AnimatedSection animation="fade-up" delay={150}>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
                   Risk management and insurance solutions tailored to your business — backed by 30+ carriers and real people who answer the phone.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -244,11 +244,11 @@ const BusinessInsurance = () => {
 
             {/* Photo card — desktop only */}
             <AnimatedSection animation="fade-up" delay={200} className="hidden lg:block order-2">
-              <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-xl">
+              <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-xl max-h-[420px]">
                 <img
                   src={businessInsuranceHero}
                   alt="Business owners in front of their shop"
-                  className="w-full object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </AnimatedSection>
