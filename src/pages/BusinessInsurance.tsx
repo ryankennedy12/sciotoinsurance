@@ -201,7 +201,7 @@ const BusinessInsurance = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Section 1: Stacked Card Hero */}
-      <section className="section-padding bg-cream">
+      <section className="pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-cream">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
             {/* Text column */}
