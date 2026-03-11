@@ -38,7 +38,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/scioto-insurance-group"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors duration-300 text-primary"
