@@ -106,8 +106,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" />
                 <p className="font-body text-sm text-charcoal/70">
-                  102 W Main St. #491<br />
-                  New Albany, OH 43054
+                  Columbus, Ohio
                 </p>
               </div>
               <div className="flex items-center gap-3">
