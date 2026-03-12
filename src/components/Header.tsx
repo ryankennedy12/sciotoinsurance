@@ -231,7 +231,7 @@ const Header = () => {
               ))}
               <span className="text-xs text-muted-foreground ml-1.5 font-body">5.0 on Google</span>
             </div>
-            <p className="text-xs text-muted-foreground font-body">Est. 1995 · New Albany, Ohio</p>
+            <p className="text-xs text-muted-foreground font-body">New Albany, Ohio</p>
           </div>
         </div>
       </div>
