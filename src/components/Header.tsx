@@ -232,7 +232,7 @@ const Header = () => {
               <span className="text-xs text-muted-foreground ml-1.5 font-body">5.0 on Google</span>
             </div>
           </div>
-      </div>
+        </div>
     </>
   );
 };
