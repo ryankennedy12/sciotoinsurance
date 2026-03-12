@@ -165,53 +165,11 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Section 2: Channel Cards */}
-      <section className="py-8 md:py-12 bg-background">
-        <div className="container-wide px-4 md:px-space-lg">
-          <AnimatedSection animation="fade-up" delay={0}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-              {channels.map((channel) => {
-                const Wrapper = channel.href ? "a" : "div";
-                const wrapperProps = channel.href
-                  ? { href: channel.href, ...(channel.href.startsWith("mailto") ? { target: "_blank", rel: "noopener noreferrer" } : {}) }
-                  : {};
-                return (
-                  <Wrapper
-                    key={channel.title}
-                    {...wrapperProps}
-                    className={`rounded-2xl p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
-                      channel.priority
-                        ? "bg-secondary border-l-4 border-primary"
-                        : "bg-card border border-border"
-                    }`}
-                  >
-                    <channel.icon className="w-6 h-6 text-primary mb-4" />
-                    <h3 className="font-display font-semibold text-lg text-foreground">
-                      {channel.title}
-                    </h3>
-                    <p className="text-primary font-medium mt-1 text-sm">
-                      {channel.detail}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {channel.subtitle}
-                    </p>
-                  </Wrapper>
-                );
-              })}
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Section 3: Centered Form */}
+      {/* Section 2: Contact Form */}
       <section className="py-12 md:py-16 bg-background">
         <div className="container-wide px-4 md:px-space-lg">
           <div className="max-w-xl mx-auto">
-            <AnimatedSection animation="fade-up" delay={100}>
-              <span className="text-xs font-body font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-8 block text-center">
-                Or send us a message
-              </span>
-
+            <AnimatedSection animation="fade-up" delay={0}>
               {isSubmitted ? (
                 <div className="text-center py-8">
                   <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
@@ -338,6 +296,47 @@ const Contact = () => {
               )}
             </AnimatedSection>
           </div>
+        </div>
+      </section>
+
+      {/* Section 3: Channel Cards */}
+      <section className="py-8 md:py-12 bg-background">
+        <div className="container-wide px-4 md:px-space-lg">
+          <AnimatedSection animation="fade-up" delay={100}>
+            <span className="text-xs font-body font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-8 block text-center">
+              Or reach us directly
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              {channels.map((channel) => {
+                const Wrapper = channel.href ? "a" : "div";
+                const wrapperProps = channel.href
+                  ? { href: channel.href, ...(channel.href.startsWith("mailto") ? { target: "_blank", rel: "noopener noreferrer" } : {}) }
+                  : {};
+                return (
+                  <Wrapper
+                    key={channel.title}
+                    {...wrapperProps}
+                    className={`rounded-2xl p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
+                      channel.priority
+                        ? "bg-secondary border-l-4 border-primary"
+                        : "bg-card border border-border"
+                    }`}
+                  >
+                    <channel.icon className="w-6 h-6 text-primary mb-4" />
+                    <h3 className="font-display font-semibold text-lg text-foreground">
+                      {channel.title}
+                    </h3>
+                    <p className="text-primary font-medium mt-1 text-sm">
+                      {channel.detail}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {channel.subtitle}
+                    </p>
+                  </Wrapper>
+                );
+              })}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
