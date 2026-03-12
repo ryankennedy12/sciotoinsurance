@@ -81,7 +81,7 @@ const Home = () => {
                     <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
                     )}
                   </div>
-                  <span className="text-xs font-body">Independent Agency · Est. 1995</span>
+                  <span className="text-xs font-body">Independent Agency</span>
                 </div>
               </div>
             </div>
