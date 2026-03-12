@@ -56,8 +56,8 @@ const channels = [
   {
     icon: MapPin,
     title: "Mailing Address",
-    detail: "P.O. Box 491",
-    subtitle: "New Albany, OH 43054",
+    detail: "Columbus, Ohio",
+    subtitle: undefined,
     href: undefined,
     priority: false,
   },
