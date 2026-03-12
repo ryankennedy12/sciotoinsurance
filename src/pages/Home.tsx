@@ -406,10 +406,6 @@ const Home = () => {
               Or call us: (614) 612-0050
             </a>
           </div>
-          
-          <p className="font-body text-sm text-white/50 italic">
-            We won't spam you or pass your info around. Promise.
-          </p>
         </AnimatedSection>
       </section>
     </>);
