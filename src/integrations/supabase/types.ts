@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      approved_admin_emails: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
       lead_activity: {
         Row: {
           activity_type: string
@@ -166,11 +184,16 @@ export type Database = {
     }
     Functions: {
       admin_exists: { Args: never; Returns: boolean }
+      assign_admin_role_self: { Args: never; Returns: undefined }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_approved_admin_email: {
+        Args: { email_to_check: string }
         Returns: boolean
       }
     }
