@@ -138,9 +138,9 @@ const HGConnect2026 = () => {
 
                   <Button type="submit" size="lg" className="w-full" disabled={loading}>
                     {loading ?
-                  <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Sending...</> :
+                  <><Loader2 className="h-5 w-5 animate-spin mr-2" /> Submitting...</> :
 
-                  <><Send className="h-5 w-5 mr-2" /> Send Message</>
+                  <>Request My Free Risk Assessment</>
                   }
                   </Button>
                 </form>
