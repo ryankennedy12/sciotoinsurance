@@ -55,10 +55,18 @@ const channels = [
   },
   {
     icon: MapPin,
-    title: "Mailing Address",
-    detail: "Columbus, Ohio",
+    title: "Canton Office",
+    detail: "4886 Hills and Dales Rd NW, Ste A, Canton, OH 44708",
     subtitle: undefined,
-    href: undefined,
+    href: "https://maps.google.com/?q=4886+Hills+and+Dales+Rd+NW+Ste+A+Canton+OH+44708",
+    priority: false,
+  },
+  {
+    icon: MapPin,
+    title: "New Albany Office",
+    detail: "102 W Main St, Unit 491, New Albany, OH 43081",
+    subtitle: undefined,
+    href: "https://maps.google.com/?q=102+W+Main+St+Unit+491+New+Albany+OH+43081",
     priority: false,
   },
 ];
