@@ -105,9 +105,14 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             <div className="flex flex-col gap-3 sm:gap-space-sm">
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" />
-                <p className="font-body text-sm text-charcoal/70">
-                  Columbus, Ohio
-                </p>
+                <div className="font-body text-sm text-charcoal/70">
+                  <a href="https://maps.google.com/?q=4886+Hills+and+Dales+Rd+NW+Ste+A+Canton+OH+44708" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300 block">
+                    4886 Hills and Dales Rd NW, Ste A<br />Canton, OH 44708
+                  </a>
+                  <a href="https://maps.google.com/?q=102+W+Main+St+Unit+491+New+Albany+OH+43081" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300 block mt-2">
+                    102 W Main St, Unit 491<br />New Albany, OH 43081
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-gold-500 flex-shrink-0" />
