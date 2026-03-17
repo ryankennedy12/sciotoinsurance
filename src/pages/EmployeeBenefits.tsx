@@ -18,9 +18,6 @@ const EmployeeBenefits = () => {
       <section className="section-padding pt-32 md:pt-36 lg:pt-40 bg-card">
         <div className="container-narrow text-center">
           <AnimatedSection animation="fade-up">
-            <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-6">
-              Employee Benefits
-            </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 leading-[1.15] text-balance">
               Employee Benefits
             </h1>
