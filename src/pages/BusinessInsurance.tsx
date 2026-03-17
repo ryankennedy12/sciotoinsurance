@@ -201,38 +201,38 @@ const BusinessInsurance = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Section 1: Stacked Card Hero */}
-      <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 bg-cream">
-        <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
+      <section className="pt-24 sm:pt-28 lg:pt-32 pb-10 sm:pb-16 lg:pb-20 bg-cream">
+        <div className="container-wide px-5 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-14 items-center">
             {/* Text column */}
             <div className="text-center lg:text-left order-1">
               <AnimatedSection animation="fade-up">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-5 lg:mb-6 tracking-tight leading-[1.1] text-balance">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-foreground mb-4 lg:mb-6 tracking-tight leading-[1.1] text-balance">
                   Protect What You've Built
                 </h1>
-                <div className="w-16 h-0.5 bg-accent mb-5 lg:mb-6 mx-auto lg:mx-0" />
+                <div className="w-12 sm:w-16 h-0.5 bg-accent mb-4 lg:mb-6 mx-auto lg:mx-0" />
               </AnimatedSection>
 
               {/* Photo card — appears here on mobile/tablet, between divider and subtext */}
-              <AnimatedSection animation="fade-up" delay={100} className="lg:hidden mb-6 sm:mb-8">
-                <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-lg mx-auto max-w-sm sm:max-w-md">
+              <AnimatedSection animation="fade-up" delay={100} className="lg:hidden mb-5 sm:mb-8">
+                <div className="rounded-2xl overflow-hidden border-4 border-[#C4A0A0] shadow-lg mx-auto max-w-xs sm:max-w-md">
                   <img
                     src={businessInsuranceHero}
                     alt="Business owners in front of their shop"
-                    className="w-full aspect-[16/10] object-cover"
+                    className="w-full aspect-[4/3] sm:aspect-[16/10] object-cover"
                   />
                 </div>
               </AnimatedSection>
 
               <AnimatedSection animation="fade-up" delay={150}>
-                <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                <p className="text-sm sm:text-lg text-muted-foreground mb-5 sm:mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
                   Risk management and insurance solutions tailored to your business — backed by 30+ carriers and real people who answer the phone.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                  <Button asChild size="lg">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start max-w-sm sm:max-w-none mx-auto lg:mx-0">
+                  <Button asChild size="lg" className="w-full sm:w-auto">
                     <Link to="/get-quote">Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" /></Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                     <a href="tel:6146120050">
                       <Phone className="h-5 w-5" />
                       Give Us a Call
