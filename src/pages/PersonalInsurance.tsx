@@ -28,9 +28,6 @@ const PersonalInsurance = () => {
         <div className="container-wide">
           <AnimatedSection animation="fade-up">
             <div className="max-w-3xl mx-auto text-center">
-              <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-6">
-                Personal Insurance
-              </span>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-[1.15] text-balance">
                 Personal Insurance
               </h1>

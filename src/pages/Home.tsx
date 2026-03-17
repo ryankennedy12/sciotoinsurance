@@ -75,14 +75,6 @@ const Home = () => {
                   </Button>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                  <div className="flex items-center gap-0.5">
-                    {[...Array(5)].map((_, i) =>
-                    <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
-                    )}
-                  </div>
-                  <span className="text-xs font-body">Independent Agency</span>
-                </div>
               </div>
             </div>
 
